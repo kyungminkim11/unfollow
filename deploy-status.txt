@@ -1,1 +1,0 @@
-Building polished responsive release.
