@@ -1,1 +1,0 @@
-Mobile work-first layout, workspace-scoped progress, privacy wording, JSON requirement, accessibility.

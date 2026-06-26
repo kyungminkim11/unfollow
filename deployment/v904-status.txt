@@ -1,1 +1,0 @@
-Files validated and ready for atomic publish.
