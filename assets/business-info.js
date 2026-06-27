@@ -1,10 +1,14 @@
 (()=>{
-  if(!document.querySelector('script[data-synthetic-sample-loader]')){
+  const loadScript=(src,key)=>{
+    if(document.querySelector(`script[data-loader="${key}"]`)) return;
     const script=document.createElement('script');
-    script.src='/assets/synthetic-sample.js?v=10.2';
-    script.dataset.syntheticSampleLoader='true';
+    script.src=src;
+    script.dataset.loader=key;
     document.head.appendChild(script);
-  }
+  };
+
+  loadScript('/assets/synthetic-sample.js?v=10.2','synthetic-sample');
+  loadScript('/assets/ux-v11.js?v=11.0','ux-v11');
 
   const start=()=>{
     if(document.getElementById('businessInfoV10')) return;
