@@ -41,7 +41,6 @@ const structuredData = {
     legalName: '라바랩스(LavaLabs)',
     url: 'https://lavalabs.co.kr/',
     email: 'lavalabs.ceo@gmail.com',
-    telephone: '+82-31-900-9228',
     vatID: '455-23-01867',
     address: {
       '@type': 'PostalAddress',
@@ -117,5 +116,6 @@ if (html.includes('code.iconify.design')) throw new Error('External icon CDN rem
 if (!html.includes('product-improvements.js')) throw new Error('Product enhancement injection failed');
 if (!html.includes('business-info.js')) throw new Error('Business information injection failed');
 if (!html.includes('455-23-01867')) throw new Error('Business registration data missing');
+if (html.includes('031-900-9228') || html.includes('+82-31-900-9228')) throw new Error('Unverified phone number remains in generated HTML');
 
 console.log(`Built ${path.relative(root, dist)} with ${html.length.toLocaleString()} characters.`);
