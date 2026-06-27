@@ -1,4 +1,11 @@
 (()=>{
+  if(!document.querySelector('script[data-synthetic-sample-loader]')){
+    const script=document.createElement('script');
+    script.src='/assets/synthetic-sample.js?v=10.2';
+    script.dataset.syntheticSampleLoader='true';
+    document.head.appendChild(script);
+  }
+
   const start=()=>{
     if(document.getElementById('businessInfoV10')) return;
 
