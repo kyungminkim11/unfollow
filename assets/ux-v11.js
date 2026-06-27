@@ -66,6 +66,11 @@
     const tools=q('.topTools');
     if(!tools||q('.mobileFilterToggle')) return;
 
+    const search=q('.search',tools)||q('input[type="search"],input[placeholder*="검색"]',tools);
+    let searchHost=search;
+    while(searchHost&&searchHost.parentElement!==tools) searchHost=searchHost.parentElement;
+    if(searchHost&&searchHost.parentElement===tools) searchHost.classList.add('mobilePrimarySearch');
+
     const button=document.createElement('button');
     button.type='button';
     button.className='mobileFilterToggle';
@@ -110,6 +115,7 @@
 
   function setupMobileResultSummary(){
     const list=q('.mobileList');
+    const tableBody=q('.table tbody');
     const tableWrap=q('.tableWrap');
     const host=list?.parentElement||tableWrap?.parentElement;
     if(!host||q('.mobileResultSummary',host)) return;
@@ -121,8 +127,11 @@
     summary.innerHTML='<span>현재 결과</span><strong data-mobile-result-count>0개</strong>';
     if(list) list.before(summary); else tableWrap.before(summary);
 
-    resultObserver=new MutationObserver(debounce(updateMobileResultSummary,60));
-    resultObserver.observe(host,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
+    const observed=list||tableBody;
+    if(observed){
+      resultObserver=new MutationObserver(debounce(updateMobileResultSummary,60));
+      resultObserver.observe(observed,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['class','hidden']});
+    }
     updateMobileResultSummary();
   }
 
@@ -132,11 +141,11 @@
 
     const visibleCards=qa('.mobileList .userCard,.mobileList>[data-username],.mobileList>article').filter(isVisible);
     const visibleRows=qa('.table tbody tr').filter(isVisible);
-    let count=visibleCards.length||visibleRows.length;
-
+    const count=visibleCards.length||visibleRows.length;
     const activeTab=q('.tab.active');
     const tabText=activeTab?.textContent?.trim().replace(/\s+/g,' ')||'';
-    output.textContent=tabText?`${tabText} · ${count}명`:`${count}명`;
+    const next=tabText?`${tabText} · ${count}명`:`${count}명`;
+    if(output.textContent!==next) output.textContent=next;
   }
 
   function setupBottomNavigation(){
@@ -154,7 +163,7 @@
     const map=[
       ['#top',links[0]],
       ['#appPanel',links[1]],
-      ['#appPanel',links[2]],
+      ['.focusPanel',links[2]],
       ['#faq',links[3]]
     ].filter(([,link])=>link);
 
@@ -169,7 +178,7 @@
       if(!match) return;
       links.forEach(link=>link.classList.remove('active'));
       match.link.classList.add('active');
-    },{rootMargin:'-20% 0px -65% 0px',threshold:[0,.1,.35]});
+    },{rootMargin:'-18% 0px -64% 0px',threshold:[0,.1,.35]});
     elements.forEach(item=>scrollObserver.observe(item.element));
     links[0]?.classList.add('active');
   }
