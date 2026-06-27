@@ -16,6 +16,7 @@ let html = gunzipSync(Buffer.from(payload, 'base64')).toString('utf8');
 html = html
   .replaceAll('https://kyungminkim11.github.io/matchal-checker/', '/')
   .replaceAll('https://kyungminkim11.github.io/unfollow/', '/')
+  .replaceAll('https://github.com/kyungminkim11/matchal-checker', 'https://github.com/kyungminkim11/unfollow')
   .replaceAll('/matchal-checker/', '/')
   .replaceAll('/unfollow/', '/')
   .replace(/<base[^>]*>/gi, '')
@@ -67,7 +68,7 @@ fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 fs.writeFileSync(path.join(dist, 'index.html'), html);
 
-for (const file of ['CNAME', 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', 'favicon.svg', 'sw.js', 'og-image.png']) {
+for (const file of ['CNAME', 'robots.txt', 'sitemap.xml', 'manifest.webmanifest', 'favicon.svg', 'sw.js']) {
   const src = path.join(root, file);
   if (fs.existsSync(src)) fs.copyFileSync(src, path.join(dist, file));
 }
@@ -78,6 +79,8 @@ fs.writeFileSync(path.join(dist, '.nojekyll'), '');
 
 if (!/<title>인스타 맞팔 확인/.test(html)) throw new Error('SEO title injection failed');
 if (html.includes('/matchal-checker/')) throw new Error('Legacy path remains in generated HTML');
+if (html.includes('kyungminkim11/matchal-checker')) throw new Error('Legacy repository link remains in generated HTML');
+if (html.includes('code.iconify.design')) throw new Error('External icon CDN remains in generated HTML');
 if (!html.includes('product-improvements.js')) throw new Error('Product enhancement injection failed');
 
 console.log(`Built ${path.relative(root, dist)} with ${html.length.toLocaleString()} characters.`);
