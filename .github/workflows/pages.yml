@@ -26,6 +26,8 @@ jobs:
           node-version: '22'
       - name: Build static site
         run: node scripts/build-pages.mjs
+      - name: Restore social preview image
+        run: base64 --decode og-image.txt > dist/og-image.png
       - name: Validate output
         run: |
           test -f dist/index.html
@@ -33,6 +35,7 @@ jobs:
           test -f dist/robots.txt
           test -f dist/sitemap.xml
           test -f dist/manifest.webmanifest
+          test -f dist/og-image.png
           grep -q "인스타 맞팔 확인" dist/index.html
           grep -q "unfollow.lavalabs.co.kr" dist/index.html
       - name: Configure Pages
