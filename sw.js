@@ -1,13 +1,15 @@
-const CACHE='unfollow-v10-20260628';
+const CACHE='unfollow-v10-2-20260628';
 const STATIC=[
   '/',
   '/index.html',
   '/favicon.svg',
   '/manifest.webmanifest',
+  '/og-image.png',
   '/assets/v8-base.css?v=10.0',
   '/assets/v8-responsive.css?v=10.0',
   '/assets/local-icons.css?v=10.0',
   '/assets/product-improvements.css?v=10.0',
+  '/assets/work-mode-enhancements.css?v=10.0',
   '/assets/product-improvements.js?v=10.0',
   '/assets/work-mode-enhancements.js?v=10.0',
   '/assets/pwa-enhancements.js?v=10.0'
