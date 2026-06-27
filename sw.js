@@ -1,0 +1,46 @@
+const CACHE='unfollow-v10-20260628';
+const STATIC=[
+  '/',
+  '/index.html',
+  '/favicon.svg',
+  '/manifest.webmanifest',
+  '/assets/v8-base.css?v=10.0',
+  '/assets/v8-responsive.css?v=10.0',
+  '/assets/local-icons.css?v=10.0',
+  '/assets/product-improvements.css?v=10.0',
+  '/assets/product-improvements.js?v=10.0',
+  '/assets/work-mode-enhancements.js?v=10.0',
+  '/assets/pwa-enhancements.js?v=10.0'
+];
+
+self.addEventListener('install',event=>{
+  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(STATIC)).then(()=>self.skipWaiting()));
+});
+
+self.addEventListener('activate',event=>{
+  event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));
+});
+
+self.addEventListener('fetch',event=>{
+  const request=event.request;
+  if(request.method!=='GET') return;
+  const url=new URL(request.url);
+  if(url.origin!==location.origin) return;
+
+  if(request.mode==='navigate'){
+    event.respondWith(fetch(request).then(response=>{
+      const copy=response.clone();
+      caches.open(CACHE).then(cache=>cache.put('/index.html',copy));
+      return response;
+    }).catch(()=>caches.match('/index.html')));
+    return;
+  }
+
+  event.respondWith(caches.match(request).then(cached=>cached||fetch(request).then(response=>{
+    if(response.ok){
+      const copy=response.clone();
+      caches.open(CACHE).then(cache=>cache.put(request,copy));
+    }
+    return response;
+  })));
+});
