@@ -1,4 +1,4 @@
-const CACHE='unfollow-v10-6-20260628';
+const CACHE='unfollow-v10-7-20260628';
 const STATIC=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=10.1','/assets/v8-responsive.css?v=10.1','/assets/local-icons.css?v=10.1','/assets/brand-fix.css?v=10.1','/assets/product-improvements.css?v=10.1','/assets/business-info.css?v=10.1','/assets/product-improvements.js?v=10.1','/assets/work-mode-enhancements.js?v=10.1','/assets/pwa-enhancements.js?v=10.1','/assets/business-info.js?v=10.1'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
