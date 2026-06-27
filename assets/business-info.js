@@ -44,7 +44,6 @@
       ['사업자등록번호','455-23-01867'],
       ['통신판매업 신고번호','2025-고양일산서-1352'],
       ['사업장 소재지','경기도 고양시 일산서구 일현로 47, 2층 204호 1308호실(탄현동, 예일 큰프라자)'],
-      ['대표 연락처','031-900-9228'],
       ['이메일','lavalabs.ceo@gmail.com']
     ];
 
@@ -52,12 +51,7 @@
       const dt=document.createElement('dt');
       const dd=document.createElement('dd');
       dt.textContent=label;
-      if(label==='대표 연락처'){
-        const a=document.createElement('a');
-        a.href='tel:0319009228';
-        a.textContent=value;
-        dd.appendChild(a);
-      }else if(label==='이메일'){
+      if(label==='이메일'){
         const a=document.createElement('a');
         a.href='mailto:lavalabs.ceo@gmail.com';
         a.textContent=value;
