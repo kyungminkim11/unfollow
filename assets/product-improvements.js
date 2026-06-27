@@ -9,18 +9,47 @@
     });
 
     const brand=q('.brand');
-    if(brand&&!brand.querySelector('.lavaByline')){
-      const subtitle=brand.querySelector('span');
-      if(subtitle) subtitle.textContent='맞팔·언팔 검토 도우미';
-      const by=document.createElement('small');
-      by.className='lavaByline';
-      const link=document.createElement('a');
-      link.href='https://lavalabs.co.kr/';
-      link.target='_blank';
-      link.rel='noopener';
-      link.textContent='by Lava Labs';
-      by.appendChild(link);
-      brand.appendChild(by);
+    if(brand){
+      const logo=brand.querySelector(':scope > .logo');
+      const title=brand.querySelector(':scope > strong');
+      let subtitle=qa(':scope > span',brand).find(el=>!el.classList.contains('iconify'));
+      let byline=brand.querySelector(':scope > .lavaByline');
+      let copy=brand.querySelector(':scope > .brandText');
+
+      if(logo){
+        logo.textContent='';
+        const icon=document.createElement('span');
+        icon.className='iconify';
+        icon.dataset.icon='ph:users-three-fill';
+        icon.setAttribute('aria-hidden','true');
+        logo.appendChild(icon);
+      }
+
+      if(!subtitle){
+        subtitle=document.createElement('span');
+      }
+      subtitle.textContent='맞팔·언팔 검토 도우미';
+
+      if(!byline){
+        byline=document.createElement('small');
+        byline.className='lavaByline';
+        const link=document.createElement('a');
+        link.href='https://lavalabs.co.kr/';
+        link.target='_blank';
+        link.rel='noopener';
+        link.textContent='by Lava Labs';
+        byline.appendChild(link);
+      }
+
+      if(!copy){
+        copy=document.createElement('div');
+        copy.className='brandText';
+        if(logo) logo.after(copy); else brand.prepend(copy);
+      }
+
+      if(title) copy.appendChild(title);
+      copy.appendChild(subtitle);
+      copy.appendChild(byline);
     }
 
     qa('body *').forEach(el=>{
