@@ -11,7 +11,10 @@
   loadScript('/assets/ux-v11.js?v=11.0','ux-v11');
 
   const start=()=>{
-    if(document.getElementById('businessInfoV10')) return;
+    if(document.getElementById('businessInfoV10')){
+      loadScript('/assets/v13-features.js?v=13.0','v13-features');
+      return;
+    }
 
     const footer=document.createElement('footer');
     footer.id='businessInfoV10';
@@ -82,6 +85,7 @@
 
     const main=document.querySelector('.main')||document.body;
     main.appendChild(footer);
+    loadScript('/assets/v13-features.js?v=13.0','v13-features');
   };
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
