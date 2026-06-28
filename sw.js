@@ -1,5 +1,5 @@
-const CACHE='unfollow-v14-20260628-1';
-const CORE=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=14.0','/assets/v8-responsive.css?v=14.0','/assets/local-icons.css?v=14.0','/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=14.0','/assets/release-hardening-v12.css?v=14.0','/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.0','/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0','/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=14.0','/assets/design-v14.js?v=14.0'];
+const CACHE='unfollow-v14-20260628-2';
+const CORE=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=14.0','/assets/v8-responsive.css?v=14.0','/assets/local-icons.css?v=14.0','/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=14.0','/assets/release-hardening-v12.css?v=14.0','/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.1','/assets/design-v14-fixes.css?v=14.1','/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0','/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=14.0','/assets/design-v14.js?v=14.1'];
 
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
