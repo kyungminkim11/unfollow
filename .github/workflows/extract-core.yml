@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/extract-core.yml'
+      - 'scripts/build-pages.mjs'
+      - 'scripts/build-release.mjs'
       - 'scripts/extract-core-snippets.mjs'
   workflow_dispatch:
 
@@ -22,7 +24,7 @@ jobs:
         with:
           node-version: '22'
       - name: Build production HTML
-        run: node scripts/build-pages.mjs
+        run: node scripts/build-release.mjs
       - name: Extract core snippets
         run: node scripts/extract-core-snippets.mjs
       - name: Commit snippets
