@@ -1,0 +1,123 @@
+name: Release Readiness Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/release-audit.yml'
+      - 'scripts/release-audit.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build production site
+        run: |
+          node scripts/build-pages.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+
+      - name: Create Instagram ZIP fixtures
+        run: |
+          python3 - <<'PY'
+          import json, os, time, zipfile
+          os.makedirs('audit-fixtures', exist_ok=True)
+          now = int(time.time())
+
+          def following_item(name, index=0):
+              return {'title': name, 'string_list_data': [{'href': f'https://www.instagram.com/{name}/', 'value': name, 'timestamp': now-index}]}
+
+          def follower_item(name, index=0):
+              return {'title': '', 'media_list_data': [], 'string_list_data': [{'href': f'https://www.instagram.com/{name}/', 'value': name, 'timestamp': now-index}]}
+
+          def write_zip(filename, files):
+              with zipfile.ZipFile(f'audit-fixtures/{filename}', 'w', zipfile.ZIP_DEFLATED) as archive:
+                  for path, value in files.items():
+                      archive.writestr(path, value if isinstance(value, str) else json.dumps(value, ensure_ascii=False))
+
+          base = 'connections/followers_and_following/'
+          write_zip('valid-basic.zip', {
+              base+'following.json': {'relationships_following': [following_item(x, i) for i, x in enumerate(['alpha','bravo','delta'])]},
+              base+'followers_1.json': [follower_item(x, i) for i, x in enumerate(['alpha','charlie'])],
+          })
+          write_zip('valid-split-followers.zip', {
+              base+'following.json': {'relationships_following': [following_item(x, i) for i, x in enumerate(['alpha','bravo','delta'])]},
+              base+'followers_1.json': [follower_item('alpha')],
+              base+'followers_2.json': [follower_item('bravo')],
+          })
+          malicious = '<img data-audit-xss src=x onerror="window.__auditXss=1">'
+          write_zip('malicious-username.zip', {
+              base+'following.json': {'relationships_following': [following_item(malicious)]},
+              base+'followers_1.json': [],
+          })
+          following = [f'user_{i:05d}' for i in range(5000)]
+          followers = following[:3000] + [f'follower_only_{i:05d}' for i in range(1000)]
+          write_zip('large-5000.zip', {
+              base+'following.json': {'relationships_following': [following_item(x, i) for i, x in enumerate(following)]},
+              base+'followers_1.json': [follower_item(x, i) for i, x in enumerate(followers)],
+          })
+          write_zip('html-export.zip', {
+              base+'following.html': '<html><body>following</body></html>',
+              base+'followers_1.html': '<html><body>followers</body></html>',
+          })
+          write_zip('missing-files.zip', {'readme.txt': 'missing Instagram JSON files'})
+          write_zip('account-a.zip', {
+              base+'following.json': {'relationships_following': [following_item('account_a_mutual'), following_item('account_a_only')]},
+              base+'followers_1.json': [follower_item('account_a_mutual')],
+          })
+          write_zip('account-b.zip', {
+              base+'following.json': {'relationships_following': [following_item('account_b_only')]},
+              base+'followers_1.json': [],
+          })
+          PY
+
+      - name: Install browser audit tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start local production server
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-audit-server.log 2>&1 &
+          echo $! > /tmp/unfollow-audit-server.pid
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-audit-server.log
+          exit 1
+
+      - name: Run release audit
+        env:
+          AUDIT_URL: http://127.0.0.1:4173/
+        run: node scripts/release-audit.mjs
+
+      - name: Commit audit report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/latest-report.json audit/latest-report.md
+          if git diff --cached --quiet; then
+            echo 'No audit report changes'
+            exit 0
+          fi
+          git commit -m 'chore: update release readiness audit [skip ci]'
+          git push
