@@ -10,8 +10,11 @@ on:
       - 'scripts/build-v13.mjs'
       - 'scripts/v13-smoke.mjs'
       - 'scripts/create-smoke-fixtures.py'
-      - 'sw.js'
+      - 'scripts/write-release-report.mjs'
+      - '.github/workflows/pages.yml'
+      - '.github/workflows/release-audit.yml'
       - '.github/workflows/v13-check.yml'
+      - 'sw.js'
   workflow_dispatch:
 
 permissions:
@@ -45,6 +48,7 @@ jobs:
           node --check assets/v13-features.js
           node --check scripts/build-v13.mjs
           node --check scripts/v13-smoke.mjs
+          node --check scripts/write-release-report.mjs
           node --check sw.js
 
       - name: Build v13 release
@@ -57,6 +61,9 @@ jobs:
           grep -R -q 'WORKSPACE_SIGNATURE_KEY' dist/assets/generated-inline-*.js
           grep -R -q 'await activateWorkspace(file,zip,allKeys)' dist/assets/generated-inline-*.js
           grep -q 'unfollow-v13' dist/sw.js
+          grep -q 'node scripts/build-v13.mjs' .github/workflows/pages.yml
+          grep -q 'node scripts/v13-smoke.mjs' .github/workflows/pages.yml
+          grep -q 'node scripts/build-v13.mjs' .github/workflows/release-audit.yml
 
       - name: Create fixtures
         run: python3 scripts/create-smoke-fixtures.py
