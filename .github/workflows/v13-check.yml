@@ -1,0 +1,87 @@
+name: V13 Improvements Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/v13-features.js'
+      - 'assets/v13-features.css'
+      - 'assets/business-info.js'
+      - 'scripts/build-v13.mjs'
+      - 'scripts/v13-smoke.mjs'
+      - 'scripts/create-smoke-fixtures.py'
+      - 'sw.js'
+      - '.github/workflows/v13-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v13-improvements-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v13
+
+      - name: Syntax checks
+        run: |
+          node --check assets/v13-features.js
+          node --check scripts/build-v13.mjs
+          node --check scripts/v13-smoke.mjs
+          node --check sw.js
+
+      - name: Build v13 release
+        run: |
+          node scripts/build-v13.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/v13-features.js
+          test -f dist/assets/v13-features.css
+          grep -q 'v13-features.js' dist/assets/business-info.js
+          grep -R -q 'WORKSPACE_SIGNATURE_KEY' dist/assets/generated-inline-*.js
+          grep -R -q 'await activateWorkspace(file,zip,allKeys)' dist/assets/generated-inline-*.js
+          grep -q 'unfollow-v13' dist/sw.js
+
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/v13-preview.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/v13-preview.log
+          exit 1
+
+      - name: V12 regression tests
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/deploy-smoke.mjs
+
+      - name: V13 feature tests
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/v13-smoke.mjs
