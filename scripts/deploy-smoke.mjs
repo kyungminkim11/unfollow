@@ -21,7 +21,19 @@ async function number(page,selector){
 async function axe(page,name){
   const report=await new AxeBuilder({page}).analyze();
   const serious=report.violations.filter(item=>['critical','serious'].includes(item.impact));
-  check(`${name} 접근성`,serious.length===0,{violations:serious.map(item=>({id:item.id,impact:item.impact,nodes:item.nodes.length}))});
+  check(`${name} 접근성`,serious.length===0,{
+    violations:serious.map(item=>({
+      id:item.id,
+      impact:item.impact,
+      description:item.description,
+      nodes:item.nodes.map(node=>({
+        target:node.target,
+        html:node.html,
+        failureSummary:node.failureSummary,
+        any:node.any?.map(result=>({id:result.id,message:result.message,data:result.data}))
+      })).slice(0,12)
+    }))
+  });
 }
 
 async function desktop(browser){
