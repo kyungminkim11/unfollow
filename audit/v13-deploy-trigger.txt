@@ -1,4 +1,4 @@
 V13_DEPLOY_TRIGGER
 requested_at=2026-06-28
-attempt=2
-reason=Run the full v13 build, regression, feature, Pages deployment, and always-on outcome report.
+attempt=3
+reason=Run the v13 Pages workflow and record the GitHub Actions run ID for direct diagnostics.
