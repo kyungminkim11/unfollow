@@ -12,13 +12,24 @@ on:
       - 'scripts/create-smoke-fixtures.py'
       - 'sw.js'
       - '.github/workflows/v13-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/v13-features.js'
+      - 'assets/v13-features.css'
+      - 'assets/business-info.js'
+      - 'scripts/build-v13.mjs'
+      - 'scripts/v13-smoke.mjs'
+      - 'scripts/create-smoke-fixtures.py'
+      - 'sw.js'
+      - '.github/workflows/v13-check.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: v13-improvements-check
+  group: v13-improvements-check-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: v13-improvements
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'v13-improvements' }}
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
@@ -122,7 +133,7 @@ jobs:
           exit $STATUS
 
       - name: Commit v13 check report
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         run: |
           test -f audit/v13-check.txt || printf 'V13 check stopped before diagnostics.\n' > audit/v13-check.txt
           git config user.name 'github-actions[bot]'
