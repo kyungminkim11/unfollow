@@ -1,0 +1,118 @@
+# 맞팔체커 출시 전 자동 감사
+
+- 생성 시각: 2026-06-28T01:42:05.827Z
+- 커밋: aedb37ad7bc27453239ec5e8964adb921779ee66
+- 판정: **NO_GO**
+- 점수: **0/100**
+- 통과 62 · 실패 19 · 경고 5
+
+## 출시 차단 항목
+
+- [HIGH] accessibility: desktop-1440 초기 화면 심각한 접근성 위반 없음
+- [HIGH] function: desktop-1440 상태 선택 및 다음 이동
+- [HIGH] accessibility: desktop-1440 결과 화면 심각한 접근성 위반 없음
+- [HIGH] legal: desktop-1440 사업자 정보 표시
+- [HIGH] accessibility: tablet-1024 초기 화면 심각한 접근성 위반 없음
+- [HIGH] function: tablet-1024 상태 선택 및 다음 이동
+- [HIGH] accessibility: tablet-1024 결과 화면 심각한 접근성 위반 없음
+- [HIGH] legal: tablet-1024 사업자 정보 표시
+- [HIGH] accessibility: mobile-390 초기 화면 심각한 접근성 위반 없음
+- [HIGH] function: mobile-390 상태 선택 및 다음 이동
+- [HIGH] accessibility: mobile-390 결과 화면 심각한 접근성 위반 없음
+- [HIGH] responsive: mobile-390 하단 내비게이션
+- [HIGH] legal: mobile-390 사업자 정보 표시
+- [HIGH] accessibility: mobile-320 초기 화면 심각한 접근성 위반 없음
+- [HIGH] function: mobile-320 상태 선택 및 다음 이동
+- [HIGH] accessibility: mobile-320 결과 화면 심각한 접근성 위반 없음
+- [HIGH] responsive: mobile-320 하단 내비게이션
+- [HIGH] legal: mobile-320 사업자 정보 표시
+- [HIGH] privacy: 다른 ZIP 업로드 시 작업 상태 분리
+
+## 전체 검사
+
+- ✅ **build / 중복 ID 없음** — PASS (high)
+- ✅ **build / HTML 로컬 자산 누락 없음** — PASS (critical)
+- ⚠️ **privacy / 초기 HTML의 외부 실행 자산 없음** — WARN (medium)
+- ✅ **security / 인라인 이벤트 핸들러 없음** — PASS (medium)
+- ✅ **security / 새 창 링크 noopener 적용** — PASS (medium)
+- ✅ **security / eval/new Function/document.write 미사용** — PASS (critical)
+- ⚠️ **security / 동적 HTML 삽입 사용 검토** — WARN (medium)
+- ✅ **privacy / 명시적 업로드 API 없음** — PASS (high)
+- ⚠️ **security / Content Security Policy 적용** — WARN (medium)
+- ✅ **security / 외부 스크립트 SRI 적용** — PASS (medium)
+- ✅ **pwa / Manifest 및 Service Worker 존재** — PASS (medium)
+- ✅ **performance / 초기 HTML 크기 1MB 미만** — PASS (medium)
+- ⚠️ **legal / 핵심 개인정보·비제휴 안내 존재** — WARN (medium)
+- ✅ **legal / 사업자 정보 정확성 기본 검사** — PASS (high)
+- ✅ **runtime / desktop-1440 페이지 로드** — PASS (critical)
+- ✅ **runtime / desktop-1440 콘솔·페이지 오류 없음** — PASS (high)
+- ✅ **runtime / desktop-1440 자산 요청 실패 없음** — PASS (high)
+- ✅ **responsive / desktop-1440 문서 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / desktop-1440 초기 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **function / desktop-1440 가상 샘플 분석** — PASS (critical)
+- ✅ **function / desktop-1440 가상 프로필 안내 팝업** — PASS (high)
+- ❌ **function / desktop-1440 상태 선택 및 다음 이동** — FAIL (high)
+- ✅ **responsive / desktop-1440 결과 화면 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / desktop-1440 결과 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ❌ **legal / desktop-1440 사업자 정보 표시** — FAIL (high)
+- ✅ **privacy / desktop-1440 파일 분석 중 외부 변경 요청 없음** — PASS (critical)
+- ✅ **privacy / desktop-1440 외부 요청 투명성** — PASS (info)
+- ✅ **runtime / tablet-1024 페이지 로드** — PASS (critical)
+- ✅ **runtime / tablet-1024 콘솔·페이지 오류 없음** — PASS (high)
+- ✅ **runtime / tablet-1024 자산 요청 실패 없음** — PASS (high)
+- ✅ **responsive / tablet-1024 문서 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / tablet-1024 초기 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **function / tablet-1024 가상 샘플 분석** — PASS (critical)
+- ✅ **function / tablet-1024 가상 프로필 안내 팝업** — PASS (high)
+- ❌ **function / tablet-1024 상태 선택 및 다음 이동** — FAIL (high)
+- ✅ **responsive / tablet-1024 결과 화면 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / tablet-1024 결과 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ❌ **legal / tablet-1024 사업자 정보 표시** — FAIL (high)
+- ✅ **privacy / tablet-1024 파일 분석 중 외부 변경 요청 없음** — PASS (critical)
+- ✅ **privacy / tablet-1024 외부 요청 투명성** — PASS (info)
+- ✅ **runtime / mobile-390 페이지 로드** — PASS (critical)
+- ✅ **runtime / mobile-390 콘솔·페이지 오류 없음** — PASS (high)
+- ✅ **runtime / mobile-390 자산 요청 실패 없음** — PASS (high)
+- ✅ **responsive / mobile-390 문서 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / mobile-390 초기 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **function / mobile-390 가상 샘플 분석** — PASS (critical)
+- ✅ **function / mobile-390 가상 프로필 안내 팝업** — PASS (high)
+- ❌ **function / mobile-390 상태 선택 및 다음 이동** — FAIL (high)
+- ✅ **responsive / mobile-390 결과 화면 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / mobile-390 결과 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **responsive / mobile-390 모바일 필터 토글** — PASS (high)
+- ❌ **responsive / mobile-390 하단 내비게이션** — FAIL (high)
+- ✅ **responsive / mobile-390 모바일 카드 목록 전환** — PASS (high)
+- ❌ **legal / mobile-390 사업자 정보 표시** — FAIL (high)
+- ✅ **privacy / mobile-390 파일 분석 중 외부 변경 요청 없음** — PASS (critical)
+- ✅ **privacy / mobile-390 외부 요청 투명성** — PASS (info)
+- ✅ **runtime / mobile-320 페이지 로드** — PASS (critical)
+- ✅ **runtime / mobile-320 콘솔·페이지 오류 없음** — PASS (high)
+- ✅ **runtime / mobile-320 자산 요청 실패 없음** — PASS (high)
+- ✅ **responsive / mobile-320 문서 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / mobile-320 초기 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **function / mobile-320 가상 샘플 분석** — PASS (critical)
+- ✅ **function / mobile-320 가상 프로필 안내 팝업** — PASS (high)
+- ❌ **function / mobile-320 상태 선택 및 다음 이동** — FAIL (high)
+- ✅ **responsive / mobile-320 결과 화면 가로 넘침 없음** — PASS (high)
+- ❌ **accessibility / mobile-320 결과 화면 심각한 접근성 위반 없음** — FAIL (high)
+- ✅ **responsive / mobile-320 모바일 필터 토글** — PASS (high)
+- ❌ **responsive / mobile-320 하단 내비게이션** — FAIL (high)
+- ✅ **responsive / mobile-320 모바일 카드 목록 전환** — PASS (high)
+- ❌ **legal / mobile-320 사업자 정보 표시** — FAIL (high)
+- ✅ **privacy / mobile-320 파일 분석 중 외부 변경 요청 없음** — PASS (critical)
+- ✅ **privacy / mobile-320 외부 요청 투명성** — PASS (info)
+- ✅ **parser / 기본 Instagram JSON ZIP 분석 정확성** — PASS (critical)
+- ✅ **parser / 분할 followers_*.json 병합** — PASS (critical)
+- ✅ **security / 업로드 데이터 DOM XSS 방어** — PASS (critical)
+- ✅ **parser / 5,000개 계정 ZIP 처리** — PASS (critical)
+- ✅ **performance / 5,000개 분석 10초 이내** — PASS (medium)
+- ⚠️ **error-handling / HTML 내보내기 파일 거부 안내** — WARN (medium)
+- ✅ **error-handling / 필수 JSON 누락 안내** — PASS (medium)
+- ✅ **parser / 계정 A 분석** — PASS (critical)
+- ✅ **parser / 계정 B 분석** — PASS (critical)
+- ❌ **privacy / 다른 ZIP 업로드 시 작업 상태 분리** — FAIL (high)
+- ✅ **privacy / 실제 ZIP 테스트 중 서버 전송 없음** — PASS (critical)
+- ✅ **runtime / 파서 테스트 중 페이지 오류 없음** — PASS (high)
+- ✅ **pwa / Service Worker 등록** — PASS (medium)
+- ✅ **pwa / 재방문 오프라인 로드** — PASS (medium)
