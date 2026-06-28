@@ -1,17 +1,6 @@
 name: V13 Improvements Check
 
 on:
-  push:
-    branches: [v13-improvements]
-    paths:
-      - 'assets/v13-features.js'
-      - 'assets/v13-features.css'
-      - 'assets/business-info.js'
-      - 'scripts/build-v13.mjs'
-      - 'scripts/v13-smoke.mjs'
-      - 'scripts/create-smoke-fixtures.py'
-      - 'sw.js'
-      - '.github/workflows/v13-check.yml'
   pull_request:
     branches: [main]
     paths:
@@ -26,7 +15,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: v13-improvements-check-${{ github.ref }}
@@ -39,7 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'v13-improvements' }}
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
@@ -52,97 +40,48 @@ jobs:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-chromium-v13
 
-      - name: Run complete v13 diagnostics
-        id: diagnostic
-        continue-on-error: true
+      - name: Syntax checks
+        run: |
+          node --check assets/v13-features.js
+          node --check scripts/build-v13.mjs
+          node --check scripts/v13-smoke.mjs
+          node --check sw.js
+
+      - name: Build v13 release
+        run: |
+          node scripts/build-v13.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/v13-features.js
+          test -f dist/assets/v13-features.css
+          grep -q 'v13-features.js' dist/assets/business-info.js
+          grep -R -q 'WORKSPACE_SIGNATURE_KEY' dist/assets/generated-inline-*.js
+          grep -R -q 'await activateWorkspace(file,zip,allKeys)' dist/assets/generated-inline-*.js
+          grep -q 'unfollow-v13' dist/sw.js
+
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/v13-preview.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/v13-preview.log
+          exit 1
+
+      - name: V12 regression tests
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: |
-          mkdir -p audit
-          set +e
-          exec > >(tee audit/v13-check.txt) 2>&1
-          STATUS=0
-          echo "commit=$GITHUB_SHA"
-          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+        run: node scripts/deploy-smoke.mjs
 
-          echo '## Syntax checks'
-          node --check assets/v13-features.js || STATUS=$?
-          node --check scripts/build-v13.mjs || STATUS=$?
-          node --check scripts/v13-smoke.mjs || STATUS=$?
-          node --check sw.js || STATUS=$?
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## Build v13 release'
-            node scripts/build-v13.mjs
-            STATUS=$?
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            base64 --decode og-image.txt > dist/og-image.png
-            test -f dist/assets/v13-features.js || STATUS=1
-            test -f dist/assets/v13-features.css || STATUS=1
-            grep -q 'v13-features.js' dist/assets/business-info.js || STATUS=1
-            grep -R -q 'WORKSPACE_SIGNATURE_KEY' dist/assets/generated-inline-*.js || STATUS=1
-            grep -R -q 'await activateWorkspace(file,zip,allKeys)' dist/assets/generated-inline-*.js || STATUS=1
-            grep -q 'unfollow-v13' dist/sw.js || STATUS=1
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## Create fixtures'
-            python3 scripts/create-smoke-fixtures.py
-            STATUS=$?
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## Install browser tools'
-            npm install --no-save playwright @axe-core/playwright
-            STATUS=$?
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            npx playwright install chromium --with-deps
-            STATUS=$?
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## Start preview'
-            python3 -m http.server 4173 --directory dist > /tmp/v13-preview.log 2>&1 &
-            READY=1
-            for i in {1..20}; do
-              if curl -fsS http://127.0.0.1:4173/ >/dev/null; then READY=0; break; fi
-              sleep 1
-            done
-            if [ "$READY" -ne 0 ]; then cat /tmp/v13-preview.log; STATUS=1; fi
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## V12 regression tests'
-            node scripts/deploy-smoke.mjs
-            STATUS=$?
-          fi
-
-          if [ "$STATUS" -eq 0 ]; then
-            echo '## V13 feature tests'
-            node scripts/v13-smoke.mjs
-            STATUS=$?
-          fi
-
-          echo "finished_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          echo "result=$([ "$STATUS" -eq 0 ] && echo PASS || echo FAIL)"
-          echo "exit_code=$STATUS"
-          exit $STATUS
-
-      - name: Commit v13 check report
-        if: always() && github.event_name != 'pull_request'
-        run: |
-          test -f audit/v13-check.txt || printf 'V13 check stopped before diagnostics.\n' > audit/v13-check.txt
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/v13-check.txt
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'chore: record v13 improvements check [skip ci]'
-          git push origin HEAD:v13-improvements
-
-      - name: Fail unsuccessful check
-        if: steps.diagnostic.outcome != 'success'
-        run: exit 1
+      - name: V13 feature tests
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/v13-smoke.mjs
