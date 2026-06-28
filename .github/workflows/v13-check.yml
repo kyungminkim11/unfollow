@@ -77,11 +77,37 @@ jobs:
           exit 1
 
       - name: V12 regression tests
+        id: v12
+        continue-on-error: true
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: node scripts/deploy-smoke.mjs
+        run: |
+          mkdir -p audit
+          node scripts/deploy-smoke.mjs | tee audit/v12-regression.json
 
       - name: V13 feature tests
+        id: v13
+        continue-on-error: true
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: node scripts/v13-smoke.mjs
+        run: |
+          mkdir -p audit
+          node scripts/v13-smoke.mjs | tee audit/v13-features.json
+
+      - name: Upload browser reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v13-browser-reports
+          path: |
+            audit/v12-regression.json
+            audit/v13-features.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce browser checks
+        if: steps.v12.outcome != 'success' || steps.v13.outcome != 'success'
+        run: |
+          echo "V12 regression: ${{ steps.v12.outcome }}"
+          echo "V13 features: ${{ steps.v13.outcome }}"
+          exit 1
