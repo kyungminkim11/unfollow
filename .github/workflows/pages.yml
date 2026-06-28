@@ -87,14 +87,40 @@ jobs:
           exit 1
 
       - name: Run v12 regression tests
+        id: v12
+        continue-on-error: true
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: node scripts/deploy-smoke.mjs
+        run: |
+          mkdir -p audit
+          node scripts/deploy-smoke.mjs | tee audit/pages-v12-regression.json
 
       - name: Run v13 feature tests
+        id: v13
+        continue-on-error: true
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: node scripts/v13-smoke.mjs
+        run: |
+          mkdir -p audit
+          node scripts/v13-smoke.mjs | tee audit/pages-v13-features.json
+
+      - name: Upload Pages smoke-test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-v13-smoke-reports
+          path: |
+            audit/pages-v12-regression.json
+            audit/pages-v13-features.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce smoke tests
+        if: steps.v12.outcome != 'success' || steps.v13.outcome != 'success'
+        run: |
+          echo "V12 regression: ${{ steps.v12.outcome }}"
+          echo "V13 features: ${{ steps.v13.outcome }}"
+          exit 1
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
