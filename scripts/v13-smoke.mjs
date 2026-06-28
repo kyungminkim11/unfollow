@@ -20,6 +20,12 @@ async function axe(page,name){
   check(name,serious.length===0,{violations:serious.map(item=>({id:item.id,impact:item.impact,nodes:item.nodes.length}))});
 }
 
+async function number(page,selector){
+  const text=await page.locator(selector).first().textContent().catch(()=>'');
+  const match=String(text||'').replace(/[^0-9]/g,'').match(/\d+/);
+  return match?Number(match[0]):0;
+}
+
 async function desktop(browser){
   const context=await browser.newContext({viewport:{width:1440,height:1000},acceptDownloads:true});
   const page=await context.newPage();
@@ -86,6 +92,22 @@ async function desktop(browser){
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===2,{timeout:15000});
   check('기존 단일 ZIP 분석 유지',await page.locator('#countFollowing').innerText()==='2',{text:await page.locator('#countFollowing').innerText()});
   check('분석 상태 UI 생성',await page.locator('#analysisStatusV13').count()===1,{});
+
+  await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-01.zip'));
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
+  await page.locator('#searchInput').fill('stable_one');
+  await page.locator('#searchInput').dispatchEvent('input');
+  await page.waitForTimeout(120);
+  await page.locator('#focusDoneBtn').click();
+  await page.waitForTimeout(180);
+  const firstWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
+  const firstDone=await number(page,'#countDone');
+
+  await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-28.zip'));
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
+  const secondWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
+  const secondDone=await number(page,'#countDone');
+  check('내용 유사도로 같은 계정 작업공간 이어쓰기',firstWorkspace===secondWorkspace&&firstWorkspace?.startsWith('data_')&&firstDone===1&&secondDone===1,{firstWorkspace,secondWorkspace,firstDone,secondDone});
 
   await axe(page,'v13 데스크톱 접근성');
   check('v13 데스크톱 실행 오류 없음',errors.length===0,{errors});
