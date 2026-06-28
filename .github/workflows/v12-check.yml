@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/build-pages.mjs'
+      - 'scripts/build-release.mjs'
       - 'assets/release-hardening-v12.css'
       - 'assets/release-hardening-v12.js'
       - 'sw.js'
@@ -39,6 +40,10 @@ jobs:
             node --check scripts/build-pages.mjs
             SYNTAX_BUILD=$?
             echo
+            echo '## node --check scripts/build-release.mjs'
+            node --check scripts/build-release.mjs
+            SYNTAX_RELEASE=$?
+            echo
             echo '## node --check assets/release-hardening-v12.js'
             node --check assets/release-hardening-v12.js
             SYNTAX_UI=$?
@@ -47,11 +52,12 @@ jobs:
             node --check sw.js
             SYNTAX_SW=$?
             echo
-            echo '## node scripts/build-pages.mjs'
-            node scripts/build-pages.mjs
+            echo '## node scripts/build-release.mjs'
+            node scripts/build-release.mjs
             BUILD=$?
             echo
             echo "syntax_build=$SYNTAX_BUILD"
+            echo "syntax_release=$SYNTAX_RELEASE"
             echo "syntax_ui=$SYNTAX_UI"
             echo "syntax_sw=$SYNTAX_SW"
             echo "build=$BUILD"
@@ -74,7 +80,7 @@ jobs:
               VALIDATE=1
             fi
             echo "validate=$VALIDATE"
-            if [ "$SYNTAX_BUILD" -ne 0 ] || [ "$SYNTAX_UI" -ne 0 ] || [ "$SYNTAX_SW" -ne 0 ] || [ "$BUILD" -ne 0 ] || [ "$VALIDATE" -ne 0 ]; then
+            if [ "$SYNTAX_BUILD" -ne 0 ] || [ "$SYNTAX_RELEASE" -ne 0 ] || [ "$SYNTAX_UI" -ne 0 ] || [ "$SYNTAX_SW" -ne 0 ] || [ "$BUILD" -ne 0 ] || [ "$VALIDATE" -ne 0 ]; then
               echo 'result=FAIL'
               exit 1
             fi
