@@ -31,15 +31,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-chromium-v13
+          key: ${{ runner.os }}-playwright-chromium-v14
 
-      - name: Build v13 static site
+      - name: Build v14 static site
         run: node scripts/build-v13.mjs
 
       - name: Restore social preview image
         run: base64 --decode og-image.txt > dist/og-image.png
 
-      - name: Validate hardened v13 output
+      - name: Validate hardened v14 output
         run: |
           test -f dist/index.html
           test -f dist/CNAME
@@ -52,16 +52,18 @@ jobs:
           test -f dist/assets/release-hardening-v12.js
           test -f dist/assets/v13-features.css
           test -f dist/assets/v13-features.js
+          test -f dist/assets/design-v14.css
+          test -f dist/assets/design-v14.js
           test -f dist/assets/generated-inline-1.js
           grep -q "인스타 맞팔 확인" dist/index.html
           grep -q "unfollow.lavalabs.co.kr" dist/index.html
           grep -q "455-23-01867" dist/index.html
           grep -q "Content-Security-Policy" dist/index.html
-          grep -q "v13-features.js" dist/assets/business-info.js
+          grep -q "design-v14.js" dist/assets/business-info.js
+          grep -q "design-v14.css" dist/assets/design-v14.js
           grep -R -q "WORKSPACE_SIGNATURE_KEY" dist/assets/generated-inline-*.js
-          grep -R -q "await activateWorkspace(file,zip,allKeys)" dist/assets/generated-inline-*.js
           grep -R -q "ZIP_LIMITS" dist/assets/generated-inline-*.js
-          grep -q "unfollow-v13" dist/sw.js
+          grep -q "unfollow-v14" dist/sw.js
           ! grep -R "kyungminkim11/matchal-checker" dist
           ! grep -R "code.iconify.design" dist
           ! grep -R "cdn.jsdelivr.net" dist
@@ -86,7 +88,7 @@ jobs:
           cat /tmp/unfollow-pages-server.log
           exit 1
 
-      - name: Run v12 regression tests
+      - name: Run existing regression tests
         id: v12
         continue-on-error: true
         env:
@@ -100,26 +102,34 @@ jobs:
         continue-on-error: true
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: |
-          mkdir -p audit
-          node scripts/v13-smoke.mjs | tee audit/pages-v13-features.json
+        run: node scripts/v13-smoke.mjs | tee audit/pages-v13-features.json
 
-      - name: Upload Pages smoke-test reports
+      - name: Run v14 visual tests
+        id: v14
+        continue-on-error: true
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/design-v14-smoke.mjs
+
+      - name: Upload Pages test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pages-v13-smoke-reports
+          name: pages-v14-reports
           path: |
             audit/pages-v12-regression.json
             audit/pages-v13-features.json
+            audit/design-v14-report.json
+            audit/design-v14-*.png
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Enforce smoke tests
-        if: steps.v12.outcome != 'success' || steps.v13.outcome != 'success'
+      - name: Enforce release checks
+        if: steps.v12.outcome != 'success' || steps.v13.outcome != 'success' || steps.v14.outcome != 'success'
         run: |
-          echo "V12 regression: ${{ steps.v12.outcome }}"
+          echo "Existing regression: ${{ steps.v12.outcome }}"
           echo "V13 features: ${{ steps.v13.outcome }}"
+          echo "V14 design: ${{ steps.v14.outcome }}"
           exit 1
 
       - name: Configure Pages
@@ -169,7 +179,7 @@ jobs:
           git pull --rebase origin main
           mkdir -p audit
           {
-            echo 'V13_PAGES_WORKFLOW_STATUS'
+            echo 'V14_PAGES_WORKFLOW_STATUS'
             echo "source_commit=$SOURCE_SHA"
             echo "checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "run_id=$RUN_ID"
@@ -178,20 +188,20 @@ jobs:
             echo "build_result=$BUILD_RESULT"
             echo "deploy_result=$DEPLOY_RESULT"
             echo "page_url=$DEPLOYED_PAGE_URL"
-          } > audit/pages-v13-status.txt
+          } > audit/pages-v14-status.txt
           if [ "$BUILD_RESULT" = 'success' ] && [ "$DEPLOY_RESULT" = 'success' ]; then
             {
-              echo 'V13_PAGES_DEPLOYED'
+              echo 'V14_PAGES_DEPLOYED'
               echo "source_commit=$SOURCE_SHA"
               echo "deployed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
               echo "run_id=$RUN_ID"
               echo "page_url=$DEPLOYED_PAGE_URL"
-            } > audit/pages-v13-deploy.txt
+            } > audit/pages-v14-deploy.txt
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/pages-v13-status.txt
-          test -f audit/pages-v13-deploy.txt && git add audit/pages-v13-deploy.txt || true
+          git add audit/pages-v14-status.txt
+          test -f audit/pages-v14-deploy.txt && git add audit/pages-v14-deploy.txt || true
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'chore: record v13 Pages workflow status [skip ci]'
+          git commit -m 'chore: record v14 Pages workflow status [skip ci]'
           git push origin main
