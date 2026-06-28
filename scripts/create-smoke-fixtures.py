@@ -62,6 +62,12 @@ write_zip("account-b.zip", ["shared_target", "account_b_only"], [])
 write_zip("compare-previous.zip", ["alice", "bob", "carol"], ["alice", "bob", "dave"])
 write_zip("compare-current.zip", ["alice", "carol", "erin"], ["alice", "carol", "frank"])
 
+# Generic Instagram filenames intentionally contain no account identifier. The
+# relationship sets overlap enough for the privacy-preserving v13 sketch to
+# recognize them as two snapshots of the same account.
+write_zip("data-2026-06-01.zip", ["stable_one", "stable_two", "old_only"], ["stable_one", "stable_two", "follower_old"])
+write_zip("data-2026-06-28.zip", ["stable_one", "stable_two", "new_only"], ["stable_one", "stable_two", "follower_new"])
+
 progress = {
     "version": 12,
     "sourceName": "basic.zip",
