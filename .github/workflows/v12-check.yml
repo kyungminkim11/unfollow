@@ -1,4 +1,4 @@
-name: V12 Build Check
+name: V12 Release Check
 
 on:
   push:
@@ -6,6 +6,8 @@ on:
     paths:
       - 'scripts/build-pages.mjs'
       - 'scripts/build-release.mjs'
+      - 'scripts/deploy-smoke.mjs'
+      - 'scripts/create-smoke-fixtures.py'
       - 'assets/release-hardening-v12.css'
       - 'assets/release-hardening-v12.js'
       - 'sw.js'
@@ -15,84 +17,113 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: v12-release-check
+  cancel-in-progress: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Run build diagnostics
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v12
+
+      - name: Run build and browser diagnostics
         id: diagnostic
         continue-on-error: true
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
         run: |
           mkdir -p audit
           set +e
-          {
-            echo "commit=$GITHUB_SHA"
-            echo "checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            echo
-            echo '## node --check scripts/build-pages.mjs'
-            node --check scripts/build-pages.mjs
-            SYNTAX_BUILD=$?
-            echo
-            echo '## node --check scripts/build-release.mjs'
-            node --check scripts/build-release.mjs
-            SYNTAX_RELEASE=$?
-            echo
-            echo '## node --check assets/release-hardening-v12.js'
-            node --check assets/release-hardening-v12.js
-            SYNTAX_UI=$?
-            echo
-            echo '## node --check sw.js'
-            node --check sw.js
-            SYNTAX_SW=$?
-            echo
-            echo '## node scripts/build-release.mjs'
+          exec > >(tee audit/v12-build-check.txt) 2>&1
+          STATUS=0
+
+          echo "commit=$GITHUB_SHA"
+          echo "checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          echo '## Syntax checks'
+          node --check scripts/build-pages.mjs || STATUS=$?
+          node --check scripts/build-release.mjs || STATUS=$?
+          node --check scripts/deploy-smoke.mjs || STATUS=$?
+          node --check assets/release-hardening-v12.js || STATUS=$?
+          node --check sw.js || STATUS=$?
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Build release'
             node scripts/build-release.mjs
-            BUILD=$?
-            echo
-            echo "syntax_build=$SYNTAX_BUILD"
-            echo "syntax_release=$SYNTAX_RELEASE"
-            echo "syntax_ui=$SYNTAX_UI"
-            echo "syntax_sw=$SYNTAX_SW"
-            echo "build=$BUILD"
-            if [ "$BUILD" -eq 0 ]; then
-              echo
-              echo '## output validation'
-              test -f dist/index.html; V1=$?
-              test -f dist/assets/release-hardening-v12.css; V2=$?
-              test -f dist/assets/release-hardening-v12.js; V3=$?
-              test -f dist/assets/generated-inline-1.js; V4=$?
-              grep -q 'Content-Security-Policy' dist/index.html; V5=$?
-              grep -R -q 'unfollow_progress_v12_' dist/assets/generated-inline-*.js; V6=$?
-              grep -R -q 'ZIP_LIMITS' dist/assets/generated-inline-*.js; V7=$?
-              grep -R 'cdn.jsdelivr.net' dist >/dev/null; V8=$?
-              grep -R 'bluepen_shop' dist >/dev/null; V9=$?
-              grep -R 'tokyo_stationery' dist >/dev/null; V10=$?
-              echo "files=$V1,$V2,$V3,$V4 csp=$V5 workspace=$V6 limits=$V7 external_font_match=$V8 legacy_sample_1=$V9 legacy_sample_2=$V10"
-              if [ "$V1" -ne 0 ] || [ "$V2" -ne 0 ] || [ "$V3" -ne 0 ] || [ "$V4" -ne 0 ] || [ "$V5" -ne 0 ] || [ "$V6" -ne 0 ] || [ "$V7" -ne 0 ] || [ "$V8" -eq 0 ] || [ "$V9" -eq 0 ] || [ "$V10" -eq 0 ]; then VALIDATE=1; else VALIDATE=0; fi
-            else
-              VALIDATE=1
-            fi
-            echo "validate=$VALIDATE"
-            if [ "$SYNTAX_BUILD" -ne 0 ] || [ "$SYNTAX_RELEASE" -ne 0 ] || [ "$SYNTAX_UI" -ne 0 ] || [ "$SYNTAX_SW" -ne 0 ] || [ "$BUILD" -ne 0 ] || [ "$VALIDATE" -ne 0 ]; then
-              echo 'result=FAIL'
-              exit 1
-            fi
-            echo 'result=PASS'
-          } > audit/v12-build-check.txt 2>&1
-          STATUS=$?
-          cat audit/v12-build-check.txt
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Validate release output'
+            test -f dist/index.html || STATUS=1
+            test -f dist/assets/release-hardening-v12.css || STATUS=1
+            test -f dist/assets/release-hardening-v12.js || STATUS=1
+            test -f dist/assets/generated-inline-1.js || STATUS=1
+            grep -q 'Content-Security-Policy' dist/index.html || STATUS=1
+            grep -R -q 'unfollow_progress_v12_' dist/assets/generated-inline-*.js || STATUS=1
+            grep -R -q 'ZIP_LIMITS' dist/assets/generated-inline-*.js || STATUS=1
+            grep -R 'cdn.jsdelivr.net' dist >/dev/null && STATUS=1
+            grep -R 'bluepen_shop' dist >/dev/null && STATUS=1
+            grep -R 'tokyo_stationery' dist >/dev/null && STATUS=1
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Create browser fixtures'
+            base64 --decode og-image.txt > dist/og-image.png
+            python3 scripts/create-smoke-fixtures.py
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Install Playwright'
+            npm install --no-save playwright @axe-core/playwright
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            npx playwright install chromium --with-deps
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Start production preview'
+            python3 -m http.server 4173 --directory dist > /tmp/v12-check-server.log 2>&1 &
+            READY=1
+            for i in {1..20}; do
+              if curl -fsS http://127.0.0.1:4173/ >/dev/null; then READY=0; break; fi
+              sleep 1
+            done
+            if [ "$READY" -ne 0 ]; then cat /tmp/v12-check-server.log; STATUS=1; fi
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Browser smoke tests'
+            node scripts/deploy-smoke.mjs
+            STATUS=$?
+          fi
+
+          echo "result=$([ "$STATUS" -eq 0 ] && echo PASS || echo FAIL)"
+          echo "exit_code=$STATUS"
           exit $STATUS
 
       - name: Commit diagnostic report
         if: always()
         run: |
+          test -f audit/v12-build-check.txt || printf 'Release check stopped before diagnostics.\n' > audit/v12-build-check.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/v12-build-check.txt
