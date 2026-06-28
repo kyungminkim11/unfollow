@@ -36,6 +36,7 @@
 .design-v14 .primaryTab.active,
 .design-v14 .primaryTab.isActive{color:#4938c9!important}
 .design-v14 .dashboard .stat:before{opacity:.66!important}
+.design-v14 .v14DuplicateMobileHeader{display:none!important}
 
 body.v8-dark.design-v14 .topbar>p{color:#c7cedb!important}
 body.v8-dark.design-v14 .topActions a,
@@ -56,8 +57,25 @@ body.v8-dark.design-v14 .bottomNavV8 a.isActive,
 body.v8-dark.design-v14 .primaryTab.active,
 body.v8-dark.design-v14 .primaryTab.isActive{color:#d4d0ff!important}
 
+@media(max-width:980px){
+  .design-v14 .v14HeroAside{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+  }
+  .design-v14 .v14HeroAside>*{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  .design-v14 .v14HeroAside .v14SummaryGrid,
+  .design-v14 .v14HeroAside .v14StepStrip,
+  .design-v14 .v14HeroAside .v14SecondaryGuide{width:100%!important}
+}
+
 @media(max-width:760px){
   .design-v14 .topbar{display:none!important}
   .design-v14 .businessLinksV10 a,
   .design-v14 .businessLinksV10 button{color:#4938c9!important}
+  .design-v14 .v14HeroAside{overflow:visible!important}
 }
