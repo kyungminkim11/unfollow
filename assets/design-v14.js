@@ -18,8 +18,8 @@
   }
 
   function loadStylesheets(){
-    addStylesheet('/assets/design-v14.css?v=14.2','main');
-    addStylesheet('/assets/design-v14-fixes.css?v=14.2','fixes');
+    addStylesheet('/assets/design-v14.css?v=14.3','main');
+    addStylesheet('/assets/design-v14-fixes.css?v=14.3','fixes');
   }
 
   function updateVisibleVersion(){
@@ -41,11 +41,27 @@
     return null;
   }
 
+  function findSummaryGrid(aside){
+    const direct=q('.heroSummaryV8,.summaryGrid,.resultSummary',aside);
+    if(direct) return direct;
+    const candidates=qa('div,section',aside).filter(element=>{
+      if(element===aside||element.closest('.v10Steps')) return false;
+      const text=(element.textContent||'').replace(/\s+/g,' ');
+      const matchingLabels=['전체 팔로잉','맞팔','취소 검토','팔로워만'].filter(label=>text.includes(label)).length;
+      return matchingLabels>=3&&element.children.length>=2;
+    });
+    return candidates.sort((a,b)=>{
+      const areaA=a.getBoundingClientRect().width*a.getBoundingClientRect().height;
+      const areaB=b.getBoundingClientRect().width*b.getBoundingClientRect().height;
+      return areaA-areaB;
+    })[0]||null;
+  }
+
   function findSecondaryGuide(aside){
     const direct=q('.quickStart',aside);
     if(direct) return direct;
     const candidates=qa('div,section,ol',aside).filter(element=>{
-      if(element===aside||element.closest('.v10Steps')||q('.v10Steps',element)||q('.heroSummaryV8',element)) return false;
+      if(element===aside||element.closest('.v10Steps')||q('.v10Steps',element)||element.classList.contains('v14SummaryGrid')) return false;
       const text=(element.textContent||'').replace(/\s+/g,' ');
       return text.includes('Instagram 데이터 다운로드')&&text.includes('ZIP 파일 업로드')&&/결과 확인|직접 처리/.test(text);
     });
@@ -65,7 +81,7 @@
     aside?.classList.add('v14HeroAside');
     q('.drop',primary)?.classList.add('v14PrimaryDrop');
     findResourceBar(primary)?.classList.add('v14ResourceBar');
-    q('.heroSummaryV8',aside)?.classList.add('v14SummaryGrid');
+    findSummaryGrid(aside)?.classList.add('v14SummaryGrid');
     q('.v10Steps',aside)?.classList.add('v14StepStrip');
 
     if(aside){
@@ -86,10 +102,25 @@
     else topbar.appendChild(chip);
   }
 
+  function mobileHeaderCandidates(){
+    if(!matchMedia('(max-width:760px)').matches) return [];
+    const raw=qa('header,[class*="mobile" i],[class*="Mobile"]');
+    return raw.filter(element=>{
+      if(element.closest('.sidebar')||element.classList.contains('v14DuplicateMobileHeader')) return false;
+      const text=(element.textContent||'').replace(/\s+/g,' ').trim();
+      if(!text.includes('맞팔체커')) return false;
+      const box=element.getBoundingClientRect();
+      if(box.width<innerWidth*.75||box.height<36||box.height>90||box.top>150) return false;
+      return qa('button,a',element).length>0;
+    }).filter((element,index,array)=>{
+      return !array.some((other,otherIndex)=>otherIndex!==index&&other.contains(element));
+    });
+  }
+
   function dedupeMobileHeaders(){
-    const candidates=qa('.mobileTopV8,.mobileHeader,.mobileTop,.mobileBar').filter((element,index,array)=>array.indexOf(element)===index);
+    const candidates=mobileHeaderCandidates();
     if(candidates.length<=1) return;
-    const score=element=>qa('button,a',element).length*10+element.children.length;
+    const score=element=>qa('button,a',element).length*20+element.children.length+element.getBoundingClientRect().top/100;
     const keep=[...candidates].sort((a,b)=>score(b)-score(a))[0];
     keep.classList.add('mobileTopV8');
     keep.classList.remove('v14DuplicateMobileHeader');
@@ -127,7 +158,7 @@
 
   function scheduleDecorate(){
     clearTimeout(decorateTimer);
-    decorateTimer=setTimeout(decorate,60);
+    decorateTimer=setTimeout(decorate,80);
   }
 
   function start(){
@@ -135,6 +166,8 @@
     document.documentElement.classList.add('design-v14-ready');
     loadStylesheets();
     decorate();
+    setTimeout(decorate,300);
+    setTimeout(decorate,900);
 
     observer=new MutationObserver(scheduleDecorate);
     observer.observe(document.body,{childList:true,subtree:true});
