@@ -23,39 +23,23 @@ concurrency:
 jobs:
   runtime:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: Build release
-        run: |
-          node scripts/build-release.mjs
-          base64 --decode og-image.txt > dist/og-image.png
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v12
 
-      - name: Create smoke fixtures
-        run: python3 scripts/create-smoke-fixtures.py
-
-      - name: Install browser tools
-        run: |
-          npm install --no-save playwright @axe-core/playwright
-          npx playwright install chromium --with-deps
-
-      - name: Start preview
-        run: |
-          python3 -m http.server 4173 --directory dist > /tmp/v12-runtime-server.log 2>&1 &
-          for i in {1..20}; do
-            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
-            sleep 1
-          done
-          cat /tmp/v12-runtime-server.log
-          exit 1
-
-      - name: Run runtime diagnostics
+      - name: Run complete runtime diagnostics
         id: runtime
         continue-on-error: true
         env:
@@ -63,16 +47,68 @@ jobs:
         run: |
           mkdir -p audit
           set +e
-          node scripts/deploy-smoke.mjs > audit/v12-runtime-check.txt 2>&1
+          exec > >(tee audit/v12-runtime-check.txt) 2>&1
+          STATUS=0
+
+          echo "commit=$GITHUB_SHA"
+          echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          echo '## Build release'
+          node scripts/build-release.mjs
           STATUS=$?
-          echo >> audit/v12-runtime-check.txt
-          echo "exit_code=$STATUS" >> audit/v12-runtime-check.txt
-          cat audit/v12-runtime-check.txt
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Restore preview image'
+            base64 --decode og-image.txt > dist/og-image.png
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Create fixtures'
+            python3 scripts/create-smoke-fixtures.py
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Install audit packages'
+            npm install --no-save playwright @axe-core/playwright
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Install Chromium'
+            npx playwright install chromium --with-deps
+            STATUS=$?
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Start preview server'
+            python3 -m http.server 4173 --directory dist > /tmp/v12-runtime-server.log 2>&1 &
+            SERVER_READY=1
+            for i in {1..20}; do
+              if curl -fsS http://127.0.0.1:4173/ >/dev/null; then SERVER_READY=0; break; fi
+              sleep 1
+            done
+            if [ "$SERVER_READY" -ne 0 ]; then
+              cat /tmp/v12-runtime-server.log
+              STATUS=1
+            fi
+          fi
+
+          if [ "$STATUS" -eq 0 ]; then
+            echo '## Run browser smoke tests'
+            node scripts/deploy-smoke.mjs
+            STATUS=$?
+          fi
+
+          echo "finished_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          echo "exit_code=$STATUS"
           exit $STATUS
 
       - name: Commit runtime report
         if: always()
         run: |
+          test -f audit/v12-runtime-check.txt || printf 'Runtime workflow stopped before diagnostics.\n' > audit/v12-runtime-check.txt
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add audit/v12-runtime-check.txt
