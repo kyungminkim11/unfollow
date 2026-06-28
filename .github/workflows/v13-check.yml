@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'assets/design-v14.css'
+      - 'assets/design-v14-fixes.css'
       - 'assets/design-v14.js'
       - 'assets/business-info.js'
       - 'scripts/design-v14-smoke.mjs'
@@ -56,10 +57,12 @@ jobs:
           node scripts/build-v13.mjs
           base64 --decode og-image.txt > dist/og-image.png
           test -f dist/assets/design-v14.css
+          test -f dist/assets/design-v14-fixes.css
           test -f dist/assets/design-v14.js
           test -f dist/assets/v13-features.js
           grep -q 'design-v14.js' dist/assets/business-info.js
           grep -q 'design-v14.css' dist/assets/design-v14.js
+          grep -q 'design-v14-fixes.css' dist/assets/design-v14.js
           grep -R -q 'WORKSPACE_SIGNATURE_KEY' dist/assets/generated-inline-*.js
           grep -q 'unfollow-v14' dist/sw.js
 
