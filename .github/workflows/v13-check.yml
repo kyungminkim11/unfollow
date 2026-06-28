@@ -1,0 +1,103 @@
+name: V13 Improvements Check
+
+on:
+  push:
+    branches: [v13-improvements]
+    paths:
+      - 'assets/v13-features.js'
+      - 'assets/v13-features.css'
+      - 'assets/business-info.js'
+      - 'scripts/v13-smoke.mjs'
+      - 'scripts/create-smoke-fixtures.py'
+      - '.github/workflows/v13-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v13-improvements-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v13-improvements
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v13
+
+      - name: Build final release
+        run: |
+          node --check assets/v13-features.js
+          node --check scripts/v13-smoke.mjs
+          node scripts/build-release.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/v13-features.js
+          test -f dist/assets/v13-features.css
+          grep -q "v13-features.js" dist/assets/business-info.js
+
+      - name: Create test fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/v13-preview.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/v13-preview.log
+          exit 1
+
+      - name: Run v12 regression and v13 feature tests
+        id: browser
+        continue-on-error: true
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: |
+          mkdir -p audit
+          set +e
+          echo '{"v12Regression":' > audit/v13-check.json
+          node scripts/deploy-smoke.mjs > /tmp/v12-regression.json
+          V12=$?
+          cat /tmp/v12-regression.json >> audit/v13-check.json
+          echo ',"v13Features":' >> audit/v13-check.json
+          node scripts/v13-smoke.mjs > /tmp/v13-features.json
+          V13=$?
+          cat /tmp/v13-features.json >> audit/v13-check.json
+          printf ',"exitCodes":{"v12":%s,"v13":%s}}\n' "$V12" "$V13" >> audit/v13-check.json
+          cat audit/v13-check.json
+          if [ "$V12" -ne 0 ] || [ "$V13" -ne 0 ]; then exit 1; fi
+
+      - name: Commit v13 check report
+        if: always()
+        run: |
+          test -f audit/v13-check.json || printf '{"error":"check stopped before browser tests"}\n' > audit/v13-check.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/v13-check.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'chore: record v13 improvements check [skip ci]'
+          git push origin HEAD:v13-improvements
+
+      - name: Fail unsuccessful check
+        if: steps.browser.outcome != 'success'
+        run: exit 1
