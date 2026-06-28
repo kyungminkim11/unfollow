@@ -1,0 +1,41 @@
+name: V12 Build Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-pages.mjs'
+      - 'assets/release-hardening-v12.css'
+      - 'assets/release-hardening-v12.js'
+      - '.github/workflows/v12-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/build-pages.mjs
+          node --check assets/release-hardening-v12.js
+      - name: Build production output
+        run: node scripts/build-pages.mjs
+      - name: Validate hardened output
+        run: |
+          test -f dist/index.html
+          test -f dist/assets/release-hardening-v12.css
+          test -f dist/assets/release-hardening-v12.js
+          test -f dist/assets/generated-inline-1.js
+          grep -q 'Content-Security-Policy' dist/index.html
+          grep -q 'unfollow_progress_v12_' dist/assets/generated-inline-1.js dist/assets/generated-inline-2.js dist/assets/generated-inline-3.js || true
+          ! grep -R 'cdn.jsdelivr.net' dist
+          ! grep -R 'bluepen_shop' dist
+          ! grep -R 'tokyo_stationery' dist
+          ! grep -P '<script(?![^>]*src=)(?![^>]*application/ld\+json)' dist/index.html
