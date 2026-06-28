@@ -1,5 +1,5 @@
-commit=9d8e76797bb66c0a6ef167843f9bf92b8cd012ee
-started_at=2026-06-28T02:39:04Z
+commit=947399e73d874ee3b5e8eee6bb52a3e7ccca4ad9
+started_at=2026-06-28T02:46:55Z
 ## Build release
 Base build completed with a removable external-font assertion. Continuing with release cleanup.
 Release build ready after CDN cleanup.
@@ -8,45 +8,45 @@ Release build ready after CDN cleanup.
 Created smoke fixtures in smoke-fixtures
 ## Install audit packages
 
-added 4 packages in 3s
+added 4 packages in 2s
 ## Install Chromium
 Installing dependencies...
 Switching to root user to install dependencies...
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [187 kB]
-Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [156 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1041 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [261 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [17.5 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1656 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [326 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [34.8 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1134 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [257 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5768 B]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [788 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [179 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.9 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.6 kB]
-Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1171 kB]
-Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [229 kB]
-Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
-Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.1 kB]
-Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1071 kB]
-Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [245 kB]
+Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1041 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [261 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [17.5 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1656 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [326 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [34.8 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1134 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [257 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5768 B]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [788 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [179 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.9 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.6 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1171 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [229 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.1 kB]
+Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1071 kB]
+Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [245 kB]
+Get:32 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [187 kB]
+Get:33 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [156 kB]
 Get:34 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1210 B]
-Fetched 9881 kB in 1s (6953 kB/s)
+Fetched 9881 kB in 1s (8004 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -122,7 +122,7 @@ Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings a
 Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
 Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
-Fetched 21.1 MB in 0s (42.6 MB/s)
+Fetched 21.1 MB in 0s (72.8 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202407 files and directories currently installed.)
 Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -321,72 +321,6 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
             "nodes": [
               {
                 "target": [
-                  ".topbar > p"
-                ],
-                "html": "<p>안녕하세요. 오늘도 필요한 계정만 차분하게 정리해보세요.</p>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#667085",
-                      "bgColor": "#171a25",
-                      "contrastRatio": 3.48,
-                      "fontSize": "10.5pt (14px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
-                  "#drop > div:nth-child(2) > span"
-                ],
-                "html": "<span>압축을 풀지 않은 .zip 파일을 그대로 올려주세요</span>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #667085, background color: #1f2330, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 3.14 (foreground color: #667085, background color: #1f2330, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#667085",
-                      "bgColor": "#1f2330",
-                      "contrastRatio": 3.14,
-                      "fontSize": "9.8pt (13px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
-                  "#zipPreflight > span"
-                ],
-                "html": "<span>account-b.zip · 0.5 KB</span>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #475467, background color: #14251b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 2.08 (foreground color: #475467, background color: #14251b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#475467",
-                      "bgColor": "#14251b",
-                      "contrastRatio": 2.08,
-                      "fontSize": "8.3pt (11px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
                   "#zipPreflight > small"
                 ],
                 "html": "<small>내부 JSON 항목은 분석 단계에서 확인합니다.</small>",
@@ -576,6 +510,72 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
                       "bgColor": "#171a25",
                       "contrastRatio": 3.48,
                       "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "span[title=\"검토 완료\"]"
+                ],
+                "html": "<span title=\"검토 완료\" data-label-hint=\"검토 완료\">완료 체크</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#progressText"
+                ],
+                "html": "<span id=\"progressText\">취소 검토 대상 기준 0% 완료 · 0 / 2</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#sessionText"
+                ],
+                "html": "<span id=\"sessionText\">이번 세션 0명 열람</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
                       "fontWeight": "normal",
                       "messageKey": null,
                       "expectedContrastRatio": "4.5:1"
@@ -718,72 +718,6 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
             "nodes": [
               {
                 "target": [
-                  ".topbar > p"
-                ],
-                "html": "<p>안녕하세요. 오늘도 필요한 계정만 차분하게 정리해보세요.</p>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#667085",
-                      "bgColor": "#171a25",
-                      "contrastRatio": 3.48,
-                      "fontSize": "10.5pt (14px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
-                  "#drop > div:nth-child(2) > span"
-                ],
-                "html": "<span>압축을 풀지 않은 .zip 파일을 그대로 올려주세요</span>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.14 (foreground color: #667085, background color: #1f2330, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 3.14 (foreground color: #667085, background color: #1f2330, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#667085",
-                      "bgColor": "#1f2330",
-                      "contrastRatio": 3.14,
-                      "fontSize": "9.8pt (13px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
-                  "#zipPreflight > span"
-                ],
-                "html": "<span>account-b.zip · 0.5 KB</span>",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.08 (foreground color: #475467, background color: #14251b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "any": [
-                  {
-                    "id": "color-contrast",
-                    "message": "Element has insufficient color contrast of 2.08 (foreground color: #475467, background color: #14251b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "data": {
-                      "fgColor": "#475467",
-                      "bgColor": "#14251b",
-                      "contrastRatio": 2.08,
-                      "fontSize": "8.3pt (11px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    }
-                  }
-                ]
-              },
-              {
-                "target": [
                   "#zipPreflight > small"
                 ],
                 "html": "<small>내부 JSON 항목은 분석 단계에서 확인합니다.</small>",
@@ -979,6 +913,72 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
                     }
                   }
                 ]
+              },
+              {
+                "target": [
+                  "span[title=\"검토 완료\"]"
+                ],
+                "html": "<span title=\"검토 완료\" data-label-hint=\"검토 완료\">완료 체크</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#progressText"
+                ],
+                "html": "<span id=\"progressText\">취소 검토 대상 기준 0% 완료 · 0 / 2</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#sessionText"
+                ],
+                "html": "<span id=\"sessionText\">이번 세션 0명 열람</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -987,5 +987,5 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
     }
   ]
 }
-finished_at=2026-06-28T02:39:47Z
+finished_at=2026-06-28T02:47:29Z
 exit_code=1
