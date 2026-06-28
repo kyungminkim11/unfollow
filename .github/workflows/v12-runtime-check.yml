@@ -1,0 +1,103 @@
+name: V12 Runtime Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build-pages.mjs'
+      - 'scripts/build-release.mjs'
+      - 'scripts/deploy-smoke.mjs'
+      - 'assets/release-hardening-v12.css'
+      - 'assets/release-hardening-v12.js'
+      - '.github/workflows/v12-runtime-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v12-runtime-check
+  cancel-in-progress: true
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build release
+        run: |
+          node scripts/build-release.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+
+      - name: Create smoke fixtures
+        run: |
+          python3 - <<'PY'
+          import json, os, time, zipfile
+          os.makedirs('smoke-fixtures', exist_ok=True)
+          now=int(time.time())
+          base='connections/followers_and_following/'
+          def following(name):
+              return {'title':name,'string_list_data':[{'href':f'https://www.instagram.com/{name}/','value':name,'timestamp':now}]}
+          def follower(name):
+              return {'title':'','media_list_data':[],'string_list_data':[{'href':f'https://www.instagram.com/{name}/','value':name,'timestamp':now}]}
+          def write(name, following_names, follower_names):
+              with zipfile.ZipFile('smoke-fixtures/'+name,'w',zipfile.ZIP_DEFLATED) as z:
+                  z.writestr(base+'following.json',json.dumps({'relationships_following':[following(x) for x in following_names]}))
+                  z.writestr(base+'followers_1.json',json.dumps([follower(x) for x in follower_names]))
+          write('basic.zip',['alpha','delta'],['alpha'])
+          write('account-a.zip',['shared_target','account_a_only'],[])
+          write('account-b.zip',['shared_target','account_b_only'],[])
+          progress={'version':12,'sourceName':'basic.zip','progress':{'delta':{'username':'delta','status':'done','updatedAt':'2026-06-28T00:00:00.000Z'}},'settings':{'activeTab':'nonMutual','sort':'recent','status':'all','hideDone':False,'dailyGoal':50}}
+          with open('smoke-fixtures/renamed-progress.txt','w',encoding='utf-8') as f: json.dump(progress,f,ensure_ascii=False)
+          PY
+
+      - name: Install browser tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/v12-runtime-server.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/v12-runtime-server.log
+          exit 1
+
+      - name: Run runtime diagnostics
+        id: runtime
+        continue-on-error: true
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: |
+          mkdir -p audit
+          set +e
+          node scripts/deploy-smoke.mjs > audit/v12-runtime-check.txt 2>&1
+          STATUS=$?
+          echo >> audit/v12-runtime-check.txt
+          echo "exit_code=$STATUS" >> audit/v12-runtime-check.txt
+          cat audit/v12-runtime-check.txt
+          exit $STATUS
+
+      - name: Commit runtime report
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/v12-runtime-check.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'chore: record v12 runtime check [skip ci]'
+          git push
+
+      - name: Fail unsuccessful runtime check
+        if: steps.runtime.outcome != 'success'
+        run: exit 1
