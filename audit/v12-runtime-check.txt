@@ -81,7 +81,31 @@
           {
             "id": "color-contrast",
             "impact": "serious",
-            "nodes": 1
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".lavaByline > a[href$=\"lavalabs.co.kr/\"][target=\"_blank\"][rel=\"noopener\"]"
+                ],
+                "html": "<a href=\"https://lavalabs.co.kr/\" target=\"_blank\" rel=\"noopener\">by Lava Labs</a>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#8b8fa3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 3.2,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -157,7 +181,31 @@
           {
             "id": "color-contrast",
             "impact": "serious",
-            "nodes": 1
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".lavaByline > a[href$=\"lavalabs.co.kr/\"][target=\"_blank\"][rel=\"noopener\"]"
+                ],
+                "html": "<a href=\"https://lavalabs.co.kr/\" target=\"_blank\" rel=\"noopener\">by Lava Labs</a>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#8b8fa3",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 3.2,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
