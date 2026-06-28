@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-28T01:45:57.185Z",
-  "commit": "a7017fe390426b57663df5ed774f1b03ee8f04ca",
+  "generatedAt": "2026-06-28T01:50:00.893Z",
+  "commit": "4c97bc0297975c1d3af28ed48428e4e838244757",
   "baseURL": "http://127.0.0.1:4173/",
   "checks": [
     {
@@ -160,7 +160,7 @@
       "details": {
         "status": 200,
         "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-        "loadMs": 858
+        "loadMs": 982
       }
     },
     {
@@ -231,7 +231,7 @@
       "severity": "high",
       "details": {
         "modalVisible": true,
-        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_433m2s_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
+        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_036u4x_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
       }
     },
     {
@@ -349,7 +349,7 @@
       "details": {
         "status": 200,
         "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-        "loadMs": 778
+        "loadMs": 870
       }
     },
     {
@@ -420,7 +420,7 @@
       "severity": "high",
       "details": {
         "modalVisible": true,
-        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_5d3m0e_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
+        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_2g155k_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
       }
     },
     {
@@ -538,7 +538,7 @@
       "details": {
         "status": 200,
         "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-        "loadMs": 753
+        "loadMs": 847
       }
     },
     {
@@ -615,7 +615,7 @@
       "severity": "high",
       "details": {
         "modalVisible": true,
-        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_01414z_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
+        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_6d5f3g_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
       }
     },
     {
@@ -762,7 +762,7 @@
       "details": {
         "status": 200,
         "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-        "loadMs": 695
+        "loadMs": 827
       }
     },
     {
@@ -839,7 +839,7 @@
       "severity": "high",
       "details": {
         "modalVisible": true,
-        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_3m5a0c_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
+        "modalText": "×\n◎\n\n가상 샘플 모드\n\n실제 Instagram 프로필은 열 수 없어요\n@lava_demo_following_6q5v2q_01\n\n이 계정은 맞팔체커의 분석·분류·작업 흐름을 체험할 수 있도록 브라우저에서 만든 가상 계정입니다. 실제 Instagram 계정이 아니므로 연결되는 프로필이 없습니다.\n\n샘플에서 가능한 기능\n필터 · 상태 선택 · 진행 저장 · 아이디 복사\n실제 ZIP 사용 시 가능한 기능\n각 계정의 Instagram 프로필 열기\n샘플 계속 보기\n내 ZIP으로 분석하기"
       }
     },
     {
@@ -994,7 +994,7 @@
           "mutual": 1,
           "nonMutual": 2
         },
-        "elapsedMs": 52
+        "elapsedMs": 48
       }
     },
     {
@@ -1013,7 +1013,7 @@
           "mutual": 2,
           "nonMutual": 1
         },
-        "elapsedMs": 4
+        "elapsedMs": 3
       }
     },
     {
@@ -1042,7 +1042,7 @@
           "mutual": 3000,
           "nonMutual": 2000
         },
-        "elapsedMs": 89
+        "elapsedMs": 80
       }
     },
     {
@@ -1051,7 +1051,7 @@
       "status": "pass",
       "severity": "medium",
       "details": {
-        "elapsedMs": 89
+        "elapsedMs": 80
       }
     },
     {
@@ -1094,7 +1094,7 @@
           "mutual": 1,
           "nonMutual": 1
         },
-        "elapsedMs": 8
+        "elapsedMs": 19
       }
     },
     {
@@ -1172,7 +1172,7 @@
       },
       "status": 200,
       "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-      "loadMs": 858,
+      "loadMs": 982,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -1222,7 +1222,7 @@
       },
       "status": 200,
       "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-      "loadMs": 778,
+      "loadMs": 870,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -1272,7 +1272,7 @@
       },
       "status": 200,
       "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-      "loadMs": 753,
+      "loadMs": 847,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],
@@ -1322,7 +1322,7 @@
       },
       "status": 200,
       "title": "인스타 맞팔 확인 · 언팔 체크 | 맞팔체커",
-      "loadMs": 695,
+      "loadMs": 827,
       "consoleErrors": [],
       "pageErrors": [],
       "failedRequests": [],

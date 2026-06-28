@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-28T01:46:24.067Z",
+  "generatedAt": "2026-06-28T01:50:28.679Z",
   "baseURL": "http://127.0.0.1:4173/",
   "desktop": {
     "before": {
       "following": 13,
       "done": 0,
-      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_01\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 22.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음",
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_3u6q4b_01\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 22.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음",
       "localStorage": {}
     },
     "keepButton": {
@@ -17,9 +17,9 @@
     },
     "afterKeep": {
       "done": 0,
-      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_02\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 21.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_3u6q4b_02\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 21.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
       "localStorage": {
-        "matchal_checker_v7_progress": "{\"lava_demo_following_0x6b2f_01\":{\"username\":\"lava_demo_following_0x6b2f_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:46:25.231Z\"}}"
+        "matchal_checker_v7_progress": "{\"lava_demo_following_3u6q4b_01\":{\"username\":\"lava_demo_following_3u6q4b_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:50:29.857Z\"}}"
       },
       "toasts": [
         "실제 계정과 무관한 가상 샘플 데이터를 불러왔습니다.",
@@ -35,9 +35,9 @@
     },
     "afterDone": {
       "done": 1,
-      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_03\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 20.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_3u6q4b_03\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 20.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
       "localStorage": {
-        "matchal_checker_v7_progress": "{\"lava_demo_following_0x6b2f_01\":{\"username\":\"lava_demo_following_0x6b2f_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:46:25.231Z\"},\"lava_demo_following_0x6b2f_02\":{\"username\":\"lava_demo_following_0x6b2f_02\",\"status\":\"done\",\"updatedAt\":\"2026-06-28T01:46:26.280Z\"}}"
+        "matchal_checker_v7_progress": "{\"lava_demo_following_3u6q4b_01\":{\"username\":\"lava_demo_following_3u6q4b_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:50:29.857Z\"},\"lava_demo_following_3u6q4b_02\":{\"username\":\"lava_demo_following_3u6q4b_02\",\"status\":\"done\",\"updatedAt\":\"2026-06-28T01:50:30.907Z\"}}"
       },
       "logs": []
     },
