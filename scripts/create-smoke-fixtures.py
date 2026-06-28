@@ -56,6 +56,12 @@ write_zip("basic.zip", ["alpha", "delta"], ["alpha"])
 write_zip("account-a.zip", ["shared_target", "account_a_only"], [])
 write_zip("account-b.zip", ["shared_target", "account_b_only"], [])
 
+# v13 snapshot comparison fixture:
+# new following=erin, stopped following=bob, new followers=carol+frank,
+# lost followers=bob+dave, newly mutual=carol, mutual ended=bob.
+write_zip("compare-previous.zip", ["alice", "bob", "carol"], ["alice", "bob", "dave"])
+write_zip("compare-current.zip", ["alice", "carol", "erin"], ["alice", "carol", "frank"])
+
 progress = {
     "version": 12,
     "sourceName": "basic.zip",
