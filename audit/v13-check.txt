@@ -1,5 +1,5 @@
-commit=faf1fa7b863f0034dcbce1f123f0e2f32ed3bfab
-started_at=2026-06-28T05:03:29Z
+commit=a5b7714606f778604feca02e7a49f4a7eaf26771
+started_at=2026-06-28T05:05:27Z
 ## Syntax checks
 ## Build v13 release
 Base build completed with a removable external-font assertion. Continuing with release cleanup.
@@ -9,7 +9,7 @@ V13 build ready with content-aware workspaces in generated-inline-1.js.
 Created smoke fixtures in smoke-fixtures
 ## Install browser tools
 
-added 4 packages in 3s
+added 4 packages in 2s
 Installing dependencies...
 Switching to root user to install dependencies...
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
@@ -46,7 +46,7 @@ Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-
 Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1071 kB]
 Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [245 kB]
 Get:34 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1210 B]
-Fetched 9881 kB in 1s (7702 kB/s)
+Fetched 9881 kB in 1s (8105 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -122,7 +122,7 @@ Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings a
 Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
 Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
-Fetched 21.1 MB in 1s (33.4 MB/s)
+Fetched 21.1 MB in 0s (50.9 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202407 files and directories currently installed.)
 Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -987,6 +987,6 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
     }
   ]
 }
-finished_at=2026-06-28T05:04:13Z
+finished_at=2026-06-28T05:06:01Z
 result=FAIL
 exit_code=1
