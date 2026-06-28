@@ -1,0 +1,1026 @@
+{
+  "generatedAt": "2026-06-28T01:46:24.067Z",
+  "baseURL": "http://127.0.0.1:4173/",
+  "desktop": {
+    "before": {
+      "following": 13,
+      "done": 0,
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_01\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 22.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음",
+      "localStorage": {}
+    },
+    "keepButton": {
+      "count": 1,
+      "visible": true,
+      "disabled": false,
+      "text": "유지하기 · 다음",
+      "html": "<button class=\"btn warn\" id=\"focusKeepBtn\">유지하기 · 다음</button>"
+    },
+    "afterKeep": {
+      "done": 0,
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_02\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 21.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
+      "localStorage": {
+        "matchal_checker_v7_progress": "{\"lava_demo_following_0x6b2f_01\":{\"username\":\"lava_demo_following_0x6b2f_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:46:25.231Z\"}}"
+      },
+      "toasts": [
+        "실제 계정과 무관한 가상 샘플 데이터를 불러왔습니다.",
+        "분석 완료"
+      ]
+    },
+    "doneButton": {
+      "count": 1,
+      "visible": true,
+      "disabled": false,
+      "text": "취소 완료 · 다음",
+      "html": "<button class=\"btn ok\" id=\"focusDoneBtn\">취소 완료 · 다음</button>"
+    },
+    "afterDone": {
+      "done": 1,
+      "currentText": "현재 작업 대상\n\n프로필 확인 → 직접 처리 → 상태 선택\n\n미처리\n1\n프로필 확인\n2\nInstagram 처리\n3\n상태 선택\n@lava_demo_following_0x6b2f_03\n분류\n취소 검토\n상태\n미처리\n팔로우 날짜\n2026. 06. 20.\n현재 필터\n취소 검토\nInstagram 프로필 열기\n취소 완료 · 다음\n유지하기 · 다음\n보류하기\n아이디 복사\n이번 세션 프로필 열람\n0\nInstagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.\nD 취소 완료\nK 유지\nL 나중에\nC 아이디 복사\n이 계정 메모\n프로필을 찾을 수 없음\n브라우저에 자동 저장됩니다",
+      "localStorage": {
+        "matchal_checker_v7_progress": "{\"lava_demo_following_0x6b2f_01\":{\"username\":\"lava_demo_following_0x6b2f_01\",\"status\":\"keep\",\"updatedAt\":\"2026-06-28T01:46:25.231Z\"},\"lava_demo_following_0x6b2f_02\":{\"username\":\"lava_demo_following_0x6b2f_02\",\"status\":\"done\",\"updatedAt\":\"2026-06-28T01:46:26.280Z\"}}"
+      },
+      "logs": []
+    },
+    "business": {
+      "detailsCount": 1,
+      "beforeOpen": "© 2026 Lava Labs · 맞팔체커\n라바랩스에서 운영하는 무료 브라우저 로컬 분석 도구입니다.\n라바랩스 홈페이지\n문의\n운영자·사업자 정보",
+      "afterOpen": "© 2026 Lava Labs · 맞팔체커\n라바랩스에서 운영하는 무료 브라우저 로컬 분석 도구입니다.\n라바랩스 홈페이지\n문의\n운영자·사업자 정보\n상호\n라바랩스(LavaLabs)\n대표자\n김경민\n사업자등록번호\n455-23-01867\n통신판매업 신고번호\n2025-고양일산서-1352\n사업장 소재지\n경기도 고양시 일산서구 일현로 47, 2층 204호 1308호실(탄현동, 예일 큰프라자)\n이메일\nlavalabs.ceo@gmail.com\n\n맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. 선택한 ZIP 파일과 분석 결과는 외부 서버로 전송되지 않습니다.",
+      "registrationVisible": true
+    }
+  },
+  "mobile": {
+    "bottomNav": {
+      "exists": false
+    },
+    "top": {
+      "exists": false
+    },
+    "filter": {
+      "exists": true,
+      "display": "flex",
+      "text": "필터 및 정렬펼치기",
+      "expanded": "false"
+    }
+  },
+  "accessibility": {
+    "desktop-result": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".lavaByline > a[href$=\"lavalabs.co.kr/\"][target=\"_blank\"][rel=\"noopener\"]"
+            ],
+            "html": "<a href=\"https://lavalabs.co.kr/\" target=\"_blank\" rel=\"noopener\">by Lava Labs</a>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#8b8fa3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 3.2,
+                  "fontSize": "7.5pt (10px)",
+                  "fontWeight": "bold",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<aside class=\"sidebar\">",
+                    "target": [
+                      ".sidebar"
+                    ]
+                  },
+                  {
+                    "html": "<body class=\"ux-v11 has-data\">",
+                    "target": [
+                      "body"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 3.2 (foreground color: #8b8fa3, background color: #ffffff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".navTitle"
+            ],
+            "html": "<div class=\"navTitle\">MENU</div>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "bold",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<aside class=\"sidebar\">",
+                    "target": [
+                      ".sidebar"
+                    ]
+                  },
+                  {
+                    "html": "<body class=\"ux-v11 has-data\">",
+                    "target": [
+                      "body"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".badge"
+            ],
+            "html": "<span class=\"badge\">모바일</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.18 (foreground color: #6557ff, background color: #efedff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#6557ff",
+                  "bgColor": "#efedff",
+                  "contrastRatio": 4.18,
+                  "fontSize": "7.5pt (10px)",
+                  "fontWeight": "bold",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<span class=\"badge\">모바일</span>",
+                    "target": [
+                      ".badge"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.18 (foreground color: #6557ff, background color: #efedff, font size: 7.5pt (10px), font weight: bold). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".sideFooter"
+            ],
+            "html": "<div class=\"sideFooter\">© 2026 맞팔체커</div>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<aside class=\"sidebar\">",
+                    "target": [
+                      ".sidebar"
+                    ]
+                  },
+                  {
+                    "html": "<body class=\"ux-v11 has-data\">",
+                    "target": [
+                      "body"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".summaryEmptyHint"
+            ],
+            "html": "<div class=\"summaryEmptyHint\">ZIP 파일을 올리면 계정 수와 비율이 자동으로 채워집니다.</div>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #7b76a8, background color: #faf9ff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#7b76a8",
+                  "bgColor": "#faf9ff",
+                  "contrastRatio": 4.01,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"summaryEmptyHint\">ZIP 파일을 올리면 계정 수와 비율이 자동으로 채워집니다.</div>",
+                    "target": [
+                      ".summaryEmptyHint"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #7b76a8, background color: #faf9ff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(1) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(2) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(3) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(4) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(5) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(6) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "tr:nth-child(7) > td:nth-child(2) > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">팔로잉</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          }
+        ]
+      },
+      {
+        "id": "select-name",
+        "impact": "critical",
+        "description": "Ensure select element has an accessible name",
+        "nodes": [
+          {
+            "target": [
+              "#sortSelect"
+            ],
+            "html": "<select class=\"select\" id=\"sortSelect\"><option value=\"recent\">최근 팔로우 순</option><option value=\"oldest\">오래된 팔로우 순</option><option value=\"az\">아이디 A-Z</option><option value=\"za\">아이디 Z-A</option></select>",
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+            "any": [
+              {
+                "id": "implicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an implicit (wrapped) <label>"
+              },
+              {
+                "id": "explicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an explicit <label>"
+              },
+              {
+                "id": "aria-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-label attribute does not exist or is empty"
+              },
+              {
+                "id": "aria-labelledby",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+              },
+              {
+                "id": "non-empty-title",
+                "data": {
+                  "messageKey": "noAttr"
+                },
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element has no title attribute"
+              },
+              {
+                "id": "presentational-role",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "#statusSelect"
+            ],
+            "html": "<select class=\"select\" id=\"statusSelect\"><option value=\"all\">상태 전체</option><option value=\"new\">미처리</option><option value=\"opened\">열어봄</option><option value=\"done\">완료</option><option value=\"keep\">유지</option><option value=\"issue\">문제/보류</option></select>",
+            "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+            "any": [
+              {
+                "id": "implicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an implicit (wrapped) <label>"
+              },
+              {
+                "id": "explicit-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element does not have an explicit <label>"
+              },
+              {
+                "id": "aria-label",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-label attribute does not exist or is empty"
+              },
+              {
+                "id": "aria-labelledby",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty"
+              },
+              {
+                "id": "non-empty-title",
+                "data": {
+                  "messageKey": "noAttr"
+                },
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element has no title attribute"
+              },
+              {
+                "id": "presentational-role",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "critical",
+                "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\""
+              }
+            ],
+            "all": [],
+            "none": []
+          }
+        ]
+      }
+    ],
+    "mobile-result": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": [
+              ".summaryEmptyHint"
+            ],
+            "html": "<div class=\"summaryEmptyHint\">ZIP 파일을 올리면 계정 수와 비율이 자동으로 채워집니다.</div>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.01 (foreground color: #7b76a8, background color: #faf9ff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#7b76a8",
+                  "bgColor": "#faf9ff",
+                  "contrastRatio": 4.01,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"summaryEmptyHint\">ZIP 파일을 올리면 계정 수와 비율이 자동으로 채워집니다.</div>",
+                    "target": [
+                      ".summaryEmptyHint"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 4.01 (foreground color: #7b76a8, background color: #faf9ff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".mobileScrollHint"
+            ],
+            "html": "<div class=\"mobileScrollHint\" hidden=\"\">필터는 좌우로 넘겨볼 수 있어요 →</div>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "7.5pt (10px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<div class=\"panelHeader\">",
+                    "target": [
+                      ".panelHeader"
+                    ]
+                  },
+                  {
+                    "html": "<section class=\"card listPanel\">",
+                    "target": [
+                      ".listPanel"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(1) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">1 · 2026. 06. 22.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(1)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(2) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">2 · 2026. 06. 21.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(2)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(3) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">3 · 2026. 06. 20.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(3)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(4) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">4 · 2026. 06. 19.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(4)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(5) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">5 · 2026. 06. 18.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(5)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(6) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">6 · 2026. 06. 17.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(6)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".userCard:nth-child(7) > .userCardHead > .userCell > div:nth-child(2) > .sub"
+            ],
+            "html": "<span class=\"sub\">7 · 2026. 06. 16.</span>",
+            "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "fgColor": "#98a2b3",
+                  "bgColor": "#ffffff",
+                  "contrastRatio": 2.57,
+                  "fontSize": "8.3pt (11px)",
+                  "fontWeight": "normal",
+                  "messageKey": null,
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<article class=\"userCard\">",
+                    "target": [
+                      ".userCard:nth-child(7)"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element has insufficient color contrast of 2.57 (foreground color: #98a2b3, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+              }
+            ],
+            "all": [],
+            "none": []
+          }
+        ]
+      },
+      {
+        "id": "scrollable-region-focusable",
+        "impact": "serious",
+        "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
+        "nodes": [
+          {
+            "target": [
+              ".v10Steps"
+            ],
+            "html": "<div class=\"v10Steps\"><div><b>1</b><span>Instagram ZIP 받기</span></div><div><b>2</b><span>ZIP 그대로 선택</span></div><div><b>3</b><span>맞팔 결과 확인</span></div></div>",
+            "failureSummary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable",
+            "any": [
+              {
+                "id": "focusable-content",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should have focusable content"
+              },
+              {
+                "id": "focusable-element",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should be focusable"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              "#guide"
+            ],
+            "html": "<section class=\"onboardingBoard\" id=\"guide\">",
+            "failureSummary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable",
+            "any": [
+              {
+                "id": "focusable-content",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should have focusable content"
+              },
+              {
+                "id": "focusable-element",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should be focusable"
+              }
+            ],
+            "all": [],
+            "none": []
+          },
+          {
+            "target": [
+              ".dashboard"
+            ],
+            "html": "<div class=\"dashboard\">",
+            "failureSummary": "Fix any of the following:\n  Element should have focusable content\n  Element should be focusable",
+            "any": [
+              {
+                "id": "focusable-content",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should have focusable content"
+              },
+              {
+                "id": "focusable-element",
+                "data": null,
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element should be focusable"
+              }
+            ],
+            "all": [],
+            "none": []
+          }
+        ]
+      }
+    ]
+  },
+  "sourceContexts": {
+    "focusKeepBtn": [
+      "ocusUsername\">업로드 후 시작</div><div class=\"metaGrid\"><div class=\"meta\"><span>분류</span><strong id=\"focusType\">-</strong></div><div class=\"meta\"><span>상태</span><strong id=\"focusStatus\">-</strong></div><div class=\"meta\"><span>팔로우 날짜</span><strong id=\"focusDate\">-</strong></div><div class=\"meta\"><span>현재 필터</span><strong id=\"focusFilter\">-</strong></div></div><div class=\"focusActions\"><button class=\"btn primary\" id=\"focusOpenBtn\"><span class=\"iconify\" data-icon=\"ph:instagram-logo\"></span>Instagram 프로필 열기</button><button class=\"btn ok\" id=\"focusDoneBtn\">취소 완료 · 다음</button><button class=\"btn warn\" id=\"focusKeepBtn\">유지하기 · 다음</button><button class=\"btn danger\" id=\"focusIssueBtn\">보류하기</button></div></div>\n<div class=\"sessionBox\"><span>이번 세션 프로필 열람</span><strong id=\"sessionCount\">0</strong></div><div class=\"noteBox\">Instagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.</div>\n</aside>\n</div>\n</section>\n<section class=\"deepFaq\" id=\"faq\"><span class=\"sectionKicker\">FAQ · 개인정보</span><h2>안심하고 사용할 수 있도록 명확하게 안내합니다</h2><div class=\"deepFaqGrid\"><details open=\"\"><summary>Instagram 비밀번호를 입력해야 하나요?</summary><p>아니요. 로그인 정보, 인증 코드, 쿠키를 요구하지 않습니다.</p></details><details><summary>ZIP 파일이 서버로 전송되나요?</summary><p>아니요. ZIP은 현재 브라우저 안에서만 해석됩니다.</p></details><details><summary>자동으로 언팔해주나요?</summary><p>아니요. 프로필 링크만 열고 실제 작업은 사용자가 직접 진행합니다.</p></details><details><summary>결과가 실시간인가요?</summary><p>다운로드한 Instagram 데이터가 생성된 시점을 기준으로 합니다.</p></details></div></section>\n<footer class=\"footer\"><strong>맞팔체커</strong>는 Instagram/Meta와 무관한 독립 수동 보조 도구입니다. 로그인 정보를 수집하지 않으며 자동 언팔 기능을 제공하지 않습니다.</footer>\n</main>\n</div>\n<nav class=\"bottomNav\"><a href=\"#home\"><span class=\"iconify\" data-icon=\"ph:house-fill\"></span>홈</a><a href=\"#results\"><span class=\"iconify\" data-icon=\"ph:chart-bar\"></span>결과</a><a class=\"primaryTab\" href",
+      "tn'), helpModal: $('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPill'),\n    focusOpenBtn: $('#focusOpenBtn'), focusDoneBtn: $('#focusDoneBtn'), focusKeepBtn: $('#focusKeepBtn'), focusIssueBtn: $('#focusIssueBtn'),\n    heroCountFollowing: $('#heroCountFollowing'), heroCountMutual: $('#heroCountMutual'), heroCountNonMutual: $('#heroCountNonMutual'), heroCountFollowersOnly: $('#heroCountFollowersOnly'),\n    heroSummaryStatus: $('#heroSummaryStatus'), dataDateText: $('#dataDateText'), returnSheet: $('#returnSheet'), returnDoneBtn: $('#returnDoneBtn'), returnKeepBtn: $('#returnKeepBtn'), returnLaterBtn: $('#returnLaterBtn')\n  };\n\n  const STORAGE_KEY = 'matchal_checker_v7_progress';\n  const SETTINGS_KEY = 'matchal_checker_v7_settings';\n  const tabDefs = [\n    ['nonMutual','취소 검토','내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.'],\n    ['mutual','맞팔','서로 팔로우 중인 계정입니다. 보통 유지 대상입니다.'],\n    ['following','팔로잉 전체','내가 팔로우 중인 전체 계정입니다.'],\n    ['followersOnly','팔로워만','나를 팔로우하지만 나는 팔로우하지 않는 계정입니다.'],\n    ['deleted','삭제/비활성 의심','아이디가 삭제/비활성 형태로 보이는 계정입니다.'],\n    ['recentlyUnfollowed','최근 언팔 기록','인스타 데이터에 포함된 최근 언팔 기록입니다. 선택 데이터가 없으면 비어 있습니다.']\n  ];\n  const statusMap = {new:'미처리', opened:'열어봄', done:'완료', keep:'유지', issue:'문제/보류'};\n  let state = {loaded:false, activeTab:'nonMutual', visibleLimit:100, allRows:[], progress:loadProgress()",
+      "('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPill'),\n    focusOpenBtn: $('#focusOpenBtn'), focusDoneBtn: $('#focusDoneBtn'), focusKeepBtn: $('#focusKeepBtn'), focusIssueBtn: $('#focusIssueBtn'),\n    heroCountFollowing: $('#heroCountFollowing'), heroCountMutual: $('#heroCountMutual'), heroCountNonMutual: $('#heroCountNonMutual'), heroCountFollowersOnly: $('#heroCountFollowersOnly'),\n    heroSummaryStatus: $('#heroSummaryStatus'), dataDateText: $('#dataDateText'), returnSheet: $('#returnSheet'), returnDoneBtn: $('#returnDoneBtn'), returnKeepBtn: $('#returnKeepBtn'), returnLaterBtn: $('#returnLaterBtn')\n  };\n\n  const STORAGE_KEY = 'matchal_checker_v7_progress';\n  const SETTINGS_KEY = 'matchal_checker_v7_settings';\n  const tabDefs = [\n    ['nonMutual','취소 검토','내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.'],\n    ['mutual','맞팔','서로 팔로우 중인 계정입니다. 보통 유지 대상입니다.'],\n    ['following','팔로잉 전체','내가 팔로우 중인 전체 계정입니다.'],\n    ['followersOnly','팔로워만','나를 팔로우하지만 나는 팔로우하지 않는 계정입니다.'],\n    ['deleted','삭제/비활성 의심','아이디가 삭제/비활성 형태로 보이는 계정입니다.'],\n    ['recentlyUnfollowed','최근 언팔 기록','인스타 데이터에 포함된 최근 언팔 기록입니다. 선택 데이터가 없으면 비어 있습니다.']\n  ];\n  const statusMap = {new:'미처리', opened:'열어봄', done:'완료', keep:'유지', issue:'문제/보류'};\n  let state = {loaded:false, activeTab:'nonMutual', visibleLimit:100, allRows:[], progress:loadProgress(), settings:loadSet",
+      "); if(action==='copy') copyUsername(row); }));\n    els.resultInfo.textContent=`${fmt(rows.length)}개 중 ${fmt(show.length)}개 표시`; els.moreBtn.disabled=show.length>=rows.length;\n  }\n  function renderFocus(){\n    const row=currentFocusRow(); const def=tabDefs.find(t=>t[0]===state.activeTab);\n    if(!row){ els.focusUsername.textContent='대상 없음'; els.focusType.textContent='-'; els.focusStatus.textContent='-'; els.focusDate.textContent='-'; els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent='완료'; els.focusStatusPill.className='pill done'; [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=true); return; }\n    state.focusKey=row.key; els.focusUsername.textContent='@'+row.username; els.focusType.textContent=row.deleted?'삭제 의심':row.label; els.focusStatus.textContent=statusText(row); els.focusDate.textContent=dateText(row.timestamp); els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent=statusText(row); els.focusStatusPill.className='pill '+rowStatus(row); [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=false);\n  }\n  function render(){\n    if(!state.loaded) return;\n    buildTabs(); updateStats(); updateProgress(); updateSession(); const def=tabDefs.find(t=>t[0]===state.activeTab); els.filterNote.textContent=def?def[2]:''; renderRows(); renderFocus();\n  }\n\n  function csvEscape(v){ return '\"' + String(v ?? '').replace(/\"/g,'\"\"') + '\"'; }\n  function exportCsv(){\n    if(!state.loaded){ toast('먼저 ZIP을 업로드하거나 샘플을 실행해주세요'); return; }\n    const rows=state.allRows.filter(r=>r.isFollowing&&!r.isFollower);\n    const header=['username','profile_url','type','status','followed_date','updated_at'];\n    const lines=[header.join(',')];\n    for(const r of rows){ const p",
+      "ocusStatusPill.textContent='완료'; els.focusStatusPill.className='pill done'; [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=true); return; }\n    state.focusKey=row.key; els.focusUsername.textContent='@'+row.username; els.focusType.textContent=row.deleted?'삭제 의심':row.label; els.focusStatus.textContent=statusText(row); els.focusDate.textContent=dateText(row.timestamp); els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent=statusText(row); els.focusStatusPill.className='pill '+rowStatus(row); [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=false);\n  }\n  function render(){\n    if(!state.loaded) return;\n    buildTabs(); updateStats(); updateProgress(); updateSession(); const def=tabDefs.find(t=>t[0]===state.activeTab); els.filterNote.textContent=def?def[2]:''; renderRows(); renderFocus();\n  }\n\n  function csvEscape(v){ return '\"' + String(v ?? '').replace(/\"/g,'\"\"') + '\"'; }\n  function exportCsv(){\n    if(!state.loaded){ toast('먼저 ZIP을 업로드하거나 샘플을 실행해주세요'); return; }\n    const rows=state.allRows.filter(r=>r.isFollowing&&!r.isFollower);\n    const header=['username','profile_url','type','status','followed_date','updated_at'];\n    const lines=[header.join(',')];\n    for(const r of rows){ const p=state.progress[r.key]||{}; lines.push([r.username,r.href,r.label,statusText(r),dateText(r.timestamp),p.updatedAt||''].map(csvEscape).join(',')); }\n    const blob=new Blob(['\\ufeff'+lines.join('\\n')],{type:'text/csv;charset=utf-8'});\n    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`matchal_checker_non_mutual_${new Date().toISOString().slice(0,10)}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.h",
+      "ofile(row); else toast('현재 필터에서 미처리 대상이 없습니다'); });\n    const openHelp=()=>els.helpModal.classList.remove('hidden'); els.helpBtn.addEventListener('click',openHelp); els.sideHelpBtn.addEventListener('click',openHelp); els.closeHelp.addEventListener('click',()=>els.helpModal.classList.add('hidden')); els.helpModal.addEventListener('click',e=>{ if(e.target===els.helpModal) els.helpModal.classList.add('hidden'); });\n    els.focusOpenBtn.addEventListener('click',()=>openProfile(currentFocusRow()));\n    els.focusDoneBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'done',true));\n    els.focusKeepBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'keep',true));\n    els.focusIssueBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'issue',false));\n    els.returnDoneBtn?.addEventListener('click',()=>{ const row=currentFocusRow(); closeReturnSheet(); setStatus(row,'done',true); });\n    els.returnKeepBtn?.addEventListener('click',()=>{ const row=currentFocusRow(); closeReturnSheet(); setStatus(row,'keep',true); });\n    els.returnLaterBtn?.addEventListener('click',closeReturnSheet);\n    document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') maybeShowReturnSheet(); });\n    window.addEventListener('pageshow',()=>maybeShowReturnSheet());\n    document.addEventListener('keydown',e=>{ if(e.target.matches('input,select,textarea')) return; const key=e.key.toLowerCase(); if(key==='n'){e.preventDefault(); const row=nextWorkRow(); if(row) openProfile(row);} if(key==='d'){e.preventDefault(); setStatus(currentFocusRow(),'done',true);} if(key==='k'){e.preventDefault(); setStatus(currentFocusRow(),'keep',true);} if(key==='/'){e.preventDefault(); els.searchInput.focus();} });\n  }\n  els.hideDoneInput.checked=!!state.settings.hideDo"
+    ],
+    "focusDoneBtn": [
+      "택</span></div>\n<div class=\"queueCard\"><div class=\"bigAt\" id=\"focusUsername\">업로드 후 시작</div><div class=\"metaGrid\"><div class=\"meta\"><span>분류</span><strong id=\"focusType\">-</strong></div><div class=\"meta\"><span>상태</span><strong id=\"focusStatus\">-</strong></div><div class=\"meta\"><span>팔로우 날짜</span><strong id=\"focusDate\">-</strong></div><div class=\"meta\"><span>현재 필터</span><strong id=\"focusFilter\">-</strong></div></div><div class=\"focusActions\"><button class=\"btn primary\" id=\"focusOpenBtn\"><span class=\"iconify\" data-icon=\"ph:instagram-logo\"></span>Instagram 프로필 열기</button><button class=\"btn ok\" id=\"focusDoneBtn\">취소 완료 · 다음</button><button class=\"btn warn\" id=\"focusKeepBtn\">유지하기 · 다음</button><button class=\"btn danger\" id=\"focusIssueBtn\">보류하기</button></div></div>\n<div class=\"sessionBox\"><span>이번 세션 프로필 열람</span><strong id=\"sessionCount\">0</strong></div><div class=\"noteBox\">Instagram에서 직접 처리한 뒤 상태만 기록하세요. 맞팔체커는 자동 언팔을 실행하지 않습니다.</div>\n</aside>\n</div>\n</section>\n<section class=\"deepFaq\" id=\"faq\"><span class=\"sectionKicker\">FAQ · 개인정보</span><h2>안심하고 사용할 수 있도록 명확하게 안내합니다</h2><div class=\"deepFaqGrid\"><details open=\"\"><summary>Instagram 비밀번호를 입력해야 하나요?</summary><p>아니요. 로그인 정보, 인증 코드, 쿠키를 요구하지 않습니다.</p></details><details><summary>ZIP 파일이 서버로 전송되나요?</summary><p>아니요. ZIP은 현재 브라우저 안에서만 해석됩니다.</p></details><details><summary>자동으로 언팔해주나요?</summary><p>아니요. 프로필 링크만 열고 실제 작업은 사용자가 직접 진행합니다.</p></details><details><summary>결과가 실시간인가요?</summary><p>다운로드한 Instagram 데이터가 생성된 시점을 기준으로 합니다.</p></details></div></section>\n<footer class=\"footer\"><strong>맞팔체커</strong>는 Instagram/Meta와 무관한 독립 수동 보조 도구입니다. 로그인 정보를 수집하지 않으며 자동 언팔 기능을 제공하지 않습니다.</footer>\n</main>\n</div>\n<nav class=\"bottomNav\"><a href=\"#home\"><span class=\"iconify\" data-icon=\"ph:house-fill\"></span>홈</a><a href=\"#results\"><span class=\"iconify\" da",
+      "pBtn'), sideHelpBtn: $('#sideHelpBtn'), helpModal: $('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPill'),\n    focusOpenBtn: $('#focusOpenBtn'), focusDoneBtn: $('#focusDoneBtn'), focusKeepBtn: $('#focusKeepBtn'), focusIssueBtn: $('#focusIssueBtn'),\n    heroCountFollowing: $('#heroCountFollowing'), heroCountMutual: $('#heroCountMutual'), heroCountNonMutual: $('#heroCountNonMutual'), heroCountFollowersOnly: $('#heroCountFollowersOnly'),\n    heroSummaryStatus: $('#heroSummaryStatus'), dataDateText: $('#dataDateText'), returnSheet: $('#returnSheet'), returnDoneBtn: $('#returnDoneBtn'), returnKeepBtn: $('#returnKeepBtn'), returnLaterBtn: $('#returnLaterBtn')\n  };\n\n  const STORAGE_KEY = 'matchal_checker_v7_progress';\n  const SETTINGS_KEY = 'matchal_checker_v7_settings';\n  const tabDefs = [\n    ['nonMutual','취소 검토','내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.'],\n    ['mutual','맞팔','서로 팔로우 중인 계정입니다. 보통 유지 대상입니다.'],\n    ['following','팔로잉 전체','내가 팔로우 중인 전체 계정입니다.'],\n    ['followersOnly','팔로워만','나를 팔로우하지만 나는 팔로우하지 않는 계정입니다.'],\n    ['deleted','삭제/비활성 의심','아이디가 삭제/비활성 형태로 보이는 계정입니다.'],\n    ['recentlyUnfollowed','최근 언팔 기록','인스타 데이터에 포함된 최근 언팔 기록입니다. 선택 데이터가 없으면 비어 있습니다.']\n  ];\n  const statusMap = {new:'미처리', opened:'열어봄', done:'완료', keep:'유지', issue:'문제/보류'};\n  let state = {loaded:false, activeTab:'nonMutual', visibleLimit:100, a",
+      "n: $('#sideHelpBtn'), helpModal: $('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPill'),\n    focusOpenBtn: $('#focusOpenBtn'), focusDoneBtn: $('#focusDoneBtn'), focusKeepBtn: $('#focusKeepBtn'), focusIssueBtn: $('#focusIssueBtn'),\n    heroCountFollowing: $('#heroCountFollowing'), heroCountMutual: $('#heroCountMutual'), heroCountNonMutual: $('#heroCountNonMutual'), heroCountFollowersOnly: $('#heroCountFollowersOnly'),\n    heroSummaryStatus: $('#heroSummaryStatus'), dataDateText: $('#dataDateText'), returnSheet: $('#returnSheet'), returnDoneBtn: $('#returnDoneBtn'), returnKeepBtn: $('#returnKeepBtn'), returnLaterBtn: $('#returnLaterBtn')\n  };\n\n  const STORAGE_KEY = 'matchal_checker_v7_progress';\n  const SETTINGS_KEY = 'matchal_checker_v7_settings';\n  const tabDefs = [\n    ['nonMutual','취소 검토','내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.'],\n    ['mutual','맞팔','서로 팔로우 중인 계정입니다. 보통 유지 대상입니다.'],\n    ['following','팔로잉 전체','내가 팔로우 중인 전체 계정입니다.'],\n    ['followersOnly','팔로워만','나를 팔로우하지만 나는 팔로우하지 않는 계정입니다.'],\n    ['deleted','삭제/비활성 의심','아이디가 삭제/비활성 형태로 보이는 계정입니다.'],\n    ['recentlyUnfollowed','최근 언팔 기록','인스타 데이터에 포함된 최근 언팔 기록입니다. 선택 데이터가 없으면 비어 있습니다.']\n  ];\n  const statusMap = {new:'미처리', opened:'열어봄', done:'완료', keep:'유지', issue:'문제/보류'};\n  let state = {loaded:false, activeTab:'nonMutual', visibleLimit:100, allRows:[], progres",
+      "tatus(row,'issue'); if(action==='copy') copyUsername(row); }));\n    els.resultInfo.textContent=`${fmt(rows.length)}개 중 ${fmt(show.length)}개 표시`; els.moreBtn.disabled=show.length>=rows.length;\n  }\n  function renderFocus(){\n    const row=currentFocusRow(); const def=tabDefs.find(t=>t[0]===state.activeTab);\n    if(!row){ els.focusUsername.textContent='대상 없음'; els.focusType.textContent='-'; els.focusStatus.textContent='-'; els.focusDate.textContent='-'; els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent='완료'; els.focusStatusPill.className='pill done'; [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=true); return; }\n    state.focusKey=row.key; els.focusUsername.textContent='@'+row.username; els.focusType.textContent=row.deleted?'삭제 의심':row.label; els.focusStatus.textContent=statusText(row); els.focusDate.textContent=dateText(row.timestamp); els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent=statusText(row); els.focusStatusPill.className='pill '+rowStatus(row); [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=false);\n  }\n  function render(){\n    if(!state.loaded) return;\n    buildTabs(); updateStats(); updateProgress(); updateSession(); const def=tabDefs.find(t=>t[0]===state.activeTab); els.filterNote.textContent=def?def[2]:''; renderRows(); renderFocus();\n  }\n\n  function csvEscape(v){ return '\"' + String(v ?? '').replace(/\"/g,'\"\"') + '\"'; }\n  function exportCsv(){\n    if(!state.loaded){ toast('먼저 ZIP을 업로드하거나 샘플을 실행해주세요'); return; }\n    const rows=state.allRows.filter(r=>r.isFollowing&&!r.isFollower);\n    const header=['username','profile_url','type','status','followed_date','updated_at'];\n    const lines=[header.join(',')];\n    for(const r ",
+      "?.[1]||'-'; els.focusStatusPill.textContent='완료'; els.focusStatusPill.className='pill done'; [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=true); return; }\n    state.focusKey=row.key; els.focusUsername.textContent='@'+row.username; els.focusType.textContent=row.deleted?'삭제 의심':row.label; els.focusStatus.textContent=statusText(row); els.focusDate.textContent=dateText(row.timestamp); els.focusFilter.textContent=def?.[1]||'-'; els.focusStatusPill.textContent=statusText(row); els.focusStatusPill.className='pill '+rowStatus(row); [els.focusOpenBtn,els.focusDoneBtn,els.focusKeepBtn,els.focusIssueBtn].forEach(b=>b.disabled=false);\n  }\n  function render(){\n    if(!state.loaded) return;\n    buildTabs(); updateStats(); updateProgress(); updateSession(); const def=tabDefs.find(t=>t[0]===state.activeTab); els.filterNote.textContent=def?def[2]:''; renderRows(); renderFocus();\n  }\n\n  function csvEscape(v){ return '\"' + String(v ?? '').replace(/\"/g,'\"\"') + '\"'; }\n  function exportCsv(){\n    if(!state.loaded){ toast('먼저 ZIP을 업로드하거나 샘플을 실행해주세요'); return; }\n    const rows=state.allRows.filter(r=>r.isFollowing&&!r.isFollower);\n    const header=['username','profile_url','type','status','followed_date','updated_at'];\n    const lines=[header.join(',')];\n    for(const r of rows){ const p=state.progress[r.key]||{}; lines.push([r.username,r.href,r.label,statusText(r),dateText(r.timestamp),p.updatedAt||''].map(csvEscape).join(',')); }\n    const blob=new Blob(['\\ufeff'+lines.join('\\n')],{type:'text/csv;charset=utf-8'});\n    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`matchal_checker_non_mutual_${new Date().toISOString().slice(0,10)}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.re",
+      ");\n    els.openNextBtn.addEventListener('click',()=>{ const row=nextWorkRow(); if(row) openProfile(row); else toast('현재 필터에서 미처리 대상이 없습니다'); });\n    const openHelp=()=>els.helpModal.classList.remove('hidden'); els.helpBtn.addEventListener('click',openHelp); els.sideHelpBtn.addEventListener('click',openHelp); els.closeHelp.addEventListener('click',()=>els.helpModal.classList.add('hidden')); els.helpModal.addEventListener('click',e=>{ if(e.target===els.helpModal) els.helpModal.classList.add('hidden'); });\n    els.focusOpenBtn.addEventListener('click',()=>openProfile(currentFocusRow()));\n    els.focusDoneBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'done',true));\n    els.focusKeepBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'keep',true));\n    els.focusIssueBtn.addEventListener('click',()=>setStatus(currentFocusRow(),'issue',false));\n    els.returnDoneBtn?.addEventListener('click',()=>{ const row=currentFocusRow(); closeReturnSheet(); setStatus(row,'done',true); });\n    els.returnKeepBtn?.addEventListener('click',()=>{ const row=currentFocusRow(); closeReturnSheet(); setStatus(row,'keep',true); });\n    els.returnLaterBtn?.addEventListener('click',closeReturnSheet);\n    document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') maybeShowReturnSheet(); });\n    window.addEventListener('pageshow',()=>maybeShowReturnSheet());\n    document.addEventListener('keydown',e=>{ if(e.target.matches('input,select,textarea')) return; const key=e.key.toLowerCase(); if(key==='n'){e.preventDefault(); const row=nextWorkRow(); if(row) openProfile(row);} if(key==='d'){e.preventDefault(); setStatus(currentFocusRow(),'done',true);} if(key==='k'){e.preventDefault(); setStatus(currentFocusRow(),'keep',true);} if(key==='/'){e.preventDef"
+    ],
+    "countDone": [
+      "\"><div><h2>내 관계 분석 결과</h2><p>요약을 확인하고 작업 모드에서 한 명씩 안전하게 검토하세요.</p></div><button class=\"btn ghost\" id=\"exportCsvBtn\"><span class=\"iconify\" data-icon=\"ph:file-csv\"></span>CSV 내보내기</button></div>\n<div class=\"dashboard\"><div class=\"stat\"><span>내가 팔로우 중</span><strong id=\"countFollowing\">0</strong></div><div class=\"stat\"><span>나를 팔로우 중</span><strong id=\"countFollowers\">0</strong></div><div class=\"stat\"><span>맞팔</span><strong id=\"countMutual\">0</strong></div><div class=\"stat target\"><span>팔로우 취소 검토</span><strong id=\"countNonMutual\">0</strong></div><div class=\"stat done\"><span>완료 체크</span><strong id=\"countDone\">0</strong></div></div>\n<div class=\"card progressCard\"><div class=\"progressHeader\"><span id=\"progressText\">진행률 0%</span><span id=\"sessionText\">이번 세션 0명 열람</span></div><div class=\"progressTrack\"><div class=\"progressBar\" id=\"progressBar\"></div></div><div class=\"goalRow\"><label>오늘 목표 <input id=\"dailyGoalInput\" max=\"500\" min=\"1\" type=\"number\" value=\"50\"/></label><span id=\"todayProgressText\">오늘 완료 0명 · 목표 50명</span></div></div>\n<div class=\"workbench\" id=\"work\">\n<section class=\"card listPanel\">\n<div class=\"panelHeader\"><div class=\"topTools\"><input class=\"search\" id=\"searchInput\" placeholder=\"아이디 검색\" type=\"text\"/><select class=\"select\" id=\"sortSelect\"><option value=\"recent\">최근 팔로우 순</option><option value=\"oldest\">오래된 팔로우 순</option><option value=\"az\">아이디 A-Z</option><option value=\"za\">아이디 Z-A</option></select><select class=\"select\" id=\"statusSelect\"><option value=\"all\">상태 전체</option><option value=\"new\">미처리</option><option value=\"opened\">열어봄</option><option value=\"done\">완료</option><option value=\"keep\">유지</option><option value=\"issue\">문제/보류</option></select><div class=\"btnRow\"><button class=\"btn primary\" id=\"openNextBtn\">다음 대상 열기</button><button class=\"btn ghost\" id=\"exportBtn\">진행 ",
+      "ton class=\"btn ok\" id=\"returnDoneBtn\">팔로우 취소 완료 · 다음</button><button class=\"btn warn\" id=\"returnKeepBtn\">이 계정은 유지 · 다음</button><button class=\"btn ghost\" id=\"returnLaterBtn\">나중에 결정</button></div></div></div>\n<script>(() => {\n  const $ = s => document.querySelector(s);\n  const els = {\n    zipInput: $('#zipInput'), progressInput: $('#progressInput'), drop: $('#drop'), loadStatus: $('#loadStatus'), errorBox: $('#errorBox'), appPanel: $('#appPanel'),\n    countFollowing: $('#countFollowing'), countFollowers: $('#countFollowers'), countMutual: $('#countMutual'), countNonMutual: $('#countNonMutual'), countDone: $('#countDone'),\n    progressText: $('#progressText'), progressBar: $('#progressBar'), sessionText: $('#sessionText'), sessionCount: $('#sessionCount'),\n    searchInput: $('#searchInput'), sortSelect: $('#sortSelect'), statusSelect: $('#statusSelect'), hideDoneInput: $('#hideDoneInput'), sameTabInput: $('#sameTabInput'),\n    tabs: $('#tabs'), filterNote: $('#filterNote'), tbody: $('#tbody'), mobileList: $('#mobileList'), resultInfo: $('#resultInfo'), moreBtn: $('#moreBtn'),\n    openNextBtn: $('#openNextBtn'), exportBtn: $('#exportBtn'), sideExportBtn: $('#sideExportBtn'), sideClearBtn: $('#sideClearBtn'),\n    helpBtn: $('#helpBtn'), sideHelpBtn: $('#sideHelpBtn'), helpModal: $('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPi",
+      "ok\" id=\"returnDoneBtn\">팔로우 취소 완료 · 다음</button><button class=\"btn warn\" id=\"returnKeepBtn\">이 계정은 유지 · 다음</button><button class=\"btn ghost\" id=\"returnLaterBtn\">나중에 결정</button></div></div></div>\n<script>(() => {\n  const $ = s => document.querySelector(s);\n  const els = {\n    zipInput: $('#zipInput'), progressInput: $('#progressInput'), drop: $('#drop'), loadStatus: $('#loadStatus'), errorBox: $('#errorBox'), appPanel: $('#appPanel'),\n    countFollowing: $('#countFollowing'), countFollowers: $('#countFollowers'), countMutual: $('#countMutual'), countNonMutual: $('#countNonMutual'), countDone: $('#countDone'),\n    progressText: $('#progressText'), progressBar: $('#progressBar'), sessionText: $('#sessionText'), sessionCount: $('#sessionCount'),\n    searchInput: $('#searchInput'), sortSelect: $('#sortSelect'), statusSelect: $('#statusSelect'), hideDoneInput: $('#hideDoneInput'), sameTabInput: $('#sameTabInput'),\n    tabs: $('#tabs'), filterNote: $('#filterNote'), tbody: $('#tbody'), mobileList: $('#mobileList'), resultInfo: $('#resultInfo'), moreBtn: $('#moreBtn'),\n    openNextBtn: $('#openNextBtn'), exportBtn: $('#exportBtn'), sideExportBtn: $('#sideExportBtn'), sideClearBtn: $('#sideClearBtn'),\n    helpBtn: $('#helpBtn'), sideHelpBtn: $('#sideHelpBtn'), helpModal: $('#helpModal'), closeHelp: $('#closeHelp'),\n    sampleBtn: $('#sampleBtn'), sampleBtnInline: $('#sampleBtnInline'), sideSampleBtn: $('#sideSampleBtn'), modalSampleBtn: $('#modalSampleBtn'),\n    dailyGoalInput: $('#dailyGoalInput'), todayProgressText: $('#todayProgressText'), exportCsvBtn: $('#exportCsvBtn'),\n    focusUsername: $('#focusUsername'), focusType: $('#focusType'), focusStatus: $('#focusStatus'), focusDate: $('#focusDate'), focusFilter: $('#focusFilter'), focusStatusPill: $('#focusStatusPill'),\n    focus",
+      "of tabDefs){ const el=document.getElementById('tabCount_'+key); if(!el) continue; const c=state.counts; const val=key==='following'?c.following:key==='mutual'?c.mutual:key==='nonMutual'?c.nonMutual:key==='followersOnly'?c.followersOnly:key==='deleted'?c.deleted:c.recentlyUnfollowed; el.textContent=fmt(val); }\n  }\n  function updateProgress(){\n    if(!state.loaded) return;\n    const targets=state.allRows.filter(r=>r.isFollowing&&!r.isFollower); const done=targets.filter(r=>state.progress[r.key]?.status==='done').length; const pct=targets.length?Math.round(done/targets.length*1000)/10:0;\n    els.countDone.textContent=fmt(done); els.progressBar.style.width=pct+'%'; els.progressText.textContent=`취소 검토 대상 기준 ${pct}% 완료 · ${fmt(done)} / ${fmt(targets.length)}`;\n    const today=new Date().toISOString().slice(0,10); const todayDone=targets.filter(r=>state.progress[r.key]?.status==='done' && String(state.progress[r.key]?.updatedAt||'').slice(0,10)===today).length; const goal=Number(els.dailyGoalInput?.value||state.settings.dailyGoal||50); if(els.todayProgressText) els.todayProgressText.textContent=`오늘 완료 ${fmt(todayDone)}명 · 목표 ${fmt(goal)}명`; if(els.dailyGoalInput && goal) els.dailyGoalInput.value=goal;\n  }\n  function updateSession(){ els.sessionCount.textContent=fmt(state.sessionOpened); els.sessionText.textContent=`이번 세션 ${fmt(state.sessionOpened)}명 열람`; }\n  function buildTabs(){\n    els.tabs.innerHTML=tabDefs.map(([key,label])=>`<button class=\"tab ${key===state.activeTab?'active':''}\" data-tab=\"${key}\">${label} <small id=\"tabCount_${key}\"></small></button>`).join('');\n    els.tabs.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{ state.activeTab=btn.dataset.tab; state.visibleLimit=100; state.focusKey=null; render(); }));\n  }\n  function actionButtons(row"
+    ],
+    "bottomNavV8": []
+  }
+}
