@@ -5,9 +5,14 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/release-audit.yml'
+      - 'scripts/build-pages.mjs'
+      - 'scripts/build-release.mjs'
       - 'scripts/release-audit.mjs'
       - 'scripts/release-debug.mjs'
       - 'scripts/extended-audit.mjs'
+      - 'assets/release-hardening-v12.css'
+      - 'assets/release-hardening-v12.js'
+      - 'sw.js'
   workflow_dispatch:
 
 permissions:
@@ -34,7 +39,7 @@ jobs:
 
       - name: Build production site
         run: |
-          node scripts/build-pages.mjs
+          node scripts/build-release.mjs
           base64 --decode og-image.txt > dist/og-image.png
 
       - name: Create Instagram ZIP fixtures
