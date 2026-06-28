@@ -18,16 +18,16 @@
   }
 
   function loadStylesheets(){
-    addStylesheet('/assets/design-v14.css?v=14.1','main');
-    addStylesheet('/assets/design-v14-fixes.css?v=14.1','fixes');
+    addStylesheet('/assets/design-v14.css?v=14.2','main');
+    addStylesheet('/assets/design-v14-fixes.css?v=14.2','fixes');
   }
 
   function updateVisibleVersion(){
     qa('body *').forEach(element=>{
       if(element.children.length) return;
-      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(element.textContent.trim())){
-        element.textContent=`v${VERSION}`;
-      }
+      const text=element.textContent.trim();
+      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(text)) element.textContent=`v${VERSION}`;
+      else if(text.length<=18&&/\bv13\b/i.test(text)) element.textContent=text.replace(/\bv13\b/i,'v14');
     });
   }
 
@@ -86,6 +86,20 @@
     else topbar.appendChild(chip);
   }
 
+  function dedupeMobileHeaders(){
+    const candidates=qa('.mobileTopV8,.mobileHeader,.mobileTop,.mobileBar').filter((element,index,array)=>array.indexOf(element)===index);
+    if(candidates.length<=1) return;
+    const score=element=>qa('button,a',element).length*10+element.children.length;
+    const keep=[...candidates].sort((a,b)=>score(b)-score(a))[0];
+    keep.classList.add('mobileTopV8');
+    keep.classList.remove('v14DuplicateMobileHeader');
+    keep.removeAttribute('aria-hidden');
+    candidates.filter(element=>element!==keep).forEach(element=>{
+      element.classList.add('v14DuplicateMobileHeader');
+      element.setAttribute('aria-hidden','true');
+    });
+  }
+
   function decorateSidebar(){
     const sidebar=q('.sidebar');
     if(!sidebar) return;
@@ -105,6 +119,7 @@
   function decorate(){
     decorateHero();
     decorateTopbar();
+    dedupeMobileHeaders();
     decorateSidebar();
     decorateCards();
     updateVisibleVersion();
