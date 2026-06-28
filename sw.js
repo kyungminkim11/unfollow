@@ -1,5 +1,5 @@
-const CACHE='unfollow-v12-20260628-1';
-const CORE=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=12.0','/assets/v8-responsive.css?v=12.0','/assets/local-icons.css?v=12.0','/assets/product-improvements.css?v=12.0','/assets/business-info.css?v=12.0','/assets/release-hardening-v12.css?v=12.0','/assets/product-improvements.js?v=12.0','/assets/work-mode-enhancements.js?v=12.0','/assets/pwa-enhancements.js?v=12.0','/assets/business-info.js?v=12.0','/assets/release-hardening-v12.js?v=12.0'];
+const CACHE='unfollow-v13-20260628-1';
+const CORE=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=13.0','/assets/v8-responsive.css?v=13.0','/assets/local-icons.css?v=13.0','/assets/product-improvements.css?v=13.0','/assets/business-info.css?v=13.0','/assets/release-hardening-v12.css?v=13.0','/assets/v13-features.css?v=13.0','/assets/product-improvements.js?v=13.0','/assets/work-mode-enhancements.js?v=13.0','/assets/pwa-enhancements.js?v=13.0','/assets/business-info.js?v=13.0','/assets/release-hardening-v12.js?v=13.0','/assets/v13-features.js?v=13.0'];
 
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{

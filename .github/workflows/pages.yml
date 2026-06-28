@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,13 +27,19 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Build static site
-        run: node scripts/build-release.mjs
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v13
+
+      - name: Build v13 static site
+        run: node scripts/build-v13.mjs
 
       - name: Restore social preview image
         run: base64 --decode og-image.txt > dist/og-image.png
 
-      - name: Validate hardened output
+      - name: Validate hardened v13 output
         run: |
           test -f dist/index.html
           test -f dist/CNAME
@@ -41,29 +47,28 @@ jobs:
           test -f dist/sitemap.xml
           test -f dist/manifest.webmanifest
           test -f dist/og-image.png
-          test -f dist/assets/work-mode-enhancements.css
-          test -f dist/assets/business-info.css
           test -f dist/assets/business-info.js
-          test -f dist/assets/ux-v11.css
-          test -f dist/assets/ux-v11-fixes.css
-          test -f dist/assets/ux-v11.js
           test -f dist/assets/release-hardening-v12.css
           test -f dist/assets/release-hardening-v12.js
+          test -f dist/assets/v13-features.css
+          test -f dist/assets/v13-features.js
           test -f dist/assets/generated-inline-1.js
           grep -q "인스타 맞팔 확인" dist/index.html
           grep -q "unfollow.lavalabs.co.kr" dist/index.html
           grep -q "455-23-01867" dist/index.html
           grep -q "Content-Security-Policy" dist/index.html
-          grep -q "release-hardening-v12.js" dist/index.html
-          grep -R -q "unfollow_progress_v12_" dist/assets/generated-inline-*.js
+          grep -q "v13-features.js" dist/assets/business-info.js
+          grep -R -q "WORKSPACE_SIGNATURE_KEY" dist/assets/generated-inline-*.js
+          grep -R -q "await activateWorkspace(file,zip,allKeys)" dist/assets/generated-inline-*.js
           grep -R -q "ZIP_LIMITS" dist/assets/generated-inline-*.js
+          grep -q "unfollow-v13" dist/sw.js
           ! grep -R "kyungminkim11/matchal-checker" dist
           ! grep -R "code.iconify.design" dist
           ! grep -R "cdn.jsdelivr.net" dist
           ! grep -R "bluepen_shop" dist
           ! grep -R "tokyo_stationery" dist
 
-      - name: Create smoke-test fixtures
+      - name: Create browser-test fixtures
         run: python3 scripts/create-smoke-fixtures.py
 
       - name: Install browser test tools
@@ -74,7 +79,6 @@ jobs:
       - name: Start production preview
         run: |
           python3 -m http.server 4173 --directory dist > /tmp/unfollow-pages-server.log 2>&1 &
-          echo $! > /tmp/unfollow-pages-server.pid
           for i in {1..20}; do
             curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
             sleep 1
@@ -82,10 +86,15 @@ jobs:
           cat /tmp/unfollow-pages-server.log
           exit 1
 
-      - name: Run release smoke tests
+      - name: Run v12 regression tests
         env:
           SMOKE_URL: http://127.0.0.1:4173/
         run: node scripts/deploy-smoke.mjs
+
+      - name: Run v13 feature tests
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/v13-smoke.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
