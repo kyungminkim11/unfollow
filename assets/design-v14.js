@@ -7,22 +7,49 @@
   let decorateTimer=0;
   let observer;
 
-  function loadStylesheet(){
-    if(q('link[data-design-v14]')) return;
+  function addStylesheet(href,key){
+    if(q(`link[data-design-style="${key}"]`)) return;
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='/assets/design-v14.css?v=14.0';
-    link.dataset.designV14='true';
+    link.href=href;
+    link.dataset.designStyle=key;
+    if(key==='main') link.dataset.designV14='true';
     document.head.appendChild(link);
+  }
+
+  function loadStylesheets(){
+    addStylesheet('/assets/design-v14.css?v=14.1','main');
+    addStylesheet('/assets/design-v14-fixes.css?v=14.1','fixes');
   }
 
   function updateVisibleVersion(){
     qa('body *').forEach(element=>{
       if(element.children.length) return;
-      if(/^v(?:10|11|12|13)(?:\.\d+)?$/i.test(element.textContent.trim())){
+      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(element.textContent.trim())){
         element.textContent=`v${VERSION}`;
       }
     });
+  }
+
+  function findResourceBar(primary){
+    const action=qa('a,button',primary).find(element=>/Instagram 데이터 다운로드/.test(element.textContent||''));
+    if(!action) return null;
+    const named=action.closest('.resourceBar,.resourceLinks,.resourceActions');
+    if(named) return named;
+    const parent=action.parentElement;
+    if(parent&&parent!==primary&&qa('a,button',parent).length>=2) return parent;
+    return null;
+  }
+
+  function findSecondaryGuide(aside){
+    const direct=q('.quickStart',aside);
+    if(direct) return direct;
+    const candidates=qa('div,section,ol',aside).filter(element=>{
+      if(element===aside||element.closest('.v10Steps')||q('.v10Steps',element)||q('.heroSummaryV8',element)) return false;
+      const text=(element.textContent||'').replace(/\s+/g,' ');
+      return text.includes('Instagram 데이터 다운로드')&&text.includes('ZIP 파일 업로드')&&/결과 확인|직접 처리/.test(text);
+    });
+    return candidates.sort((a,b)=>(a.textContent||'').length-(b.textContent||'').length)[0]||null;
   }
 
   function decorateHero(){
@@ -37,24 +64,24 @@
     primary?.classList.add('v14HeroPrimary');
     aside?.classList.add('v14HeroAside');
     q('.drop',primary)?.classList.add('v14PrimaryDrop');
-    q('.resourceBar',primary)?.classList.add('v14ResourceBar');
+    findResourceBar(primary)?.classList.add('v14ResourceBar');
     q('.heroSummaryV8',aside)?.classList.add('v14SummaryGrid');
     q('.v10Steps',aside)?.classList.add('v14StepStrip');
 
     if(aside){
-      const secondaryGuide=q('.quickStart',aside)||qa('h2,h3,strong',aside).find(element=>/처음이라면|3단계만/.test(element.textContent||''))?.parentElement;
+      const secondaryGuide=findSecondaryGuide(aside);
       if(secondaryGuide&&secondaryGuide!==aside) secondaryGuide.classList.add('v14SecondaryGuide');
     }
   }
 
   function decorateTopbar(){
-    const topbar=q('.serviceTopbar');
+    const topbar=q('.serviceTopbar,.topbar');
     if(!topbar||q('.v14LocalChip',topbar)) return;
     const chip=document.createElement('span');
     chip.className='v14LocalChip';
     chip.innerHTML='<i aria-hidden="true"></i><span>브라우저 로컬 분석</span>';
     chip.setAttribute('title','선택한 ZIP 파일은 외부 서버로 전송되지 않습니다.');
-    const actions=q('.serviceTopActions',topbar);
+    const actions=q('.serviceTopActions,.topActions',topbar);
     if(actions) topbar.insertBefore(chip,actions);
     else topbar.appendChild(chip);
   }
@@ -91,7 +118,7 @@
   function start(){
     document.body.classList.add('design-v14');
     document.documentElement.classList.add('design-v14-ready');
-    loadStylesheet();
+    loadStylesheets();
     decorate();
 
     observer=new MutationObserver(scheduleDecorate);
