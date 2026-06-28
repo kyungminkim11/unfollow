@@ -1,0 +1,3 @@
+V14_DESIGN_DEPLOY_TRIGGER
+requested_at=2026-06-28
+reason=Run the complete v14 build, feature regression, responsive design, accessibility, and Pages deployment workflow.
