@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/release-audit.yml'
       - 'scripts/release-audit.mjs'
+      - 'scripts/release-debug.mjs'
   workflow_dispatch:
 
 permissions:
@@ -110,11 +111,16 @@ jobs:
           AUDIT_URL: http://127.0.0.1:4173/
         run: node scripts/release-audit.mjs
 
-      - name: Commit audit report
+      - name: Diagnose release blockers
+        env:
+          AUDIT_URL: http://127.0.0.1:4173/
+        run: node scripts/release-debug.mjs
+
+      - name: Commit audit reports
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add audit/latest-report.json audit/latest-report.md
+          git add audit/latest-report.json audit/latest-report.md audit/debug-report.json
           if git diff --cached --quiet; then
             echo 'No audit report changes'
             exit 0
