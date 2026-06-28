@@ -1,0 +1,63 @@
+/* Selector coverage and accessibility refinements for the v14 visual layer. */
+.design-v14 .topbar{
+  min-height:64px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+.design-v14 .topbar>p{
+  flex:1!important;
+  margin:0!important;
+  color:#5e687a!important;
+  font-size:13px!important;
+  font-weight:650!important;
+}
+.design-v14 .topActions{display:flex!important;align-items:center!important;gap:8px!important}
+.design-v14 .topActions a,.design-v14 .topActions button{
+  height:40px!important;
+  border:1px solid var(--v14-line)!important;
+  border-radius:12px!important;
+  background:rgba(255,255,255,.9)!important;
+  color:#475467!important;
+  box-shadow:var(--v14-shadow-sm)!important;
+}
+.design-v14 .sidebar .brand strong{white-space:nowrap!important}
+.design-v14 .sidebar .brand span:not(.logo span):not(.lavaByline){
+  display:-webkit-box!important;
+  overflow:hidden!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+}
+.design-v14 .navTitle,.design-v14 .serviceNav small{color:#596275!important}
+.design-v14 .businessLinksV10 a,
+.design-v14 .businessLinksV10 button{color:#4938c9!important}
+.design-v14 .bottomNavV8 a.active,
+.design-v14 .bottomNavV8 a.isActive,
+.design-v14 .primaryTab.active,
+.design-v14 .primaryTab.isActive{color:#4938c9!important}
+.design-v14 .dashboard .stat:before{opacity:.66!important}
+
+body.v8-dark.design-v14 .topbar>p{color:#c7cedb!important}
+body.v8-dark.design-v14 .topActions a,
+body.v8-dark.design-v14 .topActions button{border-color:#343a49!important;background:#1d222e!important;color:#d0d5dd!important}
+body.v8-dark.design-v14 .v10Steps span,
+body.v8-dark.design-v14 .goalRow label,
+body.v8-dark.design-v14 #todayProgressText,
+body.v8-dark.design-v14 .checkLine,
+body.v8-dark.design-v14 #filterNote,
+body.v8-dark.design-v14 .table th{color:#d0d5dd!important}
+body.v8-dark.design-v14 .table th{background:#1d222e!important}
+body.v8-dark.design-v14 .businessLinksV10 a,
+body.v8-dark.design-v14 .businessLinksV10 button{color:#c7c1ff!important}
+body.v8-dark.design-v14 .navTitle,
+body.v8-dark.design-v14 .serviceNav small{color:#b9c1cf!important}
+body.v8-dark.design-v14 .bottomNavV8 a.active,
+body.v8-dark.design-v14 .bottomNavV8 a.isActive,
+body.v8-dark.design-v14 .primaryTab.active,
+body.v8-dark.design-v14 .primaryTab.isActive{color:#d4d0ff!important}
+
+@media(max-width:760px){
+  .design-v14 .topbar{display:none!important}
+  .design-v14 .businessLinksV10 a,
+  .design-v14 .businessLinksV10 button{color:#4938c9!important}
+}
