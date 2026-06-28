@@ -1,4 +1,4 @@
 V13_DEPLOY_TRIGGER
 requested_at=2026-06-28
-attempt=3
-reason=Run the v13 Pages workflow and record the GitHub Actions run ID for direct diagnostics.
+attempt=4
+reason=Run the v13 Pages workflow and preserve browser smoke reports for direct diagnosis.
