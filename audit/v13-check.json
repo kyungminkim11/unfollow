@@ -1,0 +1,912 @@
+{"v12Regression":
+{
+  "checks": [
+    {
+      "name": "데스크톱 페이지 로드",
+      "pass": true,
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "name": "데스크톱 초기 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "외부 리소스 요청 없음",
+      "pass": true,
+      "details": {
+        "external": []
+      }
+    },
+    {
+      "name": "CSP 메타 존재",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "정렬 필터 이름",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "상태 필터 이름",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "80MB 초과 ZIP 사전 차단",
+      "pass": true,
+      "details": {
+        "oversizedState": {
+          "files": 0,
+          "value": ""
+        },
+        "oversizedError": "ZIP 파일이 80MB를 초과합니다. Instagram 다운로드에서 “팔로워 및 팔로잉” 항목만 선택해 다시 받아주세요."
+      }
+    },
+    {
+      "name": "실제 ZIP 분석",
+      "pass": true,
+      "details": {
+        "following": 2,
+        "mutual": 1,
+        "nonMutual": 1
+      }
+    },
+    {
+      "name": "내용 기반 JSON 기록 불러오기",
+      "pass": true,
+      "details": {
+        "done": 1
+      }
+    },
+    {
+      "name": "계정 A 상태 저장",
+      "pass": true,
+      "details": {
+        "done": 1
+      }
+    },
+    {
+      "name": "계정별 진행 기록 분리",
+      "pass": true,
+      "details": {
+        "done": 0
+      }
+    },
+    {
+      "name": "데스크톱 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false
+      }
+    },
+    {
+      "name": "데스크톱 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "데스크톱 다크모드 결과 화면 접근성",
+      "pass": false,
+      "details": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".goalRow > label"
+                ],
+                "html": "<label>오늘 목표 <input id=\"dailyGoalInput\" max=\"500\" min=\"1\" type=\"number\" value=\"50\" aria-label=\"오늘 작업 목표 인원\"></label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#475467",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.25,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#todayProgressText"
+                ],
+                "html": "<span id=\"todayProgressText\">오늘 완료 0명 · 목표 50명</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(1)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"hideDoneInput\" type=\"checkbox\" aria-label=\"완료 또는 유지한 계정 숨기기\"> 완료·유지 숨기기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(2)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"sameTabInput\" type=\"checkbox\" aria-label=\"Instagram 프로필을 현재 탭에서 열기\"> 같은 탭에서 열기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#filterNote"
+                ],
+                "html": "<span class=\"tiny\" id=\"filterNote\">내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(2)"
+                ],
+                "html": "<th>계정</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(3)"
+                ],
+                "html": "<th>분류</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(4)"
+                ],
+                "html": "<th>상태</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(5)"
+                ],
+                "html": "<th>날짜</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(6)"
+                ],
+                "html": "<th>작업</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#resultInfo"
+                ],
+                "html": "<span id=\"resultInfo\">1개 중 1개 표시</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".meta:nth-child(1) > span"
+                ],
+                "html": "<span>분류</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#c0c7d4",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 1.69,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "데스크톱 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "모바일-390 상단바 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 하단 내비 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 카드 결과 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 데스크톱 표 숨김",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 필터 버튼 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 필터 펼치기",
+      "pass": true,
+      "details": {
+        "expanded": "true"
+      }
+    },
+    {
+      "name": "모바일-390 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "모바일-390 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "모바일-390 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "모바일-320 상단바 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 하단 내비 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 카드 결과 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 데스크톱 표 숨김",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 필터 버튼 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 필터 펼치기",
+      "pass": true,
+      "details": {
+        "expanded": "true"
+      }
+    },
+    {
+      "name": "모바일-320 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "width": 320,
+        "scrollWidth": 320
+      }
+    },
+    {
+      "name": "모바일-320 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "모바일-320 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    }
+  ],
+  "failures": [
+    {
+      "name": "데스크톱 다크모드 결과 화면 접근성",
+      "details": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".goalRow > label"
+                ],
+                "html": "<label>오늘 목표 <input id=\"dailyGoalInput\" max=\"500\" min=\"1\" type=\"number\" value=\"50\" aria-label=\"오늘 작업 목표 인원\"></label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#475467",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.25,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#todayProgressText"
+                ],
+                "html": "<span id=\"todayProgressText\">오늘 완료 0명 · 목표 50명</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(1)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"hideDoneInput\" type=\"checkbox\" aria-label=\"완료 또는 유지한 계정 숨기기\"> 완료·유지 숨기기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(2)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"sameTabInput\" type=\"checkbox\" aria-label=\"Instagram 프로필을 현재 탭에서 열기\"> 같은 탭에서 열기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#filterNote"
+                ],
+                "html": "<span class=\"tiny\" id=\"filterNote\">내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(2)"
+                ],
+                "html": "<th>계정</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(3)"
+                ],
+                "html": "<th>분류</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(4)"
+                ],
+                "html": "<th>상태</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(5)"
+                ],
+                "html": "<th>날짜</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(6)"
+                ],
+                "html": "<th>작업</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#resultInfo"
+                ],
+                "html": "<span id=\"resultInfo\">1개 중 1개 표시</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".meta:nth-child(1) > span"
+                ],
+                "html": "<span>분류</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#c0c7d4",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 1.69,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+,"v13Features":
+{
+  "checks": [
+    {
+      "name": "v13 비교 화면 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "v13 내비게이션 링크 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "초기 외부 요청 없음",
+      "pass": true,
+      "details": {
+        "external": []
+      }
+    },
+    {
+      "name": "두 ZIP 선택 후 비교 버튼 활성화",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "두 시점 관계 변화 계산 정확성",
+      "pass": true,
+      "details": {
+        "counts": {
+          "lostFollowers": 2,
+          "newFollowers": 2,
+          "newFollowing": 1,
+          "stoppedFollowing": 1,
+          "newlyMutual": 1,
+          "mutualEnded": 1
+        }
+      }
+    },
+    {
+      "name": "팔로워 이탈 목록 정확성",
+      "pass": true,
+      "details": {
+        "listText": "1\n@bob\n복사\n프로필\n2\n@dave\n복사\n프로필"
+      }
+    },
+    {
+      "name": "변화 목록 CSV 저장",
+      "pass": true,
+      "details": {
+        "filename": "unfollow-compare-lostFollowers-2026-06-28.csv",
+        "bytes": 140
+      }
+    },
+    {
+      "name": "작업공간 관리 창 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "저장 작업공간 목록 표시",
+      "pass": true,
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "name": "개인정보 없는 진단 파일 저장",
+      "pass": true,
+      "details": {
+        "filename": "unfollow-diagnostic-2026-06-28.json",
+        "keys": [
+          "reportType",
+          "version",
+          "createdAt",
+          "page",
+          "browser",
+          "support",
+          "app",
+          "privacy"
+        ]
+      }
+    },
+    {
+      "name": "기존 단일 ZIP 분석 유지",
+      "pass": true,
+      "details": {
+        "text": "2"
+      }
+    },
+    {
+      "name": "분석 상태 UI 생성",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "v13 데스크톱 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "v13 데스크톱 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "v13 320px 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "width": 320,
+        "scrollWidth": 320
+      }
+    },
+    {
+      "name": "v13 모바일 비교 결과 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "v13 모바일 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "v13 모바일 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    }
+  ],
+  "failures": []
+}
+,"exitCodes":{"v12":1,"v13":0}}
