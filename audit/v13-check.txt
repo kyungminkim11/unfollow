@@ -1,0 +1,992 @@
+commit=faf1fa7b863f0034dcbce1f123f0e2f32ed3bfab
+started_at=2026-06-28T05:03:29Z
+## Syntax checks
+## Build v13 release
+Base build completed with a removable external-font assertion. Continuing with release cleanup.
+Release build ready after CDN cleanup.
+V13 build ready with content-aware workspaces in generated-inline-1.js.
+## Create fixtures
+Created smoke fixtures in smoke-fixtures
+## Install browser tools
+
+added 4 packages in 3s
+Installing dependencies...
+Switching to root user to install dependencies...
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Hit:6 https://packages.microsoft.com/repos/azure-cli noble InRelease
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [156 kB]
+Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [187 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1041 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [261 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [17.5 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1656 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [326 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [34.8 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1134 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [257 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5768 B]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [788 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [179 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.9 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.6 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1171 kB]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [229 kB]
+Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.1 kB]
+Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1071 kB]
+Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [245 kB]
+Get:34 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1210 B]
+Fetched 9881 kB in 1s (7702 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libasound2t64 is already the newest version (1.2.11-1ubuntu0.2).
+libasound2t64 set to manually installed.
+libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+libatk-bridge2.0-0t64 set to manually installed.
+libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+libatk1.0-0t64 set to manually installed.
+libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+libatspi2.0-0t64 set to manually installed.
+libcairo2 is already the newest version (1.18.0-3build1).
+libcairo2 set to manually installed.
+libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+libcups2t64 set to manually installed.
+libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+libdbus-1-3 set to manually installed.
+libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+libdrm2 set to manually installed.
+libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.2).
+libgbm1 set to manually installed.
+libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.8).
+libglib2.0-0t64 set to manually installed.
+libnspr4 is already the newest version (2:4.35-1.1build1).
+libnspr4 set to manually installed.
+libnss3 is already the newest version (2:3.98-1ubuntu0.1).
+libnss3 set to manually installed.
+libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+libpango-1.0-0 set to manually installed.
+libx11-6 is already the newest version (2:1.8.7-1build1).
+libx11-6 set to manually installed.
+libxcb1 is already the newest version (1.15-1ubuntu2).
+libxcb1 set to manually installed.
+libxcomposite1 is already the newest version (1:0.4.5-1build3).
+libxcomposite1 set to manually installed.
+libxdamage1 is already the newest version (1:1.1.6-1build1).
+libxdamage1 set to manually installed.
+libxext6 is already the newest version (2:1.3.4-1build2).
+libxext6 set to manually installed.
+libxfixes3 is already the newest version (1:6.0.0-2build1).
+libxfixes3 set to manually installed.
+libxkbcommon0 is already the newest version (1.6.0-1build1).
+libxkbcommon0 set to manually installed.
+libxrandr2 is already the newest version (2:1.5.2-2build1).
+libxrandr2 set to manually installed.
+xvfb is already the newest version (2:21.1.12-1ubuntu1.6).
+fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+libfontconfig1 set to manually installed.
+libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.1).
+libfreetype6 set to manually installed.
+fonts-liberation is already the newest version (1:2.1.5-3).
+fonts-liberation set to manually installed.
+The following additional packages will be installed:
+  xfonts-encodings xfonts-utils
+Recommended packages:
+  fonts-ipafont-mincho fonts-tlwg-loma
+The following NEW packages will be installed:
+  fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+  fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+  xfonts-utils
+0 upgraded, 9 newly installed, 0 to remove and 11 not upgraded.
+Need to get 21.1 MB of archives.
+After this operation, 79.5 MB of additional disk space will be used.
+Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+Fetched 21.1 MB in 1s (33.4 MB/s)
+Selecting previously unselected package fonts-ipafont-gothic.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202407 files and directories currently installed.)
+Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+Selecting previously unselected package fonts-freefont-ttf.
+Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+Selecting previously unselected package fonts-tlwg-loma-otf.
+Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+Selecting previously unselected package fonts-unifont.
+Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+Unpacking fonts-unifont (1:15.1.01-1build1) ...
+Selecting previously unselected package fonts-wqy-zenhei.
+Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+Selecting previously unselected package xfonts-encodings.
+Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+Selecting previously unselected package xfonts-utils.
+Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+Unpacking xfonts-utils (1:7.7+6build3) ...
+Selecting previously unselected package xfonts-cyrillic.
+Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+Selecting previously unselected package xfonts-scalable.
+Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+Setting up fonts-wqy-zenhei (0.9.45-8) ...
+Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+Setting up fonts-unifont (1:15.1.01-1build1) ...
+Setting up xfonts-utils (1:7.7+6build3) ...
+Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+Setting up xfonts-scalable (1:1.0.3-1.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Not building database; man-db/auto-update is not 'true'.
+Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Downloading Chrome for Testing 149.0.7827.55 (playwright chromium v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-linux64.zip
+|                                                                                |   0% of 177 MiB
+|■■■■■■■■                                                                        |  10% of 177 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 177 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 177 MiB
+Chrome for Testing 149.0.7827.55 (playwright chromium v1228) downloaded to /home/runner/.cache/ms-playwright/chromium-1228
+Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+|                                                                                |   0% of 2.3 MiB
+|■■■■■■■■                                                                        |  10% of 2.3 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-headless-shell-linux64.zip
+|                                                                                |   0% of 114.2 MiB
+|■■■■■■■■                                                                        |  10% of 114.2 MiB
+|■■■■■■■■■■■■■■■■                                                                |  20% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.2 MiB
+|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.2 MiB
+Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1228
+## Start preview
+curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
+## V12 regression tests
+{
+  "checks": [
+    {
+      "name": "데스크톱 페이지 로드",
+      "pass": true,
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "name": "데스크톱 초기 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "외부 리소스 요청 없음",
+      "pass": true,
+      "details": {
+        "external": []
+      }
+    },
+    {
+      "name": "CSP 메타 존재",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "정렬 필터 이름",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "상태 필터 이름",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "80MB 초과 ZIP 사전 차단",
+      "pass": true,
+      "details": {
+        "oversizedState": {
+          "files": 0,
+          "value": ""
+        },
+        "oversizedError": "ZIP 파일이 80MB를 초과합니다. Instagram 다운로드에서 “팔로워 및 팔로잉” 항목만 선택해 다시 받아주세요."
+      }
+    },
+    {
+      "name": "실제 ZIP 분석",
+      "pass": true,
+      "details": {
+        "following": 2,
+        "mutual": 1,
+        "nonMutual": 1
+      }
+    },
+    {
+      "name": "내용 기반 JSON 기록 불러오기",
+      "pass": true,
+      "details": {
+        "done": 1
+      }
+    },
+    {
+      "name": "계정 A 상태 저장",
+      "pass": true,
+      "details": {
+        "done": 1
+      }
+    },
+    {
+      "name": "계정별 진행 기록 분리",
+      "pass": true,
+      "details": {
+        "done": 0
+      }
+    },
+    {
+      "name": "데스크톱 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false
+      }
+    },
+    {
+      "name": "데스크톱 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "데스크톱 다크모드 결과 화면 접근성",
+      "pass": false,
+      "details": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".goalRow > label"
+                ],
+                "html": "<label>오늘 목표 <input id=\"dailyGoalInput\" max=\"500\" min=\"1\" type=\"number\" value=\"50\" aria-label=\"오늘 작업 목표 인원\"></label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#475467",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.25,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#todayProgressText"
+                ],
+                "html": "<span id=\"todayProgressText\">오늘 완료 0명 · 목표 50명</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(1)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"hideDoneInput\" type=\"checkbox\" aria-label=\"완료 또는 유지한 계정 숨기기\"> 완료·유지 숨기기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(2)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"sameTabInput\" type=\"checkbox\" aria-label=\"Instagram 프로필을 현재 탭에서 열기\"> 같은 탭에서 열기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#filterNote"
+                ],
+                "html": "<span class=\"tiny\" id=\"filterNote\">내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(2)"
+                ],
+                "html": "<th>계정</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(3)"
+                ],
+                "html": "<th>분류</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(4)"
+                ],
+                "html": "<th>상태</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(5)"
+                ],
+                "html": "<th>날짜</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(6)"
+                ],
+                "html": "<th>작업</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#resultInfo"
+                ],
+                "html": "<span id=\"resultInfo\">1개 중 1개 표시</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".meta:nth-child(1) > span"
+                ],
+                "html": "<span>분류</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#c0c7d4",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 1.69,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "데스크톱 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "모바일-390 상단바 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 하단 내비 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 카드 결과 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 데스크톱 표 숨김",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 필터 버튼 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-390 필터 펼치기",
+      "pass": true,
+      "details": {
+        "expanded": "true"
+      }
+    },
+    {
+      "name": "모바일-390 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "모바일-390 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "모바일-390 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    },
+    {
+      "name": "모바일-320 상단바 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 하단 내비 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 카드 결과 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 데스크톱 표 숨김",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 필터 버튼 표시",
+      "pass": true,
+      "details": {}
+    },
+    {
+      "name": "모바일-320 필터 펼치기",
+      "pass": true,
+      "details": {
+        "expanded": "true"
+      }
+    },
+    {
+      "name": "모바일-320 가로 넘침 없음",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "width": 320,
+        "scrollWidth": 320
+      }
+    },
+    {
+      "name": "모바일-320 결과 화면 접근성",
+      "pass": true,
+      "details": {
+        "violations": []
+      }
+    },
+    {
+      "name": "모바일-320 실행 오류 없음",
+      "pass": true,
+      "details": {
+        "errors": []
+      }
+    }
+  ],
+  "failures": [
+    {
+      "name": "데스크톱 다크모드 결과 화면 접근성",
+      "details": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".goalRow > label"
+                ],
+                "html": "<label>오늘 목표 <input id=\"dailyGoalInput\" max=\"500\" min=\"1\" type=\"number\" value=\"50\" aria-label=\"오늘 작업 목표 인원\"></label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.25 (foreground color: #475467, background color: #171a25, font size: 9.0pt (12px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#475467",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.25,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#todayProgressText"
+                ],
+                "html": "<span id=\"todayProgressText\">오늘 완료 0명 · 목표 50명</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(1)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"hideDoneInput\" type=\"checkbox\" aria-label=\"완료 또는 유지한 계정 숨기기\"> 완료·유지 숨기기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".checkLine:nth-child(2)"
+                ],
+                "html": "<label class=\"checkLine\"><input id=\"sameTabInput\" type=\"checkbox\" aria-label=\"Instagram 프로필을 현재 탭에서 열기\"> 같은 탭에서 열기</label>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#filterNote"
+                ],
+                "html": "<span class=\"tiny\" id=\"filterNote\">내가 팔로우하지만 나를 팔로우하지 않는 계정입니다. 수동으로 팔로우 취소 여부를 검토하세요.</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(2)"
+                ],
+                "html": "<th>계정</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(3)"
+                ],
+                "html": "<th>분류</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(4)"
+                ],
+                "html": "<th>상태</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(5)"
+                ],
+                "html": "<th>날짜</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "th:nth-child(6)"
+                ],
+                "html": "<th>작업</th>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.29 (foreground color: #667085, background color: #1b1f2d, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#1b1f2d",
+                      "contrastRatio": 3.29,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  "#resultInfo"
+                ],
+                "html": "<span id=\"resultInfo\">1개 중 1개 표시</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 3.48 (foreground color: #667085, background color: #171a25, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#667085",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 3.48,
+                      "fontSize": "9.0pt (12px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              },
+              {
+                "target": [
+                  ".meta:nth-child(1) > span"
+                ],
+                "html": "<span>분류</span>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 1.69 (foreground color: #c0c7d4, background color: #ffffff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#c0c7d4",
+                      "bgColor": "#ffffff",
+                      "contrastRatio": 1.69,
+                      "fontSize": "7.5pt (10px)",
+                      "fontWeight": "normal",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+finished_at=2026-06-28T05:04:13Z
+result=FAIL
+exit_code=1
