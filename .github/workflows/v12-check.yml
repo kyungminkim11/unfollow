@@ -7,17 +7,20 @@ on:
       - 'scripts/build-pages.mjs'
       - 'assets/release-hardening-v12.css'
       - 'assets/release-hardening-v12.js'
+      - 'sw.js'
       - '.github/workflows/v12-check.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -25,6 +28,7 @@ jobs:
         run: |
           node --check scripts/build-pages.mjs
           node --check assets/release-hardening-v12.js
+          node --check sw.js
       - name: Build production output
         run: node scripts/build-pages.mjs
       - name: Validate hardened output
@@ -34,8 +38,19 @@ jobs:
           test -f dist/assets/release-hardening-v12.js
           test -f dist/assets/generated-inline-1.js
           grep -q 'Content-Security-Policy' dist/index.html
-          grep -q 'unfollow_progress_v12_' dist/assets/generated-inline-1.js dist/assets/generated-inline-2.js dist/assets/generated-inline-3.js || true
+          grep -R -q 'unfollow_progress_v12_' dist/assets/generated-inline-*.js
+          grep -R -q 'ZIP_LIMITS' dist/assets/generated-inline-*.js
           ! grep -R 'cdn.jsdelivr.net' dist
           ! grep -R 'bluepen_shop' dist
           ! grep -R 'tokyo_stationery' dist
           ! grep -P '<script(?![^>]*src=)(?![^>]*application/ld\+json)' dist/index.html
+      - name: Record successful check
+        run: |
+          mkdir -p audit
+          printf 'V12_BUILD_OK\ncommit=%s\nchecked_at=%s\n' "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > audit/v12-build-check.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audit/v12-build-check.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'chore: record v12 build check [skip ci]'
+          git push
