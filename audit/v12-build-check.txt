@@ -1,5 +1,5 @@
-commit=5fb19ab41ac5ec9c7dd29aaf1215365bfddb389c
-checked_at=2026-06-28T02:15:17Z
+commit=89d288b6978394a29f99a2b590e09e9ebbfd4489
+checked_at=2026-06-28T02:22:32Z
 
 ## node --check scripts/build-pages.mjs
 
