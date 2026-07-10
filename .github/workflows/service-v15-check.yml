@@ -9,6 +9,7 @@ on:
       - 'assets/service-v15-a11y.css'
       - 'assets/service-v15-compat.js'
       - 'assets/site-pages-v15.css'
+      - 'assets/site-pages-v15-a11y.css'
       - 'assets/business-info.js'
       - 'pages/**'
       - 'scripts/build-v13.mjs'
@@ -63,9 +64,13 @@ jobs:
           test -f dist/assets/service-v15-a11y.css
           test -f dist/assets/service-v15-compat.js
           test -f dist/assets/site-pages-v15.css
+          test -f dist/assets/site-pages-v15-a11y.css
           test -f dist/guide/index.html
           test -f dist/help/index.html
           test -f dist/privacy/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/guide/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/help/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/privacy/index.html
           grep -q 'service-v15.js' dist/assets/business-info.js
           grep -q 'service-v15-compat.js' dist/assets/business-info.js
           grep -q 'unfollow-v15' dist/sw.js
