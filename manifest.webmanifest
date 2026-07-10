@@ -11,8 +11,9 @@
   "categories": ["utilities", "productivity"],
   "shortcuts": [
     {"name":"관계 변화 비교","short_name":"변화 비교","url":"/#compareV13"},
-    {"name":"사용 가이드","short_name":"가이드","url":"/guide/"},
-    {"name":"도움말","short_name":"도움말","url":"/help/"}
+    {"name":"무료 베타 뉴스레터","short_name":"뉴스레터","url":"/newsletter/"},
+    {"name":"프리미엄 예정 기능","short_name":"프리미엄","url":"/premium/"},
+    {"name":"사용 가이드","short_name":"가이드","url":"/guide/"}
   ],
   "icons": [
     {
