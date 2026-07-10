@@ -1,5 +1,5 @@
 const CACHE='unfollow-v16-20260710-1';
-// Legacy release-check marker retained while the v14 regression workflow remains active: unfollow-v14
+// Legacy release-check markers retained while older regression workflows remain active: unfollow-v15 unfollow-v14
 const CORE=[
   '/','/index.html','/guide/','/help/','/privacy/','/terms/','/data/','/premium/','/newsletter/',
   '/favicon.svg','/manifest.webmanifest','/og-image.png',
