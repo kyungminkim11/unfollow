@@ -13,3 +13,12 @@ body.v8-dark.service-v15 #resultInfo{color:#c4cbd6!important}
 body.v8-dark.service-v15 .focusPanel .meta{border-color:#374151!important;background:#252c39!important}
 body.v8-dark.service-v15 .focusPanel .meta span{color:#cbd5e1!important}
 body.v8-dark.service-v15 .focusPanel .meta strong{color:#f8fafc!important}
+body.v8-dark.service-v15 .sessionBox>span,
+body.v8-dark.service-v15 .noteBox,
+body.v8-dark.service-v15 .shortcutGuide>span,
+body.v8-dark.service-v15 #localAccountState,
+body.v8-dark.service-v15 #privacyNoticeV10>small,
+body.v8-dark.service-v15 details[open]>p,
+body.v8-dark.service-v15 .footer{color:#c4cbd6!important}
+body.v8-dark.service-v15 label[for="accountMemo"]{color:#dbe2ea!important}
+body.v8-dark.service-v15 .comparePrivacyV13>strong{color:#d8d3ff!important}
