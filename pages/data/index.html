@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+  <meta name="description" content="맞팔체커가 Instagram ZIP, 분석 결과, 작업 기록과 뉴스레터 이메일을 어떻게 처리하는지 쉽게 설명합니다.">
+  <link rel="canonical" href="https://unfollow.lavalabs.co.kr/data/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site-pages-v15.css?v=15.0">
+  <link rel="stylesheet" href="/assets/site-pages-v15-a11y.css?v=15.1">
+  <link rel="stylesheet" href="/assets/site-pages-v16.css?v=16.0">
+  <title>데이터 처리 안내 | 맞팔체커</title>
+</head>
+<body>
+<a class="pageSkip" href="#main">본문으로 바로가기</a>
+<header class="pageHeader"><div class="pageHeaderInner">
+  <a class="pageBrand" href="/"><span class="pageLogo">M</span><span class="pageBrandText"><strong>맞팔체커</strong><span>by Lava Labs</span></span></a>
+  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/">가이드</a><a href="/data/" aria-current="page">데이터 처리</a><a href="/privacy/">개인정보</a><a class="primary" href="/">분석 시작</a></nav>
+</div></header>
+<main id="main" class="pageMain">
+  <section class="pageHero"><span class="pageEyebrow">쉽게 보는 데이터 처리</span><h1>ZIP 분석 데이터와 뉴스레터 이메일은 서로 분리됩니다</h1><p>맞팔체커의 핵심 분석은 브라우저 안에서 진행됩니다. 뉴스레터를 신청한 경우에만 이메일과 동의 기록이 서버에 저장되며, ZIP 원본이나 분석 결과가 함께 전송되지는 않습니다.</p><div class="policyMetaV16"><span>ZIP 원본 서버 전송 없음</span><span>분석 결과 로컬 처리</span><span>뉴스레터만 선택 저장</span></div></section>
+
+  <div class="pageGrid">
+    <section class="pageCard full"><h2>ZIP 분석 흐름</h2><div class="dataFlowV16"><div><b>1</b><strong>사용자가 ZIP을 선택합니다</strong><span>Instagram에서 직접 내려받은 JSON ZIP을 현재 기기에서 선택합니다.</span></div><div><b>2</b><strong>브라우저가 파일을 읽습니다</strong><span>팔로워·팔로잉 JSON을 브라우저 메모리에서 읽고 관계를 분류합니다.</span></div><div><b>3</b><strong>결과를 화면에 표시합니다</strong><span>분석 결과는 서버가 아니라 현재 브라우저 화면과 로컬 저장소에서 사용됩니다.</span></div></div></section>
+    <section class="pageCard"><h2>서버로 보내지 않는 정보</h2><ul class="checkList"><li>Instagram ZIP 원본</li><li>ZIP 내부 팔로워·팔로잉 JSON 원문</li><li>분석된 사용자 아이디 전체 목록</li><li>맞팔·언팔 검토 결과 전체</li><li>Instagram 로그인 정보와 비밀번호</li></ul></section>
+    <section class="pageCard"><h2>브라우저에 저장될 수 있는 정보</h2><ul class="checkList"><li>작업공간 이름</li><li>검토 완료 상태와 메모</li><li>화면 설정과 마지막 사용 상태</li><li>개인정보를 직접 포함하지 않는 작업공간 연결용 해시 스케치</li></ul><p>브라우저의 사이트 데이터 삭제 기능이나 작업공간 관리에서 지울 수 있습니다.</p></section>
+    <section class="pageCard"><h2>뉴스레터 신청 시 저장되는 정보</h2><ul class="checkList"><li>이메일 주소</li><li>개인정보 수집·이용 동의 상태</li><li>이메일 수신 동의 상태</li><li>동의 버전과 신청·해지 일시</li><li>활성 또는 해지 상태</li></ul></section>
+    <section class="pageCard"><h2>뉴스레터 저장 목적</h2><p>프리미엄 출시, 중요한 기능 변경, 무료 베타 관련 공지를 이메일로 전달하고 신청·해지 상태를 관리하기 위한 목적에만 사용합니다.</p><p>회원가입 정보, 결제 정보, ZIP 분석 데이터와 결합하지 않습니다.</p></section>
+    <section class="pageCard full"><h2>어디에 저장되나요?</h2><p>뉴스레터 신청 정보는 Supabase 기반 데이터베이스에 저장됩니다. 현재 프로젝트의 데이터베이스 리전은 서울로 설정되어 있습니다. 서비스 운영과 보안 지원을 위해 인프라 제공업체가 관련 시스템을 처리할 수 있으며, 처리 방식이 변경되면 개인정보 처리방침을 갱신합니다.</p><div class="notice">분석 기능은 뉴스레터를 신청하지 않아도 사용할 수 있습니다. 뉴스레터 신청 여부는 ZIP 분석 결과에 영향을 주지 않습니다.</div></section>
+    <section class="pageCard full"><h2>삭제와 해지</h2><p>뉴스레터는 <a href="/newsletter/#unsubscribe">수신 해지 페이지</a>에서 이메일을 입력해 해지할 수 있습니다. 브라우저 작업 기록은 맞팔체커의 작업공간 관리 또는 브라우저 사이트 데이터 삭제 기능으로 제거할 수 있습니다. 추가 삭제 요청은 <a href="mailto:lavalabs.ceo@gmail.com">이메일 문의</a>로 접수할 수 있습니다.</p></section>
+    <section class="pageCard full"><h2>앞으로 회원가입이 생기면?</h2><p>유료 기능을 위해 회원가입, 클라우드 동기화, 결제가 도입되는 경우에는 수집 항목, 저장 위치, 보유 기간, 결제·환불 조건을 기능 활성화 전에 다시 고지하고 필요한 동의를 받습니다. 현재 뉴스레터 신청이 자동으로 회원가입이나 유료 구독으로 전환되지는 않습니다.</p></section>
+  </div>
+</main>
+<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>최종 갱신: 2026년 7월 10일</div><nav><a href="/newsletter/">뉴스레터</a><a href="/premium/">프리미엄 예정</a><a href="/privacy/">개인정보</a><a href="/terms/">이용약관</a><a href="mailto:lavalabs.ceo@gmail.com">문의</a></nav></div></footer>
+</body></html>

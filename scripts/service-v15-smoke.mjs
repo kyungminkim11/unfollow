@@ -94,8 +94,9 @@ async function inspectPage(browser,{pathName,label,heading}){
     a11yStyle:Boolean(document.querySelector('link[href*="site-pages-v15-a11y.css"]')),
     overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2
   }));
+  const acceptedHeadings=Array.isArray(heading)?heading:[heading];
   check(`${label} HTTP 응답`,response?.status()===200,{status:response?.status()});
-  check(`${label} 제목`,metrics.heading===heading,metrics);
+  check(`${label} 제목`,acceptedHeadings.includes(metrics.heading),metrics);
   check(`${label} 보안·SEO 메타`,metrics.csp&&metrics.canonical.endsWith(pathName),metrics);
   check(`${label} 현재 메뉴`,metrics.current===pathName,metrics);
   check(`${label} 접근성 스타일`,metrics.a11yStyle,metrics);
@@ -112,7 +113,7 @@ try{
   await inspectApp(browser,{name:'mobile-390',width:390,height:844});
   await inspectPage(browser,{pathName:'/guide/',label:'guide',heading:'Instagram 데이터 ZIP을 준비하는 방법'});
   await inspectPage(browser,{pathName:'/help/',label:'help',heading:'분석이 되지 않을 때 확인하세요'});
-  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:'ZIP 내용은 외부 서버로 전송되지 않습니다'});
+  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:['ZIP 내용은 외부 서버로 전송되지 않습니다','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다']});
 }finally{
   await browser.close();
 }

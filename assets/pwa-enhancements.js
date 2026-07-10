@@ -3,12 +3,38 @@
   const start=()=>{
     const offline=document.createElement('div');
     offline.className='offlineBanner';
-    offline.textContent='오프라인 상태입니다. 이미 열린 페이지의 로컬 분석 기능은 계속 사용할 수 있습니다.';
+    offline.setAttribute('role','status');
+    offline.setAttribute('aria-live','polite');
+    offline.textContent='인터넷 연결이 끊겼습니다. ZIP 분석은 계속 사용할 수 있습니다.';
     document.body.appendChild(offline);
-    const sync=()=>offline.classList.toggle('show',!navigator.onLine);
-    addEventListener('online',sync);
-    addEventListener('offline',sync);
-    sync();
+
+    let checking=false;
+    const confirmConnection=async()=>{
+      if(checking) return;
+      checking=true;
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),4500);
+      try{
+        const response=await fetch(`/favicon.svg?connectivity=${Date.now()}`,{
+          method:'HEAD',
+          cache:'no-store',
+          signal:controller.signal,
+        });
+        offline.classList.toggle('show',!response.ok);
+      }catch{
+        offline.classList.add('show');
+      }finally{
+        clearTimeout(timeout);
+        checking=false;
+      }
+    };
+
+    addEventListener('online',()=>{
+      offline.classList.remove('show');
+      confirmConnection();
+    });
+    addEventListener('offline',()=>setTimeout(confirmConnection,700));
+    if(!navigator.onLine) confirmConnection();
 
     let promptEvent=null;
     addEventListener('beforeinstallprompt',event=>{
