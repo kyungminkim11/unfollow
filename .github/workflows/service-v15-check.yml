@@ -13,6 +13,7 @@ on:
       - 'assets/business-info.js'
       - 'pages/**'
       - 'scripts/build-v13.mjs'
+      - 'scripts/create-smoke-fixtures.py'
       - 'scripts/v13-smoke.mjs'
       - 'scripts/service-v15-smoke.mjs'
       - 'sw.js'
@@ -55,6 +56,7 @@ jobs:
           node --check scripts/build-v13.mjs
           node --check scripts/v13-smoke.mjs
           node --check scripts/service-v15-smoke.mjs
+          python3 -m py_compile scripts/create-smoke-fixtures.py
           node --check sw.js
 
       - name: Build v15 service
