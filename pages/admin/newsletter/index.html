@@ -8,12 +8,13 @@
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/admin-v17.css?v=17.0">
+  <link rel="stylesheet" href="/assets/admin-v18.css?v=18.0">
   <title>뉴스레터 관리자 | 맞팔체커</title>
 </head>
 <body>
 <a class="adminSkip" href="#main">본문으로 바로가기</a>
 <header class="adminHeader"><div class="adminHeaderInner">
-  <a class="adminBrand" href="/"><span class="adminLogo">M</span><span><strong>맞팔체커 관리자</strong><span>Newsletter & Premium Research</span></span></a>
+  <a class="adminBrand" href="/"><span class="adminLogo">M</span><span><strong>맞팔체커 관리자</strong><span>Subscribers · Research · Campaigns</span></span></a>
   <div class="adminHeaderActions"><a href="/">서비스 화면</a><button id="adminLogout" type="button" hidden>로그아웃</button></div>
 </div></header>
 <main id="main" class="adminMain">
@@ -29,7 +30,7 @@
 
   <section id="adminDashboard" class="adminDashboard" hidden aria-labelledby="dashboardTitle">
     <div class="adminHero">
-      <div><span class="adminEyebrow">운영 대시보드</span><h1 id="dashboardTitle">뉴스레터와 프리미엄 수요</h1><p id="adminIdentity">관리자 정보를 확인하는 중입니다.</p></div>
+      <div><span class="adminEyebrow">운영 대시보드</span><h1 id="dashboardTitle">뉴스레터 운영 센터</h1><p id="adminIdentity">관리자 정보를 확인하는 중입니다.</p></div>
       <div class="adminHeroActions"><button id="adminRefresh" class="adminSecondary" type="button">새로고침</button><button id="adminExport" class="adminPrimary" type="button">구독자 CSV</button></div>
     </div>
 
@@ -45,9 +46,10 @@
       <article class="adminPanel"><h2>희망 가격대</h2><div id="priceBars" class="adminBarList"></div></article>
     </section>
 
-    <div class="adminTabs" role="tablist" aria-label="데이터 종류">
+    <div class="adminTabs" role="tablist" aria-label="운영 메뉴">
       <button id="tabSubscribers" class="adminTab" type="button" role="tab" aria-selected="true" aria-controls="panelSubscribers">뉴스레터 구독자</button>
       <button id="tabInterest" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelInterest">프리미엄 의견</button>
+      <button id="tabCampaigns" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelCampaigns">캠페인 작성·발송</button>
     </div>
 
     <section id="panelSubscribers" role="tabpanel" aria-labelledby="tabSubscribers">
@@ -62,10 +64,41 @@
       <div class="adminPagination"><span id="interestCount">0건</span><div><button id="interestPrev" class="adminSecondary" type="button">이전</button><button id="interestNext" class="adminSecondary" type="button">다음</button></div></div>
     </section>
 
+    <section id="panelCampaigns" class="campaignPanelV18" role="tabpanel" aria-labelledby="tabCampaigns" hidden>
+      <div class="campaignProviderV18"><div><strong>발송 연결 상태</strong><span id="campaignProviderText">확인 중입니다.</span></div><span id="campaignProviderBadge" class="campaignBadgeV18">확인 중</span></div>
+      <div class="campaignLayoutV18">
+        <form id="campaignFormV18" class="campaignEditorV18" novalidate>
+          <input type="hidden" id="campaignIdV18">
+          <div class="campaignEditorHeadV18"><div><span class="adminEyebrow">캠페인 편집기</span><h2 id="campaignEditorTitleV18">새 뉴스레터</h2></div><button id="campaignNewV18" class="adminSecondary" type="button">새 초안</button></div>
+          <div class="campaignFieldsV18">
+            <label><span>관리용 이름</span><input id="campaignInternalNameV18" maxlength="120" placeholder="예: 7월 기능 업데이트" required></label>
+            <label><span>이메일 제목</span><input id="campaignSubjectV18" maxlength="180" placeholder="받은편지함에 표시될 제목" required></label>
+            <label class="wide"><span>미리보기 문구</span><input id="campaignPreviewTextV18" maxlength="240" placeholder="제목 옆에 보이는 짧은 설명"></label>
+            <label><span>발송 대상</span><select id="campaignSegmentV18"><option value="all_active">활성 구독자 전체</option><option value="recent_30d">최근 30일 신청자</option><option value="premium_interest">프리미엄 의견 참여자</option></select></label>
+            <label><span>예약 시간</span><input id="campaignScheduledAtV18" type="datetime-local"></label>
+            <label class="wide"><span>본문</span><textarea id="campaignBodyTextV18" rows="12" maxlength="20000" placeholder="문단 사이를 한 줄 비워 작성하세요." required></textarea></label>
+            <label><span>버튼 문구</span><input id="campaignCtaLabelV18" maxlength="80" placeholder="예: 새 기능 살펴보기"></label>
+            <label><span>버튼 링크</span><input id="campaignCtaUrlV18" type="url" maxlength="1000" placeholder="https://..."></label>
+          </div>
+          <div class="campaignEstimateV18"><span>예상 수신자</span><strong id="campaignEstimateV18">—</strong><button id="campaignEstimateButtonV18" class="adminSecondary" type="button">다시 계산</button></div>
+          <div class="campaignActionsV18"><button id="campaignSaveV18" class="adminPrimary" type="submit">초안 저장</button><button id="campaignTestV18" class="adminSecondary" type="button">내게 테스트 발송</button><button id="campaignQueueV18" class="adminSecondary" type="button">지금 발송 대기열</button><button id="campaignScheduleV18" class="adminSecondary" type="button">예약 대기열</button><button id="campaignDeleteV18" class="adminDanger" type="button">초안 삭제</button></div>
+          <p id="campaignFormStatusV18" class="adminStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="campaignPreviewV18" aria-labelledby="campaignPreviewTitleV18"><div class="campaignPreviewHeadV18"><span>실시간 미리보기</span><strong id="campaignPreviewTitleV18">제목을 입력해 주세요</strong></div><div class="campaignPreviewBodyV18" id="campaignPreviewBodyV18"><p>본문을 입력하면 여기에 표시됩니다.</p></div><div class="campaignPreviewFootV18">수신 해지 링크와 개인정보 안내는 실제 발송 시 자동으로 붙습니다.</div></aside>
+      </div>
+
+      <div class="campaignListHeadV18"><div><h2>캠페인 목록</h2><p>초안, 예약, 발송 진행률과 실패 건을 확인합니다.</p></div><button id="campaignRefreshV18" class="adminSecondary" type="button">목록 새로고침</button></div>
+      <div class="adminTableWrap"><table class="adminTable campaignTableV18"><thead><tr><th>캠페인</th><th>대상</th><th>상태</th><th>수신자</th><th>발송 결과</th><th>예약·갱신</th><th>작업</th></tr></thead><tbody id="campaignRowsV18"><tr><td colspan="7" class="adminEmpty">캠페인을 불러오는 중입니다.</td></tr></tbody></table></div>
+      <div class="adminPagination"><span id="campaignCountV18">0건</span><div><button id="campaignPrevV18" class="adminSecondary" type="button">이전</button><button id="campaignNextV18" class="adminSecondary" type="button">다음</button></div></div>
+      <p class="adminNotice">예약 캠페인은 대기열에 저장됩니다. Resend 연결 전에는 실제 메일이 나가지 않으며, 연결 후 관리자 화면에서 예약 시간이 지난 캠페인의 발송을 실행할 수 있습니다.</p>
+    </section>
+
     <p id="adminStatus" class="adminStatus" role="status" aria-live="polite"></p>
     <p class="adminNotice">구독자 이메일은 뉴스레터 운영과 수신 해지 처리에만 사용하세요. CSV 파일은 업무가 끝나면 안전한 위치에서 삭제하는 것을 권장합니다.</p>
   </section>
 </main>
 <script src="/assets/admin-v17.js?v=17.0" defer></script>
+<script src="/assets/admin-campaign-v18.js?v=18.0" defer></script>
 </body>
 </html>
