@@ -117,7 +117,9 @@ jobs:
       - name: V15 service audit
         id: service
         continue-on-error: true
-        run: node scripts/service-v15-smoke.mjs
+        run: |
+          mkdir -p audit
+          node scripts/service-v15-smoke.mjs > audit/service-v15-run.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
@@ -131,6 +133,7 @@ jobs:
             audit/v15-comparison-regression.log
             audit/design-v14-report.json
             audit/design-v14-*.png
+            audit/service-v15-run.log
             audit/service-v15-report.json
             audit/service-v15-*.png
           if-no-files-found: warn
