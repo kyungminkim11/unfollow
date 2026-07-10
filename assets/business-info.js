@@ -32,7 +32,10 @@
       loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
         loadScript('/assets/service-v15.js?v=15.0','service-v15',()=>{
           loadStyle('/assets/service-v15-a11y.css?v=15.1','service-v15-a11y');
-          loadScript('/assets/service-v15-compat.js?v=15.1','service-v15-compat');
+          loadScript('/assets/service-v15-compat.js?v=15.1','service-v15-compat',()=>{
+            loadStyle('/assets/monetization-v16.css?v=16.0','monetization-v16');
+            loadScript('/assets/monetization-v16.js?v=16.0','monetization-v16');
+          });
         });
       });
     });
@@ -40,6 +43,14 @@
 
   loadScript('/assets/synthetic-sample.js?v=10.2','synthetic-sample');
   loadScript('/assets/ux-v11.js?v=11.0','ux-v11');
+
+  const link=(href,text,external=false)=>{
+    const element=document.createElement('a');
+    element.href=href;
+    element.textContent=text;
+    if(external){element.target='_blank';element.rel='noopener';}
+    return element;
+  };
 
   const start=()=>{
     if(document.getElementById('businessInfoV10')){
@@ -59,26 +70,21 @@
     const title=document.createElement('strong');
     title.textContent='© 2026 Lava Labs · 맞팔체커';
     const desc=document.createElement('span');
-    desc.textContent='라바랩스에서 운영하는 무료 브라우저 로컬 분석 서비스입니다.';
+    desc.textContent='무료 베타로 운영 중인 브라우저 로컬 Instagram 관계 분석 서비스입니다.';
     brand.append(title,desc);
 
     const links=document.createElement('div');
     links.className='businessLinksV10';
-    const website=document.createElement('a');
-    website.href='https://lavalabs.co.kr/';
-    website.target='_blank';
-    website.rel='noopener';
-    website.textContent='라바랩스 홈페이지';
-    const guide=document.createElement('a');
-    guide.href='/guide/';
-    guide.textContent='사용 가이드';
-    const privacy=document.createElement('a');
-    privacy.href='/privacy/';
-    privacy.textContent='개인정보 안내';
-    const mail=document.createElement('a');
-    mail.href='mailto:lavalabs.ceo@gmail.com';
-    mail.textContent='문의';
-    links.append(website,guide,privacy,mail);
+    links.append(
+      link('/premium/','프리미엄 예정'),
+      link('/newsletter/','뉴스레터'),
+      link('/guide/','사용 가이드'),
+      link('/help/','도움말'),
+      link('/data/','데이터 처리'),
+      link('/privacy/','개인정보 처리방침'),
+      link('/terms/','이용약관'),
+      link('mailto:lavalabs.ceo@gmail.com','문의')
+    );
 
     top.append(brand,links);
 
@@ -102,22 +108,20 @@
       const dt=document.createElement('dt');
       const dd=document.createElement('dd');
       dt.textContent=label;
-      if(label==='이메일'){
-        const a=document.createElement('a');
-        a.href='mailto:lavalabs.ceo@gmail.com';
-        a.textContent=value;
-        dd.appendChild(a);
-      }else{
-        dd.textContent=value;
-      }
+      if(label==='이메일') dd.appendChild(link('mailto:lavalabs.ceo@gmail.com',value));
+      else dd.textContent=value;
       grid.append(dt,dd);
     });
 
+    const website=document.createElement('p');
+    website.className='businessNoticeV10';
+    website.append('운영사 홈페이지: ',link('https://lavalabs.co.kr/','lavalabs.co.kr',true));
+
     const notice=document.createElement('p');
     notice.className='businessNoticeV10';
-    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. 선택한 ZIP 파일과 분석 결과는 외부 서버로 전송되지 않습니다.';
+    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. Instagram ZIP 원본과 분석 결과는 외부 서버로 전송되지 않으며, 뉴스레터를 신청한 경우에만 이메일과 동의 기록을 별도로 저장합니다.';
 
-    details.append(summary,grid,notice);
+    details.append(summary,grid,website,notice);
     footer.append(top,details);
 
     const main=document.querySelector('.main')||document.body;
