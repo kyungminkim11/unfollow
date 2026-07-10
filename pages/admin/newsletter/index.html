@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'self' https://jnciddblcndmthmmvqrz.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/admin-v17.css?v=17.0">
+  <title>뉴스레터 관리자 | 맞팔체커</title>
+</head>
+<body>
+<a class="adminSkip" href="#main">본문으로 바로가기</a>
+<header class="adminHeader"><div class="adminHeaderInner">
+  <a class="adminBrand" href="/"><span class="adminLogo">M</span><span><strong>맞팔체커 관리자</strong><span>Newsletter & Premium Research</span></span></a>
+  <div class="adminHeaderActions"><a href="/">서비스 화면</a><button id="adminLogout" type="button" hidden>로그아웃</button></div>
+</div></header>
+<main id="main" class="adminMain">
+  <section id="adminLogin" class="adminLoginCard" aria-labelledby="loginTitle">
+    <span class="adminEyebrow">관리자 전용</span>
+    <h1 id="loginTitle">이메일 링크로 안전하게 로그인</h1>
+    <p>등록된 라바랩스 관리자 이메일로 일회용 로그인 링크를 보냅니다. 비밀번호는 저장하거나 입력하지 않습니다.</p>
+    <div class="adminOwnerEmail" aria-label="관리자 이메일">lavalabs.ceo@gmail.com</div>
+    <button id="adminLoginButton" class="adminPrimary" type="button">관리자 로그인 링크 받기</button>
+    <p id="adminLoginStatus" class="adminStatus" role="status" aria-live="polite"></p>
+    <p class="adminNotice">링크는 관리자 이메일 받은편지함으로만 전송됩니다. 링크를 연 브라우저 탭의 세션에만 로그인 정보가 보관됩니다.</p>
+  </section>
+
+  <section id="adminDashboard" class="adminDashboard" hidden aria-labelledby="dashboardTitle">
+    <div class="adminHero">
+      <div><span class="adminEyebrow">운영 대시보드</span><h1 id="dashboardTitle">뉴스레터와 프리미엄 수요</h1><p id="adminIdentity">관리자 정보를 확인하는 중입니다.</p></div>
+      <div class="adminHeroActions"><button id="adminRefresh" class="adminSecondary" type="button">새로고침</button><button id="adminExport" class="adminPrimary" type="button">구독자 CSV</button></div>
+    </div>
+
+    <section class="adminStats" aria-label="운영 현황">
+      <article class="adminStat"><span>활성 구독자</span><strong id="statActive">—</strong></article>
+      <article class="adminStat"><span>최근 7일 신청</span><strong id="statWeek">—</strong></article>
+      <article class="adminStat"><span>최근 30일 신청</span><strong id="statMonth">—</strong></article>
+      <article class="adminStat"><span>프리미엄 의견</span><strong id="statInterest">—</strong></article>
+    </section>
+
+    <section class="adminInsights" aria-label="프리미엄 수요 요약">
+      <article class="adminPanel"><h2>관심 기능</h2><div id="featureBars" class="adminBarList"></div></article>
+      <article class="adminPanel"><h2>희망 가격대</h2><div id="priceBars" class="adminBarList"></div></article>
+    </section>
+
+    <div class="adminTabs" role="tablist" aria-label="데이터 종류">
+      <button id="tabSubscribers" class="adminTab" type="button" role="tab" aria-selected="true" aria-controls="panelSubscribers">뉴스레터 구독자</button>
+      <button id="tabInterest" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelInterest">프리미엄 의견</button>
+    </div>
+
+    <section id="panelSubscribers" role="tabpanel" aria-labelledby="tabSubscribers">
+      <div class="adminToolbar"><form id="subscriberSearchForm" class="adminSearch"><input id="subscriberSearch" type="search" autocomplete="off" placeholder="이메일 검색" aria-label="구독자 이메일 검색"><button class="adminSecondary" type="submit">검색</button></form><button id="subscriberClear" class="adminSecondary" type="button">검색 초기화</button></div>
+      <div class="adminTableWrap"><table class="adminTable"><thead><tr><th>이메일</th><th>신청 경로</th><th>신청일</th><th>상태</th><th>관리</th></tr></thead><tbody id="subscriberRows"><tr><td colspan="5" class="adminEmpty">구독자 정보를 불러오는 중입니다.</td></tr></tbody></table></div>
+      <div class="adminPagination"><span id="subscriberCount">0명</span><div><button id="subscriberPrev" class="adminSecondary" type="button">이전</button><button id="subscriberNext" class="adminSecondary" type="button">다음</button></div></div>
+    </section>
+
+    <section id="panelInterest" role="tabpanel" aria-labelledby="tabInterest" hidden>
+      <div class="adminToolbar"><form id="interestSearchForm" class="adminSearch"><input id="interestSearch" type="search" autocomplete="off" placeholder="이메일 검색" aria-label="프리미엄 의견 이메일 검색"><button class="adminSecondary" type="submit">검색</button></form><button id="interestClear" class="adminSecondary" type="button">검색 초기화</button></div>
+      <div class="adminTableWrap"><table class="adminTable"><thead><tr><th>이메일</th><th>관심 기능</th><th>희망 가격</th><th>계정 수</th><th>추가 의견</th><th>갱신일</th><th>관리</th></tr></thead><tbody id="interestRows"><tr><td colspan="7" class="adminEmpty">의견을 불러오는 중입니다.</td></tr></tbody></table></div>
+      <div class="adminPagination"><span id="interestCount">0건</span><div><button id="interestPrev" class="adminSecondary" type="button">이전</button><button id="interestNext" class="adminSecondary" type="button">다음</button></div></div>
+    </section>
+
+    <p id="adminStatus" class="adminStatus" role="status" aria-live="polite"></p>
+    <p class="adminNotice">구독자 이메일은 뉴스레터 운영과 수신 해지 처리에만 사용하세요. CSV 파일은 업무가 끝나면 안전한 위치에서 삭제하는 것을 권장합니다.</p>
+  </section>
+</main>
+<script src="/assets/admin-v17.js?v=17.0" defer></script>
+</body>
+</html>

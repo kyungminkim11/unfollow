@@ -113,7 +113,7 @@ try{
   await inspectApp(browser,{name:'mobile-390',width:390,height:844});
   await inspectPage(browser,{pathName:'/guide/',label:'guide',heading:'Instagram 데이터 ZIP을 준비하는 방법'});
   await inspectPage(browser,{pathName:'/help/',label:'help',heading:'분석이 되지 않을 때 확인하세요'});
-  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:['ZIP 내용은 외부 서버로 전송되지 않습니다','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다']});
+  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:['ZIP 내용은 외부 서버로 전송되지 않습니다','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다','ZIP 분석은 로컬에서, 선택한 신청 정보만 분리해 저장합니다']});
 }finally{
   await browser.close();
 }
