@@ -13,7 +13,16 @@ const auditDir=path.join(process.cwd(),'audit');
 fs.mkdirSync(auditDir,{recursive:true});
 const checks=[];const failures=[];
 function check(name,pass,details={}){const item={name,pass:Boolean(pass),details};checks.push(item);if(!item.pass) failures.push(item);}
-async function axe(page,name){const result=await new AxeBuilder({page}).analyze();const serious=result.violations.filter(item=>['critical','serious'].includes(item.impact));check(`${name} 접근성`,serious.length===0,{violations:serious.map(item=>({id:item.id,impact:item.impact,nodes:item.nodes.length}))});}
+async function axe(page,name){
+  const result=await new AxeBuilder({page}).analyze();
+  const serious=result.violations.filter(item=>['critical','serious'].includes(item.impact));
+  check(`${name} 접근성`,serious.length===0,{violations:serious.map(item=>({
+    id:item.id,
+    impact:item.impact,
+    description:item.description,
+    nodes:item.nodes.map(node=>({target:node.target,html:node.html,failureSummary:node.failureSummary}))
+  }))});
+}
 function adminResponse(action){
   if(action==='stats') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},stats:{active:12,last7Days:3,last30Days:8,interestCount:5,featureCounts:{history:5,reports:3},priceCounts:{'3000_5900':4}},recent:[]};
   if(action==='list_subscribers') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},count:0,rows:[]};
