@@ -20,7 +20,9 @@
 
   const loadFeatureStack=()=>{
     loadScript('/assets/v13-features.js?v=13.0','v13-features',()=>{
-      loadScript('/assets/design-v14.js?v=14.0','design-v14');
+      loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
+        loadScript('/assets/service-v15.js?v=15.0','service-v15');
+      });
     });
   };
 
@@ -45,7 +47,7 @@
     const title=document.createElement('strong');
     title.textContent='© 2026 Lava Labs · 맞팔체커';
     const desc=document.createElement('span');
-    desc.textContent='라바랩스에서 운영하는 무료 브라우저 로컬 분석 도구입니다.';
+    desc.textContent='라바랩스에서 운영하는 무료 브라우저 로컬 분석 서비스입니다.';
     brand.append(title,desc);
 
     const links=document.createElement('div');
@@ -55,10 +57,16 @@
     website.target='_blank';
     website.rel='noopener';
     website.textContent='라바랩스 홈페이지';
+    const guide=document.createElement('a');
+    guide.href='/guide/';
+    guide.textContent='사용 가이드';
+    const privacy=document.createElement('a');
+    privacy.href='/privacy/';
+    privacy.textContent='개인정보 안내';
     const mail=document.createElement('a');
     mail.href='mailto:lavalabs.ceo@gmail.com';
     mail.textContent='문의';
-    links.append(website,mail);
+    links.append(website,guide,privacy,mail);
 
     top.append(brand,links);
 
