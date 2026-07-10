@@ -1,6 +1,6 @@
 # Core snippets
 
-Generated: 2026-06-28T02:16:29.453Z
+Generated: 2026-07-10T11:43:45.848Z
 
 ## async function handleZip
 
