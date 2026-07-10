@@ -94,11 +94,8 @@ async function desktop(browser){
   check('분석 상태 UI 생성',await page.locator('#analysisStatusV13').count()===1,{});
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-01.zip'));
-  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
-  const mutualTab=page.locator('.tabs .tab').filter({hasText:'맞팔'}).first();
-  await mutualTab.click();
-  await page.waitForFunction(()=>Array.from(document.querySelectorAll('.tabs .tab')).some(tab=>tab.classList.contains('active')&&(tab.textContent||'').includes('맞팔')),{timeout:5000});
-  await page.locator('#searchInput').fill('stable_one');
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===4,{timeout:15000});
+  await page.locator('#searchInput').fill('stable_review');
   await page.waitForFunction(()=>{
     const button=document.querySelector('#focusDoneBtn');
     return Boolean(button&&!button.disabled);
@@ -109,7 +106,7 @@ async function desktop(browser){
   const firstDone=await number(page,'#countDone');
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-28.zip'));
-  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===4,{timeout:15000});
   const secondWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
   const secondDone=await number(page,'#countDone');
   check('내용 유사도로 같은 계정 작업공간 이어쓰기',firstWorkspace===secondWorkspace&&firstWorkspace?.startsWith('data_')&&firstDone===1&&secondDone===1,{firstWorkspace,secondWorkspace,firstDone,secondDone});
