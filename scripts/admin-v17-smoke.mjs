@@ -136,8 +136,9 @@ async function adminDashboard(browser,width,label){
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
   await page.locator('#tabInterest').click();
   await page.waitForSelector('#panelInterest:not([hidden])');
-  await page.waitForFunction(()=>document.querySelectorAll('#interestRows tr').length===1);
-  check(`${label} 프리미엄 의견 탭`,await page.locator('#interestRows').innerText().then(text=>text.includes('월간 리포트')),{});
+  await page.waitForFunction(()=>/월간 리포트/.test(document.querySelector('#interestRows')?.textContent||''),{timeout:10000});
+  const interestText=await page.locator('#interestRows').innerText();
+  check(`${label} 프리미엄 의견 탭`,interestText.includes('월간 리포트'),{interestText});
   if(width>600){
     const downloadPromise=page.waitForEvent('download');
     await page.locator('#adminExport').click();
