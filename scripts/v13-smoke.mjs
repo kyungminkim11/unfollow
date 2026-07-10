@@ -94,17 +94,19 @@ async function desktop(browser){
   check('분석 상태 UI 생성',await page.locator('#analysisStatusV13').count()===1,{});
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-01.zip'));
-  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
-  await page.locator('#searchInput').fill('stable_one');
-  await page.locator('#searchInput').dispatchEvent('input');
-  await page.waitForTimeout(120);
-  await page.locator('#focusDoneBtn').click();
-  await page.waitForTimeout(180);
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===4,{timeout:15000});
+  await page.locator('#searchInput').fill('stable_review');
+  await page.waitForFunction(()=>{
+    const button=document.querySelector('#focusDoneBtn');
+    return Boolean(button&&!button.disabled);
+  },null,{timeout:10000});
+  await page.evaluate(()=>document.querySelector('#focusDoneBtn')?.click());
+  await page.waitForFunction(()=>Number((document.querySelector('#countDone')?.textContent||'').replace(/\D/g,''))===1,{timeout:5000});
   const firstWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
   const firstDone=await number(page,'#countDone');
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-28.zip'));
-  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
+  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===4,{timeout:15000});
   const secondWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
   const secondDone=await number(page,'#countDone');
   check('내용 유사도로 같은 계정 작업공간 이어쓰기',firstWorkspace===secondWorkspace&&firstWorkspace?.startsWith('data_')&&firstDone===1&&secondDone===1,{firstWorkspace,secondWorkspace,firstDone,secondDone});

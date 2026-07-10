@@ -124,10 +124,27 @@ fs.writeFileSync(corePath,source);
 
 const indexPath=path.join(root,'dist','index.html');
 let html=fs.readFileSync(indexPath,'utf8');
-html=html.replaceAll('v12.0','v13.0');
+html=html
+  .replaceAll('v12.0','v15.0')
+  .replaceAll('v13.0','v15.0')
+  .replaceAll('취소 검토 계정','나만 팔로우 중인 계정')
+  .replaceAll('맞팔과 취소 검토','맞팔과 나만 팔로우 중인 계정');
 fs.writeFileSync(indexPath,html);
+
+const pagesSource=path.join(root,'pages');
+if(fs.existsSync(pagesSource)){
+  for(const entry of fs.readdirSync(pagesSource,{withFileTypes:true})){
+    if(!entry.isDirectory()) continue;
+    fs.cpSync(path.join(pagesSource,entry.name),path.join(root,'dist',entry.name),{recursive:true});
+  }
+}
 
 if(!source.includes('WORKSPACE_SIGNATURE_KEY')) throw new Error('v13 workspace signature code missing.');
 if(!source.includes('await activateWorkspace(file,zip,allKeys)')) throw new Error('v13 content workspace activation missing.');
 if(!source.includes('version:13')) throw new Error('v13 progress export version missing.');
-console.log(`V13 build ready with content-aware workspaces in ${path.basename(corePath)}.`);
+for(const page of ['guide','help','privacy']){
+  if(!fs.existsSync(path.join(root,'dist',page,'index.html'))) throw new Error(`V15 static page missing: ${page}`);
+}
+if(!fs.existsSync(path.join(assetsDir,'service-v15.js'))||!fs.existsSync(path.join(assetsDir,'service-v15.css'))) throw new Error('V15 application layer missing.');
+if(!fs.readFileSync(path.join(assetsDir,'business-info.js'),'utf8').includes('service-v15.js')) throw new Error('V15 loader missing from business-info.js.');
+console.log(`V15 service build ready with content-aware workspaces in ${path.basename(corePath)}.`);

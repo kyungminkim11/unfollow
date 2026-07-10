@@ -1,0 +1,158 @@
+name: V15 Service Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/service-v15.js'
+      - 'assets/service-v15.css'
+      - 'assets/service-v15-a11y.css'
+      - 'assets/service-v15-compat.js'
+      - 'assets/site-pages-v15.css'
+      - 'assets/site-pages-v15-a11y.css'
+      - 'assets/business-info.js'
+      - 'pages/**'
+      - 'scripts/build-v13.mjs'
+      - 'scripts/create-smoke-fixtures.py'
+      - 'scripts/v13-smoke.mjs'
+      - 'scripts/service-v15-smoke.mjs'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'sitemap.xml'
+      - '.github/workflows/service-v15-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v15-service-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v15
+
+      - name: Syntax checks
+        run: |
+          node --check assets/service-v15.js
+          node --check assets/service-v15-compat.js
+          node --check assets/business-info.js
+          node --check scripts/build-v13.mjs
+          node --check scripts/v13-smoke.mjs
+          node --check scripts/service-v15-smoke.mjs
+          python3 -m py_compile scripts/create-smoke-fixtures.py
+          node --check sw.js
+
+      - name: Build v15 service
+        run: |
+          node scripts/build-v13.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/service-v15.js
+          test -f dist/assets/service-v15.css
+          test -f dist/assets/service-v15-a11y.css
+          test -f dist/assets/service-v15-compat.js
+          test -f dist/assets/site-pages-v15.css
+          test -f dist/assets/site-pages-v15-a11y.css
+          test -f dist/guide/index.html
+          test -f dist/help/index.html
+          test -f dist/privacy/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/guide/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/help/index.html
+          grep -q 'site-pages-v15-a11y.css' dist/privacy/index.html
+          grep -q 'service-v15.js' dist/assets/business-info.js
+          grep -q 'service-v15-compat.js' dist/assets/business-info.js
+          grep -q 'unfollow-v15' dist/sw.js
+          grep -q 'Instagram 팔로우 관계를 안전하게 확인하세요' dist/assets/service-v15.js
+
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v15.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-v15.log
+          exit 1
+
+      - name: Existing feature regression
+        id: existing
+        continue-on-error: true
+        run: |
+          mkdir -p audit
+          node scripts/deploy-smoke.mjs > audit/v15-existing-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Relationship comparison regression
+        id: comparison
+        continue-on-error: true
+        run: |
+          mkdir -p audit
+          node scripts/v13-smoke.mjs > audit/v15-comparison-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Existing layout regression
+        id: layout
+        continue-on-error: true
+        run: node scripts/design-v14-smoke.mjs
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: V15 service audit
+        id: service
+        continue-on-error: true
+        run: |
+          mkdir -p audit
+          node scripts/service-v15-smoke.mjs > audit/service-v15-run.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v15-service-reports
+          path: |
+            audit/v15-existing-regression.log
+            audit/v15-comparison-regression.log
+            audit/design-v14-report.json
+            audit/design-v14-*.png
+            audit/service-v15-run.log
+            audit/service-v15-report.json
+            audit/service-v15-*.png
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce service checks
+        if: always() && (steps.existing.outcome != 'success' || steps.comparison.outcome != 'success' || steps.layout.outcome != 'success' || steps.service.outcome != 'success')
+        run: |
+          echo "Existing: ${{ steps.existing.outcome }}"
+          echo "Comparison: ${{ steps.comparison.outcome }}"
+          echo "Layout: ${{ steps.layout.outcome }}"
+          echo "Service: ${{ steps.service.outcome }}"
+          exit 1

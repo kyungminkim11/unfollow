@@ -1,0 +1,30 @@
+.service-v15 .v15NavTitle{color:#536176}
+.service-v15 .v15NavItem>small{color:#5f6c80}
+.service-v15 .v15NavItem.active small,
+.service-v15 .v15NavItem[aria-current="page"] small{color:#5546a5}
+.service-v15 .v15TrustGrid span{color:#5f6c80}
+
+body.v8-dark.service-v15 .v15NavTitle{color:#c1cad6}
+body.v8-dark.service-v15 .v15NavItem{color:#e6eaf0!important}
+body.v8-dark.service-v15 .v15NavItem>small{color:#bcc6d3}
+body.v8-dark.service-v15 .v15NavItem.active small,
+body.v8-dark.service-v15 .v15NavItem[aria-current="page"] small{color:#ddd9ff}
+body.v8-dark.service-v15 #resultInfo{color:#c4cbd6!important}
+body.v8-dark.service-v15 .focusPanel .meta{border-color:#374151!important;background:#252c39!important}
+body.v8-dark.service-v15 .focusPanel .meta span{color:#cbd5e1!important}
+body.v8-dark.service-v15 .focusPanel .meta strong{color:#f8fafc!important}
+body.v8-dark.service-v15 .sessionBox>span,
+body.v8-dark.service-v15 .noteBox,
+body.v8-dark.service-v15 .shortcutGuide>span,
+body.v8-dark.service-v15 #localAccountState,
+body.v8-dark.service-v15 #privacyNoticeV10>small,
+body.v8-dark.service-v15 details[open]>p,
+body.v8-dark.service-v15 .footer{color:#c4cbd6!important}
+body.v8-dark.service-v15 .footer>strong{color:#f3f5f8!important}
+body.v8-dark.service-v15 label[for="accountMemo"]{color:#dbe2ea!important}
+body.v8-dark.service-v15 .comparePrivacyV13>strong{color:#d8d3ff!important}
+
+@media(max-width:760px){
+  .service-v15 .mobileTopV8{display:flex!important}
+  .service-v15 .bottomNavV8.v15MobileNav{display:grid!important}
+}

@@ -64,9 +64,19 @@ write_zip("compare-current.zip", ["alice", "carol", "erin"], ["alice", "carol", 
 
 # Generic Instagram filenames intentionally contain no account identifier. The
 # relationship sets overlap enough for the privacy-preserving v13 sketch to
-# recognize them as two snapshots of the same account.
-write_zip("data-2026-06-01.zip", ["stable_one", "stable_two", "old_only"], ["stable_one", "stable_two", "follower_old"])
-write_zip("data-2026-06-28.zip", ["stable_one", "stable_two", "new_only"], ["stable_one", "stable_two", "follower_new"])
+# recognize them as two snapshots of the same account. stable_review remains a
+# following-only review target in both snapshots so progress persistence can be
+# verified through the real review action.
+write_zip(
+    "data-2026-06-01.zip",
+    ["stable_one", "stable_two", "stable_review", "old_only"],
+    ["stable_one", "stable_two", "follower_old"],
+)
+write_zip(
+    "data-2026-06-28.zip",
+    ["stable_one", "stable_two", "stable_review", "new_only"],
+    ["stable_one", "stable_two", "follower_new"],
+)
 
 progress = {
     "version": 12,
