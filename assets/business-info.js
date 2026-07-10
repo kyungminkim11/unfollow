@@ -32,6 +32,7 @@
       loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
         loadScript('/assets/service-v15.js?v=15.0','service-v15',()=>{
           loadStyle('/assets/service-v15-a11y.css?v=15.1','service-v15-a11y');
+          loadScript('/assets/service-v15-compat.js?v=15.1','service-v15-compat');
         });
       });
     });
