@@ -105,15 +105,15 @@ try{
   await mainPage(browser,390,'mobile-390');
   await staticPage(browser,'/premium/','premium','무료 분석은 유지하고, 기록과 관리 기능을 확장합니다');
   await staticPage(browser,'/newsletter/','newsletter','프리미엄 출시와 중요한 업데이트만 알려드릴게요');
-  await staticPage(browser,'/data/','data','ZIP 분석 데이터와 뉴스레터 이메일은 서로 분리됩니다');
-  await staticPage(browser,'/privacy/','privacy','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다');
+  await staticPage(browser,'/data/','data','ZIP 분석과 선택 신청 정보는 서로 분리됩니다');
+  await staticPage(browser,'/privacy/','privacy','ZIP 분석은 로컬에서, 선택한 신청 정보만 분리해 저장합니다');
   await staticPage(browser,'/terms/','terms','맞팔체커 이용약관');
   await newsletterRoundTrip(browser);
 }finally{
   await browser.close();
 }
 
-const report={version:'16.0',checks,failures};
+const report={version:'16.1',checks,failures};
 fs.writeFileSync(path.join(auditDir,'newsletter-v16-report.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify(report,null,2));
 if(failures.length) process.exit(1);
