@@ -7,7 +7,7 @@
   const API_URL=`${SUPABASE_URL}/functions/v1/unfollow-newsletter-admin`;
   const PAGE_SIZE=25;
   const FEATURE_LABELS={history:'분석 이력',multi_account:'여러 계정',advanced_compare:'고급 비교',reports:'PDF·월간 리포트',cloud_sync:'기기 동기화',team:'팀 관리',alerts:'변화 알림',ai_insights:'AI 요약'};
-  const PRICE_LABELS={free_only:'무료만 사용',under_3000:'월 3천원 미만',3000_5900:'월 3,000~5,900원',6000_9900:'월 6,000~9,900원',10000_plus:'월 1만원 이상',unsure:'아직 모르겠음'};
+  const PRICE_LABELS={free_only:'무료만 사용',under_3000:'월 3천원 미만','3000_5900':'월 3,000~5,900원','6000_9900':'월 6,000~9,900원','10000_plus':'월 1만원 이상',unsure:'아직 모르겠음'};
   const ACCOUNT_LABELS={'1':'1개','2_3':'2~3개','4_10':'4~10개','11_plus':'11개 이상'};
 
   const $=selector=>document.querySelector(selector);
