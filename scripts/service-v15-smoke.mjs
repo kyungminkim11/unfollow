@@ -28,7 +28,7 @@ async function inspectApp(browser,{name,width,height}){
   page.on('console',message=>{if(message.type()==='error') errors.push(message.text());});
   const response=await page.goto(`${baseURL}/`,{waitUntil:'networkidle',timeout:45000});
   await page.waitForSelector('body.service-v15',{timeout:15000});
-  await page.waitForSelector('link[data-service-v15]',{timeout:15000});
+  await page.waitForSelector('link[data-service-v15]',{state:'attached',timeout:15000});
   await page.waitForTimeout(900);
   const status=response?.status()||0;
   const metrics=await page.evaluate(()=>{
