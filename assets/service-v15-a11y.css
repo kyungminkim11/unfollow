@@ -20,5 +20,11 @@ body.v8-dark.service-v15 #localAccountState,
 body.v8-dark.service-v15 #privacyNoticeV10>small,
 body.v8-dark.service-v15 details[open]>p,
 body.v8-dark.service-v15 .footer{color:#c4cbd6!important}
+body.v8-dark.service-v15 .footer>strong{color:#f3f5f8!important}
 body.v8-dark.service-v15 label[for="accountMemo"]{color:#dbe2ea!important}
 body.v8-dark.service-v15 .comparePrivacyV13>strong{color:#d8d3ff!important}
+
+@media(max-width:760px){
+  .service-v15 .mobileTopV8{display:flex!important}
+  .service-v15 .bottomNavV8.v15MobileNav{display:grid!important}
+}
