@@ -1,4 +1,4 @@
-name: V17 Admin Check
+name: V18 Campaign Check
 
 on:
   pull_request:
@@ -6,15 +6,19 @@ on:
     paths:
       - 'assets/admin-v17.js'
       - 'assets/admin-v17.css'
+      - 'assets/admin-v18.css'
+      - 'assets/admin-campaign-v18.js'
+      - 'assets/newsletter-page-v16.js'
       - 'assets/premium-interest-v17.js'
       - 'assets/site-pages-v17.css'
       - 'pages/admin/**'
+      - 'pages/newsletter/**'
       - 'pages/premium/**'
       - 'pages/privacy/**'
       - 'pages/data/**'
       - 'pages/terms/**'
       - 'scripts/newsletter-v16-smoke.mjs'
-      - 'scripts/admin-v17-smoke.mjs'
+      - 'scripts/campaign-v18-smoke.mjs'
       - 'sw.js'
       - 'README.md'
       - '.github/workflows/v17-admin-check.yml'
@@ -24,13 +28,13 @@ permissions:
   contents: read
 
 concurrency:
-  group: v17-admin-${{ github.ref }}
+  group: v18-campaign-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,14 +48,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-chromium-v17
+          key: ${{ runner.os }}-playwright-chromium-v18
 
       - name: Syntax checks
         run: |
           node --check assets/admin-v17.js
+          node --check assets/admin-campaign-v18.js
+          node --check assets/newsletter-page-v16.js
           node --check assets/premium-interest-v17.js
           node --check scripts/newsletter-v16-smoke.mjs
-          node --check scripts/admin-v17-smoke.mjs
+          node --check scripts/campaign-v18-smoke.mjs
           node --check scripts/build-v13.mjs
           node --check sw.js
 
@@ -60,15 +66,15 @@ jobs:
           node scripts/build-v13.mjs
           base64 --decode og-image.txt > dist/og-image.png
           test -f dist/assets/admin-v17.js
-          test -f dist/assets/admin-v17.css
-          test -f dist/assets/premium-interest-v17.js
-          test -f dist/assets/site-pages-v17.css
+          test -f dist/assets/admin-v18.css
+          test -f dist/assets/admin-campaign-v18.js
+          test -f dist/assets/newsletter-page-v16.js
           test -f dist/admin/newsletter/index.html
-          test -f dist/premium/index.html
+          test -f dist/newsletter/index.html
           grep -q 'noindex,nofollow,noarchive' dist/admin/newsletter/index.html
-          grep -q 'unfollow-newsletter-admin' dist/assets/admin-v17.js
-          grep -q 'unfollow-premium-interest' dist/assets/premium-interest-v17.js
-          grep -q 'unfollow-v17' dist/sw.js
+          grep -q 'unfollow-newsletter-campaigns' dist/assets/admin-campaign-v18.js
+          grep -q 'token_unsubscribe' dist/assets/newsletter-page-v16.js
+          grep -q 'unfollow-v18' dist/sw.js
           grep -q "startsWith('/admin/')" dist/sw.js
 
       - name: Create fixtures
@@ -81,12 +87,12 @@ jobs:
 
       - name: Start production preview
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v17.log 2>&1 &
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v18.log 2>&1 &
           for i in {1..20}; do
             curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
             sleep 1
           done
-          cat /tmp/unfollow-v17.log
+          cat /tmp/unfollow-v18.log
           exit 1
 
       - name: Existing analysis regression
@@ -94,35 +100,35 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p audit
-          node scripts/deploy-smoke.mjs > audit/v17-existing-regression.log 2>&1
+          node scripts/deploy-smoke.mjs > audit/v18-existing-regression.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
       - name: Relationship comparison regression
         id: comparison
         continue-on-error: true
-        run: node scripts/v13-smoke.mjs > audit/v17-comparison-regression.log 2>&1
+        run: node scripts/v13-smoke.mjs > audit/v18-comparison-regression.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
       - name: Service UI regression
         id: service
         continue-on-error: true
-        run: node scripts/service-v15-smoke.mjs > audit/v17-service-regression.log 2>&1
+        run: node scripts/service-v15-smoke.mjs > audit/v18-service-regression.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
       - name: Newsletter and policy regression
         id: newsletter
         continue-on-error: true
-        run: node scripts/newsletter-v16-smoke.mjs > audit/v17-newsletter-regression.log 2>&1
+        run: node scripts/newsletter-v16-smoke.mjs > audit/v18-newsletter-regression.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
-      - name: Premium survey and admin audit
-        id: admin
+      - name: Campaign manager audit
+        id: campaign
         continue-on-error: true
-        run: node scripts/admin-v17-smoke.mjs > audit/admin-v17-run.log 2>&1
+        run: node scripts/campaign-v18-smoke.mjs > audit/campaign-v18-run.log 2>&1
         env:
           SMOKE_URL: http://127.0.0.1:4173/
 
@@ -130,24 +136,24 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: v17-admin-reports
+          name: v18-campaign-reports
           path: |
-            audit/v17-existing-regression.log
-            audit/v17-comparison-regression.log
-            audit/v17-service-regression.log
-            audit/v17-newsletter-regression.log
-            audit/admin-v17-run.log
-            audit/admin-v17-report.json
-            audit/admin-v17-*.png
+            audit/v18-existing-regression.log
+            audit/v18-comparison-regression.log
+            audit/v18-service-regression.log
+            audit/v18-newsletter-regression.log
+            audit/campaign-v18-run.log
+            audit/campaign-v18-report.json
+            audit/campaign-v18-*.png
           if-no-files-found: warn
           retention-days: 7
 
       - name: Enforce checks
-        if: always() && (steps.existing.outcome != 'success' || steps.comparison.outcome != 'success' || steps.service.outcome != 'success' || steps.newsletter.outcome != 'success' || steps.admin.outcome != 'success')
+        if: always() && (steps.existing.outcome != 'success' || steps.comparison.outcome != 'success' || steps.service.outcome != 'success' || steps.newsletter.outcome != 'success' || steps.campaign.outcome != 'success')
         run: |
           echo "Existing: ${{ steps.existing.outcome }}"
           echo "Comparison: ${{ steps.comparison.outcome }}"
           echo "Service: ${{ steps.service.outcome }}"
           echo "Newsletter: ${{ steps.newsletter.outcome }}"
-          echo "Admin: ${{ steps.admin.outcome }}"
+          echo "Campaign: ${{ steps.campaign.outcome }}"
           exit 1
