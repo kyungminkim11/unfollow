@@ -4,6 +4,7 @@
   const q=(selector,root=document)=>root.querySelector(selector);
   const qa=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
   let timer=0;
+  let observer;
 
   function visible(element){
     const style=getComputedStyle(element);
@@ -12,10 +13,10 @@
   }
 
   function disableDuplicate(element){
-    element.classList.remove('mobileTopV8');
-    element.classList.add('v14DuplicateMobileHeader');
-    element.setAttribute('aria-hidden','true');
-    element.setAttribute('inert','');
+    if(element.classList.contains('mobileTopV8')) element.classList.remove('mobileTopV8');
+    if(!element.classList.contains('v14DuplicateMobileHeader')) element.classList.add('v14DuplicateMobileHeader');
+    if(element.getAttribute('aria-hidden')!=='true') element.setAttribute('aria-hidden','true');
+    if(!element.hasAttribute('inert')) element.setAttribute('inert','');
   }
 
   function normalizeMobileHeader(){
@@ -27,7 +28,7 @@
       || marked.find(element=>!element.classList.contains('v14DuplicateMobileHeader'))
       || marked[marked.length-1];
 
-    preferred.classList.add('mobileTopV8');
+    if(!preferred.classList.contains('mobileTopV8')) preferred.classList.add('mobileTopV8');
     preferred.classList.remove('v14DuplicateMobileHeader');
     preferred.removeAttribute('aria-hidden');
     preferred.removeAttribute('inert');
@@ -47,6 +48,8 @@
     if(!existing) return;
 
     qa('.v15MobileNav:not(.bottomNavV8)').forEach(element=>element.remove());
+    if(existing.dataset.v15Normalized==='true') return;
+
     existing.classList.add('v15MobileNav');
     existing.setAttribute('aria-label','모바일 주요 메뉴');
 
@@ -60,6 +63,9 @@
       const [href,label,description]=map[index];
       item.classList.add('v15NavItem');
       if(item.tagName==='A') item.setAttribute('href',href);
+      const currentLabel=q('span',item)?.textContent||'';
+      const currentDescription=q('small',item)?.textContent||'';
+      if(currentLabel===label&&currentDescription===description) return;
       item.replaceChildren();
       const span=document.createElement('span');
       span.textContent=label;
@@ -67,6 +73,7 @@
       small.textContent=description;
       item.append(span,small);
     });
+    existing.dataset.v15Normalized='true';
   }
 
   function apply(){
@@ -76,14 +83,16 @@
 
   function schedule(){
     clearTimeout(timer);
-    timer=setTimeout(apply,60);
+    timer=setTimeout(apply,80);
   }
 
   function start(){
     apply();
     setTimeout(apply,300);
     setTimeout(apply,1000);
-    new MutationObserver(schedule).observe(document.body,{childList:true,subtree:true});
+    observer=new MutationObserver(schedule);
+    observer.observe(document.body,{childList:true,subtree:true});
+    setTimeout(()=>observer?.disconnect(),8000);
     addEventListener('resize',schedule,{passive:true});
   }
 
