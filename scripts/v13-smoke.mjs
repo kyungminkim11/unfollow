@@ -95,6 +95,9 @@ async function desktop(browser){
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtures,'data-2026-06-01.zip'));
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
+  const mutualTab=page.locator('.tabs .tab').filter({hasText:'맞팔'}).first();
+  await mutualTab.click();
+  await page.waitForFunction(()=>Array.from(document.querySelectorAll('.tabs .tab')).some(tab=>tab.classList.contains('active')&&(tab.textContent||'').includes('맞팔')),{timeout:5000});
   await page.locator('#searchInput').fill('stable_one');
   await page.waitForFunction(()=>{
     const button=document.querySelector('#focusDoneBtn');
