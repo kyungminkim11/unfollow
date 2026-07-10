@@ -76,9 +76,24 @@
     existing.dataset.v15Normalized='true';
   }
 
+  function normalizeUploadInput(){
+    const input=q('#zipInput');
+    const trust=q('.v15TrustGrid');
+    if(!input||!trust) return;
+    input.setAttribute('accept','.zip,application/zip');
+    input.setAttribute('aria-describedby','v15UploadHelp');
+    if(q('#v15UploadHelp')) return;
+    const help=document.createElement('p');
+    help.id='v15UploadHelp';
+    help.className='v15UploadHelp';
+    help.innerHTML='지원 형식: Instagram JSON ZIP · 최대 80MB · <a href="/guide/">데이터 받는 방법</a>';
+    trust.after(help);
+  }
+
   function apply(){
     normalizeMobileHeader();
     normalizeBottomNavigation();
+    normalizeUploadInput();
   }
 
   function schedule(){
