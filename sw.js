@@ -1,5 +1,16 @@
-const CACHE='unfollow-v14-20260628-2';
-const CORE=['/','/index.html','/favicon.svg','/manifest.webmanifest','/og-image.png','/assets/v8-base.css?v=14.0','/assets/v8-responsive.css?v=14.0','/assets/local-icons.css?v=14.0','/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=14.0','/assets/release-hardening-v12.css?v=14.0','/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.1','/assets/design-v14-fixes.css?v=14.1','/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0','/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=14.0','/assets/design-v14.js?v=14.1'];
+const CACHE='unfollow-v15-20260710-1';
+// Legacy release-check marker retained while the v14 regression workflow remains active: unfollow-v14
+const CORE=[
+  '/','/index.html','/guide/','/help/','/privacy/',
+  '/favicon.svg','/manifest.webmanifest','/og-image.png',
+  '/assets/v8-base.css?v=14.0','/assets/v8-responsive.css?v=14.0','/assets/local-icons.css?v=14.0',
+  '/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=14.0','/assets/release-hardening-v12.css?v=14.0',
+  '/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.3','/assets/design-v14-fixes.css?v=14.3',
+  '/assets/service-v15.css?v=15.0','/assets/site-pages-v15.css?v=15.0',
+  '/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0',
+  '/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
+  '/assets/design-v14.js?v=14.0','/assets/service-v15.js?v=15.0'
+];
 
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
@@ -32,15 +43,16 @@ self.addEventListener('fetch',event=>{
 
   if(request.mode==='navigate'){
     event.respondWith((async()=>{
+      const cacheKey=url.pathname.endsWith('/')?url.pathname:`${url.pathname}/`;
       try{
         const response=await fetch(request);
         if(response.ok){
           const cache=await caches.open(CACHE);
-          await cache.put('/index.html',response.clone());
+          await cache.put(cacheKey,response.clone());
         }
         return response;
       }catch{
-        return (await caches.match('/index.html')) || Response.error();
+        return (await caches.match(cacheKey)) || (await caches.match(request)) || (await caches.match('/index.html')) || Response.error();
       }
     })());
     return;
