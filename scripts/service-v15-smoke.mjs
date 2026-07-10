@@ -17,7 +17,14 @@ function check(name,pass,details={}){
 async function accessibility(page,name){
   const result=await new AxeBuilder({page}).analyze();
   const serious=result.violations.filter(item=>['critical','serious'].includes(item.impact));
-  check(`${name} 접근성`,serious.length===0,{violations:serious.map(item=>({id:item.id,impact:item.impact,nodes:item.nodes.length}))});
+  check(`${name} 접근성`,serious.length===0,{
+    violations:serious.map(item=>({
+      id:item.id,
+      impact:item.impact,
+      description:item.description,
+      nodes:item.nodes.slice(0,10).map(node=>({target:node.target,html:node.html,failureSummary:node.failureSummary}))
+    }))
+  });
 }
 
 async function inspectApp(browser,{name,width,height}){
@@ -29,7 +36,7 @@ async function inspectApp(browser,{name,width,height}){
   const response=await page.goto(`${baseURL}/`,{waitUntil:'networkidle',timeout:45000});
   await page.waitForSelector('body.service-v15',{timeout:15000});
   await page.waitForSelector('link[data-service-v15]',{state:'attached',timeout:15000});
-  await page.waitForTimeout(900);
+  await page.waitForTimeout(1200);
   const status=response?.status()||0;
   const metrics=await page.evaluate(()=>{
     const visibleText=Array.from(document.querySelectorAll('body *')).filter(element=>{
@@ -37,25 +44,29 @@ async function inspectApp(browser,{name,width,height}){
       const box=element.getBoundingClientRect();
       return !element.children.length&&!element.hidden&&style.display!=='none'&&style.visibility!=='hidden'&&box.width>0&&box.height>0;
     }).map(element=>element.textContent.trim());
-    const summaryText=document.querySelector('.v14SummaryGrid .sum span');
+    const summaryText=Array.from(document.querySelectorAll('.v14HeroAside *')).find(element=>{
+      const text=(element.textContent||'').trim();
+      return !element.children.length&&['나만 팔로우 중','맞팔','내가 팔로우 중'].some(label=>text.includes(label));
+    });
     return {
       title:document.title,
       heading:document.querySelector('.hero h1')?.textContent.trim()||'',
+      serviceReady:document.body.classList.contains('service-v15')&&document.documentElement.classList.contains('service-v15-ready'),
       serviceNav:document.querySelectorAll('.v15ServiceNav .v15NavItem').length,
       mobileNav:document.querySelectorAll('.v15MobileNav .v15NavItem').length,
       trust:document.querySelectorAll('.v15TrustGrid>div').length,
-      uploadHelp:document.querySelector('#zipInput,input[type="file"]')?.getAttribute('aria-describedby')||'',
+      uploadHelp:document.querySelector('#zipInput')?.getAttribute('aria-describedby')||'',
       oldCopy:visibleText.includes('취소 검토')||visibleText.includes('팔로워만')||visibleText.includes('전체 팔로잉'),
+      summaryText:summaryText?.textContent.trim()||'',
       summaryFont:summaryText?parseFloat(getComputedStyle(summaryText).fontSize):0,
       overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,
-      version:visibleText.find(text=>/^v15(?:\.0)?$/i.test(text))||'',
       privacyLink:Boolean(document.querySelector('a[href="/privacy/"]')),
       guideLink:Boolean(document.querySelector('a[href="/guide/"]')),
       helpLink:Boolean(document.querySelector('a[href="/help/"]'))
     };
   });
   check(`${name} HTTP 응답`,status===200,{status});
-  check(`${name} v15 레이어 적용`,metrics.heading==='Instagram 팔로우 관계를 안전하게 확인하세요'&&metrics.version==='v15.0',metrics);
+  check(`${name} v15 레이어 적용`,metrics.serviceReady&&metrics.heading==='Instagram 팔로우 관계를 안전하게 확인하세요',metrics);
   check(`${name} 서비스 메뉴`,metrics.serviceNav>=6&&metrics.mobileNav===4,metrics);
   check(`${name} 신뢰 안내`,metrics.trust===3&&metrics.uploadHelp==='v15UploadHelp',metrics);
   check(`${name} 문구 정리`,!metrics.oldCopy,metrics);
@@ -80,12 +91,14 @@ async function inspectPage(browser,{pathName,label,heading}){
     canonical:document.querySelector('link[rel="canonical"]')?.href||'',
     csp:Boolean(document.querySelector('meta[http-equiv="Content-Security-Policy"]')),
     current:document.querySelector('.pageNav [aria-current="page"]')?.getAttribute('href')||'',
+    a11yStyle:Boolean(document.querySelector('link[href*="site-pages-v15-a11y.css"]')),
     overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2
   }));
   check(`${label} HTTP 응답`,response?.status()===200,{status:response?.status()});
   check(`${label} 제목`,metrics.heading===heading,metrics);
   check(`${label} 보안·SEO 메타`,metrics.csp&&metrics.canonical.endsWith(pathName),metrics);
   check(`${label} 현재 메뉴`,metrics.current===pathName,metrics);
+  check(`${label} 접근성 스타일`,metrics.a11yStyle,metrics);
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
   check(`${label} 실행 오류 없음`,errors.length===0,{errors});
   await accessibility(page,label);
