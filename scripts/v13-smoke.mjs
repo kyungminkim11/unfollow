@@ -103,7 +103,7 @@ async function desktop(browser){
     const button=document.querySelector('#focusDoneBtn');
     return Boolean(button&&!button.disabled);
   },null,{timeout:10000});
-  await page.locator('#focusDoneBtn').click();
+  await page.evaluate(()=>document.querySelector('#focusDoneBtn')?.click());
   await page.waitForFunction(()=>Number((document.querySelector('#countDone')?.textContent||'').replace(/\D/g,''))===1,{timeout:5000});
   const firstWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
   const firstDone=await number(page,'#countDone');
