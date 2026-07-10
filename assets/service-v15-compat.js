@@ -5,23 +5,41 @@
   const qa=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
   let timer=0;
 
+  function visible(element){
+    const style=getComputedStyle(element);
+    const box=element.getBoundingClientRect();
+    return !element.hidden&&style.display!=='none'&&style.visibility!=='hidden'&&box.width>0&&box.height>0;
+  }
+
+  function disableDuplicate(element){
+    element.classList.remove('mobileTopV8');
+    element.classList.add('v14DuplicateMobileHeader');
+    element.setAttribute('aria-hidden','true');
+    element.setAttribute('inert','');
+  }
+
   function normalizeMobileHeader(){
-    const preferred=q('.mobileTopV8');
-    if(!preferred) return;
+    if(!matchMedia('(max-width:760px)').matches) return;
+    const marked=qa('.mobileTopV8');
+    if(!marked.length) return;
+
+    const preferred=marked.find(element=>!element.classList.contains('v14DuplicateMobileHeader')&&visible(element))
+      || marked.find(element=>!element.classList.contains('v14DuplicateMobileHeader'))
+      || marked[marked.length-1];
+
+    preferred.classList.add('mobileTopV8');
     preferred.classList.remove('v14DuplicateMobileHeader');
     preferred.removeAttribute('aria-hidden');
+    preferred.removeAttribute('inert');
 
-    if(!matchMedia('(max-width:760px)').matches) return;
-    const candidates=qa('header,[class*="mobile" i],[class*="Mobile"]').filter(element=>{
-      if(element===preferred||element.closest('.sidebar')||element.closest('.bottomNavV8')) return false;
+    marked.filter(element=>element!==preferred).forEach(disableDuplicate);
+
+    qa('header,[class*="mobile" i],[class*="Mobile"]').filter(element=>{
+      if(element===preferred||element.closest('.sidebar')||element.closest('.bottomNavV8')||element.classList.contains('v14DuplicateMobileHeader')) return false;
       const text=(element.textContent||'').replace(/\s+/g,' ').trim();
       const box=element.getBoundingClientRect();
       return text.includes('맞팔체커')&&box.width>=innerWidth*.75&&box.height>=36&&box.height<=90&&box.top<=150;
-    });
-    candidates.forEach(element=>{
-      element.classList.add('v14DuplicateMobileHeader');
-      element.setAttribute('aria-hidden','true');
-    });
+    }).forEach(disableDuplicate);
   }
 
   function normalizeBottomNavigation(){
