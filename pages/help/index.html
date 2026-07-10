@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
+  <meta name="description" content="맞팔체커 ZIP 분석 오류, 지원 브라우저, 작업 기록, 변화 비교 기능에 대한 도움말입니다.">
+  <link rel="canonical" href="https://unfollow.lavalabs.co.kr/help/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site-pages-v15.css?v=15.0">
+  <title>도움말 | 맞팔체커</title>
+</head>
+<body>
+<a class="pageSkip" href="#main">본문으로 바로가기</a>
+<header class="pageHeader"><div class="pageHeaderInner">
+  <a class="pageBrand" href="/"><span class="pageLogo">M</span><span class="pageBrandText"><strong>맞팔체커</strong><span>by Lava Labs</span></span></a>
+  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/">가이드</a><a href="/help/" aria-current="page">도움말</a><a href="/privacy/">개인정보</a><a class="primary" href="/">분석 시작</a></nav>
+</div></header>
+<main id="main" class="pageMain">
+  <section class="pageHero"><span class="pageEyebrow">문제 해결</span><h1>분석이 되지 않을 때 확인하세요</h1><p>대부분의 오류는 다운로드 형식이 HTML이거나, 팔로워·팔로잉 파일이 ZIP에 포함되지 않았거나, 다운로드가 완료되지 않은 경우에 발생합니다.</p><div class="pageActions"><a class="pageButton primary" href="/">분석 화면으로 이동</a><a class="pageButton" href="/guide/">ZIP 준비 방법 보기</a></div></section>
+  <div class="pageGrid">
+    <section class="pageCard full"><h2>오류 메시지별 해결 방법</h2><div class="tableWrap"><table><thead><tr><th>상황</th><th>확인 방법</th></tr></thead><tbody><tr><td>followers_*.json 또는 following.json을 찾지 못함</td><td>Instagram 데이터 요청 시 파일 형식을 JSON으로 설정하고 ‘팔로워 및 팔로잉’을 포함해 다시 요청하세요.</td></tr><tr><td>ZIP 파일이 손상됨</td><td>다운로드가 완전히 끝났는지 확인한 뒤 파일을 다시 내려받으세요. 메신저로 전달하며 파일이 변형된 경우 원본을 사용하세요.</td></tr><tr><td>파일이 80MB를 초과함</td><td>전체 Instagram 정보 대신 팔로워 및 팔로잉 항목만 선택해 새 ZIP을 받으세요.</td></tr><tr><td>압축 해제를 지원하지 않는 브라우저</td><td>최신 Chrome, Edge 또는 Safari에서 다시 열어 주세요.</td></tr><tr><td>결과가 현재 Instagram과 다름</td><td>결과는 ZIP 생성 시점의 스냅샷입니다. 실제 변경 전 해당 프로필을 직접 확인하세요.</td></tr></tbody></table></div></section>
+    <section class="pageCard"><h2>작업 기록은 어디에 저장되나요?</h2><p>검토 상태와 작업공간 이름은 현재 브라우저의 로컬 저장소에 저장됩니다. 다른 기기나 다른 브라우저에는 자동으로 동기화되지 않습니다.</p></section>
+    <section class="pageCard"><h2>자동으로 언팔하나요?</h2><p>아닙니다. 맞팔체커는 관계를 분류하고 프로필 링크를 제공할 뿐입니다. 팔로우 변경은 사용자가 Instagram에서 직접 진행합니다.</p></section>
+    <section class="pageCard"><h2>두 ZIP 비교는 어떻게 하나요?</h2><p>분석 화면의 ‘관계 변화 비교’에서 이전 ZIP과 최신 ZIP을 각각 선택하세요. 새 팔로워, 팔로워 이탈, 새 맞팔 등의 변화를 확인할 수 있습니다.</p></section>
+    <section class="pageCard"><h2>문의할 때 무엇을 보내야 하나요?</h2><p>분석 화면 하단의 ‘진단 파일 저장’을 사용하면 사용자 아이디와 ZIP 파일명 없이 브라우저 지원 정보와 오류 상태를 저장할 수 있습니다.</p></section>
+    <section class="pageCard full"><h2>자주 묻는 질문</h2><details><summary>ZIP 파일을 서버에 올리나요?</summary><p>아니요. 파일 선택과 분석은 현재 브라우저 안에서 수행되며 ZIP 내용은 외부 서버로 전송되지 않습니다.</p></details><details><summary>비공개 계정도 표시되나요?</summary><p>Instagram 다운로드 데이터에 사용자 아이디가 포함되어 있다면 관계 목록에 표시될 수 있습니다. 프로필의 현재 공개 상태를 별도로 조회하지는 않습니다.</p></details><details><summary>작업 기록을 다른 기기로 옮길 수 있나요?</summary><p>작업공간 관리에서 백업 파일을 저장할 수 있습니다. 현재 버전에서는 백업 내보내기를 지원하며, 가져오기 지원 범위는 분석 화면의 기록 관리 기능을 확인해 주세요.</p></details><details><summary>결과 목록에서 바로 프로필을 열어도 안전한가요?</summary><p>프로필 버튼을 누르면 Instagram 웹사이트가 새 탭으로 열립니다. 이때부터는 Instagram의 로그인 상태와 정책이 적용됩니다.</p></details></section>
+    <section class="pageCard full"><h2>계속 해결되지 않는 경우</h2><p>진단 파일과 화면에 표시된 오류 문구를 함께 보내 주세요. ZIP 원본이나 사용자 아이디 목록은 보내지 않아도 됩니다.</p><div class="pageActions"><a class="pageButton" href="mailto:lavalabs.ceo@gmail.com">이메일 문의</a><a class="pageButton" href="/privacy/">개인정보 처리 확인</a></div></section>
+  </div>
+</main>
+<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다.</div><nav><a href="/guide/">사용 가이드</a><a href="/privacy/">개인정보 안내</a><a href="mailto:lavalabs.ceo@gmail.com">문의</a></nav></div></footer>
+</body></html>
