@@ -97,7 +97,11 @@ async function desktop(browser){
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===3,{timeout:15000});
   await page.locator('#searchInput').fill('stable_one');
   await page.locator('#searchInput').dispatchEvent('input');
-  await page.waitForTimeout(120);
+  await page.waitForFunction(()=>{
+    const button=document.querySelector('#focusDoneBtn');
+    const focusText=(document.querySelector('#focusUsername')?.textContent||document.querySelector('.focusPanel')?.textContent||'').toLowerCase();
+    return Boolean(button&&!button.disabled&&focusText.includes('stable_one'));
+  },null,{timeout:5000});
   await page.locator('#focusDoneBtn').click();
   await page.waitForTimeout(180);
   const firstWorkspace=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
