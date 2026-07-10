@@ -55,12 +55,13 @@
   }
 
   function rewriteCopy(){
+    const version=`v${VERSION}`;
     qa('body *').forEach(element=>{
       if(element.children.length) return;
       const current=(element.textContent||'').trim();
       const next=leafCopy.get(current);
       if(next&&current!==next) element.textContent=next;
-      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(current)) element.textContent=`v${VERSION}`;
+      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(current)&&current!==version) element.textContent=version;
     });
 
     const brandSubtitle=q('.sidebar .brandText > span:not(.lavaByline),.sidebar .brand > span:not(.logo):not(.lavaByline)');
@@ -156,20 +157,22 @@
     const brand=q('.brand',sidebar);
     if(brand) brand.after(nav); else sidebar.prepend(nav);
 
-    const mobile=document.createElement('nav');
-    mobile.className='v15MobileNav';
-    mobile.setAttribute('aria-label','모바일 주요 메뉴');
-    mobile.append(
-      navLink('/#top','분석','ZIP 분석'),
-      navLink('/#compareV13','비교','변화 확인')
-    );
-    const mobileWorkspace=document.createElement('button');
-    mobileWorkspace.type='button';
-    mobileWorkspace.className='v15NavItem';
-    mobileWorkspace.innerHTML='<span>기록</span><small>작업공간</small>';
-    mobileWorkspace.addEventListener('click',()=>q('[data-v13-workspace]')?.click());
-    mobile.append(mobileWorkspace,navLink('/help/','도움말','문제 해결'));
-    document.body.appendChild(mobile);
+    if(!q('.bottomNavV8')){
+      const mobile=document.createElement('nav');
+      mobile.className='v15MobileNav';
+      mobile.setAttribute('aria-label','모바일 주요 메뉴');
+      mobile.append(
+        navLink('/#top','분석','ZIP 분석'),
+        navLink('/#compareV13','비교','변화 확인')
+      );
+      const mobileWorkspace=document.createElement('button');
+      mobileWorkspace.type='button';
+      mobileWorkspace.className='v15NavItem';
+      mobileWorkspace.innerHTML='<span>기록</span><small>작업공간</small>';
+      mobileWorkspace.addEventListener('click',()=>q('[data-v13-workspace]')?.click());
+      mobile.append(mobileWorkspace,navLink('/help/','도움말','문제 해결'));
+      document.body.appendChild(mobile);
+    }
 
     updateNavigationState();
   }
@@ -282,7 +285,8 @@
     setTimeout(decorate,1200);
 
     observer=new MutationObserver(scheduleDecorate);
-    observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+    observer.observe(document.body,{childList:true,subtree:true});
+    setTimeout(()=>observer?.disconnect(),2500);
     addEventListener('hashchange',updateNavigationState);
     addEventListener('popstate',updateNavigationState);
   }
