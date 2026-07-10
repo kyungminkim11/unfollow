@@ -1,14 +1,19 @@
 {
-  "name": "맞팔체커 · Instagram 맞팔 검토 도우미",
+  "name": "맞팔체커 · Instagram 관계 분석",
   "short_name": "맞팔체커",
-  "description": "Instagram 데이터 ZIP을 브라우저에서만 분석해 맞팔과 취소 검토 계정을 확인하는 로컬 분석 도구",
+  "description": "Instagram JSON ZIP을 브라우저에서 분석해 맞팔, 나만 팔로우 중인 계정과 관계 변화를 확인하는 로컬 분석 서비스",
   "lang": "ko-KR",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f7f8fc",
-  "theme_color": "#6557ff",
+  "background_color": "#f5f7fb",
+  "theme_color": "#5b4be7",
   "categories": ["utilities", "productivity"],
+  "shortcuts": [
+    {"name":"관계 변화 비교","short_name":"변화 비교","url":"/#compareV13"},
+    {"name":"사용 가이드","short_name":"가이드","url":"/guide/"},
+    {"name":"도움말","short_name":"도움말","url":"/help/"}
+  ],
   "icons": [
     {
       "src": "/favicon.svg",
