@@ -1,4 +1,4 @@
-const CACHE='unfollow-v15-20260710-2';
+const CACHE='unfollow-v15-20260710-3';
 // Legacy release-check marker retained while the v14 regression workflow remains active: unfollow-v14
 const CORE=[
   '/','/index.html','/guide/','/help/','/privacy/',
@@ -9,7 +9,7 @@ const CORE=[
   '/assets/service-v15.css?v=15.0','/assets/service-v15-a11y.css?v=15.1','/assets/site-pages-v15.css?v=15.0',
   '/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0',
   '/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
-  '/assets/design-v14.js?v=14.0','/assets/service-v15.js?v=15.0'
+  '/assets/design-v14.js?v=14.0','/assets/service-v15.js?v=15.0','/assets/service-v15-compat.js?v=15.1'
 ];
 
 self.addEventListener('install',event=>{
