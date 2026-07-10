@@ -41,6 +41,10 @@ const indexPath=path.join(dist,'index.html');
 let html=fs.readFileSync(indexPath,'utf8');
 html=html.replace(/<meta\s+charset=["'][^"']+["']\s*\/?\s*>/gi,'');
 html=html.replace(/<head([^>]*)>/i,'<head$1><meta charset="utf-8">');
+html=html.replace(
+  "connect-src 'self';",
+  "connect-src 'self' https://jnciddblcndmthmmvqrz.supabase.co;"
+);
 fs.writeFileSync(indexPath,html);
 
 const remaining=[];
@@ -50,6 +54,7 @@ for(const file of textFiles){
 }
 if(remaining.length) throw new Error(`External CDN references remain: ${remaining.join(', ')}`);
 if(!html.includes('Content-Security-Policy')) throw new Error('CSP missing from release output');
+if(!html.includes("connect-src 'self' https://jnciddblcndmthmmvqrz.supabase.co;")) throw new Error('Newsletter API missing from release CSP');
 if(!html.includes('release-hardening-v12.js')) throw new Error('v12 hardening script missing');
 if(!html.includes('release-hardening-v12.css')) throw new Error('v12 hardening stylesheet missing');
 if(!walk(path.join(dist,'assets')).some(file=>/generated-inline-\d+\.js$/.test(file))) throw new Error('Externalized core scripts missing');
