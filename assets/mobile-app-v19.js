@@ -14,6 +14,13 @@
     });
 
     const drop=document.querySelector('.v14PrimaryDrop,[data-upload-zone],.dropZone,.uploadArea');
+    const steps=document.querySelector('.v10Steps,.v15StepList,.heroSteps');
+    const lead=document.querySelector('.v14HeroPrimary .lead,.hero .lead');
+    if(drop&&steps&&lead&&matchMedia('(max-width:760px)').matches){
+      lead.insertAdjacentElement('afterend',drop);
+      drop.classList.add('v19UploadFirst');
+      steps.classList.add('v19StepsAfterUpload');
+    }
     if(drop&&!drop.querySelector('[data-v19-mobile-hint]')){
       const hint=document.createElement('span');
       hint.dataset.v19MobileHint='true';
