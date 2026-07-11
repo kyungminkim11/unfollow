@@ -3,4 +3,23 @@
   .v19BottomNavItem{color:#596579!important}
   .v19TrustRow{flex-wrap:wrap;overflow:visible}
   .v19TrustRow span{flex:0 0 auto}
+  body.mobile-native-v19 .v15MobileNav,body.mobile-native-v19 .bottomNavV8{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  body.mobile-native-v19 .betaBannerActionsV16 button,body.mobile-native-v19 .betaBannerActionsV16 a{min-height:44px!important}
+  body.mobile-native-v19>.offlineBanner{
+    position:fixed!important;
+    inset:calc(var(--v19-appbar-height) + env(safe-area-inset-top) + 8px) auto auto 50%!important;
+    display:flex!important;
+    width:min(360px,calc(100vw - 24px))!important;
+    height:auto!important;
+    min-height:44px!important;
+    max-height:56px!important;
+    flex-flow:row nowrap!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    overflow:hidden!important;
+    box-sizing:border-box!important;
+    transform:translate(-50%,-150%)!important;
+  }
+  body.mobile-native-v19>.offlineBanner.show{transform:translate(-50%,0)!important}
+  body.mobile-native-v19>.offlineBanner .offlineBannerText{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
