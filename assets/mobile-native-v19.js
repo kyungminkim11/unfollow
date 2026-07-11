@@ -16,8 +16,7 @@
     upload:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16.5v1.2A2.3 2.3 0 0 0 6.3 20h11.4a2.3 2.3 0 0 0 2.3-2.3v-1.2" fill="none"/><path d="M12 16V4M7.8 8.2 12 4l4.2 4.2" fill="none"/></svg>',
     analyze:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v13H4z" fill="none"/><path d="M7 15v-3M12 15V8M17 15v-5" fill="none"/></svg>',
     compare:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11M15 4l3 3-3 3M17 17H6M9 14l-3 3 3 3" fill="none"/></svg>',
-    history:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6" fill="none"/><path d="M4 4v4.6h4.6M12 8v4l2.7 1.7" fill="none"/></svg>',
-    wifiOff:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M8.5 8.4A10 10 0 0 1 20 10.2M4 10.2a12 12 0 0 1 2.3-1.4M7.2 14a7.2 7.2 0 0 1 8.2-.9M10.5 17.3a2.8 2.8 0 0 1 3 0M12 20h.01" fill="none"/></svg>'
+    history:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.6" fill="none"/><path d="M4 4v4.6h4.6M12 8v4l2.7 1.7" fill="none"/></svg>'
   };
 
   function setResponsiveText(element,mobileText){
@@ -52,6 +51,7 @@
       actions.append(help,theme);
       sidebar.appendChild(actions);
     }
+    actions.hidden=!mobileQuery.matches;
     const saved=localStorage.getItem('unfollow_theme_v19');
     if(saved==='dark') document.body.classList.add('v8-dark');
     if(saved==='light') document.body.classList.remove('v8-dark');
