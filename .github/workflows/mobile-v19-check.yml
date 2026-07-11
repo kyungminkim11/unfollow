@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'assets/mobile-app-v19.css'
+      - 'assets/mobile-app-v19-header.css'
       - 'assets/mobile-app-v19.js'
       - 'assets/business-info.js'
       - 'assets/pwa-enhancements.js'
@@ -50,9 +51,11 @@ jobs:
           node scripts/build-v13.mjs
           base64 --decode og-image.txt > dist/og-image.png
           test -f dist/assets/mobile-app-v19.css
+          test -f dist/assets/mobile-app-v19-header.css
           test -f dist/assets/mobile-app-v19.js
           grep -q 'mobile-app-v19.css' dist/assets/business-info.js
           grep -q 'mobile-app-v19.js' dist/assets/business-info.js
+          grep -q 'mobile-app-v19-header.css' dist/assets/mobile-app-v19.js
           grep -q 'unfollow-v19' dist/sw.js
       - name: Create fixtures
         run: python3 scripts/create-smoke-fixtures.py
