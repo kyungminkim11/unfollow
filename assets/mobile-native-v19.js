@@ -30,8 +30,9 @@
     q('.v19HeaderActions')?.remove();
 
     if(!appbar){
-      appbar=document.createElement('header');
+      appbar=document.createElement('div');
       appbar.className='v19NativeAppBar';
+      appbar.setAttribute('role','banner');
       appbar.setAttribute('aria-label','맞팔체커 앱 메뉴');
 
       const home=document.createElement('a');
