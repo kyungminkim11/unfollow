@@ -1,28 +1,44 @@
 (()=>{
   const q=s=>document.querySelector(s);
   const start=()=>{
-    const offline=document.createElement('div');
+    const offline=document.createElement('aside');
     offline.className='offlineBanner';
     offline.setAttribute('role','status');
     offline.setAttribute('aria-live','polite');
-    offline.textContent='인터넷 연결이 끊겼습니다. ZIP 분석은 계속 사용할 수 있습니다.';
+    offline.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M8.5 8.4A10 10 0 0 1 20 10.2M4 10.2a12 12 0 0 1 2.3-1.4M7.2 14a7.2 7.2 0 0 1 8.2-.9M10.5 17.3a2.8 2.8 0 0 1 3 0M12 20h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="offlineBannerText">오프라인 모드 · ZIP 분석은 계속 가능해요</span><button type="button" class="offlineBannerClose" aria-label="오프라인 안내 닫기">×</button>';
     document.body.appendChild(offline);
 
     let checking=false;
-    const confirmConnection=async()=>{
+    let failures=0;
+    let dismissed=false;
+    let retryTimer=0;
+    const hide=()=>offline.classList.remove('show');
+    const show=()=>{if(!dismissed) offline.classList.add('show');};
+    q('.offlineBannerClose')?.addEventListener('click',()=>{dismissed=true;hide();});
+
+    const confirmConnection=async({retry=true}={})=>{
       if(checking) return;
       checking=true;
       const controller=new AbortController();
-      const timeout=setTimeout(()=>controller.abort(),4500);
+      const timeout=setTimeout(()=>controller.abort(),4200);
       try{
         const response=await fetch(`/favicon.svg?connectivity=${Date.now()}`,{
-          method:'HEAD',
+          method:'GET',
           cache:'no-store',
+          credentials:'omit',
           signal:controller.signal,
         });
-        offline.classList.toggle('show',!response.ok);
+        if(!response.ok) throw new Error('connectivity check failed');
+        failures=0;
+        dismissed=false;
+        hide();
       }catch{
-        offline.classList.add('show');
+        failures+=1;
+        if(failures>=2) show();
+        else if(retry){
+          clearTimeout(retryTimer);
+          retryTimer=setTimeout(()=>confirmConnection({retry:false}),900);
+        }
       }finally{
         clearTimeout(timeout);
         checking=false;
@@ -30,10 +46,15 @@
     };
 
     addEventListener('online',()=>{
-      offline.classList.remove('show');
+      failures=0;
+      dismissed=false;
+      hide();
       confirmConnection();
     });
-    addEventListener('offline',()=>setTimeout(confirmConnection,700));
+    addEventListener('offline',()=>{
+      failures=0;
+      setTimeout(()=>confirmConnection(),350);
+    });
     if(!navigator.onLine) confirmConnection();
 
     let promptEvent=null;
