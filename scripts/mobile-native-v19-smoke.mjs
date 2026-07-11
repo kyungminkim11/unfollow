@@ -72,6 +72,7 @@ async function inspectMobile(browser,width,height,label){
   await context.setOffline(true);
   await page.evaluate(()=>window.dispatchEvent(new Event('offline')));
   await page.waitForSelector('.offlineBanner.show',{timeout:8000});
+  await page.waitForTimeout(350);
   const offline=await page.evaluate(()=>{
     const banner=document.querySelector('.offlineBanner');
     const box=banner.getBoundingClientRect();
