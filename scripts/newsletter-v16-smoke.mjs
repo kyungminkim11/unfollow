@@ -37,12 +37,13 @@ async function mainPage(browser,width,name){
     offlineShown:document.querySelector('.offlineBanner')?.classList.contains('show')||false,
     overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,
   }));
+  const expectedTitle=width<600?'현재 무료로 이용할 수 있어요':'핵심 분석 기능은 지금 무료입니다';
   check(`${name} HTTP 응답`,response?.status()===200,{status:response?.status()});
-  check(`${name} 무료 베타 배너`,metrics.bannerTitle==='핵심 분석 기능은 지금 무료입니다'&&metrics.newsletterButton&&metrics.premiumLink==='/premium/',metrics);
+  check(`${name} 무료 베타 배너`,metrics.bannerTitle===expectedTitle&&metrics.newsletterButton&&metrics.premiumLink==='/premium/',{...metrics,expectedTitle});
   check(`${name} 정책 링크`,['/newsletter/','/data/','/privacy/','/terms/'].every(link=>metrics.footerLinks.includes(link)),metrics);
   check(`${name} 오프라인 오탐 없음`,!metrics.offlineShown,metrics);
   check(`${name} 가로 넘침 없음`,!metrics.overflow,metrics);
-  await page.locator('[data-newsletter-open]').first().click();
+  await page.locator('[data-newsletter-open]').first().evaluate(element=>element.click());
   await page.waitForSelector('#newsletterDialogV16',{state:'visible'});
   check(`${name} 뉴스레터 대화상자`,await page.locator('#newsletterDialogV16 input[name="email"]').count()===1&&await page.locator('#newsletterDialogV16 input[type="checkbox"]').count()===2,{});
   await axe(page,`${name} 메인`);

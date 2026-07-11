@@ -65,8 +65,9 @@ async function inspectApp(browser,{name,width,height}){
       helpLink:Boolean(document.querySelector('a[href="/help/"]'))
     };
   });
+  const expectedHeading=width<=760?'Instagram 관계 분석':'Instagram 팔로우 관계를 안전하게 확인하세요';
   check(`${name} HTTP 응답`,status===200,{status});
-  check(`${name} v15 레이어 적용`,metrics.serviceReady&&metrics.heading==='Instagram 팔로우 관계를 안전하게 확인하세요',metrics);
+  check(`${name} v15 레이어 적용`,metrics.serviceReady&&metrics.heading===expectedHeading,{...metrics,expectedHeading});
   check(`${name} 서비스 메뉴`,metrics.serviceNav>=6&&metrics.mobileNav===4,metrics);
   check(`${name} 신뢰 안내`,metrics.trust===3&&metrics.uploadHelp==='v15UploadHelp',metrics);
   check(`${name} 문구 정리`,!metrics.oldCopy,metrics);

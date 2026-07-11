@@ -143,12 +143,13 @@ if(!source.includes('WORKSPACE_SIGNATURE_KEY')) throw new Error('v13 workspace s
 if(!source.includes('await activateWorkspace(file,zip,allKeys)')) throw new Error('v13 content workspace activation missing.');
 if(!source.includes('version:13')) throw new Error('v13 progress export version missing.');
 for(const page of ['guide','help','privacy','terms','data','premium','newsletter']){
-  if(!fs.existsSync(path.join(root,'dist',page,'index.html'))) throw new Error(`V16 static page missing: ${page}`);
+  if(!fs.existsSync(path.join(root,'dist',page,'index.html'))) throw new Error(`V19 static page missing: ${page}`);
 }
-for(const asset of ['service-v15.js','service-v15.css','monetization-v16.js','monetization-v16.css','newsletter-page-v16.js','site-pages-v16.css']){
-  if(!fs.existsSync(path.join(assetsDir,asset))) throw new Error(`V16 asset missing: ${asset}`);
+for(const asset of ['service-v15.js','service-v15.css','monetization-v16.js','monetization-v16.css','newsletter-page-v16.js','site-pages-v16.css','mobile-native-v19.js','mobile-native-v19.css']){
+  if(!fs.existsSync(path.join(assetsDir,asset))) throw new Error(`V19 asset missing: ${asset}`);
 }
 const businessInfo=fs.readFileSync(path.join(assetsDir,'business-info.js'),'utf8');
 if(!businessInfo.includes('service-v15.js')) throw new Error('V15 loader missing from business-info.js.');
 if(!businessInfo.includes('monetization-v16.js')) throw new Error('V16 monetization loader missing from business-info.js.');
-console.log(`V16 free beta and newsletter build ready with content-aware workspaces in ${path.basename(corePath)}.`);
+if(!businessInfo.includes('mobile-native-v19.js')) throw new Error('V19 mobile loader missing from business-info.js.');
+console.log(`V19 mobile-native service build ready with content-aware workspaces in ${path.basename(corePath)}.`);
