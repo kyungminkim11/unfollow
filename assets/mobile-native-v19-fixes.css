@@ -5,6 +5,19 @@
   .v19TrustRow span{flex:0 0 auto}
   body.mobile-native-v19 .v15MobileNav,body.mobile-native-v19 .bottomNavV8{display:none!important;visibility:hidden!important;pointer-events:none!important}
   body.mobile-native-v19 .betaBannerActionsV16 button,body.mobile-native-v19 .betaBannerActionsV16 a{min-height:44px!important}
+  body.mobile-native-v19 .sidebar .brand>:not(.logo){display:none!important}
+  body.mobile-native-v19 .sidebar .brand::after{
+    content:'맞팔체커';
+    display:block;
+    overflow:hidden;
+    color:var(--v19-mobile-text);
+    font-size:17px;
+    font-weight:950;
+    line-height:1.2;
+    letter-spacing:-.035em;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
   body.mobile-native-v19>.offlineBanner{
     position:fixed!important;
     inset:calc(var(--v19-appbar-height) + env(safe-area-inset-top) + 8px) auto auto 50%!important;
