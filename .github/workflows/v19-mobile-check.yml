@@ -6,9 +6,13 @@ on:
     paths:
       - 'assets/mobile-native-v19.js'
       - 'assets/mobile-native-v19.css'
+      - 'assets/mobile-native-v19-fixes.css'
       - 'assets/pwa-enhancements.js'
       - 'assets/business-info.js'
       - 'scripts/build-v13.mjs'
+      - 'scripts/deploy-smoke.mjs'
+      - 'scripts/service-v15-smoke.mjs'
+      - 'scripts/newsletter-v16-smoke.mjs'
       - 'scripts/mobile-native-v19-smoke.mjs'
       - 'sw.js'
       - 'README.md'
@@ -47,6 +51,9 @@ jobs:
           node --check assets/pwa-enhancements.js
           node --check assets/business-info.js
           node --check scripts/build-v13.mjs
+          node --check scripts/deploy-smoke.mjs
+          node --check scripts/service-v15-smoke.mjs
+          node --check scripts/newsletter-v16-smoke.mjs
           node --check scripts/mobile-native-v19-smoke.mjs
           node --check sw.js
 
@@ -56,7 +63,9 @@ jobs:
           base64 --decode og-image.txt > dist/og-image.png
           test -f dist/assets/mobile-native-v19.js
           test -f dist/assets/mobile-native-v19.css
+          test -f dist/assets/mobile-native-v19-fixes.css
           grep -q 'mobile-native-v19.js' dist/assets/business-info.js
+          grep -q 'mobile-native-v19-fixes.css' dist/assets/business-info.js
           grep -q 'unfollow-v19' dist/sw.js
           grep -q "searchParams.has('connectivity')" dist/sw.js
 
