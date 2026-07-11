@@ -1,0 +1,101 @@
+name: V19 Mobile App UX Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/mobile-app-v19.css'
+      - 'assets/mobile-app-v19.js'
+      - 'assets/business-info.js'
+      - 'assets/pwa-enhancements.js'
+      - 'scripts/mobile-v19-smoke.mjs'
+      - 'scripts/build-v13.mjs'
+      - 'sw.js'
+      - '.github/workflows/mobile-v19-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v19-mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v19
+      - name: Syntax checks
+        run: |
+          node --check assets/mobile-app-v19.js
+          node --check assets/business-info.js
+          node --check assets/pwa-enhancements.js
+          node --check scripts/mobile-v19-smoke.mjs
+          node --check scripts/build-v13.mjs
+          node --check sw.js
+      - name: Build production site
+        run: |
+          node scripts/build-v13.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/mobile-app-v19.css
+          test -f dist/assets/mobile-app-v19.js
+          grep -q 'mobile-app-v19.css' dist/assets/business-info.js
+          grep -q 'mobile-app-v19.js' dist/assets/business-info.js
+          grep -q 'unfollow-v19' dist/sw.js
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v19.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-v19.log
+          exit 1
+      - name: Mobile app UX audit
+        id: mobile
+        continue-on-error: true
+        run: node scripts/mobile-v19-smoke.mjs > audit/mobile-v19-run.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+      - name: Existing service regression
+        id: service
+        continue-on-error: true
+        run: node scripts/service-v15-smoke.mjs > audit/mobile-v19-service-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-v19-reports
+          path: |
+            audit/mobile-v19-run.log
+            audit/mobile-v19-report.json
+            audit/mobile-v19-*.png
+            audit/mobile-v19-service-regression.log
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Enforce checks
+        if: always() && (steps.mobile.outcome != 'success' || steps.service.outcome != 'success')
+        run: |
+          echo "Mobile: ${{ steps.mobile.outcome }}"
+          echo "Service: ${{ steps.service.outcome }}"
+          exit 1
