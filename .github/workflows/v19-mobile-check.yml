@@ -1,0 +1,142 @@
+name: V19 Mobile Native Check
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/mobile-native-v19.js'
+      - 'assets/mobile-native-v19.css'
+      - 'assets/pwa-enhancements.js'
+      - 'assets/business-info.js'
+      - 'scripts/build-v13.mjs'
+      - 'scripts/mobile-native-v19-smoke.mjs'
+      - 'sw.js'
+      - 'README.md'
+      - '.github/workflows/v19-mobile-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v19-mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-v19
+
+      - name: Syntax checks
+        run: |
+          node --check assets/mobile-native-v19.js
+          node --check assets/pwa-enhancements.js
+          node --check assets/business-info.js
+          node --check scripts/build-v13.mjs
+          node --check scripts/mobile-native-v19-smoke.mjs
+          node --check sw.js
+
+      - name: Build production site
+        run: |
+          node scripts/build-v13.mjs
+          base64 --decode og-image.txt > dist/og-image.png
+          test -f dist/assets/mobile-native-v19.js
+          test -f dist/assets/mobile-native-v19.css
+          grep -q 'mobile-native-v19.js' dist/assets/business-info.js
+          grep -q 'unfollow-v19' dist/sw.js
+          grep -q "searchParams.has('connectivity')" dist/sw.js
+
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v19.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-v19.log
+          exit 1
+
+      - name: Existing analysis regression
+        id: existing
+        continue-on-error: true
+        run: |
+          mkdir -p audit
+          node scripts/deploy-smoke.mjs > audit/v19-existing-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Relationship comparison regression
+        id: comparison
+        continue-on-error: true
+        run: node scripts/v13-smoke.mjs > audit/v19-comparison-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Service UI regression
+        id: service
+        continue-on-error: true
+        run: node scripts/service-v15-smoke.mjs > audit/v19-service-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Newsletter regression
+        id: newsletter
+        continue-on-error: true
+        run: node scripts/newsletter-v16-smoke.mjs > audit/v19-newsletter-regression.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Mobile native audit
+        id: mobile
+        continue-on-error: true
+        run: node scripts/mobile-native-v19-smoke.mjs > audit/mobile-native-v19-run.log 2>&1
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v19-mobile-native-reports
+          path: |
+            audit/v19-existing-regression.log
+            audit/v19-comparison-regression.log
+            audit/v19-service-regression.log
+            audit/v19-newsletter-regression.log
+            audit/mobile-native-v19-run.log
+            audit/mobile-native-v19-report.json
+            audit/mobile-native-v19-*.png
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Enforce checks
+        if: always() && (steps.existing.outcome != 'success' || steps.comparison.outcome != 'success' || steps.service.outcome != 'success' || steps.newsletter.outcome != 'success' || steps.mobile.outcome != 'success')
+        run: |
+          echo "Existing: ${{ steps.existing.outcome }}"
+          echo "Comparison: ${{ steps.comparison.outcome }}"
+          echo "Service: ${{ steps.service.outcome }}"
+          echo "Newsletter: ${{ steps.newsletter.outcome }}"
+          echo "Mobile: ${{ steps.mobile.outcome }}"
+          exit 1
