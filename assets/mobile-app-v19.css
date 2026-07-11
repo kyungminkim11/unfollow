@@ -114,7 +114,7 @@
   .design-v14 [data-beta-banner],
   .design-v14 .freeBetaBannerV16{
     margin:0 2px 12px!important;
-    padding:18px!important;
+    padding:16px!important;
     border-radius:22px!important;
     background:linear-gradient(145deg,#fff,#fbfaff)!important;
     box-shadow:0 8px 24px rgba(17,24,39,.055)!important;
@@ -123,9 +123,9 @@
   .design-v14 .betaBannerV16 h2,
   .design-v14 [data-beta-banner] h2,
   .design-v14 .freeBetaBannerV16 h2{
-    margin:8px 0 5px!important;
+    margin:7px 0 4px!important;
     font-size:18px!important;
-    line-height:1.28!important;
+    line-height:1.26!important;
   }
   .design-v14 .monetizationBannerV16 p,
   .design-v14 .betaBannerV16 p,
@@ -133,7 +133,7 @@
   .design-v14 .freeBetaBannerV16 p{
     margin:0!important;
     font-size:13px!important;
-    line-height:1.55!important;
+    line-height:1.5!important;
   }
   .design-v14 .monetizationBannerV16 .actions,
   .design-v14 .betaBannerV16 .actions,
@@ -142,7 +142,7 @@
     display:grid!important;
     grid-template-columns:1fr 1fr!important;
     gap:10px!important;
-    margin-top:16px!important;
+    margin-top:14px!important;
   }
   .design-v14 .hero.v14Hero{
     display:block!important;
@@ -150,35 +150,40 @@
   }
   .design-v14 .v14HeroPrimary{
     margin:0!important;
-    padding:22px 20px 18px!important;
+    padding:20px 18px 18px!important;
     border-radius:24px!important;
     background:linear-gradient(180deg,#fff 0%,#fff 72%,#fbfaff 100%)!important;
     box-shadow:0 8px 26px rgba(17,24,39,.055)!important;
   }
   .design-v14 .v14HeroPrimary .eyebrow{
-    min-height:34px!important;
+    min-height:32px!important;
     padding:0 11px!important;
     font-size:11px!important;
   }
   .design-v14 .v14HeroPrimary h1{
-    margin:18px 0 10px!important;
-    font-size:clamp(34px,9.9vw,43px)!important;
-    line-height:1.08!important;
+    margin:16px 0 9px!important;
+    font-size:clamp(32px,9.4vw,40px)!important;
+    line-height:1.07!important;
     letter-spacing:-.07em!important;
   }
   .design-v14 .v14HeroPrimary .lead{
-    font-size:15px!important;
-    line-height:1.65!important;
+    font-size:14px!important;
+    line-height:1.58!important;
   }
   .design-v14 .v10Steps,
   .design-v14 .v15StepList,
   .design-v14 .heroSteps{
     display:flex!important;
     gap:8px!important;
-    margin:18px 0 0!important;
+    margin:14px 0 0!important;
     overflow-x:auto!important;
     padding-bottom:2px!important;
     scrollbar-width:none!important;
+  }
+  .design-v14 .v10Steps.v19StepsAfterUpload,
+  .design-v14 .v15StepList.v19StepsAfterUpload,
+  .design-v14 .heroSteps.v19StepsAfterUpload{
+    margin-top:12px!important;
   }
   .design-v14 .v10Steps::-webkit-scrollbar,
   .design-v14 .v15StepList::-webkit-scrollbar,
@@ -187,44 +192,47 @@
   .design-v14 .v15StepList>*{
     flex:0 0 auto!important;
     min-width:142px!important;
-    min-height:46px!important;
-    padding:10px 12px!important;
+    min-height:44px!important;
+    padding:9px 12px!important;
     border-radius:15px!important;
     background:#fff!important;
   }
   .design-v14 .v14PrimaryDrop{
-    min-height:154px!important;
-    margin-top:20px!important;
-    padding:20px 16px!important;
+    min-height:144px!important;
+    margin-top:16px!important;
+    padding:18px 16px!important;
     border-width:1.5px!important;
     border-radius:22px!important;
     background:#fbfaff!important;
     text-align:center!important;
   }
+  .design-v14 .v14PrimaryDrop.v19UploadFirst{
+    margin-top:16px!important;
+  }
   .design-v14 .v14PrimaryDrop .dropIcon{
-    width:58px!important;
-    height:58px!important;
-    margin:0 auto 12px!important;
+    width:54px!important;
+    height:54px!important;
+    margin:0 auto 10px!important;
     border-radius:18px!important;
   }
   .design-v14 .v14PrimaryDrop strong{
     display:block!important;
-    font-size:18px!important;
+    font-size:17px!important;
     letter-spacing:-.035em!important;
   }
   .design-v14 .v14PrimaryDrop span{
     display:block!important;
     max-width:280px!important;
-    margin:8px auto 0!important;
-    font-size:13px!important;
-    line-height:1.55!important;
+    margin:7px auto 0!important;
+    font-size:12px!important;
+    line-height:1.5!important;
   }
   .design-v14 .v14HeroPrimary .fileSafetyV12{
     margin-top:12px!important;
-    padding:11px 12px!important;
+    padding:10px 12px!important;
     border-radius:14px!important;
-    font-size:11px!important;
-    line-height:1.55!important;
+    font-size:10px!important;
+    line-height:1.5!important;
   }
   .design-v14 .v14ResourceBar{
     grid-template-columns:1fr 1fr!important;
@@ -234,14 +242,14 @@
   .design-v14 .v14ResourceBar .btn,
   .design-v14 .v14ResourceBar a,
   .design-v14 .v14ResourceBar button{
-    min-height:56px!important;
+    min-height:54px!important;
     border-radius:16px!important;
     font-size:14px!important;
     font-weight:900!important;
   }
   .design-v14 .v14ResourceBar>*:first-child{
     grid-column:1/-1!important;
-    min-height:58px!important;
+    min-height:56px!important;
   }
   .design-v14 .v14HeroAside{
     position:static!important;
@@ -279,7 +287,7 @@
   .offlineBanner.show{transform:translateY(0)!important}
 }
 @media(max-width:390px){
-  .design-v14 .v14HeroPrimary h1{font-size:35px!important}
+  .design-v14 .v14HeroPrimary h1{font-size:34px!important}
   .design-v14 .main{padding-left:12px!important;padding-right:12px!important}
   .design-v14 .serviceTopActions a,.design-v14 .serviceTopActions button{width:48px!important;height:48px!important;min-width:48px!important}
 }
