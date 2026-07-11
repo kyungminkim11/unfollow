@@ -78,11 +78,17 @@ async function desktop(browser){
   await page.waitForTimeout(150);
   await page.locator('#focusDoneBtn').click();
   await page.waitForTimeout(200);
-  check('계정 A 상태 저장',await number(page,'#countDone')===1,{done:await number(page,'#countDone')});
+  const workspaceA=await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'));
+  check('계정 A 상태 저장',await number(page,'#countDone')===1,{done:await number(page,'#countDone'),workspaceA});
 
   await page.locator('#zipInput').setInputFiles(path.join(fixtureDir,'account-b.zip'));
-  await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===2);
-  check('계정별 진행 기록 분리',await number(page,'#countDone')===0,{done:await number(page,'#countDone')});
+  await page.waitForFunction(previous=>{
+    const current=sessionStorage.getItem('unfollow_active_workspace');
+    return Boolean(current&&current!==previous);
+  },workspaceA,{timeout:15000});
+  await page.waitForTimeout(100);
+  const doneB=await number(page,'#countDone');
+  check('계정별 진행 기록 분리',Number(doneB)===0,{done:doneB,workspaceA,workspaceB:await page.evaluate(()=>sessionStorage.getItem('unfollow_active_workspace'))});
 
   const overflow=await page.evaluate(()=>Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2);
   check('데스크톱 가로 넘침 없음',!overflow,{overflow});
@@ -109,8 +115,8 @@ async function mobile(browser,width,height){
   }
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===13,null,{timeout:15000});
 
-  check(`${label} 상단바 표시`,await page.locator('.mobileTopV8').isVisible().catch(()=>false),{});
-  check(`${label} 하단 내비 표시`,await page.locator('.bottomNavV8').isVisible().catch(()=>false),{});
+  check(`${label} 상단바 표시`,await page.locator('.sidebar,.mobileTopV8').first().isVisible().catch(()=>false),{});
+  check(`${label} 하단 내비 표시`,await page.locator('.v19BottomNav,.bottomNavV8').first().isVisible().catch(()=>false),{});
   check(`${label} 카드 결과 표시`,await page.locator('.mobileList').isVisible().catch(()=>false),{});
   check(`${label} 데스크톱 표 숨김`,await page.locator('.tableWrap').isHidden().catch(()=>false),{});
   const toggle=page.locator('.mobileFilterToggle');
