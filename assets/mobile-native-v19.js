@@ -25,22 +25,45 @@
     element.textContent=mobileQuery.matches?mobileText:originalText.get(element);
   }
 
-  function addHeaderActions(){
-    const sidebar=q('.sidebar');
-    if(!sidebar) return;
-    let actions=q('.v19HeaderActions',sidebar);
-    if(!actions){
-      actions=document.createElement('div');
-      actions.className='v19HeaderActions';
+  function buildNativeAppBar(){
+    let appbar=q('.v19NativeAppBar');
+    q('.v19HeaderActions')?.remove();
+
+    if(!appbar){
+      appbar=document.createElement('div');
+      appbar.className='v19NativeAppBar';
+      appbar.setAttribute('role','banner');
+      appbar.setAttribute('aria-label','맞팔체커 앱 메뉴');
+
+      const home=document.createElement('a');
+      home.href='/';
+      home.className='v19AppBrand';
+      home.setAttribute('aria-label','맞팔체커 홈');
+
+      const sourceLogo=q('.sidebar .logo');
+      const logo=sourceLogo?sourceLogo.cloneNode(true):document.createElement('span');
+      logo.removeAttribute?.('id');
+      logo.classList.add('v19AppLogo');
+      if(!sourceLogo) logo.textContent='M';
+
+      const copy=document.createElement('span');
+      copy.className='v19AppBrandCopy';
+      copy.innerHTML='<strong>맞팔체커</strong><small>Instagram 관계 분석</small>';
+      home.append(logo,copy);
+
+      const actions=document.createElement('div');
+      actions.className='v19AppActions';
+
       const help=document.createElement('a');
-      help.className='v19HeaderButton';
       help.href='/help/';
+      help.className='v19AppButton';
       help.setAttribute('aria-label','도움말 열기');
+      help.title='도움말';
       help.innerHTML=icons.help;
 
       const theme=document.createElement('button');
       theme.type='button';
-      theme.className='v19HeaderButton';
+      theme.className='v19AppButton';
       theme.dataset.v19Theme='true';
       theme.addEventListener('click',()=>{
         const dark=!document.body.classList.contains('v8-dark');
@@ -49,13 +72,19 @@
         updateThemeButton(theme);
       });
       actions.append(help,theme);
-      sidebar.appendChild(actions);
+      appbar.append(home,actions);
+
+      const shell=q('.appShell');
+      const sidebar=q('.sidebar',shell||document);
+      if(shell) shell.insertBefore(appbar,sidebar||shell.firstChild);
+      else document.body.prepend(appbar);
     }
-    actions.hidden=!mobileQuery.matches;
+
+    appbar.hidden=!mobileQuery.matches;
     const saved=localStorage.getItem('unfollow_theme_v19');
     if(saved==='dark') document.body.classList.add('v8-dark');
     if(saved==='light') document.body.classList.remove('v8-dark');
-    updateThemeButton(q('[data-v19-theme]',actions));
+    updateThemeButton(q('[data-v19-theme]',appbar));
   }
 
   function updateThemeButton(button){
@@ -72,8 +101,7 @@
     setResponsiveText(q('.betaPillV16',banner),'무료 베타');
     setResponsiveText(q('h2',banner),'현재 무료로 이용할 수 있어요');
     setResponsiveText(q('[data-newsletter-open]',banner),'출시 알림');
-    const link=q('a[href="/premium/"]',banner);
-    setResponsiveText(link,'예정 기능');
+    setResponsiveText(q('a[href="/premium/"]',banner),'예정 기능');
   }
 
   function enhanceHero(){
@@ -105,8 +133,7 @@
       }
     }
 
-    const safety=q('.fileSafetyV12',primary);
-    setResponsiveText(safety,'지원 형식: JSON ZIP · 최대 80MB · 압축을 풀지 마세요.');
+    setResponsiveText(q('.fileSafetyV12',primary),'지원 형식: JSON ZIP · 최대 80MB · 압축을 풀지 마세요.');
 
     if(!q('.v19TrustRow',primary)){
       const row=document.createElement('div');
@@ -186,14 +213,14 @@
     resultObserver?.disconnect();
     resultObserver=new MutationObserver(syncDataState);
     targets.forEach(target=>resultObserver.observe(target,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','hidden']}));
-    q('#zipInput')?.addEventListener('change',()=>setTimeout(syncDataState,50));
+    q('#zipInput')?.addEventListener('change',()=>setTimeout(syncDataState,50),{once:true});
     syncDataState();
   }
 
   function sync(){
     document.documentElement.classList.add('mobile-native-v19-ready');
     document.body.classList.add('mobile-native-v19');
-    addHeaderActions();
+    buildNativeAppBar();
     enhanceBanner();
     enhanceHero();
     buildBottomNavigation();

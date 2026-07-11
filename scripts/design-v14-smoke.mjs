@@ -41,7 +41,7 @@ async function inspect(browser,{name,width,height,mobile=false}){
       return !element.hidden&&style.display!=='none'&&style.visibility!=='hidden'&&box.width>0&&box.height>0;
     };
     const hero=document.querySelector('.hero');
-    const headerCandidates=Array.from(document.querySelectorAll('header,[class*="mobile" i],[class*="Mobile"]')).filter(element=>{
+    const headerCandidates=Array.from(document.querySelectorAll('header,.v19NativeAppBar,[class*="mobile" i],[class*="Mobile"]')).filter(element=>{
       if(element.closest('.sidebar')) return false;
       const text=(element.textContent||'').replace(/\s+/g,' ').trim();
       if(!text.includes('맞팔체커')) return false;
@@ -52,6 +52,7 @@ async function inspect(browser,{name,width,height,mobile=false}){
       overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,
       bodyClass:document.body.className,
       sidebar:rect('.sidebar'),
+      nativeAppbar:rect('.v19NativeAppBar'),
       main:rect('.main'),
       hero:rect('.hero'),
       primary:rect('.v14HeroPrimary'),
@@ -91,11 +92,12 @@ async function inspect(browser,{name,width,height,mobile=false}){
   }
 
   if(mobile){
-    const nativeAppbar=metrics.sidebar&&metrics.sidebar.display!=='none'&&metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=82;
+    const sidebarAppbar=metrics.sidebar&&metrics.sidebar.display!=='none'&&metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=82;
+    const dedicatedAppbar=metrics.nativeAppbar&&metrics.nativeAppbar.display!=='none'&&metrics.nativeAppbar.position==='sticky'&&metrics.nativeAppbar.height<=82;
     const legacyHeader=metrics.sidebar&&metrics.sidebar.display==='none'&&metrics.visibleMobileHeaderCount===1;
     check(`${name} 모바일 제목 크기`,metrics.heading&&metrics.heading.fontSize<=43,metrics.heading||{});
-    check(`${name} 모바일 앱바 표시`,nativeAppbar||legacyHeader,{sidebar:metrics.sidebar,visibleHeaders:metrics.visibleMobileHeaderCount});
-    check(`${name} 모바일 상단 헤더 하나만 표시`,(nativeAppbar&&metrics.visibleMobileHeaderCount===0)||(legacyHeader&&metrics.visibleMobileHeaderCount===1),{total:metrics.mobileHeaderCount,visible:metrics.visibleMobileHeaderCount,duplicates:metrics.duplicateMobileHeaders,nativeAppbar});
+    check(`${name} 모바일 앱바 표시`,dedicatedAppbar||sidebarAppbar||legacyHeader,{sidebar:metrics.sidebar,nativeAppbar:metrics.nativeAppbar,visibleHeaders:metrics.visibleMobileHeaderCount});
+    check(`${name} 모바일 상단 헤더 하나만 표시`,metrics.visibleMobileHeaderCount===1&&Boolean(dedicatedAppbar||legacyHeader)||(sidebarAppbar&&metrics.visibleMobileHeaderCount===0),{total:metrics.mobileHeaderCount,visible:metrics.visibleMobileHeaderCount,duplicates:metrics.duplicateMobileHeaders,dedicatedAppbar,sidebarAppbar});
   }
 
   const axe=await new AxeBuilder({page}).analyze();

@@ -115,7 +115,7 @@ async function mobile(browser,width,height){
   }
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===13,null,{timeout:15000});
 
-  const topbarVisible=await page.locator('.sidebar').isVisible().catch(()=>false)||await page.locator('.mobileTopV8').isVisible().catch(()=>false);
+  const topbarVisible=await page.locator('.v19NativeAppBar').isVisible().catch(()=>false)||await page.locator('.sidebar').isVisible().catch(()=>false)||await page.locator('.mobileTopV8').isVisible().catch(()=>false);
   const bottomNavVisible=await page.locator('.v19BottomNav').isVisible().catch(()=>false)||await page.locator('.bottomNavV8').isVisible().catch(()=>false);
   check(`${label} 상단바 표시`,topbarVisible,{});
   check(`${label} 하단 내비 표시`,bottomNavVisible,{});
