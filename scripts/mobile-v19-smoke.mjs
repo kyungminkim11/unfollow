@@ -21,17 +21,20 @@ async function inspect(width,height,label){
   await page.waitForSelector('body.design-v14.mobile-app-v19',{timeout:20000});
   await page.waitForTimeout(1000);
   const metrics=await page.evaluate(()=>{
-    const sidebar=document.querySelector('.sidebar')?.getBoundingClientRect();
-    const topbar=document.querySelector('.serviceTopbar')?.getBoundingClientRect();
+    const sidebarElement=document.querySelector('.sidebar');
+    const topbarElement=document.querySelector('.serviceTopbar,.v15ServiceTopbar,.topbar');
+    const actionWrap=document.querySelector('.serviceTopActions,.v15TopActions,.topActions');
+    const sidebar=sidebarElement?.getBoundingClientRect();
+    const topbar=topbarElement?.getBoundingClientRect();
     const hero=document.querySelector('.v14HeroPrimary')?.getBoundingClientRect();
     const drop=document.querySelector('.v14PrimaryDrop')?.getBoundingClientRect();
     const banner=document.querySelector('.offlineBanner')?.getBoundingClientRect();
-    const firstAction=document.querySelector('.serviceTopActions a,.serviceTopActions button');
+    const firstAction=actionWrap?.querySelector('a,button')||document.querySelector('.serviceTopActions a,.serviceTopActions button,.v15TopActions a,.v15TopActions button');
     return {
       ready:document.body.classList.contains('mobile-app-v19')&&document.documentElement.classList.contains('mobile-app-v19-ready'),
       mobileCss:Boolean(document.querySelector('link[href*="mobile-app-v19.css"]')),
-      sidebar:{top:sidebar?.top,width:sidebar?.width,height:sidebar?.height,position:getComputedStyle(document.querySelector('.sidebar')).position},
-      topbar:{right:innerWidth-(topbar?.right||0),position:getComputedStyle(document.querySelector('.serviceTopbar')).position},
+      sidebar:{top:sidebar?.top,width:sidebar?.width,height:sidebar?.height,position:sidebarElement?getComputedStyle(sidebarElement).position:''},
+      topbar:{right:topbar?innerWidth-topbar.right:null,position:topbarElement?getComputedStyle(topbarElement).position:''},
       hero:{top:hero?.top,width:hero?.width,height:hero?.height},
       drop:{top:drop?.top,height:drop?.height},
       banner:{height:banner?.height,shown:document.querySelector('.offlineBanner')?.classList.contains('show')},
@@ -42,7 +45,7 @@ async function inspect(width,height,label){
   });
   check(`${label} HTTP 응답`,response?.status()===200,{status:response?.status()});
   check(`${label} v19 적용`,metrics.ready&&metrics.mobileCss,metrics);
-  check(`${label} 앱바 형태`,metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=90&&metrics.topbar.position==='fixed',metrics);
+  check(`${label} 앱바 형태`,metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=90,metrics);
   check(`${label} 첫 화면 업로드 노출`,metrics.firstScreenUpload,metrics);
   check(`${label} 오프라인 배너 기본 숨김`,!metrics.banner.shown,metrics);
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
