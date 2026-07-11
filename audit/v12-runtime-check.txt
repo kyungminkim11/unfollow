@@ -1,5 +1,5 @@
-commit=b03099df1ae493c6f818042654db3ccdce52c0fa
-started_at=2026-07-10T03:57:49Z
+commit=c5029761464796e441d73545ddeea8d217d76767
+started_at=2026-07-11T04:18:30Z
 ## Build release
 Base build completed with a removable external-font assertion. Continuing with release cleanup.
 Release build ready after CDN cleanup.
@@ -21,30 +21,30 @@ Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
 Get:9 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [2314 B]
-Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [208 kB]
-Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.7 kB]
-Get:12 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [174 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1089 kB]
+Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.6 kB]
+Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [214 kB]
+Get:12 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [181 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1092 kB]
 Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [269 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
 Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1660 kB]
 Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [327 kB]
 Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1215 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [274 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1225 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [276 kB]
 Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5768 B]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5740 B]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.6 kB]
 Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [827 kB]
 Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [187 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.9 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.8 kB]
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.9 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1174 kB]
 Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [231 kB]
 Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
 Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
-Get:32 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1217 B]
-Fetched 8781 kB in 1s (7247 kB/s)
+Get:32 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1218 B]
+Fetched 8808 kB in 1s (7805 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -107,7 +107,7 @@ The following NEW packages will be installed:
   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
   xfonts-utils
-0 upgraded, 9 newly installed, 0 to remove and 37 not upgraded.
+0 upgraded, 9 newly installed, 0 to remove and 38 not upgraded.
 Need to get 21.1 MB of archives.
 After this operation, 79.5 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
@@ -120,7 +120,7 @@ Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings a
 Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
 Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
-Fetched 21.1 MB in 0s (48.6 MB/s)
+Fetched 21.1 MB in 3s (7866 kB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202701 files and directories currently installed.)
 Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -172,45 +172,6 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Downloading Chrome for Testing 149.0.7827.55 (playwright chromium v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-linux64.zip
-|                                                                                |   0% of 177 MiB
-|■■■■■■■■                                                                        |  10% of 177 MiB
-|■■■■■■■■■■■■■■■■                                                                |  20% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 177 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 177 MiB
-Chrome for Testing 149.0.7827.55 (playwright chromium v1228) downloaded to /home/runner/.cache/ms-playwright/chromium-1228
-Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
-|                                                                                |   0% of 2.3 MiB
-|■■■■■■■■                                                                        |  10% of 2.3 MiB
-|■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
-FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
-Downloading Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) from https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-headless-shell-linux64.zip
-|                                                                                |   0% of 114.2 MiB
-|■■■■■■■■                                                                        |  10% of 114.2 MiB
-|■■■■■■■■■■■■■■■■                                                                |  20% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.2 MiB
-|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.2 MiB
-Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1228
 ## Start preview server
 curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
 ## Run browser smoke tests
@@ -283,14 +244,17 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
       "name": "계정 A 상태 저장",
       "pass": true,
       "details": {
-        "done": 1
+        "done": 1,
+        "workspaceA": "account-a"
       }
     },
     {
       "name": "계정별 진행 기록 분리",
       "pass": true,
       "details": {
-        "done": 0
+        "done": 0,
+        "workspaceA": "account-a",
+        "workspaceB": "account-b"
       }
     },
     {
@@ -434,5 +398,5 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
   ],
   "failures": []
 }
-finished_at=2026-07-10T03:58:29Z
+finished_at=2026-07-11T04:19:02Z
 exit_code=0
