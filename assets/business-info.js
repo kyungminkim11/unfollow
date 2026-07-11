@@ -34,7 +34,10 @@
           loadStyle('/assets/service-v15-a11y.css?v=15.1','service-v15-a11y');
           loadScript('/assets/service-v15-compat.js?v=15.1','service-v15-compat',()=>{
             loadStyle('/assets/monetization-v16.css?v=16.0','monetization-v16');
-            loadScript('/assets/monetization-v16.js?v=16.0','monetization-v16');
+            loadScript('/assets/monetization-v16.js?v=16.0','monetization-v16',()=>{
+              loadStyle('/assets/mobile-native-v19.css?v=19.0','mobile-native-v19');
+              loadScript('/assets/mobile-native-v19.js?v=19.0','mobile-native-v19');
+            });
           });
         });
       });
