@@ -1,0 +1,97 @@
+@media(max-width:760px){
+  .v19DuplicateHeader,
+  .v14DuplicateMobileHeader,
+  .mobileTopV8.v14DuplicateMobileHeader{
+    display:none!important;
+  }
+
+  .design-v14 .sidebar{
+    min-height:64px!important;
+    padding:8px 12px!important;
+    box-shadow:0 6px 18px rgba(17,24,39,.045)!important;
+  }
+  .design-v14 .sidebar .brand{
+    gap:9px!important;
+    min-width:0!important;
+  }
+  .design-v14 .sidebar .logo{
+    width:40px!important;
+    height:40px!important;
+    flex:0 0 40px!important;
+    border-radius:13px!important;
+    box-shadow:0 6px 15px rgba(105,87,245,.2)!important;
+  }
+  .design-v14 .sidebar .brandText{
+    min-width:0!important;
+  }
+  .design-v14 .sidebar .brand strong{
+    max-width:130px!important;
+    overflow:hidden!important;
+    font-size:16px!important;
+    line-height:1.15!important;
+    white-space:nowrap!important;
+    text-overflow:ellipsis!important;
+  }
+  .design-v14 .serviceTopbar{
+    top:10px!important;
+    right:12px!important;
+    height:44px!important;
+  }
+  .design-v14 .serviceTopActions{
+    gap:6px!important;
+  }
+  .design-v14 .serviceTopActions a,
+  .design-v14 .serviceTopActions button{
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    border-radius:14px!important;
+    box-shadow:0 5px 16px rgba(17,24,39,.065)!important;
+  }
+  .design-v14 .serviceTopActions a::before,
+  .design-v14 .serviceTopActions button::before{
+    font-size:20px!important;
+  }
+  .design-v14 .main{
+    padding-top:10px!important;
+  }
+}
+
+@media(max-width:390px){
+  .design-v14 .sidebar{
+    min-height:60px!important;
+    padding:7px 10px!important;
+  }
+  .design-v14 .sidebar .logo{
+    width:38px!important;
+    height:38px!important;
+    flex-basis:38px!important;
+  }
+  .design-v14 .sidebar .brand strong{
+    max-width:112px!important;
+    font-size:15px!important;
+  }
+  .design-v14 .serviceTopbar{
+    top:9px!important;
+    right:10px!important;
+    height:42px!important;
+  }
+  .design-v14 .serviceTopActions a,
+  .design-v14 .serviceTopActions button{
+    width:42px!important;
+    height:42px!important;
+    min-width:42px!important;
+    border-radius:13px!important;
+  }
+}
+
+body.v8-dark.design-v14 .sidebar{
+  border-bottom-color:#2a2f3b!important;
+  background:rgba(23,26,37,.92)!important;
+}
+body.v8-dark.design-v14 .serviceTopActions a,
+body.v8-dark.design-v14 .serviceTopActions button{
+  border-color:#343947!important;
+  background:#202430!important;
+  color:#f1f4f8!important;
+}
