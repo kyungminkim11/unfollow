@@ -5,36 +5,42 @@
     offline.className='offlineBanner';
     offline.setAttribute('role','status');
     offline.setAttribute('aria-live','polite');
-    offline.textContent='인터넷 연결이 끊겼습니다. ZIP 분석은 계속 사용할 수 있습니다.';
+    offline.textContent='인터넷 연결이 불안정합니다. ZIP 분석은 계속 사용할 수 있습니다.';
     document.body.appendChild(offline);
 
     let checking=false;
-    const confirmConnection=async()=>{
+    let visibleTimer=0;
+    const setOfflineVisible=visible=>{
+      clearTimeout(visibleTimer);
+      if(visible){
+        visibleTimer=setTimeout(()=>offline.classList.add('show'),1200);
+      }else{
+        offline.classList.remove('show');
+      }
+    };
+    const confirmConnection=async({quiet=false}={})=>{
       if(checking) return;
       checking=true;
       const controller=new AbortController();
-      const timeout=setTimeout(()=>controller.abort(),4500);
+      const timeout=setTimeout(()=>controller.abort(),3500);
       try{
         const response=await fetch(`/favicon.svg?connectivity=${Date.now()}`,{
           method:'HEAD',
           cache:'no-store',
           signal:controller.signal,
         });
-        offline.classList.toggle('show',!response.ok);
+        setOfflineVisible(!response.ok&&!quiet);
       }catch{
-        offline.classList.add('show');
+        setOfflineVisible(!quiet);
       }finally{
         clearTimeout(timeout);
         checking=false;
       }
     };
 
-    addEventListener('online',()=>{
-      offline.classList.remove('show');
-      confirmConnection();
-    });
-    addEventListener('offline',()=>setTimeout(confirmConnection,700));
-    if(!navigator.onLine) confirmConnection();
+    addEventListener('online',()=>confirmConnection({quiet:true}));
+    addEventListener('offline',()=>setTimeout(()=>confirmConnection(),1300));
+    if(!navigator.onLine) setTimeout(()=>confirmConnection(),1600);
 
     let promptEvent=null;
     addEventListener('beforeinstallprompt',event=>{
