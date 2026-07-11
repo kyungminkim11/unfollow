@@ -59,9 +59,9 @@ async function inspectMobile(browser,width,height,label){
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
   check(`${label} 정상 연결에서 오프라인 안내 없음`,!metrics.offlineVisible,metrics);
 
-  await page.route('**/favicon.svg?connectivity=*',route=>route.abort());
+  await context.setOffline(true);
   await page.evaluate(()=>window.dispatchEvent(new Event('offline')));
-  await page.waitForSelector('.offlineBanner.show',{timeout:6000});
+  await page.waitForSelector('.offlineBanner.show',{timeout:8000});
   const offline=await page.evaluate(()=>{
     const banner=document.querySelector('.offlineBanner');
     const box=banner.getBoundingClientRect();
@@ -71,6 +71,9 @@ async function inspectMobile(browser,width,height,label){
   await page.locator('.offlineBannerClose').click();
   await page.waitForFunction(()=>!document.querySelector('.offlineBanner')?.classList.contains('show'));
   check(`${label} 오프라인 안내 닫기`,true,{});
+  await context.setOffline(false);
+  await page.evaluate(()=>window.dispatchEvent(new Event('online')));
+  await page.waitForTimeout(300);
 
   const theme=page.locator('[data-v19-theme]');
   await theme.click();
