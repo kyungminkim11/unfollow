@@ -19,7 +19,8 @@ async function inspect(width,height,label){
   page.on('console',message=>{if(message.type()==='error') errors.push(message.text());});
   const response=await page.goto(`${baseURL}/`,{waitUntil:'networkidle',timeout:45000});
   await page.waitForSelector('body.design-v14.mobile-app-v19',{timeout:20000});
-  await page.waitForTimeout(1000);
+  await page.waitForSelector('link[data-v19-header-fix]',{state:'attached',timeout:10000});
+  await page.waitForTimeout(1200);
   const metrics=await page.evaluate(()=>{
     const sidebarElement=document.querySelector('.sidebar');
     const topbarElement=document.querySelector('.serviceTopbar,.v15ServiceTopbar,.topbar');
@@ -30,22 +31,30 @@ async function inspect(width,height,label){
     const drop=document.querySelector('.v14PrimaryDrop')?.getBoundingClientRect();
     const banner=document.querySelector('.offlineBanner')?.getBoundingClientRect();
     const firstAction=actionWrap?.querySelector('a,button')||document.querySelector('.serviceTopActions a,.serviceTopActions button,.v15TopActions a,.v15TopActions button');
+    const visibleDuplicateHeaders=Array.from(document.querySelectorAll('.v19DuplicateHeader,.v14DuplicateMobileHeader,.mobileTopV8')).filter(element=>{
+      if(element===sidebarElement||sidebarElement?.contains(element)) return false;
+      const style=getComputedStyle(element);
+      const rect=element.getBoundingClientRect();
+      return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0;
+    }).length;
     return {
       ready:document.body.classList.contains('mobile-app-v19')&&document.documentElement.classList.contains('mobile-app-v19-ready'),
       mobileCss:Boolean(document.querySelector('link[href*="mobile-app-v19.css"]')),
+      headerFixCss:Boolean(document.querySelector('link[href*="mobile-app-v19-header.css"]')),
       sidebar:{top:sidebar?.top,width:sidebar?.width,height:sidebar?.height,position:sidebarElement?getComputedStyle(sidebarElement).position:''},
       topbar:{right:topbar?innerWidth-topbar.right:null,position:topbarElement?getComputedStyle(topbarElement).position:''},
       hero:{top:hero?.top,width:hero?.width,height:hero?.height},
       drop:{top:drop?.top,height:drop?.height},
       banner:{height:banner?.height,shown:document.querySelector('.offlineBanner')?.classList.contains('show')},
       actionLabel:firstAction?.getAttribute('aria-label')||'',
+      duplicateHeaders:visibleDuplicateHeaders,
       overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,
       firstScreenUpload:(drop?.top||9999)<820,
     };
   });
   check(`${label} HTTP 응답`,response?.status()===200,{status:response?.status()});
-  check(`${label} v19 적용`,metrics.ready&&metrics.mobileCss,metrics);
-  check(`${label} 앱바 형태`,metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=90,metrics);
+  check(`${label} v19 적용`,metrics.ready&&metrics.mobileCss&&metrics.headerFixCss,metrics);
+  check(`${label} 단일 앱바`,metrics.sidebar.position==='sticky'&&metrics.sidebar.height<=70&&metrics.duplicateHeaders===0,metrics);
   check(`${label} 첫 화면 업로드 노출`,metrics.firstScreenUpload,metrics);
   check(`${label} 오프라인 배너 기본 숨김`,!metrics.banner.shown,metrics);
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
@@ -58,7 +67,7 @@ async function inspect(width,height,label){
 }
 await inspect(390,844,'mobile-390');
 await inspect(430,932,'mobile-430');
-const report={version:'19.0',checks,failures};
+const report={version:'19.1',checks,failures};
 fs.writeFileSync(path.join(auditDir,'mobile-v19-report.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify(report,null,2));
 if(failures.length) process.exit(1);
