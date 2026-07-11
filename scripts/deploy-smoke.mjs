@@ -115,8 +115,10 @@ async function mobile(browser,width,height){
   }
   await page.waitForFunction(()=>Number((document.querySelector('#countFollowing')?.textContent||'').replace(/\D/g,''))===13,null,{timeout:15000});
 
-  check(`${label} 상단바 표시`,await page.locator('.sidebar,.mobileTopV8').first().isVisible().catch(()=>false),{});
-  check(`${label} 하단 내비 표시`,await page.locator('.v19BottomNav,.bottomNavV8').first().isVisible().catch(()=>false),{});
+  const topbarVisible=await page.locator('.sidebar').isVisible().catch(()=>false)||await page.locator('.mobileTopV8').isVisible().catch(()=>false);
+  const bottomNavVisible=await page.locator('.v19BottomNav').isVisible().catch(()=>false)||await page.locator('.bottomNavV8').isVisible().catch(()=>false);
+  check(`${label} 상단바 표시`,topbarVisible,{});
+  check(`${label} 하단 내비 표시`,bottomNavVisible,{});
   check(`${label} 카드 결과 표시`,await page.locator('.mobileList').isVisible().catch(()=>false),{});
   check(`${label} 데스크톱 표 숨김`,await page.locator('.tableWrap').isHidden().catch(()=>false),{});
   const toggle=page.locator('.mobileFilterToggle');
