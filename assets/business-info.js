@@ -27,11 +27,45 @@
     document.head.appendChild(link);
   };
 
-  /*
-   * This runs after every feature/theme stylesheet has been requested.
-   * extension-site owns only the website companion UI; responsive-final is the
-   * single canonical application layout layer and therefore loads last.
-   */
+  loadStyle('/assets/business-info.css?v=20.0','business-info');
+
+  const organizeFooterUtilities=()=>{
+    const footer=document.getElementById('businessInfoV10');
+    const links=footer?.querySelector('.businessLinksV10');
+    if(!footer||!links) return;
+    const controls=Array.from(links.querySelectorAll('[data-v13-workspace],[data-v13-diagnostic]'));
+    if(!controls.length) return;
+
+    let utility=footer.querySelector('.businessUtilitiesV20');
+    if(!utility){
+      utility=document.createElement('section');
+      utility.className='businessUtilitiesV20';
+      utility.setAttribute('aria-label','브라우저 로컬 관리 도구');
+
+      const copy=document.createElement('div');
+      copy.className='businessUtilitiesCopyV20';
+      const title=document.createElement('strong');
+      title.textContent='로컬 관리 도구';
+      const desc=document.createElement('span');
+      desc.textContent='작업 기록을 관리하거나 개인정보가 제외된 진단 파일을 저장합니다.';
+      copy.append(title,desc);
+
+      const actions=document.createElement('div');
+      actions.className='businessUtilitiesActionsV20';
+      utility.append(copy,actions);
+
+      const details=footer.querySelector('.businessDetailsV10');
+      if(details) footer.insertBefore(utility,details);
+      else footer.appendChild(utility);
+    }
+
+    const actions=utility.querySelector('.businessUtilitiesActionsV20');
+    controls.forEach(control=>{
+      control.classList.add('businessUtilityButtonV20');
+      actions.appendChild(control);
+    });
+  };
+
   const loadCompanionLayout=()=>{
     loadStyle('/assets/extension-site.css?v=4','extension-site');
     loadStyle('/assets/responsive-final.css?v=4','responsive-final');
@@ -41,6 +75,7 @@
 
   const loadFeatureStack=()=>{
     loadScript('/assets/v13-features.js?v=13.0','v13-features',()=>{
+      organizeFooterUtilities();
       loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
         loadScript('/assets/service-v15.js?v=15.3','service-v15',()=>{
           loadStyle('/assets/service-v15-a11y.css?v=15.1','service-v15-a11y');
@@ -64,8 +99,21 @@
     const element=document.createElement('a');
     element.href=href;
     element.textContent=text;
-    if(external){element.target='_blank';element.rel='noopener';}
+    if(external){element.target='_blank';element.rel='noopener noreferrer';}
     return element;
+  };
+
+  const navGroup=(title,items)=>{
+    const group=document.createElement('section');
+    group.className='businessLinkGroupV20';
+    const heading=document.createElement('strong');
+    heading.className='businessLinkTitleV20';
+    heading.textContent=title;
+    const list=document.createElement('div');
+    list.className='businessLinkListV20';
+    items.forEach(item=>list.appendChild(link(item.href,item.label,item.external)));
+    group.append(heading,list);
+    return group;
   };
 
   const start=()=>{
@@ -83,23 +131,54 @@
 
     const brand=document.createElement('div');
     brand.className='businessBrandV10';
-    const title=document.createElement('strong');
-    title.textContent='© 2026 Lava Labs · 맞팔체커';
-    const desc=document.createElement('span');
-    desc.textContent='무료 베타로 운영 중인 브라우저 로컬 Instagram 관계 분석 서비스입니다.';
-    brand.append(title,desc);
 
-    const links=document.createElement('div');
+    const brandHome=document.createElement('a');
+    brandHome.className='businessBrandHomeV20';
+    brandHome.href='/';
+    brandHome.setAttribute('aria-label','맞팔체커 홈');
+    const logo=document.createElement('img');
+    logo.className='businessBrandLogoV20';
+    logo.src='/favicon.svg';
+    logo.width=44;
+    logo.height=44;
+    logo.alt='';
+    const brandCopy=document.createElement('span');
+    brandCopy.className='businessBrandNameV20';
+    const serviceName=document.createElement('strong');
+    serviceName.textContent='맞팔체커';
+    const operator=document.createElement('small');
+    operator.textContent='by Lava Labs';
+    brandCopy.append(serviceName,operator);
+    brandHome.append(logo,brandCopy);
+
+    const desc=document.createElement('p');
+    desc.textContent='Instagram 공식 데이터 ZIP을 로그인 없이 브라우저에서 분석하는 관계 확인 도구입니다.';
+    const beta=document.createElement('span');
+    beta.className='businessBetaV20';
+    beta.textContent='무료 베타 · 파일 외부 전송 없음';
+    const copyright=document.createElement('small');
+    copyright.className='businessCopyrightV20';
+    copyright.textContent='© 2026 Lava Labs';
+    brand.append(brandHome,desc,beta,copyright);
+
+    const links=document.createElement('nav');
     links.className='businessLinksV10';
+    links.setAttribute('aria-label','사이트 하단 메뉴');
     links.append(
-      link('/premium/','프리미엄 예정'),
-      link('/newsletter/','뉴스레터'),
-      link('/guide/','사용 가이드'),
-      link('/help/','도움말'),
-      link('/data/','데이터 처리'),
-      link('/privacy/','개인정보 처리방침'),
-      link('/terms/','이용약관'),
-      link('mailto:info@lavalabs.co.kr','문의')
+      navGroup('서비스',[
+        {href:'/premium/',label:'프리미엄 예정'},
+        {href:'/newsletter/',label:'뉴스레터'}
+      ]),
+      navGroup('이용 안내',[
+        {href:'/guide/',label:'사용 가이드'},
+        {href:'/help/',label:'도움말'},
+        {href:'/data/',label:'데이터 처리'}
+      ]),
+      navGroup('정책 · 문의',[
+        {href:'/privacy/',label:'개인정보 처리방침'},
+        {href:'/terms/',label:'이용약관'},
+        {href:'mailto:info@lavalabs.co.kr',label:'문의'}
+      ])
     );
 
     top.append(brand,links);
