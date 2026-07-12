@@ -1,6 +1,9 @@
 (() => {
   'use strict';
 
+  if (window.__MATCHAL_EXTENSION_SITE_ACTIVE__) return;
+  window.__MATCHAL_EXTENSION_SITE_ACTIVE__ = true;
+
   const ORIGIN = 'https://unfollow.lavalabs.co.kr';
   const STORE_URL = '';
   const state = { ready: false, version: '', mounted: false, pingTimer: null };
@@ -18,11 +21,15 @@
     const topbar = document.querySelector('.serviceTopbar');
     const topActions = document.querySelector('.serviceTopActions');
     createGuideDialog();
-    const promo = createPromo();
-    if (hero?.parentNode) hero.parentNode.insertBefore(promo, hero);
-    else if (topbar?.parentNode) topbar.insertAdjacentElement('afterend', promo);
-    else main.insertAdjacentElement('afterbegin', promo);
-    if (topActions) topActions.insertAdjacentElement('afterbegin', createHeaderButton());
+    const promo = document.getElementById('chrome-extension') || createPromo();
+    if (!promo.isConnected) {
+      if (hero?.parentNode) hero.parentNode.insertBefore(promo, hero);
+      else if (topbar?.parentNode) topbar.insertAdjacentElement('afterend', promo);
+      else main.insertAdjacentElement('afterbegin', promo);
+    }
+    if (topActions && !topActions.querySelector('.extensionHeaderBtn')) {
+      topActions.insertAdjacentElement('afterbegin', createHeaderButton());
+    }
     bindGlobalEvents();
     state.mounted = true;
     updateUI();
@@ -143,7 +150,8 @@
     const viewport = Math.round(window.visualViewport?.width || document.documentElement.clientWidth || window.innerWidth);
     const main = document.querySelector('.main') || document.querySelector('main');
     const mainWidth = main ? Math.round(main.getBoundingClientRect().width) : viewport;
-    const shouldCompact = viewport <= 1260 || mainWidth <= 1040 || (state.ready && viewport <= 1420);
+    const uploadWidth = Math.round(document.querySelector('.uploadPanel')?.getBoundingClientRect().width || 0);
+    const shouldCompact = viewport <= 1560 || mainWidth <= 1380 || (uploadWidth > 0 && uploadWidth < 560) || (state.ready && viewport <= 1900);
     document.body.classList.toggle('matchal-compact', shouldCompact);
   }
 
