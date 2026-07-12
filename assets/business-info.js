@@ -41,7 +41,7 @@
   const loadFeatureStack=()=>{
     loadScript('/assets/v13-features.js?v=13.0','v13-features',()=>{
       loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
-        loadScript('/assets/service-v15.js?v=15.2','service-v15',()=>{
+        loadScript('/assets/service-v15.js?v=15.3','service-v15',()=>{
           loadStyle('/assets/service-v15-a11y.css?v=15.1','service-v15-a11y');
           loadScript('/assets/service-v15-compat.js?v=15.1','service-v15-compat',()=>{
             loadStyle('/assets/monetization-v16.css?v=16.0','monetization-v16');
