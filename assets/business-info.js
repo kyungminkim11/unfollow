@@ -177,7 +177,7 @@
       navGroup('정책 · 문의',[
         {href:'/privacy/',label:'개인정보 처리방침'},
         {href:'/terms/',label:'이용약관'},
-        {href:'mailto:info@lavalabs.co.kr',label:'문의'}
+        {href:'/contact/',label:'문의하기'}
       ])
     );
 
