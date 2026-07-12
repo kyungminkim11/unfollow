@@ -28,8 +28,8 @@
         const payloadFiles=['v9/part1.txt','v9/part2.txt','v9/part3.txt'];
         /*
          * Only the immutable base theme is injected during restoration.
-         * Feature CSS is loaded by the restored app, and business-info.js loads
-         * the final companion/responsive layer exactly once after that stack.
+         * business-info.js then bootstraps the feature/theme chain and loads
+         * the single final responsive layer after every themed stylesheet.
          */
         const cssFiles=['assets/v8-base.css','assets/v8-responsive.css'];
         const [parts,styles]=await Promise.all([
@@ -68,6 +68,10 @@
         const baseStyles=`<style id="unfollow-base-domain-styles">${styles.join('\n')}</style>`;
         if(/<\/head>/i.test(html)) html=html.replace(/<\/head>/i,baseStyles+'</head>');
         else html=baseStyles+html;
+
+        const bootstrap='<script src="/assets/business-info.js?v=14.1"><\/script>';
+        if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,bootstrap+'</body>');
+        else html+=bootstrap;
 
         document.open();
         document.write(html);
