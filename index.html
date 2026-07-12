@@ -62,7 +62,7 @@
 
         html=html.replace(
           /<head([^>]*)>/i,
-          '<head$1><base href="/"><script src="https://code.iconify.design/3/3.1.1/iconify.min.js"><\/script>'
+          '<head$1><base href="/"><script async src="https://code.iconify.design/3/3.1.1/iconify.min.js"><\/script>'
         );
 
         const baseStyles=`<style id="unfollow-base-domain-styles">${styles.join('\n')}</style>`;
