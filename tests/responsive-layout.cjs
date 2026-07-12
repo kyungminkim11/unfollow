@@ -73,7 +73,7 @@ async function collect(page) {
 
     const brand = document.querySelector('.sidebar .brandLockupV15');
     const brandLogo = brand?.querySelector('.brandLogoV15 img');
-    const brandText = (brand?.textContent || '').replace(/\s+/g, ' ').trim();
+    const brandText = (brand?.textContent || '').replace(/\s+/g, '').trim();
 
     return {
       readyState: document.readyState,
@@ -96,7 +96,7 @@ async function collect(page) {
         homeHref: brand?.querySelector('.brandHomeV15')?.getAttribute('href') || '',
         titleCount: brand?.querySelectorAll('.brandTextV15 > strong').length || 0,
         descriptorCount: brand?.querySelectorAll('.brandDescriptorV15').length || 0,
-        legacyDuplicatePresent: /인스타\s*맞팔|맞팔·언팔/.test(brandText),
+        legacyDuplicatePresent: /인스타맞팔|맞팔·언팔/.test(brandText),
         logo: {
           src: brandLogo?.getAttribute('src') || '',
           complete: Boolean(brandLogo?.complete),
@@ -201,7 +201,7 @@ async function collect(page) {
         : (metrics.elements.aside?.width || 0) >= 330);
     const relevantErrors = errors.filter(entry => !entry.text.includes('code.iconify.design'));
     const brandPass = metrics.brand.exists
-      && metrics.brand.text === '맞팔체커 Instagram 관계 분석 by Lava Labs'
+      && metrics.brand.text === '맞팔체커Instagram관계분석byLavaLabs'
       && metrics.brand.homeHref === '/'
       && metrics.brand.titleCount === 1
       && metrics.brand.descriptorCount === 1
