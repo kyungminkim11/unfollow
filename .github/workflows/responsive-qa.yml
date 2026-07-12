@@ -10,6 +10,15 @@ on:
       - 'sw.js'
       - 'tests/responsive-layout.cjs'
       - '.github/workflows/responsive-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'assets/**'
+      - 'v9/**'
+      - 'sw.js'
+      - 'tests/responsive-layout.cjs'
+      - '.github/workflows/responsive-qa.yml'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +27,7 @@ permissions:
 jobs:
   responsive-layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +41,7 @@ jobs:
           npx playwright install --with-deps chromium
 
       - name: Start static server
+        if: github.event_name != 'push'
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/matchal-http.log 2>&1 &
           echo $! > /tmp/matchal-http.pid
@@ -42,22 +52,39 @@ jobs:
           cat /tmp/matchal-http.log
           exit 1
 
+      - name: Wait for production deployment
+        if: github.event_name == 'push'
+        run: |
+          for i in {1..60}; do
+            url="https://unfollow.lavalabs.co.kr/?deploy=${GITHUB_SHA}-${i}"
+            body="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "$url" || true)"
+            if printf '%s' "$body" | grep -Fq 'business-info.js?v=14.1'; then
+              echo "Production is serving the structural responsive release."
+              exit 0
+            fi
+            echo "Waiting for production deployment ($i/60)..."
+            sleep 10
+          done
+          echo "Production did not expose the expected release marker in time."
+          exit 1
+
       - name: Run responsive diagnostics
         env:
           NODE_PATH: /tmp/matchal-qa/node_modules
-          QA_URL: http://127.0.0.1:4173/
-          QA_OUT: qa-artifacts
-        run: timeout --signal=TERM 180s node tests/responsive-layout.cjs
+          QA_URL: ${{ github.event_name == 'push' && 'https://unfollow.lavalabs.co.kr/' || 'http://127.0.0.1:4173/' }}
+          QA_OUT: ${{ github.event_name == 'push' && 'qa-live-artifacts' || 'qa-artifacts' }}
+          DEPLOY_SHA: ${{ github.sha }}
+        run: timeout --signal=TERM 240s node tests/responsive-layout.cjs
 
       - name: Upload screenshots and metrics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: responsive-qa
-          path: qa-artifacts
+          name: ${{ github.event_name == 'push' && 'responsive-qa-live' || 'responsive-qa' }}
+          path: ${{ github.event_name == 'push' && 'qa-live-artifacts' || 'qa-artifacts' }}
           if-no-files-found: warn
           retention-days: 14
 
       - name: Print server log
-        if: failure()
+        if: failure() && github.event_name != 'push'
         run: cat /tmp/matchal-http.log || true
