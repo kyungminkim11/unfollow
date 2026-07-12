@@ -33,7 +33,6 @@
     bindGlobalEvents();
     state.mounted = true;
     updateUI();
-    updateCompactMode();
     pingExtension();
   }
 
@@ -78,15 +77,7 @@
       if (event.target.id === 'extensionGuideBackdrop') hideGuide();
     });
     window.addEventListener('message', onExtensionMessage);
-    window.addEventListener('resize', updateCompactMode, { passive: true });
-    window.visualViewport?.addEventListener('resize', updateCompactMode, { passive: true });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') hideGuide(); });
-    if ('ResizeObserver' in window) {
-      const observer = new ResizeObserver(updateCompactMode);
-      observer.observe(document.documentElement);
-      const main = document.querySelector('.main') || document.querySelector('main');
-      if (main) observer.observe(main);
-    }
   }
 
   function onExtensionMessage(event) {
@@ -97,7 +88,6 @@
       document.body.classList.add('matchal-extension-connected');
       clearTimeout(state.pingTimer);
       updateUI();
-      updateCompactMode();
     }
   }
 
@@ -145,19 +135,10 @@
     document.querySelectorAll('[data-install-notice]').forEach((element) => { element.hidden = state.ready; });
   }
 
-  function updateCompactMode() {
-    if (!document.body) return;
-    const viewport = Math.round(window.visualViewport?.width || document.documentElement.clientWidth || window.innerWidth);
-    const main = document.querySelector('.main') || document.querySelector('main');
-    const mainWidth = main ? Math.round(main.getBoundingClientRect().width) : viewport;
-    const uploadWidth = Math.round(document.querySelector('.uploadPanel')?.getBoundingClientRect().width || 0);
-    const shouldCompact = viewport <= 1560 || mainWidth <= 1380 || (uploadWidth > 0 && uploadWidth < 560) || (state.ready && viewport <= 1900);
-    document.body.classList.toggle('matchal-compact', shouldCompact);
-  }
-
   function boot() {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(mount, 0), { once: true });
     else setTimeout(mount, 0);
   }
+
   boot();
 })();

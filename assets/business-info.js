@@ -27,12 +27,15 @@
     document.head.appendChild(link);
   };
 
+  /*
+   * This runs after every feature/theme stylesheet has been requested.
+   * extension-site owns only the website companion UI; responsive-final is the
+   * single canonical application layout layer and therefore loads last.
+   */
   const loadCompanionLayout=()=>{
-    loadStyle('/assets/extension-site.css?v=3','extension-site');
-    loadStyle('/assets/responsive-final.css?v=3','responsive-final');
-    loadScript('/assets/extension-site.js?v=7','extension-site',()=>{
-      loadScript('/assets/responsive-late.js?v=5','responsive-late');
-    });
+    loadStyle('/assets/extension-site.css?v=4','extension-site');
+    loadStyle('/assets/responsive-final.css?v=4','responsive-final');
+    loadScript('/assets/extension-site.js?v=8','extension-site');
   };
 
   const loadFeatureStack=()=>{

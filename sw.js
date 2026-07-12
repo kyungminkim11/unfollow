@@ -1,19 +1,20 @@
-const CACHE='unfollow-v19-20260712-sidepanel-1';
+const CACHE='unfollow-v19-20260712-sidepanel-3';
 // Legacy release-check markers retained while older regression workflows remain active: unfollow-v18 unfollow-v17 unfollow-v16 unfollow-v15 unfollow-v14
 const CORE=[
   '/','/index.html','/guide/','/help/','/privacy/','/terms/','/data/','/premium/','/newsletter/',
   '/favicon.svg','/manifest.webmanifest','/og-image.png',
+  '/v9/part1.txt','/v9/part2.txt','/v9/part3.txt',
   '/assets/v8-base.css?v=14.0','/assets/v8-responsive.css?v=14.0','/assets/local-icons.css?v=14.0',
   '/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=14.0','/assets/release-hardening-v12.css?v=14.0',
   '/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.3','/assets/design-v14-fixes.css?v=14.3',
   '/assets/service-v15.css?v=15.0','/assets/service-v15-a11y.css?v=15.1','/assets/site-pages-v15.css?v=15.0','/assets/site-pages-v15-a11y.css?v=15.1',
   '/assets/monetization-v16.css?v=16.0','/assets/site-pages-v16.css?v=16.0','/assets/site-pages-v17.css?v=17.0','/assets/mobile-native-v19.css?v=19.0','/assets/mobile-native-v19-fixes.css?v=19.2',
-  '/assets/extension-site.css?v=3','/assets/responsive-final.css?v=3',
+  '/assets/extension-site.css?v=4','/assets/responsive-final.css?v=4',
   '/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0',
-  '/assets/business-info.js?v=14.0','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
+  '/assets/business-info.js?v=14.1','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
   '/assets/design-v14.js?v=14.0','/assets/service-v15.js?v=15.0','/assets/service-v15-compat.js?v=15.1',
   '/assets/monetization-v16.js?v=16.0','/assets/mobile-native-v19.js?v=19.2','/assets/newsletter-page-v16.js?v=18.0','/assets/premium-interest-v17.js?v=17.0',
-  '/assets/extension-site.js?v=7','/assets/responsive-late.js?v=5'
+  '/assets/extension-site.js?v=8'
 ];
 
 self.addEventListener('install',event=>{
@@ -39,36 +40,47 @@ self.addEventListener('activate',event=>{
   })());
 });
 
+async function networkFirst(request,cacheKey=request){
+  try{
+    const response=await fetch(request,{cache:'no-store'});
+    if(response.ok){
+      const cache=await caches.open(CACHE);
+      await cache.put(cacheKey,response.clone());
+    }
+    return response;
+  }catch(error){
+    return (await caches.match(cacheKey)) || (await caches.match(request)) || Response.error();
+  }
+}
+
 self.addEventListener('fetch',event=>{
   const request=event.request;
   if(request.method!=='GET') return;
   const url=new URL(request.url);
   if(url.origin!==location.origin) return;
 
-  if(url.searchParams.has('connectivity')){
-    event.respondWith(fetch(request,{cache:'no-store'}));
-    return;
-  }
-
-  if(url.pathname.startsWith('/admin/')){
+  if(url.searchParams.has('connectivity')||url.pathname.startsWith('/admin/')){
     event.respondWith(fetch(request,{cache:'no-store'}));
     return;
   }
 
   if(request.mode==='navigate'){
+    const cacheKey=url.pathname.endsWith('/')?url.pathname:`${url.pathname}/`;
     event.respondWith((async()=>{
-      const cacheKey=url.pathname.endsWith('/')?url.pathname:`${url.pathname}/`;
-      try{
-        const response=await fetch(request,{cache:'no-store'});
-        if(response.ok){
-          const cache=await caches.open(CACHE);
-          await cache.put(cacheKey,response.clone());
-        }
-        return response;
-      }catch{
-        return (await caches.match(cacheKey)) || (await caches.match(request)) || (await caches.match('/index.html')) || Response.error();
-      }
+      const response=await networkFirst(request,cacheKey);
+      if(response.ok) return response;
+      return (await caches.match(cacheKey)) || (await caches.match(request)) || (await caches.match('/index.html')) || Response.error();
     })());
+    return;
+  }
+
+  /*
+   * CSS, JavaScript and compressed app payloads are release-sensitive.
+   * Network-first prevents an old cache-first response from winning after a
+   * deployment; the cache remains an offline fallback.
+   */
+  if(url.pathname.startsWith('/assets/')||url.pathname.startsWith('/v9/')){
+    event.respondWith(networkFirst(request));
     return;
   }
 
