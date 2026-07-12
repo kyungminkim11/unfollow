@@ -1,5 +1,5 @@
-commit=bb329860ccbef94acfc67c866ae845489014ad50
-checked_at=2026-07-10T14:35:57Z
+commit=01dd7d900c15a32c0a1004ad26564036536dea29
+checked_at=2026-07-12T03:39:22Z
 ## Syntax checks
 ## Build release
 Base build completed with a removable external-font assertion. Continuing with release cleanup.
@@ -9,42 +9,42 @@ Release build ready after CDN cleanup.
 Created smoke fixtures in smoke-fixtures
 ## Install Playwright
 
-added 4 packages in 4s
+added 4 packages in 2s
 Installing dependencies...
 Switching to root user to install dependencies...
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:6 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
+Get:9 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [2314 B]
+Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.6 kB]
+Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [181 kB]
+Get:12 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [214 kB]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:6 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
-Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
-Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1092 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [269 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1660 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [327 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1225 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [276 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5740 B]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.6 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [827 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [187 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.8 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.9 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1174 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [231 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
-Get:28 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [2314 B]
-Get:29 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [208 kB]
-Get:30 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [175 kB]
-Get:31 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.7 kB]
-Get:32 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1218 B]
-Fetched 8797 kB in 1s (6232 kB/s)
+Get:13 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1215 B]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1092 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [269 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1660 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [327 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1225 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [276 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [827 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [187 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.8 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.9 kB]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1174 kB]
+Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [231 kB]
+Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
+Fetched 8809 kB in 1s (7494 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -107,7 +107,7 @@ The following NEW packages will be installed:
   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
   xfonts-utils
-0 upgraded, 9 newly installed, 0 to remove and 37 not upgraded.
+0 upgraded, 9 newly installed, 0 to remove and 38 not upgraded.
 Need to get 21.1 MB of archives.
 After this operation, 79.5 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
@@ -120,7 +120,7 @@ Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings a
 Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
 Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
-Fetched 21.1 MB in 1s (18.0 MB/s)
+Fetched 21.1 MB in 2s (12.9 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202701 files and directories currently installed.)
 Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
@@ -244,14 +244,17 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
       "name": "계정 A 상태 저장",
       "pass": true,
       "details": {
-        "done": 1
+        "done": 1,
+        "workspaceA": "account-a"
       }
     },
     {
       "name": "계정별 진행 기록 분리",
       "pass": true,
       "details": {
-        "done": 0
+        "done": 0,
+        "workspaceA": "account-a",
+        "workspaceB": "account-b"
       }
     },
     {
@@ -270,9 +273,39 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
     },
     {
       "name": "데스크톱 다크모드 결과 화면 접근성",
-      "pass": true,
+      "pass": false,
       "details": {
-        "violations": []
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".extensionPromoKicker"
+                ],
+                "html": "<p class=\"extensionPromoKicker\">CHROME COMPANION</p>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.85 (foreground color: #3157d5, background color: #171a25, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.85 (foreground color: #3157d5, background color: #171a25, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#3157d5",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.85,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     },
     {
@@ -393,7 +426,44 @@ curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect 
       }
     }
   ],
-  "failures": []
+  "failures": [
+    {
+      "name": "데스크톱 다크모드 결과 화면 접근성",
+      "details": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "nodes": [
+              {
+                "target": [
+                  ".extensionPromoKicker"
+                ],
+                "html": "<p class=\"extensionPromoKicker\">CHROME COMPANION</p>",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.85 (foreground color: #3157d5, background color: #171a25, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                "any": [
+                  {
+                    "id": "color-contrast",
+                    "message": "Element has insufficient color contrast of 2.85 (foreground color: #3157d5, background color: #171a25, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1",
+                    "data": {
+                      "fgColor": "#3157d5",
+                      "bgColor": "#171a25",
+                      "contrastRatio": 2.85,
+                      "fontSize": "8.3pt (11px)",
+                      "fontWeight": "bold",
+                      "messageKey": null,
+                      "expectedContrastRatio": "4.5:1"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
-result=PASS
-exit_code=0
+result=FAIL
+exit_code=1
