@@ -23,7 +23,9 @@
     createGuideDialog();
     const promo = document.getElementById('chrome-extension') || createPromo();
     if (!promo.isConnected) {
-      if (hero?.parentNode) hero.parentNode.insertBefore(promo, hero);
+      const mobileTaskFirst = window.matchMedia('(max-width: 760px)').matches;
+      if (mobileTaskFirst && hero?.parentNode) hero.insertAdjacentElement('afterend', promo);
+      else if (hero?.parentNode) hero.parentNode.insertBefore(promo, hero);
       else if (topbar?.parentNode) topbar.insertAdjacentElement('afterend', promo);
       else main.insertAdjacentElement('afterbegin', promo);
     }
