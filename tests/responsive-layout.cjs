@@ -69,18 +69,19 @@ async function collect(page) {
       };
     });
 
-    const responsiveAssets = Array.from(document.querySelectorAll('link[href*="responsive"],style[id*="responsive"]'))
-      .map(element => element.getAttribute('href') || element.id);
-
     return {
+      readyState: document.readyState,
+      bootText: document.getElementById('boot')?.innerText || '',
+      bodyTextStart: (document.body?.innerText || '').replace(/\s+/g, ' ').slice(0, 500),
       viewport: { width: innerWidth, height: innerHeight, visualWidth: visualViewport?.width || null },
-      bodyClasses: document.body.className,
+      bodyClasses: document.body?.className || '',
       documentWidth: {
         clientWidth: document.documentElement.clientWidth,
         scrollWidth: document.documentElement.scrollWidth,
-        bodyScrollWidth: document.body.scrollWidth,
+        bodyScrollWidth: document.body?.scrollWidth || 0,
       },
-      responsiveAssets,
+      responsiveAssets: Array.from(document.querySelectorAll('link[href*="responsive"],style[id*="responsive"]'))
+        .map(element => element.getAttribute('href') || element.id),
       elements: {
         appShell: elementMetrics('.appShell'),
         main: elementMetrics('.main'),
@@ -112,36 +113,34 @@ async function collect(page) {
     const page = await context.newPage();
     await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*/, route => route.abort());
 
-    const consoleEntries = [];
+    const errors = [];
     page.on('console', message => {
-      if (['error'].includes(message.type())) consoleEntries.push({ type: message.type(), text: message.text() });
+      if (message.type() === 'error') errors.push({ type: 'console', text: message.text() });
     });
-    page.on('pageerror', error => consoleEntries.push({ type: 'pageerror', text: String(error) }));
+    page.on('pageerror', error => errors.push({ type: 'pageerror', text: String(error) }));
+    page.on('requestfailed', request => {
+      if (request.url().startsWith(BASE_URL)) errors.push({ type: 'requestfailed', text: `${request.url()} ${request.failure()?.errorText || ''}` });
+    });
 
-    await page.goto(`${BASE_URL}?qa=${encodeURIComponent(testCase.name)}`, { waitUntil: 'domcontentloaded', timeout: 20_000 });
-    await page.waitForSelector('body.service-v15 .hero.v14Hero', { state: 'attached', timeout: 20_000 });
-    await page.waitForSelector('.v14HeroAside', { state: 'attached', timeout: 20_000 });
-    await page.waitForTimeout(1000);
+    await page.goto(`${BASE_URL}?qa=${encodeURIComponent(testCase.name)}`, { waitUntil: 'commit', timeout: 15_000 });
+    await page.waitForTimeout(5000);
 
     let interaction = { pass: true, action: 'layout-only case' };
-    if (testCase.name === 'desktop-1536') {
-      const button = page.locator('[data-extension-guide]').first();
-      if (await button.isVisible().catch(() => false)) {
-        await button.click({ timeout: 5000 });
-        interaction = {
-          action: 'open and close extension usage guide',
-          pass: await page.locator('#extensionGuideBackdrop.show').isVisible().catch(() => false),
-        };
-        await page.keyboard.press('Escape');
-      }
+    if (testCase.name === 'desktop-1536' && await page.locator('[data-extension-guide]').first().isVisible().catch(() => false)) {
+      await page.locator('[data-extension-guide]').first().click({ timeout: 3000 });
+      interaction = {
+        action: 'open and close extension usage guide',
+        pass: await page.locator('#extensionGuideBackdrop.show').isVisible().catch(() => false),
+      };
+      await page.keyboard.press('Escape');
     }
 
     if (testCase.name === 'sidepanel-1240') {
       await page.setViewportSize({ width: 1080, height: 900 });
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(250);
       const dragged = await collect(page);
       await page.setViewportSize({ width: 1240, height: 900 });
-      await page.waitForTimeout(200);
+      await page.waitForTimeout(250);
       interaction = {
         action: 'drag divider 1240 → 1080 → 1240',
         pass: countColumns(dragged.elements.hero) === 1 && dragged.documentWidth.scrollWidth <= dragged.documentWidth.clientWidth + 1,
@@ -150,50 +149,28 @@ async function collect(page) {
     }
 
     const metrics = await collect(page);
+    const appLoaded = Boolean(metrics.elements.hero && metrics.elements.aside && metrics.elements.main);
     const heroColumns = countColumns(metrics.elements.hero);
     const visibleText = metrics.textChecks.filter(item => item.visible);
     const asideHidden = metrics.elements.aside?.display === 'none';
     const asideWideEnough = asideHidden || (testCase.width <= 420
-      ? metrics.elements.aside.width >= testCase.width - 30
+      ? (metrics.elements.aside?.width || 0) >= testCase.width - 30
       : testCase.expectedColumns === 1
-        ? metrics.elements.aside.width >= Math.min(700, testCase.width - 80)
-        : metrics.elements.aside.width >= 330);
+        ? (metrics.elements.aside?.width || 0) >= Math.min(700, testCase.width - 80)
+        : (metrics.elements.aside?.width || 0) >= 330);
 
     const checks = {
-      heroColumns: {
-        pass: heroColumns === testCase.expectedColumns,
-        expected: testCase.expectedColumns,
-        actual: heroColumns,
-        display: metrics.elements.hero?.display,
-        gridTemplateColumns: metrics.elements.hero?.gridTemplateColumns,
-      },
-      noHorizontalOverflow: {
-        pass: metrics.documentWidth.scrollWidth <= metrics.documentWidth.clientWidth + 1,
-        ...metrics.documentWidth,
-      },
-      horizontalText: {
-        pass: visibleText.every(item => item.writingMode === 'horizontal-tb' && !item.likelyCharacterColumn),
-        offenders: visibleText.filter(item => item.writingMode !== 'horizontal-tb' || item.likelyCharacterColumn),
-      },
-      asideWideEnough: {
-        pass: Boolean(asideWideEnough),
-        display: metrics.elements.aside?.display,
-        width: metrics.elements.aside?.width || 0,
-      },
+      appLoaded: { pass: appLoaded, readyState: metrics.readyState, bootText: metrics.bootText, bodyTextStart: metrics.bodyTextStart },
+      heroColumns: { pass: appLoaded && heroColumns === testCase.expectedColumns, expected: testCase.expectedColumns, actual: heroColumns, hero: metrics.elements.hero },
+      noHorizontalOverflow: { pass: metrics.documentWidth.scrollWidth <= metrics.documentWidth.clientWidth + 1, ...metrics.documentWidth },
+      horizontalText: { pass: visibleText.every(item => item.writingMode === 'horizontal-tb' && !item.likelyCharacterColumn), offenders: visibleText.filter(item => item.writingMode !== 'horizontal-tb' || item.likelyCharacterColumn) },
+      asideWideEnough: { pass: appLoaded && Boolean(asideWideEnough), display: metrics.elements.aside?.display, width: metrics.elements.aside?.width || 0 },
       oneCanonicalResponsiveAsset: {
-        pass: metrics.responsiveAssets.filter(item => item.includes('responsive-final')).length === 1
-          && metrics.responsiveAssets.every(item => !item.includes('responsive-shell')),
+        pass: metrics.responsiveAssets.filter(item => item.includes('responsive-final')).length === 1 && metrics.responsiveAssets.every(item => !item.includes('responsive-shell')),
         assets: metrics.responsiveAssets,
       },
-      noResponsiveInlineStyles: {
-        pass: !metrics.elements.hero?.inlineStyle && !metrics.elements.aside?.inlineStyle,
-        hero: metrics.elements.hero?.inlineStyle,
-        aside: metrics.elements.aside?.inlineStyle,
-      },
-      noPageErrors: {
-        pass: consoleEntries.length === 0,
-        entries: consoleEntries,
-      },
+      noResponsiveInlineStyles: { pass: !metrics.elements.hero?.inlineStyle && !metrics.elements.aside?.inlineStyle, hero: metrics.elements.hero?.inlineStyle, aside: metrics.elements.aside?.inlineStyle },
+      noPageErrors: { pass: errors.length === 0, entries: errors },
       interaction,
     };
 
