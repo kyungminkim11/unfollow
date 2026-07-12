@@ -1,11 +1,372 @@
-:root{
-  --ext-brand:#3157d5;
-  --ext-brand-strong:#2548bd;
-  --ext-brand-soft:#eef3ff;
-  --ext-ink:#14213d;
-  --ext-muted:#667085;
-  --ext-line:#dfe5f1;
-  --ext-success:#0a8f5b;
-  --ext-shadow:0 14px 38px rgba(32,48,88,.10);
+:root {
+  --ext-brand: #3157d5;
+  --ext-brand-strong: #2548bd;
+  --ext-brand-soft: #eef3ff;
+  --ext-ink: #14213d;
+  --ext-muted: #667085;
+  --ext-line: #dfe5f1;
+  --ext-success: #0a8f5b;
+  --ext-shadow: 0 14px 38px rgba(32, 48, 88, .10);
 }
-.extensionPromoSite{margin:0 0 18px;border:1px solid #dce4f6;border-radius:22px;background:radial-gradient(circle at 92% 18%,rgba(49,87,213,.12),transparent 28%),linear-gradient(135deg,#fff 0%,#f8faff 58%,#f3f6ff 100%);box-shadow:var(--ext-shadow);overflow:hidden}.extensionPromoInner{min-height:116px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px}.extensionPromoCopy{display:flex;align-items:flex-start;gap:15px;min-width:0}.extensionPromoIcon{flex:0 0 auto;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#3157d5,#694fe8);box-shadow:0 11px 24px rgba(49,87,213,.28)}.extensionPromoIcon svg{width:25px;height:25px}.extensionPromoText{min-width:0}.extensionPromoKicker{margin:0 0 5px;color:#3157d5;font-size:11px;font-weight:900;letter-spacing:.08em}.extensionPromoTitle{margin:0;color:var(--ext-ink);font-size:19px;line-height:1.28;letter-spacing:-.035em;word-break:keep-all}.extensionPromoDesc{margin:7px 0 0;color:var(--ext-muted);font-size:13px;line-height:1.58;word-break:keep-all}.extensionPromoStatus{display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:27px;padding:0 9px;border-radius:999px;border:1px solid #dfe5f2;background:#fff;color:#667085;font-size:11px;font-weight:850}.extensionPromoStatus::before{content:"";width:7px;height:7px;border-radius:50%;background:#98a2b3}.extensionPromoSite.is-ready .extensionPromoStatus{color:#08764d;border-color:#c9eadc;background:#f4fff9}.extensionPromoSite.is-ready .extensionPromoStatus::before{background:#11a36a;box-shadow:0 0 0 4px rgba(17,163,106,.10)}.extensionPromoActions{display:flex;align-items:center;justify-content:flex-end;gap:9px;flex-wrap:wrap}.extensionPromoBtn{min-height:43px;border:1px solid #d8deeb;border-radius:13px;padding:0 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:#344054;font:inherit;font-size:13px;font-weight:900;text-decoration:none;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s ease}.extensionPromoBtn:hover{transform:translateY(-1px);border-color:#bfc9e5;box-shadow:0 8px 18px rgba(32,48,88,.09)}.extensionPromoBtn.primary{border-color:#3157d5;background:#3157d5;color:#fff;box-shadow:0 10px 20px rgba(49,87,213,.20)}.extensionPromoBtn.primary:hover{background:#2548bd;border-color:#2548bd}.extensionPromoBtn svg{width:17px;height:17px}.extensionPromoSite.is-ready .install-label{display:none}.extensionPromoSite:not(.is-ready) .open-label{display:none}.extensionHeaderBtn{position:relative;white-space:nowrap}.extensionHeaderBtn .extDot{width:7px;height:7px;border-radius:50%;background:#98a2b3;display:inline-block}.extensionHeaderBtn.is-ready .extDot{background:#11a36a;box-shadow:0 0 0 4px rgba(17,163,106,.10)}.extensionGuideBackdrop{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(15,23,42,.50);backdrop-filter:blur(7px)}.extensionGuideBackdrop.show{display:flex}.extensionGuideDialog{width:min(560px,100%);max-height:min(760px,calc(100vh - 36px));overflow:auto;border:1px solid #e2e7f1;border-radius:24px;background:#fff;color:#172033;box-shadow:0 28px 90px rgba(15,23,42,.28)}.extensionGuideHead{padding:22px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.extensionGuideHead h2{margin:0;font-size:22px;line-height:1.25;letter-spacing:-.04em;word-break:keep-all}.extensionGuideHead p{margin:7px 0 0;color:#667085;font-size:13px;line-height:1.55;word-break:keep-all}.extensionGuideClose{width:38px;height:38px;border:1px solid #e2e7f1;border-radius:12px;background:#fff;color:#475467;display:grid;place-items:center;cursor:pointer;flex:0 0 auto}.extensionGuideBody{padding:0 22px 22px}.extensionGuideState{display:flex;align-items:center;gap:9px;padding:12px 13px;border:1px solid #dce4f6;border-radius:14px;background:#f7f9ff;color:#344054;font-size:12px;font-weight:800}.extensionGuideState .stateDot{width:8px;height:8px;border-radius:50%;background:#98a2b3}.extensionGuideState.is-ready{border-color:#c9eadc;background:#f4fff9;color:#08764d}.extensionGuideState.is-ready .stateDot{background:#11a36a}.extensionGuideSteps{display:grid;gap:10px;margin-top:14px}.extensionGuideStep{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;padding:13px;border:1px solid #e5e9f2;border-radius:15px;background:#fff}.extensionGuideStepNum{width:32px;height:32px;border-radius:10px;background:#eef3ff;color:#3157d5;display:grid;place-items:center;font-size:12px;font-weight:950}.extensionGuideStep strong{display:block;font-size:13px;color:#1d2939}.extensionGuideStep p{margin:4px 0 0;color:#667085;font-size:12px;line-height:1.52;word-break:keep-all}.extensionGuideNotice{margin-top:14px;padding:13px;border-radius:14px;background:#fff8e8;border:1px solid #f1dfb2;color:#725412;font-size:12px;line-height:1.55;word-break:keep-all}.extensionGuideActions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.extensionGuideActions .extensionPromoBtn{width:100%;box-sizing:border-box}.extensionGuideFoot{margin-top:13px;color:#98a2b3;font-size:11px;line-height:1.5;text-align:center}body.matchal-compact .appShell{grid-template-columns:1fr!important}body.matchal-compact .sidebar{display:none!important}body.matchal-compact .main{max-width:none!important;padding:0 18px 32px!important}body.matchal-compact .serviceTopbar{min-height:66px;height:auto!important;padding:10px 0;flex-wrap:wrap}body.matchal-compact .serviceTopbar p{font-size:13px!important;max-width:620px}body.matchal-compact .serviceTopActions{margin-left:auto;flex-wrap:wrap;justify-content:flex-end}body.matchal-compact .hero{grid-template-columns:1fr!important;gap:13px!important}body.matchal-compact .heroMain{padding:25px!important}body.matchal-compact h1{font-size:clamp(35px,4.2vw,49px)!important;line-height:1.06!important;word-break:keep-all!important;overflow-wrap:normal!important}body.matchal-compact .lead{max-width:780px;word-break:keep-all}body.matchal-compact .uploadPanel{padding:20px!important}body.matchal-compact .drop{min-height:132px!important}body.matchal-compact .workbench{grid-template-columns:1fr!important}body.matchal-compact .focusPanel{position:relative!important;top:auto!important;order:-1!important}body.matchal-compact .dashboard{grid-template-columns:repeat(2,minmax(0,1fr))!important}body.matchal-compact .onboardingBoard{grid-template-columns:repeat(3,minmax(0,1fr))!important}body.matchal-compact .topTools{grid-template-columns:minmax(0,1fr)!important}body.matchal-compact .topTools .search,body.matchal-compact .topTools .btnRow{grid-column:auto!important}body.matchal-compact .btnRow{display:flex!important;flex-wrap:wrap!important}body.matchal-compact .tableWrap{overflow:auto}body.matchal-compact .extensionPromoInner{grid-template-columns:1fr;align-items:start}body.matchal-compact .extensionPromoActions{justify-content:flex-start}@media(max-width:920px){.extensionPromoInner{grid-template-columns:1fr;align-items:start}.extensionPromoActions{justify-content:flex-start}body.matchal-compact .onboardingBoard{grid-template-columns:1fr!important}}@media(max-width:760px){.extensionPromoSite{margin:0 0 12px;border-radius:19px}.extensionPromoInner{padding:16px;gap:15px}.extensionPromoCopy{gap:12px}.extensionPromoIcon{width:42px;height:42px;border-radius:13px}.extensionPromoTitle{font-size:17px}.extensionPromoDesc{font-size:12px}.extensionPromoActions{display:grid;grid-template-columns:1fr 1fr;width:100%}.extensionPromoBtn{width:100%;padding:0 10px}.extensionGuideBackdrop{padding:10px;align-items:flex-end}.extensionGuideDialog{border-radius:22px 22px 16px 16px;max-height:88vh}.extensionGuideHead,.extensionGuideBody{padding-left:17px;padding-right:17px}.extensionGuideActions{grid-template-columns:1fr}body.matchal-compact .main{padding:10px 11px 22px!important}body.matchal-compact .serviceTopbar{display:none!important}body.matchal-compact .mobileTopV8{display:flex!important}body.matchal-compact .dashboard{grid-template-columns:1fr 1fr!important}body.matchal-compact .heroMain{padding:20px 16px!important}body.matchal-compact h1{font-size:clamp(30px,9vw,40px)!important}}@media(max-width:430px){.extensionPromoCopy{display:grid;grid-template-columns:42px minmax(0,1fr)}.extensionPromoDesc,.extensionPromoStatus{grid-column:1/-1}.extensionPromoActions{grid-template-columns:1fr}body.matchal-compact .dashboard{grid-template-columns:1fr!important}}body.v8-dark .extensionPromoSite,body.v8-dark .extensionGuideDialog,body.v8-dark .extensionGuideStep,body.v8-dark .extensionPromoBtn,body.v8-dark .extensionGuideClose{background:#171a25;color:#f8fafc;border-color:#2a3040}body.v8-dark .extensionPromoTitle,body.v8-dark .extensionGuideHead h2,body.v8-dark .extensionGuideStep strong{color:#f8fafc}body.v8-dark .extensionPromoDesc,body.v8-dark .extensionGuideHead p,body.v8-dark .extensionGuideStep p{color:#a8b0c0}body.v8-dark .extensionPromoStatus{background:#1d2230;border-color:#30384b;color:#b5bdcc}body.v8-dark .extensionGuideState{background:#1d2230;border-color:#30384b;color:#d1d7e2}body.v8-dark .extensionGuideNotice{background:#292315;border-color:#554822;color:#f1d999}
+
+/* Website companion promotion only. Application layout lives in responsive-final.css. */
+.extensionPromoSite {
+  margin: 0 0 18px;
+  overflow: hidden;
+  border: 1px solid #dce4f6;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(49, 87, 213, .12), transparent 28%),
+    linear-gradient(135deg, #fff 0%, #f8faff 58%, #f3f6ff 100%);
+  box-shadow: var(--ext-shadow);
+}
+
+.extensionPromoInner {
+  min-height: 116px;
+  padding: 20px 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.extensionPromoCopy {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.extensionPromoIcon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #3157d5, #694fe8);
+  color: #fff;
+  box-shadow: 0 11px 24px rgba(49, 87, 213, .28);
+}
+
+.extensionPromoIcon svg { width: 25px; height: 25px; }
+.extensionPromoText { min-width: 0; }
+
+.extensionPromoKicker {
+  margin: 0 0 5px;
+  color: var(--ext-brand);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.extensionPromoTitle {
+  margin: 0;
+  color: var(--ext-ink);
+  font-size: 19px;
+  line-height: 1.28;
+  letter-spacing: -.035em;
+  word-break: keep-all;
+}
+
+.extensionPromoDesc {
+  margin: 7px 0 0;
+  color: var(--ext-muted);
+  font-size: 13px;
+  line-height: 1.58;
+  word-break: keep-all;
+}
+
+.extensionPromoStatus {
+  display: inline-flex;
+  min-height: 27px;
+  margin-top: 10px;
+  padding: 0 9px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #dfe5f2;
+  border-radius: 999px;
+  background: #fff;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.extensionPromoStatus::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #98a2b3;
+}
+
+.extensionPromoSite.is-ready .extensionPromoStatus {
+  border-color: #c9eadc;
+  background: #f4fff9;
+  color: #08764d;
+}
+
+.extensionPromoSite.is-ready .extensionPromoStatus::before {
+  background: #11a36a;
+  box-shadow: 0 0 0 4px rgba(17, 163, 106, .10);
+}
+
+.extensionPromoActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.extensionPromoBtn {
+  min-height: 43px;
+  padding: 0 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d8deeb;
+  border-radius: 13px;
+  background: #fff;
+  color: #344054;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.extensionPromoBtn:hover {
+  transform: translateY(-1px);
+  border-color: #bfc9e5;
+  box-shadow: 0 8px 18px rgba(32, 48, 88, .09);
+}
+
+.extensionPromoBtn.primary {
+  border-color: var(--ext-brand);
+  background: var(--ext-brand);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(49, 87, 213, .20);
+}
+
+.extensionPromoBtn.primary:hover {
+  border-color: var(--ext-brand-strong);
+  background: var(--ext-brand-strong);
+}
+
+.extensionPromoBtn svg { width: 17px; height: 17px; }
+.extensionPromoSite.is-ready .install-label { display: none; }
+.extensionPromoSite:not(.is-ready) .open-label { display: none; }
+
+.extensionHeaderBtn { position: relative; white-space: nowrap; }
+.extensionHeaderBtn .extDot {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #98a2b3;
+}
+.extensionHeaderBtn.is-ready .extDot {
+  background: #11a36a;
+  box-shadow: 0 0 0 4px rgba(17, 163, 106, .10);
+}
+
+.extensionGuideBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  padding: 18px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, .50);
+  backdrop-filter: blur(7px);
+}
+.extensionGuideBackdrop.show { display: flex; }
+
+.extensionGuideDialog {
+  width: min(560px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+  border: 1px solid #e2e7f1;
+  border-radius: 24px;
+  background: #fff;
+  color: #172033;
+  box-shadow: 0 28px 90px rgba(15, 23, 42, .28);
+}
+
+.extensionGuideHead {
+  padding: 22px 22px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.extensionGuideHead h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -.04em;
+  word-break: keep-all;
+}
+.extensionGuideHead p {
+  margin: 7px 0 0;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+.extensionGuideClose {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e2e7f1;
+  border-radius: 12px;
+  background: #fff;
+  color: #475467;
+  cursor: pointer;
+}
+
+.extensionGuideBody { padding: 0 22px 22px; }
+.extensionGuideState {
+  padding: 12px 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #dce4f6;
+  border-radius: 14px;
+  background: #f7f9ff;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 800;
+}
+.extensionGuideState .stateDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #98a2b3;
+}
+.extensionGuideState.is-ready {
+  border-color: #c9eadc;
+  background: #f4fff9;
+  color: #08764d;
+}
+.extensionGuideState.is-ready .stateDot { background: #11a36a; }
+
+.extensionGuideSteps { display: grid; gap: 10px; margin-top: 14px; }
+.extensionGuideStep {
+  padding: 13px;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 11px;
+  border: 1px solid #e5e9f2;
+  border-radius: 15px;
+  background: #fff;
+}
+.extensionGuideStepNum {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #eef3ff;
+  color: #3157d5;
+  font-size: 12px;
+  font-weight: 950;
+}
+.extensionGuideStep strong { display: block; color: #1d2939; font-size: 13px; }
+.extensionGuideStep p {
+  margin: 4px 0 0;
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.52;
+  word-break: keep-all;
+}
+
+.extensionGuideNotice {
+  margin-top: 14px;
+  padding: 13px;
+  border: 1px solid #f1dfb2;
+  border-radius: 14px;
+  background: #fff8e8;
+  color: #725412;
+  font-size: 12px;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+.extensionGuideActions {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+.extensionGuideActions .extensionPromoBtn { width: 100%; box-sizing: border-box; }
+.extensionGuideFoot {
+  margin-top: 13px;
+  color: #98a2b3;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 920px) {
+  .extensionPromoInner { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .extensionPromoActions { justify-content: flex-start; }
+}
+
+@media (max-width: 760px) {
+  .extensionPromoSite { margin-bottom: 12px; border-radius: 19px; }
+  .extensionPromoInner { padding: 16px; gap: 15px; }
+  .extensionPromoCopy { gap: 12px; }
+  .extensionPromoIcon { width: 42px; height: 42px; border-radius: 13px; }
+  .extensionPromoTitle { font-size: 17px; }
+  .extensionPromoDesc { font-size: 12px; }
+  .extensionPromoActions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .extensionPromoBtn { width: 100%; padding-inline: 10px; }
+  .extensionGuideBackdrop { padding: 10px; align-items: flex-end; }
+  .extensionGuideDialog { max-height: 88vh; border-radius: 22px 22px 16px 16px; }
+  .extensionGuideHead, .extensionGuideBody { padding-left: 17px; padding-right: 17px; }
+  .extensionGuideActions { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 430px) {
+  .extensionPromoCopy { display: grid; grid-template-columns: 42px minmax(0, 1fr); }
+  .extensionPromoDesc, .extensionPromoStatus { grid-column: 1 / -1; }
+  .extensionPromoActions { grid-template-columns: 1fr; }
+}
+
+body.v8-dark .extensionPromoSite,
+body.v8-dark .extensionGuideDialog,
+body.v8-dark .extensionGuideStep,
+body.v8-dark .extensionPromoBtn,
+body.v8-dark .extensionGuideClose {
+  border-color: #2a3040;
+  background: #171a25;
+  color: #f8fafc;
+}
+body.v8-dark .extensionPromoTitle,
+body.v8-dark .extensionGuideHead h2,
+body.v8-dark .extensionGuideStep strong { color: #f8fafc; }
+body.v8-dark .extensionPromoDesc,
+body.v8-dark .extensionGuideHead p,
+body.v8-dark .extensionGuideStep p { color: #a8b0c0; }
+body.v8-dark .extensionPromoStatus {
+  border-color: #30384b;
+  background: #1d2230;
+  color: #b5bdcc;
+}
+body.v8-dark .extensionGuideState {
+  border-color: #30384b;
+  background: #1d2230;
+  color: #d1d7e2;
+}
+body.v8-dark .extensionGuideNotice {
+  border-color: #554822;
+  background: #292315;
+  color: #f1d999;
+}
