@@ -20,14 +20,15 @@ jobs:
       - name: Confirm deployed feedback release
         run: |
           for i in {1..30}; do
-            body="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "https://unfollow.lavalabs.co.kr/?feedback-live=${GITHUB_SHA}-${i}" || true)"
-            if printf '%s' "$body" | grep -Fq 'business-info.js?v=14.5'; then
-              echo "Feedback release is live."
+            feedback="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "https://unfollow.lavalabs.co.kr/assets/feedback-v20.js?v=20.0&check=${i}" || true)"
+            loader="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "https://unfollow.lavalabs.co.kr/assets/business-info.js?v=14.5&check=${i}" || true)"
+            if printf '%s' "$feedback" | grep -Fq 'kyungminkim11/unfollow/issues/new' && printf '%s' "$loader" | grep -Fq 'feedback-v20.js?v=20.0'; then
+              echo "Feedback release assets are live."
               exit 0
             fi
             sleep 5
           done
-          echo "Feedback release marker was not found."
+          echo "Feedback release assets were not found."
           exit 1
 
       - name: Prepare Playwright
