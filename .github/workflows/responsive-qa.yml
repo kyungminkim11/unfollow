@@ -18,7 +18,7 @@ permissions:
 jobs:
   responsive-layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,7 +47,7 @@ jobs:
           NODE_PATH: /tmp/matchal-qa/node_modules
           QA_URL: http://127.0.0.1:4173/
           QA_OUT: qa-artifacts
-        run: node tests/responsive-layout.cjs
+        run: timeout --signal=TERM 180s node tests/responsive-layout.cjs
 
       - name: Upload screenshots and metrics
         if: always()
