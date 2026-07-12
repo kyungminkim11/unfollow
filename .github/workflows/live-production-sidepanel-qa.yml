@@ -1,0 +1,58 @@
+name: Live production side-panel QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-production-sidepanel-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-responsive-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for production release marker
+        run: |
+          for i in {1..60}; do
+            url="https://unfollow.lavalabs.co.kr/?deploy=${GITHUB_SHA}-${i}"
+            body="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "$url" || true)"
+            if printf '%s' "$body" | grep -Fq 'business-info.js?v=14.1'; then
+              echo "Production release marker found."
+              exit 0
+            fi
+            echo "Waiting for GitHub Pages deployment ($i/60)..."
+            sleep 10
+          done
+          echo "Expected production release marker was not served in time."
+          exit 1
+
+      - name: Prepare Playwright
+        run: |
+          mkdir -p /tmp/matchal-live-qa
+          cd /tmp/matchal-live-qa
+          npm init -y >/dev/null 2>&1
+          npm install --no-save --no-package-lock playwright@1.51.1
+          npx playwright install --with-deps chromium
+
+      - name: Test live production
+        env:
+          NODE_PATH: /tmp/matchal-live-qa/node_modules
+          QA_URL: https://unfollow.lavalabs.co.kr/
+          QA_OUT: qa-live-production
+          DEPLOY_SHA: ${{ github.sha }}
+        run: timeout --signal=TERM 240s node tests/responsive-layout.cjs
+
+      - name: Upload live screenshots and metrics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-production-sidepanel-qa
+          path: qa-live-production
+          if-no-files-found: warn
+          retention-days: 14
