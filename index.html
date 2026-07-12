@@ -69,7 +69,7 @@
         if(/<\/head>/i.test(html)) html=html.replace(/<\/head>/i,baseStyles+'</head>');
         else html=baseStyles+html;
 
-        const bootstrap='<script src="/assets/business-info.js?v=14.5"><\/script>';
+        const bootstrap='<script src="/assets/business-info.js?v=14.6"><\/script>';
         if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,bootstrap+'</body>');
         else html+=bootstrap;
 
