@@ -27,6 +27,14 @@
     document.head.appendChild(link);
   };
 
+  const loadCompanionLayout=()=>{
+    loadStyle('/assets/extension-site.css?v=3','extension-site');
+    loadStyle('/assets/responsive-final.css?v=3','responsive-final');
+    loadScript('/assets/extension-site.js?v=7','extension-site',()=>{
+      loadScript('/assets/responsive-late.js?v=5','responsive-late');
+    });
+  };
+
   const loadFeatureStack=()=>{
     loadScript('/assets/v13-features.js?v=13.0','v13-features',()=>{
       loadScript('/assets/design-v14.js?v=14.0','design-v14',()=>{
@@ -37,7 +45,7 @@
             loadScript('/assets/monetization-v16.js?v=16.0','monetization-v16',()=>{
               loadStyle('/assets/mobile-native-v19.css?v=19.0','mobile-native-v19');
               loadStyle('/assets/mobile-native-v19-fixes.css?v=19.2','mobile-native-v19-fixes');
-              loadScript('/assets/mobile-native-v19.js?v=19.2','mobile-native-v19');
+              loadScript('/assets/mobile-native-v19.js?v=19.2','mobile-native-v19',loadCompanionLayout);
             });
           });
         });
@@ -87,7 +95,7 @@
       link('/data/','데이터 처리'),
       link('/privacy/','개인정보 처리방침'),
       link('/terms/','이용약관'),
-      link('mailto:lavalabs.ceo@gmail.com','문의')
+      link('mailto:info@lavalabs.co.kr','문의')
     );
 
     top.append(brand,links);
@@ -105,14 +113,14 @@
       ['사업자등록번호','455-23-01867'],
       ['통신판매업 신고번호','2025-고양일산서-1352'],
       ['사업장 소재지','경기도 고양시 일산서구 일현로 47, 2층 204호 1308호실(탄현동, 예일 큰프라자)'],
-      ['이메일','lavalabs.ceo@gmail.com']
+      ['이메일','info@lavalabs.co.kr']
     ];
 
     rows.forEach(([label,value])=>{
       const dt=document.createElement('dt');
       const dd=document.createElement('dd');
       dt.textContent=label;
-      if(label==='이메일') dd.appendChild(link('mailto:lavalabs.ceo@gmail.com',value));
+      if(label==='이메일') dd.appendChild(link('mailto:info@lavalabs.co.kr',value));
       else dd.textContent=value;
       grid.append(dt,dd);
     });
