@@ -47,7 +47,7 @@
             loadStyle('/assets/monetization-v16.css?v=16.0','monetization-v16');
             loadScript('/assets/monetization-v16.js?v=16.0','monetization-v16',()=>{
               loadStyle('/assets/mobile-native-v19.css?v=19.0','mobile-native-v19');
-              loadStyle('/assets/mobile-native-v19-fixes.css?v=19.2','mobile-native-v19-fixes');
+              loadStyle('/assets/mobile-native-v19-fixes.css?v=19.3','mobile-native-v19-fixes');
               loadScript('/assets/mobile-native-v19.js?v=19.2','mobile-native-v19',loadCompanionLayout);
             });
           });
