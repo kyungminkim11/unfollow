@@ -35,6 +35,7 @@
   const loadCompanionLayout=()=>{
     loadStyle('/assets/extension-site.css?v=4','extension-site');
     loadStyle('/assets/responsive-final.css?v=4','responsive-final');
+    loadScript('/assets/feedback-v20.js?v=20.0','feedback-v20');
     loadScript('/assets/extension-site.js?v=8','extension-site');
   };
 
