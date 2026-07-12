@@ -75,18 +75,17 @@ async function collect(page) {
     const brandLogo = brand?.querySelector('.brandLogoV15 img');
     const brandText = (brand?.textContent || '').replace(/\s+/g, '').trim();
 
-    const topBrandCandidates = Array.from(document.querySelectorAll(
-      'header,.v19NativeAppBar,.mobileTopV8,.sidebar'
-    )).filter(element => {
+    const topBrandCandidates = Array.from(document.body.querySelectorAll('*')).filter(element => {
       const computed = getComputedStyle(element);
       const rect = element.getBoundingClientRect();
       const text = (element.textContent || '').replace(/\s+/g, ' ').trim();
       return computed.display !== 'none'
         && computed.visibility !== 'hidden'
         && Number(computed.opacity || 1) > 0
-        && rect.width > 0
+        && rect.width >= innerWidth * .72
         && rect.height >= 36
         && rect.height <= 120
+        && rect.top >= -2
         && rect.top < 140
         && text.includes('맞팔체커');
     });
@@ -96,10 +95,12 @@ async function collect(page) {
         const rect = element.getBoundingClientRect();
         return {
           tag: element.tagName.toLowerCase(),
+          id: element.id || '',
           classes: element.className,
           ariaHidden: element.getAttribute('aria-hidden'),
           text: (element.textContent || '').replace(/\s+/g, ' ').trim(),
           top: Number(rect.top.toFixed(1)),
+          width: Number(rect.width.toFixed(1)),
           height: Number(rect.height.toFixed(1)),
         };
       });
@@ -167,10 +168,6 @@ async function collect(page) {
     });
     const page = await context.newPage();
 
-    /*
-     * Local/PR runs rewrite absolute production asset URLs to the checked-out
-     * static server. Live deployment runs intentionally use production as-is.
-     */
     if (baseOrigin !== PRODUCTION_ORIGIN) {
       await page.route(`${PRODUCTION_ORIGIN}/**`, async route => {
         const production = new URL(route.request().url());
