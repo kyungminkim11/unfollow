@@ -349,6 +349,7 @@ body.v8-dark .extensionGuideClose {
   background: #171a25;
   color: #f8fafc;
 }
+body.v8-dark .extensionPromoKicker { color: #aab9ff; }
 body.v8-dark .extensionPromoTitle,
 body.v8-dark .extensionGuideHead h2,
 body.v8-dark .extensionGuideStep strong { color: #f8fafc; }
