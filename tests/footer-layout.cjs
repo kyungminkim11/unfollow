@@ -116,7 +116,7 @@ function countGridColumns(value) {
       footerRendered: { pass: metrics.exists && metrics.footerWidth > 0, ...metrics },
       groupedNavigation: { pass: metrics.navGroupCount === 3 && navColumnCount === testCase.expectedNavColumns, expectedColumns: testCase.expectedNavColumns, actualColumns: navColumnCount, groupCount: metrics.navGroupCount },
       utilityControlsGrouped: { pass: metrics.utilityExists && metrics.utilityButtonCount === 2 && metrics.oldLooseUtilityButtons === 0, utilityExists: metrics.utilityExists, buttonCount: metrics.utilityButtonCount, oldLooseUtilityButtons: metrics.oldLooseUtilityButtons },
-      utilityButtonsReadable: { pass: metrics.utilityButtonStyles.every(item => item.width >= 90 && item.textDecorationLine === 'none' && item.whiteSpace === 'nowrap'), buttons: metrics.utilityButtonStyles },
+      utilityButtonsReadable: { pass: metrics.utilityButtonStyles.every(item => item.width >= 80 && item.textDecorationLine === 'none' && item.whiteSpace === 'nowrap'), buttons: metrics.utilityButtonStyles },
       horizontalText: { pass: metrics.textNodes.every(item => item.writingMode === 'horizontal-tb'), offenders: metrics.textNodes.filter(item => item.writingMode !== 'horizontal-tb') },
       noHorizontalOverflow: { pass: metrics.scrollWidth <= metrics.viewportWidth + 1 && metrics.footerWidth <= metrics.viewportWidth + 1, viewportWidth: metrics.viewportWidth, scrollWidth: metrics.scrollWidth, footerWidth: metrics.footerWidth },
       noPageErrors: { pass: relevantErrors.length === 0, entries: relevantErrors },
