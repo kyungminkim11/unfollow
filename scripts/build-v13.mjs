@@ -27,11 +27,11 @@ replaceRequired(
   /  function workspaceFromFile\(file\)\{[\s\S]*?  function assertZipFile\(file\)\{/,
 `  const WORKSPACE_SIGNATURE_KEY = 'unfollow_workspace_signatures_v13';
   function workspaceFromFile(file){
-    let value=String(file?.name||'').replace(/\.zip$/i,'').toLowerCase();
+    let value=String(file?.name||'').replace(/\\.zip$/i,'').toLowerCase();
     if(/^instagram[-_]lava[-_]demo[-_]/.test(value)) return 'sample';
     value=value.replace(/^instagram[-_]?/,'');
-    value=value.replace(/[-_](?:19|20)\d{2}[-_]\d{1,2}[-_]\d{1,2}.*$/,'');
-    value=value.replace(/[-_]\d{8}.*$/,'');
+    value=value.replace(/[-_](?:19|20)\\d{2}[-_]\\d{1,2}[-_]\\d{1,2}.*$/,'');
+    value=value.replace(/[-_]\\d{8}.*$/,'');
     value=value.replace(/[^a-z0-9._-]+/g,'_').replace(/^[_-]+|[_-]+$/g,'').slice(0,80);
     return value||'default';
   }
