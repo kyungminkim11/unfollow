@@ -82,6 +82,8 @@ async function collect(page) {
       },
       responsiveAssets: Array.from(document.querySelectorAll('link[href*="responsive"],style[id*="responsive"]'))
         .map(element => element.getAttribute('href') || element.id),
+      loadedScripts: Array.from(document.scripts).map(script => script.src).filter(Boolean),
+      loadedStyles: Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(link => link.href),
       elements: {
         appShell: elementMetrics('.appShell'),
         main: elementMetrics('.main'),
@@ -111,7 +113,19 @@ async function collect(page) {
       serviceWorkers: 'block',
     });
     const page = await context.newPage();
-    await page.route(/^https:\/\/(?!127\.0\.0\.1|localhost).*/, route => route.abort());
+
+    /*
+     * The restored v9 document still contains a few absolute production asset
+     * URLs. Serve those requests from this checked-out branch so computed style
+     * diagnostics exercise the code under review, never the currently deployed
+     * main branch.
+     */
+    await page.route('https://unfollow.lavalabs.co.kr/**', async route => {
+      const production = new URL(route.request().url());
+      const local = new URL(`${production.pathname}${production.search}`, BASE_URL).href;
+      const response = await route.fetch({ url: local });
+      await route.fulfill({ response });
+    });
 
     const errors = [];
     page.on('console', message => {
@@ -119,7 +133,7 @@ async function collect(page) {
     });
     page.on('pageerror', error => errors.push({ type: 'pageerror', text: String(error) }));
     page.on('requestfailed', request => {
-      if (request.url().startsWith(BASE_URL)) errors.push({ type: 'requestfailed', text: `${request.url()} ${request.failure()?.errorText || ''}` });
+      errors.push({ type: 'requestfailed', text: `${request.url()} ${request.failure()?.errorText || ''}` });
     });
 
     await page.goto(`${BASE_URL}?qa=${encodeURIComponent(testCase.name)}`, { waitUntil: 'commit', timeout: 15_000 });
@@ -158,6 +172,7 @@ async function collect(page) {
       : testCase.expectedColumns === 1
         ? (metrics.elements.aside?.width || 0) >= Math.min(700, testCase.width - 80)
         : (metrics.elements.aside?.width || 0) >= 330);
+    const relevantErrors = errors.filter(entry => !entry.text.includes('code.iconify.design'));
 
     const checks = {
       appLoaded: { pass: appLoaded, readyState: metrics.readyState, bootText: metrics.bootText, bodyTextStart: metrics.bodyTextStart },
@@ -170,12 +185,12 @@ async function collect(page) {
         assets: metrics.responsiveAssets,
       },
       noResponsiveInlineStyles: { pass: !metrics.elements.hero?.inlineStyle && !metrics.elements.aside?.inlineStyle, hero: metrics.elements.hero?.inlineStyle, aside: metrics.elements.aside?.inlineStyle },
-      noPageErrors: { pass: errors.length === 0, entries: errors },
+      noPageErrors: { pass: relevantErrors.length === 0, entries: relevantErrors },
       interaction,
     };
 
     if (Object.values(checks).some(check => !check.pass)) failed = true;
-    const result = { case: testCase, checks, metrics };
+    const result = { case: testCase, checks, metrics, errors };
     results.push(result);
     fs.writeFileSync(path.join(OUT_DIR, `${testCase.name}.json`), JSON.stringify(result, null, 2));
     await page.screenshot({ path: path.join(OUT_DIR, `${testCase.name}.png`), fullPage: false });
