@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
 
-  const VERSION='15.2';
+  const VERSION='15.3';
   const q=(selector,root=document)=>root.querySelector(selector);
   const qa=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
   let observer;
@@ -26,7 +26,7 @@
     if(q('link[data-service-v15]')) return;
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='/assets/service-v15.css?v=15.2';
+    link.href='/assets/service-v15.css?v=15.3';
     link.dataset.serviceV15='true';
     document.head.appendChild(link);
   }
@@ -43,11 +43,10 @@
   function buildBrand(){
     const sidebar=q('.sidebar');
     const brand=q('.brand',sidebar||document);
-    if(!brand||brand.dataset.brandLockup==='15.2') return;
+    if(!brand||brand.dataset.brandLockup==='15.3') return;
 
-    brand.dataset.brandLockup='15.2';
+    brand.dataset.brandLockup='15.3';
     brand.classList.add('brandLockupV15');
-    brand.removeAttribute('aria-hidden');
 
     const home=document.createElement('a');
     home.href='/';
