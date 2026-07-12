@@ -4,6 +4,8 @@ const { chromium } = require('playwright');
 
 const BASE_URL = process.env.QA_URL || 'http://127.0.0.1:4173/';
 const OUT_DIR = process.env.QA_OUT || path.join(process.cwd(), 'qa-artifacts');
+const DEPLOY_SHA = process.env.DEPLOY_SHA || 'local';
+const PRODUCTION_ORIGIN = 'https://unfollow.lavalabs.co.kr';
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const cases = [
@@ -103,9 +105,10 @@ async function collect(page) {
   const browser = await chromium.launch({ headless: true });
   const results = [];
   let failed = false;
+  const baseOrigin = new URL(BASE_URL).origin;
 
   for (const testCase of cases) {
-    console.log(`[responsive-qa] start ${testCase.name}`);
+    console.log(`[responsive-qa] start ${testCase.name} at ${BASE_URL}`);
     const context = await browser.newContext({
       viewport: { width: testCase.width, height: testCase.height },
       deviceScaleFactor: 1,
@@ -115,17 +118,17 @@ async function collect(page) {
     const page = await context.newPage();
 
     /*
-     * The restored v9 document still contains a few absolute production asset
-     * URLs. Serve those requests from this checked-out branch so computed style
-     * diagnostics exercise the code under review, never the currently deployed
-     * main branch.
+     * Local/PR runs rewrite absolute production asset URLs to the checked-out
+     * static server. Live deployment runs intentionally use production as-is.
      */
-    await page.route('https://unfollow.lavalabs.co.kr/**', async route => {
-      const production = new URL(route.request().url());
-      const local = new URL(`${production.pathname}${production.search}`, BASE_URL).href;
-      const response = await route.fetch({ url: local });
-      await route.fulfill({ response });
-    });
+    if (baseOrigin !== PRODUCTION_ORIGIN) {
+      await page.route(`${PRODUCTION_ORIGIN}/**`, async route => {
+        const production = new URL(route.request().url());
+        const local = new URL(`${production.pathname}${production.search}`, BASE_URL).href;
+        const response = await route.fetch({ url: local });
+        await route.fulfill({ response });
+      });
+    }
 
     const errors = [];
     page.on('console', message => {
@@ -136,7 +139,11 @@ async function collect(page) {
       errors.push({ type: 'requestfailed', text: `${request.url()} ${request.failure()?.errorText || ''}` });
     });
 
-    await page.goto(`${BASE_URL}?qa=${encodeURIComponent(testCase.name)}`, { waitUntil: 'commit', timeout: 15_000 });
+    const target = new URL(BASE_URL);
+    target.searchParams.set('qa', testCase.name);
+    target.searchParams.set('deploy', DEPLOY_SHA);
+    target.searchParams.set('cache', String(Date.now()));
+    await page.goto(target.href, { waitUntil: 'commit', timeout: 30_000 });
     await page.waitForTimeout(5000);
 
     let interaction = { pass: true, action: 'layout-only case' };
@@ -190,7 +197,7 @@ async function collect(page) {
     };
 
     if (Object.values(checks).some(check => !check.pass)) failed = true;
-    const result = { case: testCase, checks, metrics, errors };
+    const result = { source: BASE_URL, deploySha: DEPLOY_SHA, case: testCase, checks, metrics, errors };
     results.push(result);
     fs.writeFileSync(path.join(OUT_DIR, `${testCase.name}.json`), JSON.stringify(result, null, 2));
     await page.screenshot({ path: path.join(OUT_DIR, `${testCase.name}.png`), fullPage: false });
