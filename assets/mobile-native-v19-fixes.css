@@ -6,6 +6,7 @@
   body.mobile-native-v19 .sidebar,
   body.mobile-native-v19 .serviceTopbar,
   body.mobile-native-v19 .topbar,
+  body.mobile-native-v19 .mobileTopbar,
   body.mobile-native-v19 .mobileTopV8,
   body.mobile-native-v19 .v19HeaderActions{
     display:none!important;

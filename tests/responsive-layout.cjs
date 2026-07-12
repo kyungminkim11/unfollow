@@ -75,6 +75,36 @@ async function collect(page) {
     const brandLogo = brand?.querySelector('.brandLogoV15 img');
     const brandText = (brand?.textContent || '').replace(/\s+/g, '').trim();
 
+    const topBrandCandidates = Array.from(document.body.querySelectorAll('*')).filter(element => {
+      const computed = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      const text = (element.textContent || '').replace(/\s+/g, ' ').trim();
+      return computed.display !== 'none'
+        && computed.visibility !== 'hidden'
+        && Number(computed.opacity || 1) > 0
+        && rect.width >= innerWidth * .72
+        && rect.height >= 36
+        && rect.height <= 120
+        && rect.top >= -2
+        && rect.top < 140
+        && text.includes('맞팔체커');
+    });
+    const visibleTopBrandHeaders = topBrandCandidates
+      .filter(element => !topBrandCandidates.some(other => other !== element && other.contains(element)))
+      .map(element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          tag: element.tagName.toLowerCase(),
+          id: element.id || '',
+          classes: element.className,
+          ariaHidden: element.getAttribute('aria-hidden'),
+          text: (element.textContent || '').replace(/\s+/g, ' ').trim(),
+          top: Number(rect.top.toFixed(1)),
+          width: Number(rect.width.toFixed(1)),
+          height: Number(rect.height.toFixed(1)),
+        };
+      });
+
     return {
       readyState: document.readyState,
       bootText: document.getElementById('boot')?.innerText || '',
@@ -103,6 +133,7 @@ async function collect(page) {
           naturalWidth: brandLogo?.naturalWidth || 0,
         },
       },
+      visibleTopBrandHeaders,
       elements: {
         appShell: elementMetrics('.appShell'),
         main: elementMetrics('.main'),
@@ -137,10 +168,6 @@ async function collect(page) {
     });
     const page = await context.newPage();
 
-    /*
-     * Local/PR runs rewrite absolute production asset URLs to the checked-out
-     * static server. Live deployment runs intentionally use production as-is.
-     */
     if (baseOrigin !== PRODUCTION_ORIGIN) {
       await page.route(`${PRODUCTION_ORIGIN}/**`, async route => {
         const production = new URL(route.request().url());
@@ -209,6 +236,7 @@ async function collect(page) {
       && metrics.brand.logo.src === '/favicon.svg'
       && metrics.brand.logo.complete
       && metrics.brand.logo.naturalWidth > 0;
+    const mobileHeaderPass = testCase.width > 760 || metrics.visibleTopBrandHeaders.length === 1;
 
     const checks = {
       appLoaded: { pass: appLoaded, readyState: metrics.readyState, bootText: metrics.bootText, bodyTextStart: metrics.bodyTextStart },
@@ -217,6 +245,7 @@ async function collect(page) {
       horizontalText: { pass: visibleText.every(item => item.writingMode === 'horizontal-tb' && !item.likelyCharacterColumn), offenders: visibleText.filter(item => item.writingMode !== 'horizontal-tb' || item.likelyCharacterColumn) },
       asideWideEnough: { pass: appLoaded && Boolean(asideWideEnough), display: metrics.elements.aside?.display, width: metrics.elements.aside?.width || 0 },
       sidebarBrandLockup: { pass: brandPass, ...metrics.brand, elements: { brand: metrics.elements.brand, logo: metrics.elements.brandLogo, copy: metrics.elements.brandCopy } },
+      oneVisibleMobileBrandHeader: { pass: mobileHeaderPass, expected: testCase.width <= 760 ? 1 : 'not enforced', actual: metrics.visibleTopBrandHeaders.length, headers: metrics.visibleTopBrandHeaders },
       oneCanonicalResponsiveAsset: {
         pass: metrics.responsiveAssets.filter(item => item.includes('responsive-final')).length === 1 && metrics.responsiveAssets.every(item => !item.includes('responsive-shell')),
         assets: metrics.responsiveAssets,
