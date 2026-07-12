@@ -89,7 +89,7 @@ button,
  * 1170–1240px. At this range the themed 224px sidebar plus the hard 360px
  * hero aside no longer fit. Collapse both structures before they can squeeze.
  */
-@media (max-width: 1320px) {
+@media (max-width: 1240px) {
   body.service-v15.design-v14 .appShell,
   body.service-v15 .appShell,
   body.design-v14 .appShell {
