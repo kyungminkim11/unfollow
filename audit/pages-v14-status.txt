@@ -1,9 +1,9 @@
 V14_PAGES_WORKFLOW_STATUS
-source_commit=f3fa2ccd4d3c3b94c2507e867fa1dd6cf390b0fc
-checked_at=2026-07-12T05:01:02Z
-run_id=29180495309
+source_commit=56991a14263104656bb21a18320fb89ad4011919
+checked_at=2026-07-12T05:13:58Z
+run_id=29180830889
 run_attempt=1
-run_url=https://github.com/kyungminkim11/unfollow/actions/runs/29180495309
+run_url=https://github.com/kyungminkim11/unfollow/actions/runs/29180830889
 build_result=success
 deploy_result=success
 page_url=https://unfollow.lavalabs.co.kr/
