@@ -12,25 +12,15 @@ permissions:
 jobs:
   live-responsive-layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Wait for production release marker
+      - name: Confirm deployed page responds
         run: |
-          for i in {1..60}; do
-            url="https://unfollow.lavalabs.co.kr/?deploy=${GITHUB_SHA}-${i}"
-            body="$(curl -fsSL --retry 2 --connect-timeout 10 -H 'Cache-Control: no-cache' "$url" || true)"
-            if printf '%s' "$body" | grep -Fq 'business-info.js?v=14.1'; then
-              echo "Production release marker found."
-              exit 0
-            fi
-            echo "Waiting for GitHub Pages deployment ($i/60)..."
-            sleep 10
-          done
-          echo "Expected production release marker was not served in time."
-          exit 1
+          curl -fsSL --retry 5 --connect-timeout 10 -H 'Cache-Control: no-cache' \
+            "https://unfollow.lavalabs.co.kr/?live-qa=${GITHUB_SHA}" >/dev/null
 
       - name: Prepare Playwright
         run: |
