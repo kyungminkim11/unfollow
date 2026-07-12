@@ -9,13 +9,14 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/admin-v17.css?v=17.0">
   <link rel="stylesheet" href="/assets/admin-v18.css?v=18.0">
-  <title>뉴스레터 관리자 | 맞팔체커</title>
+  <link rel="stylesheet" href="/assets/admin-inquiries-v21.css?v=21.0">
+  <title>운영 관리자 | 맞팔체커</title>
 </head>
 <body>
 <a class="adminSkip" href="#main">본문으로 바로가기</a>
 <header class="adminHeader"><div class="adminHeaderInner">
-  <a class="adminBrand" href="/"><span class="adminLogo">M</span><span><strong>맞팔체커 관리자</strong><span>Subscribers · Research · Campaigns</span></span></a>
-  <div class="adminHeaderActions"><a href="/">서비스 화면</a><button id="adminLogout" type="button" hidden>로그아웃</button></div>
+  <a class="adminBrand" href="/"><span class="adminLogo">M</span><span><strong>맞팔체커 관리자</strong><span>Subscribers · Inquiries · Campaigns</span></span></a>
+  <div class="adminHeaderActions"><a href="/">서비스 화면</a><a href="/contact/">문의 화면</a><button id="adminLogout" type="button" hidden>로그아웃</button></div>
 </div></header>
 <main id="main" class="adminMain">
   <section id="adminLogin" class="adminLoginCard" aria-labelledby="loginTitle">
@@ -30,7 +31,7 @@
 
   <section id="adminDashboard" class="adminDashboard" hidden aria-labelledby="dashboardTitle">
     <div class="adminHero">
-      <div><span class="adminEyebrow">운영 대시보드</span><h1 id="dashboardTitle">뉴스레터 운영 센터</h1><p id="adminIdentity">관리자 정보를 확인하는 중입니다.</p></div>
+      <div><span class="adminEyebrow">운영 대시보드</span><h1 id="dashboardTitle">맞팔체커 운영 센터</h1><p id="adminIdentity">관리자 정보를 확인하는 중입니다.</p></div>
       <div class="adminHeroActions"><button id="adminRefresh" class="adminSecondary" type="button">새로고침</button><button id="adminExport" class="adminPrimary" type="button">구독자 CSV</button></div>
     </div>
 
@@ -39,6 +40,7 @@
       <article class="adminStat"><span>최근 7일 신청</span><strong id="statWeek">—</strong></article>
       <article class="adminStat"><span>최근 30일 신청</span><strong id="statMonth">—</strong></article>
       <article class="adminStat"><span>프리미엄 의견</span><strong id="statInterest">—</strong></article>
+      <article class="adminStat"><span>새 문의</span><strong id="statInquiry">—</strong></article>
     </section>
 
     <section class="adminInsights" aria-label="프리미엄 수요 요약">
@@ -48,6 +50,7 @@
 
     <div class="adminTabs" role="tablist" aria-label="운영 메뉴">
       <button id="tabSubscribers" class="adminTab" type="button" role="tab" aria-selected="true" aria-controls="panelSubscribers">뉴스레터 구독자</button>
+      <button id="tabInquiries" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelInquiries">문의 접수</button>
       <button id="tabInterest" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelInterest">프리미엄 의견</button>
       <button id="tabCampaigns" class="adminTab" type="button" role="tab" aria-selected="false" aria-controls="panelCampaigns">캠페인 작성·발송</button>
     </div>
@@ -56,6 +59,13 @@
       <div class="adminToolbar"><form id="subscriberSearchForm" class="adminSearch"><input id="subscriberSearch" type="search" autocomplete="off" placeholder="이메일 검색" aria-label="구독자 이메일 검색"><button class="adminSecondary" type="submit">검색</button></form><button id="subscriberClear" class="adminSecondary" type="button">검색 초기화</button></div>
       <div class="adminTableWrap"><table class="adminTable"><thead><tr><th>이메일</th><th>신청 경로</th><th>신청일</th><th>상태</th><th>관리</th></tr></thead><tbody id="subscriberRows"><tr><td colspan="5" class="adminEmpty">구독자 정보를 불러오는 중입니다.</td></tr></tbody></table></div>
       <div class="adminPagination"><span id="subscriberCount">0명</span><div><button id="subscriberPrev" class="adminSecondary" type="button">이전</button><button id="subscriberNext" class="adminSecondary" type="button">다음</button></div></div>
+    </section>
+
+    <section id="panelInquiries" role="tabpanel" aria-labelledby="tabInquiries" hidden>
+      <div class="adminToolbar inquiryToolbarV21"><form id="inquirySearchFormV21" class="adminSearch"><input id="inquirySearchV21" type="search" autocomplete="off" placeholder="이름, 이메일, 제목 검색" aria-label="문의 검색"><button class="adminSecondary" type="submit">검색</button></form><select id="inquiryStatusFilterV21" aria-label="문의 상태 필터"><option value="">전체 상태</option><option value="new">신규</option><option value="in_progress">처리 중</option><option value="resolved">답변 완료</option><option value="spam">스팸</option></select><button id="inquiryClearV21" class="adminSecondary" type="button">초기화</button><button id="inquiryRefreshV21" class="adminSecondary" type="button">새로고침</button></div>
+      <div class="adminTableWrap"><table class="adminTable"><thead><tr><th>접수번호</th><th>문의자</th><th>유형</th><th>제목·내용</th><th>이메일 알림</th><th>상태</th><th>접수일</th><th>관리</th></tr></thead><tbody id="inquiryRowsV21"><tr><td colspan="8" class="adminEmpty">문의 내역을 불러오는 중입니다.</td></tr></tbody></table></div>
+      <div class="adminPagination"><span id="inquiryCountV21">0건</span><div><button id="inquiryPrevV21" class="adminSecondary" type="button">이전</button><button id="inquiryNextV21" class="adminSecondary" type="button">다음</button></div></div>
+      <p class="adminNotice">문의 답장은 문의자 이메일로 직접 전송됩니다. Instagram 비밀번호, 로그인 코드 또는 ZIP 원본을 요청하지 마세요.</p>
     </section>
 
     <section id="panelInterest" role="tabpanel" aria-labelledby="tabInterest" hidden>
@@ -95,10 +105,11 @@
     </section>
 
     <p id="adminStatus" class="adminStatus" role="status" aria-live="polite"></p>
-    <p class="adminNotice">구독자 이메일은 뉴스레터 운영과 수신 해지 처리에만 사용하세요. CSV 파일은 업무가 끝나면 안전한 위치에서 삭제하는 것을 권장합니다.</p>
+    <p class="adminNotice">구독자 이메일과 문의 내용은 서비스 운영과 답변에만 사용하세요. 내보낸 파일은 업무가 끝나면 안전한 위치에서 삭제하는 것을 권장합니다.</p>
   </section>
 </main>
 <script src="/assets/admin-v17.js?v=17.0" defer></script>
 <script src="/assets/admin-campaign-v18.js?v=18.0" defer></script>
+<script src="/assets/admin-inquiries-v21.js?v=21.0" defer></script>
 </body>
 </html>
