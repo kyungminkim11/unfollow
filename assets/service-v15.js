@@ -1,7 +1,7 @@
 (()=>{
   'use strict';
 
-  const VERSION='15.0';
+  const VERSION='15.2';
   const q=(selector,root=document)=>root.querySelector(selector);
   const qa=(selector,root=document)=>Array.from(root.querySelectorAll(selector));
   let observer;
@@ -26,7 +26,7 @@
     if(q('link[data-service-v15]')) return;
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='/assets/service-v15.css?v=15.0';
+    link.href='/assets/service-v15.css?v=15.2';
     link.dataset.serviceV15='true';
     document.head.appendChild(link);
   }
@@ -38,6 +38,44 @@
     link.href='#serviceMainV15';
     link.textContent='본문으로 바로가기';
     document.body.prepend(link);
+  }
+
+  function buildBrand(){
+    const sidebar=q('.sidebar');
+    const brand=q('.brand',sidebar||document);
+    if(!brand||brand.dataset.brandLockup==='15.2') return;
+
+    brand.dataset.brandLockup='15.2';
+    brand.classList.add('brandLockupV15');
+    brand.removeAttribute('aria-hidden');
+
+    const home=document.createElement('a');
+    home.href='/';
+    home.className='brandHomeV15';
+    home.setAttribute('aria-label','맞팔체커 홈');
+
+    const logo=document.createElement('span');
+    logo.className='logo brandLogoV15';
+    logo.setAttribute('aria-hidden','true');
+    logo.innerHTML='<img src="/favicon.svg" width="52" height="52" alt="">';
+
+    const copy=document.createElement('span');
+    copy.className='brandText brandTextV15';
+
+    const title=document.createElement('strong');
+    title.textContent='맞팔체커';
+
+    const descriptor=document.createElement('span');
+    descriptor.className='brandDescriptorV15';
+    descriptor.textContent='Instagram 관계 분석';
+
+    const byline=document.createElement('span');
+    byline.className='lavaByline';
+    byline.textContent='by Lava Labs';
+
+    copy.append(title,descriptor,byline);
+    home.append(logo,copy);
+    brand.replaceChildren(home);
   }
 
   function setPageSemantics(){
@@ -61,11 +99,11 @@
       const current=(element.textContent||'').trim();
       const next=leafCopy.get(current);
       if(next&&current!==next) element.textContent=next;
-      if(/^v(?:10|11|12|13|14)(?:\.\d+)?$/i.test(current)&&current!==version) element.textContent=version;
+      if(/^v(?:10|11|12|13|14|15)(?:\.\d+)?$/i.test(current)&&current!==version) element.textContent=version;
     });
 
     const brandSubtitle=q('.sidebar .brandText > span:not(.lavaByline),.sidebar .brand > span:not(.logo):not(.lavaByline)');
-    setText(brandSubtitle,'Instagram 관계 분석 도구');
+    if(brandSubtitle&&!brandSubtitle.classList.contains('brandDescriptorV15')) setText(brandSubtitle,'Instagram 관계 분석 도구');
 
     const topbarText=q('.serviceTopbar>p,.topbar>p');
     setText(topbarText,'분석, 변화 비교, 작업 기록을 한 곳에서 관리하세요.');
@@ -260,6 +298,7 @@
   }
 
   function decorate(){
+    buildBrand();
     rewriteCopy();
     setPageSemantics();
     buildNavigation();

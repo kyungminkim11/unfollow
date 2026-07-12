@@ -71,6 +71,10 @@ async function collect(page) {
       };
     });
 
+    const brand = document.querySelector('.sidebar .brandLockupV15');
+    const brandLogo = brand?.querySelector('.brandLogoV15 img');
+    const brandText = (brand?.textContent || '').replace(/\s+/g, '').trim();
+
     return {
       readyState: document.readyState,
       bootText: document.getElementById('boot')?.innerText || '',
@@ -86,6 +90,19 @@ async function collect(page) {
         .map(element => element.getAttribute('href') || element.id),
       loadedScripts: Array.from(document.scripts).map(script => script.src).filter(Boolean),
       loadedStyles: Array.from(document.querySelectorAll('link[rel="stylesheet"]')).map(link => link.href),
+      brand: {
+        exists: Boolean(brand),
+        text: brandText,
+        homeHref: brand?.querySelector('.brandHomeV15')?.getAttribute('href') || '',
+        titleCount: brand?.querySelectorAll('.brandTextV15 > strong').length || 0,
+        descriptorCount: brand?.querySelectorAll('.brandDescriptorV15').length || 0,
+        legacyDuplicatePresent: /인스타맞팔|맞팔·언팔/.test(brandText),
+        logo: {
+          src: brandLogo?.getAttribute('src') || '',
+          complete: Boolean(brandLogo?.complete),
+          naturalWidth: brandLogo?.naturalWidth || 0,
+        },
+      },
       elements: {
         appShell: elementMetrics('.appShell'),
         main: elementMetrics('.main'),
@@ -95,6 +112,9 @@ async function collect(page) {
         stepStrip: elementMetrics('.v14StepStrip'),
         summaryGrid: elementMetrics('.v14SummaryGrid'),
         dashboard: elementMetrics('.dashboard'),
+        brand: elementMetrics('.sidebar .brandLockupV15'),
+        brandLogo: elementMetrics('.sidebar .brandLogoV15'),
+        brandCopy: elementMetrics('.sidebar .brandTextV15'),
       },
       textChecks,
     };
@@ -180,6 +200,15 @@ async function collect(page) {
         ? (metrics.elements.aside?.width || 0) >= Math.min(700, testCase.width - 80)
         : (metrics.elements.aside?.width || 0) >= 330);
     const relevantErrors = errors.filter(entry => !entry.text.includes('code.iconify.design'));
+    const brandPass = metrics.brand.exists
+      && metrics.brand.text === '맞팔체커Instagram관계분석byLavaLabs'
+      && metrics.brand.homeHref === '/'
+      && metrics.brand.titleCount === 1
+      && metrics.brand.descriptorCount === 1
+      && !metrics.brand.legacyDuplicatePresent
+      && metrics.brand.logo.src === '/favicon.svg'
+      && metrics.brand.logo.complete
+      && metrics.brand.logo.naturalWidth > 0;
 
     const checks = {
       appLoaded: { pass: appLoaded, readyState: metrics.readyState, bootText: metrics.bootText, bodyTextStart: metrics.bodyTextStart },
@@ -187,6 +216,7 @@ async function collect(page) {
       noHorizontalOverflow: { pass: metrics.documentWidth.scrollWidth <= metrics.documentWidth.clientWidth + 1, ...metrics.documentWidth },
       horizontalText: { pass: visibleText.every(item => item.writingMode === 'horizontal-tb' && !item.likelyCharacterColumn), offenders: visibleText.filter(item => item.writingMode !== 'horizontal-tb' || item.likelyCharacterColumn) },
       asideWideEnough: { pass: appLoaded && Boolean(asideWideEnough), display: metrics.elements.aside?.display, width: metrics.elements.aside?.width || 0 },
+      sidebarBrandLockup: { pass: brandPass, ...metrics.brand, elements: { brand: metrics.elements.brand, logo: metrics.elements.brandLogo, copy: metrics.elements.brandCopy } },
       oneCanonicalResponsiveAsset: {
         pass: metrics.responsiveAssets.filter(item => item.includes('responsive-final')).length === 1 && metrics.responsiveAssets.every(item => !item.includes('responsive-shell')),
         assets: metrics.responsiveAssets,
@@ -201,6 +231,12 @@ async function collect(page) {
     results.push(result);
     fs.writeFileSync(path.join(OUT_DIR, `${testCase.name}.json`), JSON.stringify(result, null, 2));
     await page.screenshot({ path: path.join(OUT_DIR, `${testCase.name}.png`), fullPage: false });
+    if (testCase.name === 'desktop-1536') {
+      const brand = page.locator('.sidebar .brandLockupV15');
+      if (await brand.isVisible().catch(() => false)) {
+        await brand.screenshot({ path: path.join(OUT_DIR, 'sidebar-brand-lockup.png') });
+      }
+    }
     await context.close();
     console.log(`[responsive-qa] done ${testCase.name}`, JSON.stringify(checks));
   }

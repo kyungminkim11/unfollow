@@ -32,6 +32,81 @@ body.service-v15 button,body.service-v15 input,body.service-v15 select,body.serv
 .service-v15 .sidebar .brand strong{font-size:18px!important;color:var(--v15-text)!important}
 .service-v15 .sidebar .brand span:not(.logo span){font-size:11px!important;line-height:1.45!important;color:var(--v15-muted)!important}
 .service-v15 .sidebar .lavaByline{font-size:10px!important}
+
+/* One clear brand lockup: logo + service name + descriptor. */
+.service-v15 .sidebar .brand.brandLockupV15{
+  display:block!important;
+  min-width:0!important;
+  padding:0 5px 17px!important;
+  border-bottom:1px solid #eceef4;
+}
+.service-v15 .sidebar .brandHomeV15{
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr);
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  color:inherit!important;
+  text-decoration:none!important;
+}
+.service-v15 .sidebar .brandLogoV15{
+  display:block!important;
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  overflow:hidden!important;
+  border-radius:16px!important;
+  background:transparent!important;
+  box-shadow:0 12px 26px rgba(91,75,231,.22)!important;
+  transition:transform .18s ease,box-shadow .18s ease!important;
+}
+.service-v15 .sidebar .brandLogoV15 img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.service-v15 .sidebar .brandTextV15{
+  display:grid!important;
+  min-width:0!important;
+  gap:2px!important;
+}
+.service-v15 .sidebar .brandTextV15 strong{
+  overflow:hidden;
+  font-size:20px!important;
+  font-weight:950!important;
+  line-height:1.08!important;
+  letter-spacing:-.055em!important;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.service-v15 .sidebar .brandTextV15 .brandDescriptorV15{
+  display:block!important;
+  margin:2px 0 0!important;
+  overflow:hidden;
+  color:#667085!important;
+  font-size:10.5px!important;
+  font-weight:740!important;
+  line-height:1.35!important;
+  letter-spacing:-.015em!important;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.service-v15 .sidebar .brandTextV15 .lavaByline{
+  display:block!important;
+  margin:0!important;
+  color:#98a2b3!important;
+  font-size:9px!important;
+  font-weight:760!important;
+  line-height:1.3!important;
+  letter-spacing:.01em!important;
+  white-space:nowrap;
+}
+.service-v15 .sidebar .brandHomeV15:hover .brandLogoV15{
+  transform:translateY(-1px) scale(1.02);
+  box-shadow:0 15px 30px rgba(91,75,231,.28)!important;
+}
+.service-v15 .sidebar .brandHomeV15:hover .brandTextV15 strong{color:var(--v15-brand-deep)!important}
 .service-v15 .v15LegacyNav{display:none!important}
 
 .v15ServiceNav{display:flex;flex-direction:column;gap:5px;min-width:0}
@@ -116,6 +191,9 @@ body.v8-dark.service-v15 .v15SnapshotNotice{border-color:#55492e;background:#272
 body.v8-dark.service-v15 .privacyNoticeV10{border-color:#2f4c42!important;background:#15231f!important}
 body.v8-dark.service-v15 .privacyNoticeV10 h2{color:#a9e4cc!important}
 body.v8-dark.service-v15 .panelHeader,body.v8-dark.service-v15 .table th{background:#1d222d!important}
+body.v8-dark.service-v15 .sidebar .brand.brandLockupV15{border-bottom-color:#2d3442}
+body.v8-dark.service-v15 .sidebar .brandTextV15 .brandDescriptorV15{color:#b7c0ce!important}
+body.v8-dark.service-v15 .sidebar .brandTextV15 .lavaByline{color:#858fa1!important}
 
 @media(max-width:1180px){.service-v15 .appShell{display:block!important}.service-v15 .sidebar{padding:10px 16px!important}.service-v15 .v15ServiceNav{display:none}.service-v15 .main{padding:0 20px 64px!important}}
 @media(max-width:980px){.service-v15 .hero.v14Hero{grid-template-columns:1fr!important}.service-v15 .v14HeroAside{position:relative!important;top:auto!important;max-height:none!important}.v15TrustGrid{grid-template-columns:1fr!important}}
