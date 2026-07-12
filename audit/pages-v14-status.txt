@@ -1,9 +1,9 @@
 V14_PAGES_WORKFLOW_STATUS
-source_commit=5fda22d8f884fbeea164d9dc45639e106eb159de
-checked_at=2026-07-12T02:54:54Z
-run_id=29177431260
+source_commit=c70bb10a8f57d3d7aa7e9fc9f8ce6c5a06ecdeaa
+checked_at=2026-07-12T02:56:15Z
+run_id=29177444470
 run_attempt=1
-run_url=https://github.com/kyungminkim11/unfollow/actions/runs/29177431260
-build_result=cancelled
-deploy_result=cancelled
+run_url=https://github.com/kyungminkim11/unfollow/actions/runs/29177444470
+build_result=failure
+deploy_result=skipped
 page_url=
