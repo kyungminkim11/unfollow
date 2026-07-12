@@ -1,0 +1,295 @@
+/* Responsive shell for narrow desktop windows and Chrome Side Panel use.
+   Uses the actual .main container width, so browser zoom and Side Panel width
+   do not leave the desktop two-column layout squeezed into a small area. */
+
+.main{
+  container-type:inline-size;
+  container-name:matchal-main;
+  min-width:0;
+}
+
+.hero > *,
+.uploadPanel > *,
+.onboardingBoard > *,
+.dashboard > *,
+.workbench > *,
+.topTools > *,
+.serviceTopbar > *{
+  min-width:0;
+}
+
+.hero h1,
+.hero h2,
+.uploadPanel h2,
+.onboardCard,
+.stat,
+.btn,
+.serviceTopActions a,
+.serviceTopActions button{
+  word-break:keep-all;
+  overflow-wrap:normal;
+}
+
+@container matchal-main (max-width:1150px){
+  .hero{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:14px!important;
+  }
+
+  .heroMain{
+    padding:26px!important;
+  }
+
+  .heroMain h1,
+  h1{
+    max-width:850px;
+    font-size:clamp(36px,5.8cqw,52px)!important;
+    line-height:1.05!important;
+    word-break:keep-all!important;
+  }
+
+  .lead{
+    max-width:850px;
+    word-break:keep-all!important;
+  }
+
+  .uploadPanel{
+    padding:22px!important;
+  }
+
+  .drop{
+    min-height:142px!important;
+  }
+
+  .workbench{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:14px!important;
+  }
+
+  .focusPanel{
+    position:relative!important;
+    top:auto!important;
+    order:-1!important;
+  }
+
+  .topTools{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .topTools .search,
+  .topTools .btnRow{
+    grid-column:auto!important;
+  }
+
+  .btnRow{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:8px!important;
+  }
+
+  .tableWrap{
+    overflow:auto!important;
+    max-width:100%;
+  }
+
+  .extensionPromoInner{
+    grid-template-columns:minmax(0,1fr)!important;
+    align-items:start!important;
+  }
+
+  .extensionPromoActions{
+    justify-content:flex-start!important;
+  }
+}
+
+@container matchal-main (max-width:920px){
+  .serviceTopbar{
+    height:auto!important;
+    min-height:64px;
+    padding:10px 0!important;
+    align-items:flex-start!important;
+    flex-wrap:wrap!important;
+  }
+
+  .serviceTopbar p{
+    flex:1 1 100%;
+    font-size:13px!important;
+  }
+
+  .serviceTopActions{
+    width:100%;
+    margin-left:0!important;
+    justify-content:flex-start!important;
+    flex-wrap:wrap!important;
+  }
+
+  .heroMain{
+    padding:22px!important;
+  }
+
+  .heroMain h1,
+  h1{
+    font-size:clamp(34px,7.2cqw,46px)!important;
+  }
+
+  .onboardingBoard{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+  }
+
+  .dashboard{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .trustStrip,
+  .heroSummaryV8{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .resourceBar{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .uploadPanel .quickStart,
+  .uploadPanel .safeNotice,
+  .uploadPanel .sampleNudge{
+    width:100%;
+    box-sizing:border-box;
+  }
+
+  .uploadPanel .btn,
+  .uploadPanel button,
+  .onboardCard,
+  .stat{
+    white-space:normal!important;
+    word-break:keep-all!important;
+  }
+}
+
+@container matchal-main (max-width:700px){
+  .heroMain,
+  .uploadPanel{
+    padding:18px!important;
+    border-radius:20px!important;
+  }
+
+  .heroMain h1,
+  h1{
+    font-size:clamp(30px,9.2cqw,40px)!important;
+    letter-spacing:-.05em!important;
+  }
+
+  .lead{
+    font-size:14px!important;
+    line-height:1.62!important;
+  }
+
+  .heroBadges,
+  .serviceTopActions,
+  .extensionPromoActions,
+  .topTools .btnRow,
+  .userCard .actions{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    width:100%;
+    gap:8px!important;
+  }
+
+  .heroBadges span,
+  .serviceTopActions a,
+  .serviceTopActions button,
+  .extensionPromoBtn,
+  .topTools .btnRow .btn,
+  .userCard .actions .btn{
+    width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box;
+    justify-content:center!important;
+  }
+
+  .drop{
+    min-height:126px!important;
+    padding:18px!important;
+  }
+
+  .drop > *,
+  .quickStart > *,
+  .safeNotice > *{
+    min-width:0!important;
+    word-break:keep-all!important;
+  }
+
+  .dashboard,
+  .metaGrid,
+  .heroSummaryV8,
+  .trustStrip{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+
+  .extensionPromoInner{
+    padding:16px!important;
+  }
+}
+
+@container matchal-main (max-width:470px){
+  .heroBadges,
+  .serviceTopActions,
+  .extensionPromoActions,
+  .topTools .btnRow,
+  .userCard .actions,
+  .dashboard,
+  .metaGrid,
+  .heroSummaryV8,
+  .trustStrip{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .heroMain,
+  .uploadPanel{
+    padding:16px!important;
+  }
+
+  .heroMain h1,
+  h1{
+    font-size:clamp(29px,10.4cqw,37px)!important;
+  }
+}
+
+/* Viewport fallbacks for browsers without container-query support. */
+@media(max-width:1320px){
+  .appShell{
+    grid-template-columns:1fr!important;
+  }
+
+  .sidebar{
+    display:none!important;
+  }
+
+  .main{
+    max-width:none!important;
+    width:auto!important;
+    padding-left:20px!important;
+    padding-right:20px!important;
+  }
+
+  .hero{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .workbench{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .focusPanel{
+    position:relative!important;
+    top:auto!important;
+    order:-1!important;
+  }
+}
+
+@media(max-width:760px){
+  .main{
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+}
