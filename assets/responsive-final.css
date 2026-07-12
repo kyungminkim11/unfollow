@@ -1,460 +1,426 @@
-/* Final responsive pass — loaded after every app stylesheet. */
+/*
+ * Canonical responsive layer.
+ * Loaded once, after design-v14/service-v15/mobile-native styles.
+ *
+ * The application DOM is decorated at runtime as:
+ *   .hero.v14Hero
+ *     > .v14HeroPrimary
+ *     > .v14HeroAside
+ *       .v14StepStrip
+ *       .v14SummaryGrid
+ *
+ * Keep selectors at least as specific as the service theme rules because the
+ * theme declares its desktop grid with !important.
+ */
 
-html,body{
-  max-width:100%;
-  overflow-x:hidden;
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
-*,*::before,*::after{
-  box-sizing:border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.appShell,.main,.hero,.heroMain,.uploadPanel,.onboardingBoard,.dashboard,.workbench,
-.panel,.card,.serviceTopbar,.serviceTopActions,.extensionPromoSite,.extensionPromoInner{
-  min-width:0!important;
+.appShell,
+.main,
+.hero.v14Hero,
+.v14HeroPrimary,
+.v14HeroAside,
+.v14StepStrip,
+.v14SummaryGrid,
+.dashboard,
+.onboardingBoard,
+.workbench,
+.topTools,
+.serviceTopbar,
+.serviceTopActions,
+.extensionPromoSite,
+.extensionPromoInner,
+.extensionPromoCopy,
+.extensionPromoText {
+  min-width: 0 !important;
 }
 
-/* Prevent Korean labels from collapsing into one character per line. */
-.hero *,
-.uploadPanel *,
-.onboardingBoard *,
+/* Korean UI labels must always remain horizontally typeset. */
+.hero.v14Hero *,
+.v14HeroAside *,
+.v14StepStrip *,
+.v14SummaryGrid *,
 .dashboard *,
-.workbench *,
 .serviceTopbar *,
-.extensionPromoSite *{
-  text-orientation:mixed;
-  writing-mode:horizontal-tb;
+.extensionPromoSite * {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
 }
 
-button,a,.btn,.tab,.select,.search,input,textarea{
-  min-width:0;
+.v14StepStrip span,
+.v14SummaryGrid span,
+.v14SummaryGrid strong,
+.dashboard .stat span,
+.dashboard .stat strong,
+.v14HeroAside h2,
+.v14HeroAside h3,
+.v14HeroAside p,
+.v14HeroAside small {
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
 }
 
-button,.btn,.serviceTopActions a,.serviceTopActions button,.extensionPromoBtn{
-  min-height:44px;
+button,
+.btn,
+.serviceTopActions a,
+.serviceTopActions button,
+.v14ResourceBar a,
+.v14ResourceBar button,
+.extensionPromoBtn {
+  max-width: 100%;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
 }
 
-/* Chrome Side Panel / small laptop layout */
-body.matchal-compact .appShell{
-  display:block!important;
-  grid-template-columns:minmax(0,1fr)!important;
-}
-
-body.matchal-compact .sidebar{
-  display:none!important;
-}
-
-body.matchal-compact .main{
-  width:min(100%,1180px)!important;
-  max-width:1180px!important;
-  margin:0 auto!important;
-  padding:0 20px 38px!important;
-}
-
-body.matchal-compact .serviceTopbar{
-  width:100%!important;
-  min-height:68px!important;
-  height:auto!important;
-  padding:11px 0!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:10px 14px!important;
-  flex-wrap:wrap!important;
-}
-
-body.matchal-compact .serviceTopbar p{
-  flex:1 1 360px!important;
-  max-width:680px!important;
-  margin:0!important;
-  font-size:13px!important;
-  line-height:1.5!important;
-  word-break:keep-all!important;
-}
-
-body.matchal-compact .serviceTopActions{
-  flex:0 1 auto!important;
-  margin-left:auto!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-end!important;
-  gap:8px!important;
-  flex-wrap:wrap!important;
-}
-
-body.matchal-compact .serviceTopActions a,
-body.matchal-compact .serviceTopActions button{
-  white-space:nowrap!important;
-  padding-inline:13px!important;
-}
-
-body.matchal-compact .extensionPromoSite{
-  margin-bottom:14px!important;
-  border-radius:19px!important;
-}
-
-body.matchal-compact .extensionPromoInner{
-  min-height:0!important;
-  padding:16px 18px!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto!important;
-  align-items:center!important;
-  gap:14px!important;
-}
-
-body.matchal-compact .extensionPromoCopy{
-  gap:12px!important;
-}
-
-body.matchal-compact .extensionPromoIcon{
-  width:43px!important;
-  height:43px!important;
-  border-radius:13px!important;
-}
-
-body.matchal-compact .extensionPromoKicker{
-  display:none!important;
-}
-
-body.matchal-compact .extensionPromoTitle{
-  font-size:16px!important;
-}
-
-body.matchal-compact .extensionPromoDesc{
-  margin-top:4px!important;
-  font-size:12px!important;
-  line-height:1.5!important;
-}
-
-body.matchal-compact .extensionPromoStatus{
-  margin-top:7px!important;
-}
-
-body.matchal-compact .extensionPromoActions{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-end!important;
-  gap:8px!important;
-  flex-wrap:wrap!important;
-}
-
-/* Main hero becomes a clear vertical workflow instead of two squeezed columns. */
-body.matchal-compact .hero{
-  width:100%!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:14px!important;
-  margin-bottom:14px!important;
-}
-
-body.matchal-compact .heroMain,
-body.matchal-compact .uploadPanel{
-  width:100%!important;
-  max-width:none!important;
-  min-width:0!important;
-  border-radius:22px!important;
-}
-
-body.matchal-compact .heroMain{
-  padding:27px!important;
-}
-
-body.matchal-compact .heroMain h1,
-body.matchal-compact h1{
-  max-width:820px!important;
-  margin-right:auto!important;
-  font-size:clamp(37px,5vw,52px)!important;
-  line-height:1.04!important;
-  letter-spacing:-.055em!important;
-  word-break:keep-all!important;
-  overflow-wrap:normal!important;
-}
-
-body.matchal-compact .lead{
-  max-width:840px!important;
-  font-size:15px!important;
-  line-height:1.65!important;
-  word-break:keep-all!important;
-  overflow-wrap:break-word!important;
-}
-
-body.matchal-compact .heroBadges{
-  display:flex!important;
-  flex-wrap:wrap!important;
-  gap:7px!important;
-}
-
-body.matchal-compact .uploadPanel{
-  padding:22px!important;
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:12px!important;
-}
-
-body.matchal-compact .uploadPanel::before,
-body.matchal-compact .uploadPanel > *{
-  grid-column:1 / -1!important;
-  width:100%!important;
-  max-width:none!important;
-  min-width:0!important;
-}
-
-body.matchal-compact .uploadPanel::before{
-  margin:0!important;
-  font-size:18px!important;
-}
-
-body.matchal-compact .drop{
-  min-height:144px!important;
-  padding:22px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:14px!important;
-  flex-wrap:wrap!important;
-  text-align:left!important;
-}
-
-body.matchal-compact .drop > *{
-  min-width:0!important;
-  max-width:100%!important;
-  word-break:keep-all!important;
-  overflow-wrap:break-word!important;
-}
-
-body.matchal-compact .heroSummaryV8{
-  display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:9px!important;
-}
-
-body.matchal-compact .quickStart,
-body.matchal-compact .safeNotice,
-body.matchal-compact .sampleNudge,
-body.matchal-compact .resourceBar{
-  width:100%!important;
-  max-width:none!important;
-  min-width:0!important;
-}
-
-/* The small guide inside the upload panel must never become three letter-wide columns. */
-body.matchal-compact .uploadPanel .quickStart,
-body.matchal-compact .uploadPanel .quickStart > div,
-body.matchal-compact .uploadPanel [class*="step"],
-body.matchal-compact .uploadPanel [class*="Step"]{
-  min-width:0!important;
-  word-break:keep-all!important;
-  overflow-wrap:break-word!important;
-}
-
-body.matchal-compact .uploadPanel .quickStart{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:10px!important;
-}
-
-body.matchal-compact .uploadPanel .quickStart > *{
-  width:100%!important;
-  max-width:none!important;
-  grid-column:1 / -1!important;
-}
-
-/* Content sections */
-body.matchal-compact .onboardingBoard{
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
-  gap:12px!important;
-}
-
-body.matchal-compact .onboardCard{
-  min-width:0!important;
-  padding:18px!important;
-}
-
-body.matchal-compact .dashboard{
-  display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:10px!important;
-}
-
-body.matchal-compact .stat{
-  min-width:0!important;
-  padding:16px!important;
-}
-
-body.matchal-compact .workbench{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:14px!important;
-}
-
-body.matchal-compact .focusPanel{
-  position:relative!important;
-  inset:auto!important;
-  top:auto!important;
-  order:-1!important;
-  width:100%!important;
-  max-width:none!important;
-}
-
-body.matchal-compact .topTools{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr)!important;
-  gap:9px!important;
-}
-
-body.matchal-compact .topTools .search,
-body.matchal-compact .topTools .btnRow{
-  grid-column:auto!important;
-  width:100%!important;
-}
-
-body.matchal-compact .btnRow,
-body.matchal-compact .userCard .actions,
-body.matchal-compact .focusActions{
-  display:flex!important;
-  flex-wrap:wrap!important;
-  gap:8px!important;
-}
-
-body.matchal-compact .tableWrap{
-  width:100%!important;
-  max-width:100%!important;
-  overflow:auto!important;
-  overscroll-behavior-inline:contain;
-  -webkit-overflow-scrolling:touch;
-}
-
-body.matchal-compact .table{
-  min-width:760px;
-}
-
-body.matchal-compact footer,
-body.matchal-compact .footer{
-  min-width:0!important;
-}
-
-body.matchal-compact footer a,
-body.matchal-compact .footer a{
-  white-space:normal!important;
-}
-
-/* Narrower than a typical Side Panel split. */
-body.matchal-very-narrow .main{
-  width:100%!important;
-  max-width:none!important;
-  padding:10px 12px 28px!important;
-}
-
-body.matchal-very-narrow .serviceTopbar{
-  display:none!important;
-}
-
-body.matchal-very-narrow .mobileTopV8{
-  display:flex!important;
-}
-
-body.matchal-very-narrow .extensionPromoInner{
-  grid-template-columns:minmax(0,1fr)!important;
-  align-items:start!important;
-}
-
-body.matchal-very-narrow .extensionPromoActions{
-  width:100%!important;
-  display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  justify-content:stretch!important;
-}
-
-body.matchal-very-narrow .extensionPromoBtn{
-  width:100%!important;
-}
-
-body.matchal-very-narrow .heroMain,
-body.matchal-very-narrow .uploadPanel{
-  padding:18px!important;
-  border-radius:19px!important;
-}
-
-body.matchal-very-narrow .heroMain h1,
-body.matchal-very-narrow h1{
-  font-size:clamp(31px,8vw,42px)!important;
-}
-
-body.matchal-very-narrow .drop{
-  min-height:126px!important;
-  padding:18px!important;
-  text-align:center!important;
-  flex-direction:column!important;
-}
-
-body.matchal-very-narrow .heroSummaryV8,
-body.matchal-very-narrow .dashboard,
-body.matchal-very-narrow .metaGrid,
-body.matchal-very-narrow .trustStrip{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-}
-
-body.matchal-very-narrow .onboardingBoard{
-  grid-template-columns:minmax(0,1fr)!important;
-}
-
-body.matchal-very-narrow .onboardCard{
-  padding:16px!important;
-}
-
-body.matchal-very-narrow .btnRow,
-body.matchal-very-narrow .userCard .actions,
-body.matchal-very-narrow .focusActions{
-  display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-}
-
-body.matchal-very-narrow .btnRow .btn,
-body.matchal-very-narrow .userCard .actions .btn,
-body.matchal-very-narrow .focusActions .btn{
-  width:100%!important;
-  justify-content:center!important;
-}
-
-@media(max-width:560px){
-  body.matchal-compact .main,
-  body.matchal-very-narrow .main{
-    padding-left:10px!important;
-    padding-right:10px!important;
+/*
+ * Chrome Side Panel reduces the page viewport from roughly 1536px to
+ * 1170–1240px. At this range the themed 224px sidebar plus the hard 360px
+ * hero aside no longer fit. Collapse both structures before they can squeeze.
+ */
+@media (max-width: 1320px) {
+  body.service-v15.design-v14 .appShell,
+  body.service-v15 .appShell,
+  body.design-v14 .appShell {
+    display: block !important;
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
-  body.matchal-compact .heroMain,
-  body.matchal-compact .uploadPanel,
-  body.matchal-very-narrow .heroMain,
-  body.matchal-very-narrow .uploadPanel{
-    padding:16px!important;
+  body.service-v15.design-v14 .sidebar,
+  body.service-v15 .sidebar,
+  body.design-v14 .sidebar {
+    display: none !important;
   }
 
-  body.matchal-compact .heroMain h1,
-  body.matchal-compact h1,
-  body.matchal-very-narrow .heroMain h1,
-  body.matchal-very-narrow h1{
-    font-size:clamp(29px,10vw,38px)!important;
+  body.service-v15.design-v14 .main,
+  body.service-v15 .main,
+  body.design-v14 .main {
+    width: 100% !important;
+    max-width: 1180px !important;
+    min-width: 0 !important;
+    margin-inline: auto !important;
+    padding: 0 20px 56px !important;
   }
 
-  body.matchal-very-narrow .extensionPromoActions,
-  body.matchal-very-narrow .heroSummaryV8,
-  body.matchal-very-narrow .dashboard,
-  body.matchal-very-narrow .metaGrid,
-  body.matchal-very-narrow .trustStrip,
-  body.matchal-very-narrow .btnRow,
-  body.matchal-very-narrow .userCard .actions,
-  body.matchal-very-narrow .focusActions{
-    grid-template-columns:minmax(0,1fr)!important;
+  /* Higher specificity than .service-v15 .hero.v14Hero. */
+  body.service-v15.design-v14 .hero.v14Hero,
+  body.service-v15 .hero.v14Hero,
+  body.design-v14 .hero.v14Hero {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+
+  body.service-v15.design-v14 .hero.v14Hero > .v14HeroPrimary,
+  body.service-v15.design-v14 .hero.v14Hero > .v14HeroAside,
+  body.service-v15 .hero.v14Hero > .v14HeroPrimary,
+  body.service-v15 .hero.v14Hero > .v14HeroAside,
+  body.design-v14 .hero.v14Hero > .v14HeroPrimary,
+  body.design-v14 .hero.v14Hero > .v14HeroAside {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  body.service-v15.design-v14 .v14HeroAside,
+  body.service-v15 .v14HeroAside,
+  body.design-v14 .v14HeroAside {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    align-self: stretch !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 22px !important;
+  }
+
+  body.service-v15.design-v14 .v14HeroAside > *,
+  body.service-v15 .v14HeroAside > *,
+  body.design-v14 .v14HeroAside > * {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    grid-column: 1 / -1 !important;
+  }
+
+  body.service-v15.design-v14 .v14StepStrip,
+  body.service-v15 .v14StepStrip,
+  body.design-v14 .v14StepStrip {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    overflow: visible !important;
+  }
+
+  body.service-v15.design-v14 .v14StepStrip > div,
+  body.service-v15 .v14StepStrip > div,
+  body.design-v14 .v14StepStrip > div {
+    display: grid !important;
+    min-width: 0 !important;
+    min-height: 64px !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 9px !important;
+  }
+
+  body.service-v15.design-v14 .v14StepStrip span,
+  body.service-v15 .v14StepStrip span,
+  body.design-v14 .v14StepStrip span {
+    display: block !important;
+    min-width: 0 !important;
+    width: auto !important;
+    line-height: 1.45 !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
+
+  body.service-v15.design-v14 .v14SummaryGrid,
+  body.service-v15 .v14SummaryGrid,
+  body.design-v14 .v14SummaryGrid {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  body.service-v15.design-v14 .v14SummaryGrid .sum,
+  body.service-v15 .v14SummaryGrid .sum,
+  body.design-v14 .v14SummaryGrid .sum {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 96px !important;
+  }
+
+  body.service-v15.design-v14 .workbench,
+  body.service-v15 .workbench,
+  body.design-v14 .workbench {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body.service-v15.design-v14 .focusPanel,
+  body.service-v15 .focusPanel,
+  body.design-v14 .focusPanel {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    order: -1 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .extensionPromoInner {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+  }
+
+  .extensionPromoActions {
+    justify-content: flex-start !important;
   }
 }
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    scroll-behavior:auto!important;
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
+@media (max-width: 900px) {
+  body.service-v15.design-v14 .main,
+  body.service-v15 .main,
+  body.design-v14 .main {
+    max-width: none !important;
+    padding-inline: 14px !important;
+  }
+
+  body.service-v15.design-v14 .serviceTopbar,
+  body.service-v15 .serviceTopbar,
+  body.design-v14 .serviceTopbar {
+    height: auto !important;
+    min-height: 62px !important;
+    padding-block: 10px !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+  }
+
+  .serviceTopbar > p,
+  .serviceTopActions {
+    width: 100% !important;
+  }
+
+  .serviceTopActions {
+    margin-left: 0 !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+  }
+
+  body.service-v15.design-v14 .v14SummaryGrid,
+  body.service-v15 .v14SummaryGrid,
+  body.design-v14 .v14SummaryGrid,
+  .dashboard,
+  .metaGrid,
+  .heroSummaryV8,
+  .trustStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .onboardingBoard {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body.service-v15.design-v14 .main,
+  body.service-v15 .main,
+  body.design-v14 .main,
+  body.mobile-native-v19 .main {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  body.service-v15.design-v14 .hero.v14Hero,
+  body.service-v15 .hero.v14Hero,
+  body.design-v14 .hero.v14Hero,
+  body.mobile-native-v19 .hero.v14Hero {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  body.service-v15.design-v14 .v14HeroAside,
+  body.service-v15 .v14HeroAside,
+  body.design-v14 .v14HeroAside {
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  body.service-v15.design-v14 .v14StepStrip,
+  body.service-v15 .v14StepStrip,
+  body.design-v14 .v14StepStrip {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  body.service-v15.design-v14 .v14StepStrip > div,
+  body.service-v15 .v14StepStrip > div,
+  body.design-v14 .v14StepStrip > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
+  }
+
+  .v14ResourceBar,
+  .serviceTopActions,
+  .extensionPromoActions,
+  .topTools .btnRow,
+  .userCard .actions,
+  .focusActions {
+    display: grid !important;
+    width: 100% !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .v14ResourceBar > *,
+  .serviceTopActions > *,
+  .extensionPromoActions > *,
+  .topTools .btnRow > *,
+  .userCard .actions > *,
+  .focusActions > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+  }
+
+  .v14ResourceBar > :first-child {
+    grid-column: 1 / -1 !important;
+  }
+
+  .tableWrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overscroll-behavior-inline: contain;
+  }
+}
+
+@media (max-width: 430px) {
+  body.service-v15.design-v14 .v14SummaryGrid,
+  body.service-v15 .v14SummaryGrid,
+  body.design-v14 .v14SummaryGrid,
+  .dashboard,
+  .metaGrid,
+  .heroSummaryV8,
+  .trustStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .serviceTopActions,
+  .extensionPromoActions,
+  .topTools .btnRow,
+  .userCard .actions,
+  .focusActions {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .v14ResourceBar {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .v14ResourceBar > :first-child {
+    grid-column: auto !important;
+  }
+
+  button,
+  .btn,
+  .serviceTopActions a,
+  .serviceTopActions button,
+  .v14ResourceBar a,
+  .v14ResourceBar button,
+  .extensionPromoBtn {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 340px) {
+  body.service-v15.design-v14 .v14SummaryGrid,
+  body.service-v15 .v14SummaryGrid,
+  body.design-v14 .v14SummaryGrid,
+  .dashboard,
+  .metaGrid,
+  .heroSummaryV8,
+  .trustStrip {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
