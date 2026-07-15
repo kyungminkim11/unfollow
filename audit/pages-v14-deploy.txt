@@ -1,5 +1,5 @@
-V14_PAGES_DEPLOYED
-source_commit=2c5f2759cc15160f495b38929a02e9f15d4b31fc
-deployed_at=2026-07-12T09:00:16Z
-run_id=29186701784
+V22_PAGES_DEPLOYED
+source_commit=0fdbc6464e3ff0b30641da1838cd2258fbb7e797
+deployed_at=2026-07-15T06:28:04Z
+run_id=29394209896
 page_url=https://unfollow.lavalabs.co.kr/
