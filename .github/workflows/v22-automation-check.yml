@@ -1,0 +1,84 @@
+name: V22 Automation Check
+
+on:
+  pull_request:
+    paths:
+      - 'extension/**'
+      - 'assets/automation-v22.*'
+      - 'assets/automation-parser-v22.js'
+      - 'assets/extension-site.js'
+      - 'assets/business-info.js'
+      - 'scripts/automation-v22-smoke.mjs'
+      - 'scripts/build-v13.mjs'
+      - 'sw.js'
+      - '.github/workflows/v22-automation-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax checks
+        run: |
+          node --check assets/automation-parser-v22.js
+          node --check assets/automation-v22.js
+          node --check assets/extension-site.js
+          node --check extension/background.js
+          node --check extension/content-bridge.js
+          node --check extension/instagram-content.js
+          node --check extension/sidepanel.js
+          node -e "const m=require('./extension/manifest.json'); if(m.manifest_version!==3) process.exit(1)"
+
+      - name: Build production site
+        run: node scripts/build-v13.mjs
+
+      - name: Package Companion extension
+        run: |
+          mkdir -p dist/downloads
+          (cd extension && zip -qr ../dist/downloads/matchal-companion-v22.zip .)
+
+      - name: Create fixtures
+        run: python3 scripts/create-smoke-fixtures.py
+
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v22-server.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-v22-server.log
+          exit 1
+
+      - name: Automation audit
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/automation-v22-smoke.mjs
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v22-automation-reports
+          path: |
+            audit/automation-v22-report.json
+            audit/automation-v22-*.png
+          if-no-files-found: warn
+          retention-days: 7
