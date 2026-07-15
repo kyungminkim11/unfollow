@@ -69,8 +69,13 @@
   const loadCompanionLayout=()=>{
     loadStyle('/assets/extension-site.css?v=4','extension-site');
     loadStyle('/assets/responsive-final.css?v=4','responsive-final');
+    loadStyle('/assets/automation-v22.css?v=22.0','automation-v22');
     loadScript('/assets/feedback-v20.js?v=20.0','feedback-v20');
-    loadScript('/assets/extension-site.js?v=8','extension-site');
+    loadScript('/assets/extension-site.js?v=22.0','extension-site',()=>{
+      loadScript('/assets/automation-parser-v22.js?v=22.0','automation-parser-v22',()=>{
+        loadScript('/assets/automation-v22.js?v=22.0','automation-v22');
+      });
+    });
   };
 
   const loadFeatureStack=()=>{
@@ -166,6 +171,7 @@
     links.setAttribute('aria-label','사이트 하단 메뉴');
     links.append(
       navGroup('서비스',[
+        {href:'/#automationV22',label:'팔로우 취소 자동화'},
         {href:'/premium/',label:'프리미엄 예정'},
         {href:'/newsletter/',label:'뉴스레터'}
       ]),
@@ -214,7 +220,7 @@
 
     const notice=document.createElement('p');
     notice.className='businessNoticeV10';
-    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. Instagram ZIP 원본과 분석 결과는 외부 서버로 전송되지 않으며, 뉴스레터를 신청한 경우에만 이메일과 동의 기록을 별도로 저장합니다.';
+    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. Instagram ZIP 원본과 분석 결과는 외부 서버로 전송되지 않으며, 선택한 자동화 목록은 설치한 Chrome 확장 프로그램의 로컬 저장소에서만 처리됩니다.';
 
     details.append(summary,grid,website,notice);
     footer.append(top,details);

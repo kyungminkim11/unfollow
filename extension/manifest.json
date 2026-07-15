@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "맞팔체커 Companion",
+  "version": "22.0.0",
+  "description": "맞팔체커에서 만든 검토 목록을 Instagram에서 사용자가 시작한 배치 작업으로 처리합니다.",
+  "minimum_chrome_version": "116",
+  "permissions": ["storage", "tabs", "sidePanel"],
+  "host_permissions": [
+    "https://www.instagram.com/*",
+    "https://unfollow.lavalabs.co.kr/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "맞팔체커 Companion 열기"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://unfollow.lavalabs.co.kr/*"],
+      "js": ["content-bridge.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.instagram.com/*"],
+      "js": ["instagram-content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
