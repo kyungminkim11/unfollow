@@ -1,5 +1,5 @@
-commit=2c5f2759cc15160f495b38929a02e9f15d4b31fc
-checked_at=2026-07-12T08:58:54Z
+commit=0fdbc6464e3ff0b30641da1838cd2258fbb7e797
+checked_at=2026-07-15T06:26:34Z
 ## Syntax checks
 ## Build release
 Base build completed with a removable external-font assertion. Continuing with release cleanup.
@@ -13,44 +13,44 @@ added 4 packages in 2s
 Installing dependencies...
 Switching to root user to install dependencies...
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
-Get:3 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
-Get:4 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
-Get:5 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
+Get:6 https://packages.microsoft.com/repos/azure-cli noble InRelease [3564 B]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
-Get:7 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
-Get:8 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:8 https://dl.google.com/linux/chrome-stable/deb stable InRelease [1825 B]
 Get:9 https://packages.microsoft.com/repos/azure-cli noble/main amd64 Packages [2314 B]
-Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [181 kB]
-Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.6 kB]
-Get:12 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [214 kB]
-Get:13 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1215 B]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1092 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [269 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1660 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [327 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1225 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [276 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [827 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [187 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.8 kB]
-Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.9 kB]
-Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1174 kB]
-Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [231 kB]
-Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
-Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
-Fetched 8809 kB in 1s (7633 kB/s)
+Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [191 kB]
+Get:11 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [11.7 kB]
+Get:12 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [224 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1096 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [270 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1661 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [328 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1229 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [278 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5744 B]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [10.5 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [835 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [188 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [44.9 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [11.9 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1177 kB]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [232 kB]
+Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:31 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
+Get:32 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1139 kB]
+Get:33 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [260 kB]
+Get:34 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1221 B]
+Fetched 10.3 MB in 1s (7846 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
 Reading state information...
-libasound2t64 is already the newest version (1.2.11-1ubuntu0.2).
-libasound2t64 set to manually installed.
 libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
 libatk-bridge2.0-0t64 set to manually installed.
 libatk1.0-0t64 is already the newest version (2.52.0-1build1).
@@ -100,15 +100,19 @@ libfreetype6 set to manually installed.
 fonts-liberation is already the newest version (1:2.1.5-3).
 fonts-liberation set to manually installed.
 The following additional packages will be installed:
-  xfonts-encodings xfonts-utils
+  libasound2-data xfonts-encodings xfonts-utils
+Suggested packages:
+  alsa-utils libasound2-plugins
 Recommended packages:
-  fonts-ipafont-mincho fonts-tlwg-loma
+  fonts-ipafont-mincho fonts-tlwg-loma alsa-ucm-conf alsa-topology-conf
 The following NEW packages will be installed:
   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
   xfonts-utils
-0 upgraded, 9 newly installed, 0 to remove and 38 not upgraded.
-Need to get 21.1 MB of archives.
+The following packages will be upgraded:
+  libasound2-data libasound2t64
+2 upgraded, 9 newly installed, 0 to remove and 51 not upgraded.
+Need to get 21.5 MB of archives.
 After this operation, 79.5 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
@@ -116,41 +120,49 @@ Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
 Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
-Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
-Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
-Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
-Fetched 21.1 MB in 1s (18.0 MB/s)
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libasound2t64 amd64 1.2.11-1ubuntu0.3 [398 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libasound2-data all 1.2.11-1ubuntu0.3 [21.4 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+Fetched 21.5 MB in 0s (80.0 MB/s)
 Selecting previously unselected package fonts-ipafont-gothic.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 202701 files and directories currently installed.)
-Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
 Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
 Selecting previously unselected package fonts-freefont-ttf.
-Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+Preparing to unpack .../01-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
 Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
 Selecting previously unselected package fonts-tlwg-loma-otf.
-Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+Preparing to unpack .../02-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
 Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
 Selecting previously unselected package fonts-unifont.
-Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+Preparing to unpack .../03-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
 Unpacking fonts-unifont (1:15.1.01-1build1) ...
 Selecting previously unselected package fonts-wqy-zenhei.
-Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+Preparing to unpack .../04-fonts-wqy-zenhei_0.9.45-8_all.deb ...
 Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+Preparing to unpack .../05-libasound2t64_1.2.11-1ubuntu0.3_amd64.deb ...
+Unpacking libasound2t64:amd64 (1.2.11-1ubuntu0.3) over (1.2.11-1ubuntu0.2) ...
+Preparing to unpack .../06-libasound2-data_1.2.11-1ubuntu0.3_all.deb ...
+Unpacking libasound2-data (1.2.11-1ubuntu0.3) over (1.2.11-1ubuntu0.2) ...
 Selecting previously unselected package xfonts-encodings.
-Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+Preparing to unpack .../07-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
 Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
 Selecting previously unselected package xfonts-utils.
-Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+Preparing to unpack .../08-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
 Unpacking xfonts-utils (1:7.7+6build3) ...
 Selecting previously unselected package xfonts-cyrillic.
-Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+Preparing to unpack .../09-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
 Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
 Selecting previously unselected package xfonts-scalable.
-Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+Preparing to unpack .../10-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
 Unpacking xfonts-scalable (1:1.0.3-1.3) ...
 Setting up fonts-wqy-zenhei (0.9.45-8) ...
 Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+Setting up libasound2-data (1.2.11-1ubuntu0.3) ...
+Setting up libasound2t64:amd64 (1.2.11-1ubuntu0.3) ...
 Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
 Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
 Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
@@ -159,6 +171,7 @@ Setting up fonts-unifont (1:15.1.01-1build1) ...
 Setting up xfonts-utils (1:7.7+6build3) ...
 Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
 Setting up xfonts-scalable (1:1.0.3-1.3) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.7) ...
 Processing triggers for man-db (2.12.0-4build2) ...
 Not building database; man-db/auto-update is not 'true'.
 Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
@@ -173,6 +186,7 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 ## Start production preview
+curl: (7) Failed to connect to 127.0.0.1 port 4173 after 0 ms: Couldn't connect to server
 ## Browser smoke tests
 {
   "checks": [
