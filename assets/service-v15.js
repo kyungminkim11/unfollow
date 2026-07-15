@@ -88,7 +88,7 @@
     q('.hero')?.setAttribute('aria-labelledby','serviceHeadingV15');
     const heading=q('.hero h1');
     if(heading) heading.id='serviceHeadingV15';
-    ['#top','#appPanel','#compareV13','#beginnerGuide','#faq','#privacyNoticeV10'].forEach(selector=>q(selector)?.classList.add('v15Anchor'));
+    ['#top','#appPanel','#compareV13','#automationV22','#beginnerGuide','#faq','#privacyNoticeV10'].forEach(selector=>q(selector)?.classList.add('v15Anchor'));
   }
 
   function rewriteCopy(){
@@ -105,7 +105,7 @@
     if(brandSubtitle&&!brandSubtitle.classList.contains('brandDescriptorV15')) setText(brandSubtitle,'Instagram 관계 분석 도구');
 
     const topbarText=q('.serviceTopbar>p,.topbar>p');
-    setText(topbarText,'분석, 변화 비교, 작업 기록을 한 곳에서 관리하세요.');
+    setText(topbarText,'분석, 변화 비교, 작업 기록과 선택형 자동화를 한 곳에서 관리하세요.');
 
     const hero=q('.hero');
     const eyebrow=q('.eyebrow',hero||document);
@@ -113,7 +113,7 @@
     const heading=q('h1',hero||document);
     setText(heading,'Instagram 팔로우 관계를 안전하게 확인하세요');
     const lead=q('.lead',hero||document);
-    setText(lead,'Instagram에서 내려받은 JSON ZIP을 선택하면 맞팔, 나만 팔로우 중인 계정, 나를 팔로우 중인 계정을 이 브라우저에서 분석합니다.');
+    setText(lead,'Instagram JSON ZIP으로 맞팔과 관계 변화를 분석하고, 선택한 비맞팔·팔로워 이탈 목록은 Chrome Companion에서 사용자가 시작한 작업으로 처리할 수 있습니다.');
 
     const drop=q('.drop');
     const dropStrong=q('strong',drop||document);
@@ -123,15 +123,15 @@
 
     const compare=q('#compareV13');
     const compareParagraph=q('.compareHeadV13 p',compare||document);
-    setText(compareParagraph,'이전 ZIP과 최신 ZIP을 비교해 두 데이터 시점 사이의 팔로우 관계 변화를 확인합니다.');
+    setText(compareParagraph,'이전 ZIP과 최신 ZIP을 비교해 관계 변화와 자동화 가능한 팔로워 이탈 대상을 계산합니다.');
     const comparePrivacy=q('.comparePrivacyV13 span',compare||document);
     setText(comparePrivacy,'두 파일은 모두 브라우저 안에서만 처리됩니다.');
 
     const privacy=q('#privacyNoticeV10');
     const privacyTitle=q('h2',privacy||document);
-    setText(privacyTitle,'파일은 업로드되지 않고 이 브라우저에서만 처리됩니다');
+    setText(privacyTitle,'ZIP은 업로드되지 않고 이 브라우저에서만 처리됩니다');
     const privacyText=q('p',privacy||document);
-    setText(privacyText,'선택한 ZIP과 분석 결과는 외부 서버로 전송되지 않습니다. 검토 상태와 작업공간 이름만 현재 브라우저의 로컬 저장소에 보관되며 언제든 삭제할 수 있습니다.');
+    setText(privacyText,'ZIP과 분석 결과는 외부 서버로 전송되지 않습니다. 선택한 자동화 아이디 목록과 작업 상태는 설치한 Chrome Companion의 로컬 저장소에만 보관됩니다.');
   }
 
   function navLink(href,label,description){
@@ -166,7 +166,8 @@
     nav.append(serviceTitle);
     nav.append(
       navLink('/#top','분석 시작','ZIP 한 개 분석'),
-      navLink('/#compareV13','변화 비교','두 시점 비교')
+      navLink('/#compareV13','변화 비교','두 시점 비교'),
+      navLink('/#automationV22','팔로우 취소 자동화','선택 목록 처리')
     );
 
     const workspace=document.createElement('button');
@@ -186,7 +187,7 @@
     helpTitle.textContent='안내';
     nav.append(helpTitle);
     nav.append(
-      navLink('/guide/','사용 가이드','데이터 받는 방법'),
+      navLink('/guide/','사용 가이드','분석·자동화 방법'),
       navLink('/help/','도움말','오류 해결과 FAQ'),
       navLink('/privacy/','개인정보 안내','처리·저장·삭제')
     );
@@ -200,14 +201,15 @@
       mobile.setAttribute('aria-label','모바일 주요 메뉴');
       mobile.append(
         navLink('/#top','분석','ZIP 분석'),
-        navLink('/#compareV13','비교','변화 확인')
+        navLink('/#compareV13','비교','변화 확인'),
+        navLink('/#automationV22','자동화','목록 처리')
       );
       const mobileWorkspace=document.createElement('button');
       mobileWorkspace.type='button';
       mobileWorkspace.className='v15NavItem';
       mobileWorkspace.innerHTML='<span>기록</span><small>작업공간</small>';
       mobileWorkspace.addEventListener('click',()=>q('[data-v13-workspace]')?.click());
-      mobile.append(mobileWorkspace,navLink('/help/','도움말','문제 해결'));
+      mobile.append(mobileWorkspace);
       document.body.appendChild(mobile);
     }
 
@@ -234,7 +236,7 @@
     trust.innerHTML=`
       <div><strong>파일 전송 없음</strong><span>선택은 업로드가 아닙니다. 분석은 기기 안에서 진행됩니다.</span></div>
       <div><strong>로그인 정보 불필요</strong><span>Instagram 아이디나 비밀번호를 입력하지 않습니다.</span></div>
-      <div><strong>자동 언팔 없음</strong><span>결과를 확인한 뒤 Instagram에서 직접 판단하고 처리합니다.</span></div>`;
+      <div><strong>선택형 자동화</strong><span>목록을 확인하고 Companion에서 처리 수와 대기 시간을 정한 뒤 시작합니다.</span></div>`;
 
     const drop=q('.drop',upload);
     if(drop) drop.after(trust); else upload.appendChild(trust);
@@ -264,7 +266,7 @@
     if(!app||q('.v15SnapshotNotice',app)) return;
     const notice=document.createElement('aside');
     notice.className='v15SnapshotNotice';
-    notice.innerHTML='<strong>결과는 ZIP을 생성한 시점의 스냅샷입니다.</strong><span>Instagram의 현재 상태와 다를 수 있으므로 실제 팔로우 변경 전 프로필을 한 번 더 확인하세요.</span>';
+    notice.innerHTML='<strong>결과는 ZIP을 생성한 시점의 스냅샷입니다.</strong><span>Companion은 실행 시 각 프로필의 현재 팔로우 상태를 다시 확인하며, 이미 팔로우하지 않는 계정은 건너뜁니다.</span>';
     const header=q('.panelHeader',app);
     if(header) header.after(notice); else app.prepend(notice);
   }
@@ -275,7 +277,7 @@
     if(!primary||q('.v15ServiceSummary',primary)) return;
     const summary=document.createElement('div');
     summary.className='v15ServiceSummary';
-    summary.innerHTML='<span><b>1</b> JSON ZIP 선택</span><span><b>2</b> 관계 자동 분류</span><span><b>3</b> 직접 확인·처리</span>';
+    summary.innerHTML='<span><b>1</b> JSON ZIP 선택</span><span><b>2</b> 관계·변화 분류</span><span><b>3</b> 검토 또는 자동화</span>';
     const lead=q('.lead',primary);
     if(lead) lead.after(summary); else primary.prepend(summary);
   }
@@ -324,7 +326,7 @@
 
     observer=new MutationObserver(scheduleDecorate);
     observer.observe(document.body,{childList:true,subtree:true});
-    setTimeout(()=>observer?.disconnect(),2500);
+    setTimeout(()=>observer?.disconnect(),3500);
     addEventListener('hashchange',updateNavigationState);
     addEventListener('popstate',updateNavigationState);
   }
