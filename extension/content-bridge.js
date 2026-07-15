@@ -3,6 +3,7 @@
 
   const PAGE_SOURCE = 'MATCHAL_WEB';
   const EXTENSION_SOURCE = 'MATCHAL_EXTENSION';
+  const RELATIONSHIP_KEY = 'matchalRelationshipStateV23';
 
   function post(type, payload = {}) {
     window.postMessage({ source: EXTENSION_SOURCE, type, payload }, location.origin);
@@ -21,12 +22,23 @@
     if (response?.ok) post('MATCHAL_READY', { version: response.version || chrome.runtime.getManifest().version });
   }
 
+  async function announceRelationshipState() {
+    const response = await runtimeMessage({ type: 'MATCHAL_GET_RELATIONSHIP_SCAN' });
+    if (response?.ok) post('MATCHAL_RELATIONSHIP_SCAN', { state: response.state || {}, version: response.version || chrome.runtime.getManifest().version });
+    else post('MATCHAL_ERROR', response || { message: '스캔 결과를 불러오지 못했습니다.' });
+  }
+
   window.addEventListener('message', async event => {
     if (event.source !== window || event.origin !== location.origin || event.data?.source !== PAGE_SOURCE) return;
     const type = String(event.data.type || '');
 
     if (type === 'MATCHAL_PING') {
       await announceReady();
+      return;
+    }
+
+    if (type === 'MATCHAL_GET_RELATIONSHIP_SCAN') {
+      await announceRelationshipState();
       return;
     }
 
@@ -42,5 +54,11 @@
     }
   });
 
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== 'local' || !changes[RELATIONSHIP_KEY]?.newValue) return;
+    post('MATCHAL_RELATIONSHIP_SCAN', { state: changes[RELATIONSHIP_KEY].newValue, version: chrome.runtime.getManifest().version });
+  });
+
   announceReady();
+  announceRelationshipState();
 })();
