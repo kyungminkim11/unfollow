@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
-  <meta name="description" content="맞팔체커 ZIP 분석, 팔로우 취소 자동화, 지원 브라우저, 작업 기록과 변화 비교 도움말입니다.">
+  <meta name="description" content="맞팔체커 Instagram 웹 스캔, ZIP 분석, 팔로우 취소 자동화와 확장 프로그램 문제 해결 도움말입니다.">
   <link rel="canonical" href="https://unfollow.lavalabs.co.kr/help/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site-pages-v15.css?v=15.0">
@@ -16,21 +16,24 @@
 <a class="pageSkip" href="#main">본문으로 바로가기</a>
 <header class="pageHeader"><div class="pageHeaderInner">
   <a class="pageBrand" href="/"><span class="pageLogo">M</span><span class="pageBrandText"><strong>맞팔체커</strong><span>by Lava Labs</span></span></a>
-  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/">가이드</a><a href="/help/" aria-current="page">도움말</a><a href="/#automationV22">자동화</a><a href="/contact/">문의</a><a class="primary" href="/">분석 시작</a></nav>
+  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/">가이드</a><a href="/help/" aria-current="page">도움말</a><a href="/#relationshipScanV23">웹 스캔</a><a href="/contact/">문의</a><a class="primary" href="/">분석 시작</a></nav>
 </div></header>
 <main id="main" class="pageMain">
-  <div class="pageNoticeBannerV16"><div><strong>자동화는 사용자가 직접 시작해야 합니다</strong><span>웹에서 목록을 만든 뒤 Chrome Companion에서 처리 수와 대기 시간을 확인하고 시작합니다.</span></div><a href="/#automationV22">자동화 열기</a></div>
-  <section class="pageHero"><span class="pageEyebrow">문제 해결</span><h1>분석이 되지 않을 때 확인하세요</h1><p>ZIP 형식, 확장 프로그램 연결, Instagram 로그인 상태와 화면 언어를 순서대로 확인하면 대부분의 분석·자동화 문제를 찾을 수 있습니다.</p><div class="pageActions"><a class="pageButton primary" href="/">분석 화면으로 이동</a><a class="pageButton" href="/guide/">전체 사용법 보기</a></div></section>
+  <div class="pageNoticeBannerV16"><div><strong>현재 관계 스캔은 PC Chrome Companion에서 실행합니다</strong><span>내 Instagram 프로필을 열고 팔로워·팔로잉 목록 수집이 끝날 때까지 해당 탭을 유지하세요.</span></div><a href="/#relationshipScanV23">스캔 화면</a></div>
+  <section class="pageHero"><span class="pageEyebrow">문제 해결</span><h1>스캔이나 분석이 되지 않을 때 확인하세요</h1><p>확장 프로그램 버전, Instagram 로그인 상태, 내 프로필 여부, 목록 로딩과 ZIP 형식을 순서대로 확인하면 대부분의 문제를 찾을 수 있습니다.</p><div class="pageActions"><a class="pageButton primary" href="/#relationshipScanV23">관계 스캔 열기</a><a class="pageButton" href="/guide/">전체 사용법 보기</a></div></section>
   <div class="pageGrid">
-    <section class="pageCard full"><h2>오류 메시지별 해결 방법</h2><div class="tableWrap"><table><thead><tr><th>상황</th><th>확인 방법</th></tr></thead><tbody><tr><td>followers_*.json 또는 following.json을 찾지 못함</td><td>Instagram 데이터 요청 시 파일 형식을 JSON으로 설정하고 ‘팔로워 및 팔로잉’을 포함해 다시 요청하세요.</td></tr><tr><td>ZIP 파일이 손상됨</td><td>다운로드가 완전히 끝났는지 확인한 뒤 파일을 다시 내려받으세요.</td></tr><tr><td>확장 프로그램이 연결되지 않음</td><td>Companion ZIP을 압축 해제해 Chrome 확장 프로그램으로 로드한 뒤 맞팔체커 페이지를 새로고침하세요.</td></tr><tr><td>팔로잉 버튼을 찾지 못함</td><td>현재 페이지가 대상 프로필인지, Instagram 로그인이 유지되는지, 화면 언어가 지원 범위인지 확인하세요.</td></tr><tr><td>보안 확인·챌린지 감지</td><td>작업은 자동 중지됩니다. Instagram 화면에서 확인 절차를 직접 완료한 뒤 충분히 쉬고 다시 시작하세요.</td></tr><tr><td>연속 오류로 중지됨</td><td>Instagram UI가 변경됐을 수 있습니다. 실패 항목을 즉시 반복하지 말고 문의 페이지로 오류 문구를 보내 주세요.</td></tr></tbody></table></div></section>
-    <section class="pageCard"><h2>어떤 목록을 자동화할 수 있나요?</h2><p><strong>현재 비맞팔</strong>과 <strong>A·B 시점 사이에 나를 언팔했지만 내가 현재도 팔로우 중인 계정</strong>을 만들 수 있습니다. 두 목록은 중복을 제거한 뒤 선택해서 전달합니다.</p></section>
-    <section class="pageCard"><h2>자동으로 바로 시작하나요?</h2><p>아닙니다. 목록 전달만으로는 실행되지 않습니다. 사이드패널에서 최대 처리 수, 임의 대기, 휴식 시간을 확인하고 필수 확인란을 선택한 뒤 시작해야 합니다.</p></section>
-    <section class="pageCard"><h2>어떤 안전장치가 있나요?</h2><p>1회 최대 30개, 최소 5초 이상 대기, 정기 휴식, 일시정지·중지, 로그인·챌린지 감지, 2회 연속 버튼 탐지 실패 시 자동 중지를 적용합니다.</p></section>
-    <section class="pageCard"><h2>작업 기록은 어디에 저장되나요?</h2><p>웹 검토 상태와 자동화 큐·성공·실패 상태는 각각 현재 브라우저와 설치된 확장 프로그램의 로컬 저장소에 보관됩니다. 다른 기기로 자동 동기화되지 않습니다.</p></section>
-    <section class="pageCard"><h2>두 ZIP 비교는 어떻게 하나요?</h2><p>분석 화면의 ‘관계 변화 비교’에서 이전 ZIP과 최신 ZIP을 선택하세요. 자동화 목록은 단순 팔로워 이탈 전체가 아니라, 이탈 계정 중 최신 시점에도 내가 팔로우 중인 계정만 추립니다.</p></section>
-    <section class="pageCard full"><h2>자주 묻는 질문</h2><details><summary>ZIP 파일을 확장 프로그램이나 서버에 보내나요?</summary><p>아니요. ZIP 분석은 웹 브라우저 안에서 수행됩니다. 확장 프로그램에는 선택한 Instagram 아이디 목록과 작업 상태만 전달됩니다.</p></details><details><summary>비밀번호나 로그인 쿠키를 읽나요?</summary><p>아니요. Companion은 Instagram에 이미 로그인된 탭에서 화면에 표시된 프로필 버튼을 찾으며 비밀번호, 인증 코드, 쿠키와 세션 토큰을 읽지 않습니다.</p></details><details><summary>실패한 계정은 자동으로 계속 재시도하나요?</summary><p>아니요. 실패로 남기고 연속 오류가 발생하면 중지합니다. 사용자가 원인을 확인한 뒤에만 ‘실패 다시 대기’를 눌러 재시도할 수 있습니다.</p></details><details><summary>사이드패널을 닫으면 어떻게 되나요?</summary><p>진행 중인 실행은 중지됩니다. 다음에 열면 처리 상태는 남아 있지만 자동으로 다시 시작하지 않습니다.</p></details><details><summary>결과가 현재 Instagram과 다를 수 있나요?</summary><p>ZIP은 생성 시점의 스냅샷입니다. Companion은 각 프로필에서 현재 팔로우 상태를 다시 확인하고 이미 팔로우하지 않는 계정은 건너뜁니다.</p></details></section>
-    <section class="pageCard full"><h2>계속 해결되지 않는 경우</h2><p>화면에 표시된 오류 코드와 사용한 Chrome·Instagram 화면 언어를 보내 주세요. ZIP 원본, 비밀번호, 인증 코드나 쿠키는 보내지 마세요.</p><div class="pageActions"><a class="pageButton primary" href="/contact/">문의 접수하기</a><a class="pageButton" href="/privacy/">개인정보 처리방침</a></div></section>
+    <section class="pageCard full"><h2>오류 상황별 해결 방법</h2><div class="tableWrap"><table><thead><tr><th>상황</th><th>확인 방법</th></tr></thead><tbody><tr><td>Companion이 연결되지 않음</td><td>기존 v22 폴더가 설치돼 있다면 제거하거나 v23 폴더로 다시 불러온 뒤 맞팔체커를 새로고침하세요.</td></tr><tr><td>내 프로필을 확인하지 못함</td><td>Instagram에서 로그인한 계정의 내 프로필을 직접 연 뒤 아이디를 다시 감지하세요. 다른 사람의 프로필은 스캔하지 않습니다.</td></tr><tr><td>팔로워·팔로잉 버튼을 찾지 못함</td><td>프로필 페이지가 완전히 로드됐는지 확인하고 새로고침하세요. Instagram 화면 구조가 바뀐 경우 문의로 오류 문구를 알려 주세요.</td></tr><tr><td>목록 창을 열지 못함</td><td>팝업이나 목록 창이 이미 열려 있으면 닫고 다시 시작하세요. 탭 확대율을 기본값으로 되돌리는 것도 도움이 됩니다.</td></tr><tr><td>일부 목록일 수 있음 경고</td><td>Instagram이 목록 추가 로딩을 멈췄거나 네트워크가 느린 상태입니다. 잠시 뒤 다시 스캔하거나 공식 JSON ZIP으로 분석하세요.</td></tr><tr><td>보안 확인·챌린지 감지</td><td>스캔과 작업은 자동 중지됩니다. Instagram 화면에서 확인 절차를 직접 완료하고 충분히 쉬었다가 다시 시작하세요.</td></tr><tr><td>followers_*.json 또는 following.json을 찾지 못함</td><td>공식 데이터 요청 시 파일 형식을 JSON으로 설정하고 팔로워 및 팔로잉을 포함해 다시 요청하세요.</td></tr><tr><td>연속 오류로 작업 중지</td><td>실패 항목을 즉시 반복하지 말고 현재 화면 언어와 버튼 상태를 확인하세요.</td></tr></tbody></table></div></section>
+
+    <section class="pageCard"><h2>팔로워 수와 수집 수가 달라요</h2><p>Instagram의 표시 숫자가 반올림되거나 비활성·삭제 계정, 로딩 상태 때문에 실제 화면 목록과 차이가 날 수 있습니다. 차이가 크면 일부 목록 경고를 확인하고 다시 스캔하세요.</p></section>
+    <section class="pageCard"><h2>스캔 중 다른 탭을 사용해도 되나요?</h2><p>다른 탭을 보는 것은 가능하지만, 스캔에 사용하는 Instagram 탭의 프로필과 목록 창을 닫거나 다른 주소로 이동하면 수집이 중지됩니다.</p></section>
+    <section class="pageCard"><h2>맞팔 아닌 명단은 어떻게 계산하나요?</h2><p>현재 팔로잉 명단에서 현재 팔로워 명단을 뺍니다. 따라서 나는 팔로우하지만 상대는 나를 팔로우하지 않는 계정만 포함됩니다.</p></section>
+    <section class="pageCard"><h2>현재 스캔으로 과거 언팔을 알 수 있나요?</h2><p>아닙니다. 한 시점의 명단으로는 과거 변화를 알 수 없습니다. 이전·최신 공식 ZIP을 비교하거나 서로 다른 날짜의 기록이 필요합니다.</p></section>
+    <section class="pageCard"><h2>결과는 어디에 저장되나요?</h2><p>팔로워·팔로잉·맞팔 아닌 명단과 작업 상태는 설치된 확장 프로그램의 로컬 저장소에 남습니다. 라바랩스 서버나 다른 기기로 자동 전송되지 않습니다.</p></section>
+    <section class="pageCard"><h2>목록을 바로 실행하나요?</h2><p>아닙니다. 스캔이 끝나도 자동 실행되지 않습니다. 맞팔 아닌 명단을 검토해 작업 목록을 만든 뒤 별도 확인란과 시작 버튼을 눌러야 합니다.</p></section>
+
+    <section class="pageCard full"><h2>자주 묻는 질문</h2><details><summary>팔로워·팔로잉을 Instagram 비공개 API로 가져오나요?</summary><p>아니요. Companion은 내 프로필에서 사용자가 볼 수 있는 목록 창의 프로필 링크를 읽고 스크롤합니다. 비공개 API 요청을 만들지 않습니다.</p></details><details><summary>비밀번호나 로그인 쿠키를 읽나요?</summary><p>아니요. 비밀번호, 인증 코드, 쿠키와 세션 토큰을 읽지 않습니다. 이미 로그인된 Instagram 탭의 화면만 사용합니다.</p></details><details><summary>스캔 결과를 CSV로 저장할 수 있나요?</summary><p>네. Companion에서 팔로워, 팔로잉 또는 맞팔 아닌 탭을 선택하고 CSV 버튼을 누르면 현재 명단을 저장할 수 있습니다.</p></details><details><summary>사이드패널을 닫으면 어떻게 되나요?</summary><p>진행 중인 스캔이나 팔로우 취소 작업은 중지됩니다. 저장된 명단과 완료 상태는 남지만 자동 재시작하지 않습니다.</p></details><details><summary>기존 ZIP 분석은 없어졌나요?</summary><p>아닙니다. ZIP 방식은 대량 분석과 과거 A·B 시점 비교에 계속 사용할 수 있습니다.</p></details></section>
+    <section class="pageCard full"><h2>계속 해결되지 않는 경우</h2><p>Companion 버전, 화면에 표시된 오류 문구, Chrome 버전과 Instagram 화면 언어를 보내 주세요. ZIP 원본, 비밀번호, 인증 코드 또는 쿠키는 보내지 마세요.</p><div class="pageActions"><a class="pageButton primary" href="/contact/">문의 접수하기</a><a class="pageButton" href="/privacy/">개인정보 처리방침</a></div></section>
   </div>
 </main>
-<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다.</div><nav><a href="/guide/">사용 가이드</a><a href="/#automationV22">자동화</a><a href="/data/">데이터 처리</a><a href="/privacy/">개인정보</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav></div></footer>
+<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다.</div><nav><a href="/guide/">사용 가이드</a><a href="/#relationshipScanV23">웹 스캔</a><a href="/#automationV22">자동화</a><a href="/data/">데이터 처리</a><a href="/privacy/">개인정보</a><a href="/contact/">문의</a></nav></div></footer>
 </body></html>
