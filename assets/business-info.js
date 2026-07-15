@@ -70,10 +70,13 @@
     loadStyle('/assets/extension-site.css?v=4','extension-site');
     loadStyle('/assets/responsive-final.css?v=4','responsive-final');
     loadStyle('/assets/automation-v22.css?v=22.0','automation-v22');
+    loadStyle('/assets/relationship-scan-v23.css?v=23.0','relationship-scan-v23');
     loadScript('/assets/feedback-v20.js?v=20.0','feedback-v20');
-    loadScript('/assets/extension-site.js?v=22.0','extension-site',()=>{
+    loadScript('/assets/extension-site.js?v=23.0','extension-site',()=>{
       loadScript('/assets/automation-parser-v22.js?v=22.0','automation-parser-v22',()=>{
-        loadScript('/assets/automation-v22.js?v=22.0','automation-v22');
+        loadScript('/assets/automation-v22.js?v=22.0','automation-v22',()=>{
+          loadScript('/assets/relationship-scan-v23.js?v=23.0','relationship-scan-v23');
+        });
       });
     });
   };
@@ -157,10 +160,10 @@
     brandHome.append(logo,brandCopy);
 
     const desc=document.createElement('p');
-    desc.textContent='Instagram 공식 데이터 ZIP을 로그인 없이 브라우저에서 분석하는 관계 확인 도구입니다.';
+    desc.textContent='Instagram 공식 ZIP 분석과 Chrome Companion 웹 스캔으로 팔로우 관계를 확인하는 도구입니다.';
     const beta=document.createElement('span');
     beta.className='businessBetaV20';
-    beta.textContent='무료 베타 · 파일 외부 전송 없음';
+    beta.textContent='무료 베타 · 분석과 스캔 결과 로컬 처리';
     const copyright=document.createElement('small');
     copyright.className='businessCopyrightV20';
     copyright.textContent='© 2026 Lava Labs';
@@ -171,9 +174,9 @@
     links.setAttribute('aria-label','사이트 하단 메뉴');
     links.append(
       navGroup('서비스',[
+        {href:'/#relationshipScanV23',label:'팔로워·팔로잉 웹 스캔'},
         {href:'/#automationV22',label:'팔로우 취소 자동화'},
-        {href:'/premium/',label:'프리미엄 예정'},
-        {href:'/newsletter/',label:'뉴스레터'}
+        {href:'/premium/',label:'프리미엄 예정'}
       ]),
       navGroup('이용 안내',[
         {href:'/guide/',label:'사용 가이드'},
@@ -181,6 +184,7 @@
         {href:'/data/',label:'데이터 처리'}
       ]),
       navGroup('정책 · 문의',[
+        {href:'/newsletter/',label:'뉴스레터'},
         {href:'/privacy/',label:'개인정보 처리방침'},
         {href:'/terms/',label:'이용약관'},
         {href:'/contact/',label:'문의하기'}
@@ -220,7 +224,7 @@
 
     const notice=document.createElement('p');
     notice.className='businessNoticeV10';
-    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. Instagram ZIP 원본과 분석 결과는 외부 서버로 전송되지 않으며, 선택한 자동화 목록은 설치한 Chrome 확장 프로그램의 로컬 저장소에서만 처리됩니다.';
+    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. ZIP 원본, 웹 스캔 명단과 자동화 작업 상태는 라바랩스 서버로 전송하지 않고 각 브라우저와 확장 프로그램 로컬 저장소에서 처리합니다.';
 
     details.append(summary,grid,website,notice);
     footer.append(top,details);

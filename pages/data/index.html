@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
-  <meta name="description" content="맞팔체커의 Instagram ZIP 분석, Chrome Companion 자동화 목록, 문의와 뉴스레터 데이터 처리 흐름을 설명합니다.">
+  <meta name="description" content="맞팔체커의 공식 ZIP 분석, Instagram 팔로워·팔로잉 웹 스캔, Companion 작업 목록과 서버 업무 정보의 처리 흐름입니다.">
   <link rel="canonical" href="https://unfollow.lavalabs.co.kr/data/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site-pages-v15.css?v=15.0">
@@ -19,20 +19,28 @@
   <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/">가이드</a><a href="/data/" aria-current="page">데이터 처리</a><a href="/privacy/">개인정보</a><a href="/contact/">문의</a><a class="primary" href="/">분석 시작</a></nav>
 </div></header>
 <main id="main" class="pageMain">
-  <section class="pageHero"><span class="pageEyebrow">쉽게 보는 데이터 처리</span><h1>ZIP 분석과 선택 신청 정보는 서로 분리됩니다</h1><p>ZIP은 웹 브라우저에서 읽고, 사용자가 선택한 자동화 아이디 목록은 설치한 Chrome Companion의 로컬 저장소로만 전달됩니다. 문의와 뉴스레터처럼 직접 제출한 정보만 별도의 서버 업무 시스템에 저장됩니다.</p><div class="policyMetaV16"><span>ZIP 원본 서버 전송 없음</span><span>자동화 목록 확장 프로그램 로컬 저장</span><span>비밀번호·쿠키 수집 없음</span></div></section>
+  <section class="pageHero"><span class="pageEyebrow">쉽게 보는 데이터 처리</span><h1>ZIP과 팔로워·팔로잉 스캔 결과는 서버를 거치지 않습니다</h1><p>공식 ZIP은 웹 브라우저에서 읽고, Instagram 웹 스캔 명단과 작업 상태는 Chrome Companion 안에서 처리합니다. 문의와 뉴스레터처럼 이용자가 직접 제출한 정보만 별도의 서버 업무 시스템에 저장됩니다.</p><div class="policyMetaV16"><span>ZIP 원본 서버 전송 없음</span><span>관계 스캔 확장 프로그램 로컬 저장</span><span>비밀번호·쿠키 수집 없음</span></div></section>
 
   <div class="pageGrid">
-    <section class="pageCard full"><h2>ZIP 분석 흐름</h2><div class="dataFlowV16"><div><b>1</b><strong>사용자가 ZIP을 선택합니다</strong><span>Instagram에서 직접 내려받은 JSON ZIP을 현재 기기에서 선택합니다.</span></div><div><b>2</b><strong>브라우저가 관계를 계산합니다</strong><span>팔로워·팔로잉 JSON을 메모리에서 읽어 현재 비맞팔과 A·B 관계 변화를 계산합니다.</span></div><div><b>3</b><strong>결과를 화면에 표시합니다</strong><span>분석 결과는 맞팔체커 서버가 아니라 현재 브라우저 화면과 로컬 작업 기록에서 사용됩니다.</span></div></div></section>
-    <section class="pageCard"><h2>서버로 보내지 않는 정보</h2><ul class="checkList"><li>Instagram ZIP 원본과 JSON 원문</li><li>분석된 사용자 아이디 전체 목록</li><li>비맞팔·팔로워 이탈 결과 전체</li><li>자동화 큐와 성공·실패 상태</li><li>Instagram 비밀번호·쿠키·인증 코드</li></ul></section>
-    <section class="pageCard"><h2>웹 브라우저에 저장되는 정보</h2><ul class="checkList"><li>작업공간 이름</li><li>검토 완료 상태와 메모</li><li>화면 설정과 마지막 사용 상태</li><li>작업공간 연결용 비식별 해시 스케치</li></ul><p>작업공간 관리나 브라우저 사이트 데이터 삭제 기능으로 제거할 수 있습니다.</p></section>
-    <section class="pageCard full"><h2>Chrome Companion 자동화 흐름</h2><div class="dataFlowV16"><div><b>1</b><strong>사용자가 대상 목록을 선택합니다</strong><span>현재 비맞팔 또는 팔로워 이탈 후에도 내가 팔로우 중인 계정 가운데 필요한 아이디만 체크합니다.</span></div><div><b>2</b><strong>아이디만 확장 프로그램에 전달합니다</strong><span>목록 이름, 출처, 아이디와 작업 상태를 Chrome 확장 프로그램 로컬 저장소에 저장합니다. ZIP 원본은 전달하지 않습니다.</span></div><div><b>3</b><strong>사용자가 사이드패널에서 실행합니다</strong><span>Instagram 프로필을 열고 화면의 팔로잉·팔로우 취소 버튼을 확인합니다. 로그인·챌린지·연속 오류가 감지되면 중지합니다.</span></div></div></section>
-    <section class="pageCard"><h2>Companion이 읽는 범위</h2><ul class="checkList"><li>현재 Instagram 프로필 URL의 사용자 아이디</li><li>화면에 표시된 버튼 텍스트와 대화상자</li><li>확장 프로그램 로컬 큐와 실행 설정</li><li>탭 로딩 상태</li></ul></section>
-    <section class="pageCard"><h2>Companion이 읽지 않는 범위</h2><ul class="checkList"><li>Instagram 비밀번호와 인증 코드</li><li>브라우저 쿠키와 세션 토큰</li><li>DM·게시물 내용·연락처</li><li>Instagram 비공개 API 응답</li><li>선택하지 않은 분석 목록</li></ul></section>
-    <section class="pageCard"><h2>문의 접수 정보</h2><ul class="checkList"><li>이름과 답변 이메일</li><li>문의 유형과 제목·내용</li><li>개인정보 동의 기록</li><li>접수·처리·이메일 알림 상태</li></ul></section>
-    <section class="pageCard"><h2>뉴스레터·수요조사 정보</h2><ul class="checkList"><li>신청 이메일과 동의 기록</li><li>수신 해지 토큰과 발송 상태</li><li>관심 기능과 희망 가격대</li><li>추가 의견과 갱신 일시</li></ul></section>
-    <section class="pageCard full"><h2>서버에 저장되는 정보와 로컬 정보의 분리</h2><p>문의, 뉴스레터, 수요조사와 캠페인 기록은 Supabase 기반 업무 데이터베이스에 분리해 저장합니다. ZIP 분석, 작업공간, 자동화 큐는 이 데이터베이스에 저장하지 않으며 서로 결합하지 않습니다.</p><div class="notice">분석과 Companion 자동화는 문의, 뉴스레터나 수요조사에 참여하지 않아도 사용할 수 있습니다.</div></section>
-    <section class="pageCard full"><h2>삭제 방법</h2><div class="tableWrap"><table><thead><tr><th>정보</th><th>삭제 방법</th></tr></thead><tbody><tr><td>웹 작업공간</td><td>작업공간 관리 또는 브라우저 사이트 데이터 삭제</td></tr><tr><td>Companion 자동화 큐</td><td>새 목록으로 교체하거나 Chrome 확장 프로그램 데이터 삭제·제거</td></tr><tr><td>뉴스레터</td><td><a href="/newsletter/#unsubscribe">수신 해지 페이지</a> 또는 개별 해지 링크</td></tr><tr><td>프리미엄 의견</td><td><a href="/premium/#interest-survey">수요조사 화면</a>의 삭제 기능</td></tr><tr><td>문의 기록</td><td><a href="/contact/">문의 페이지</a>에서 삭제 요청</td></tr></tbody></table></div></section>
+    <section class="pageCard full"><h2>공식 ZIP 분석 흐름</h2><div class="dataFlowV16"><div><b>1</b><strong>사용자가 JSON ZIP을 선택합니다</strong><span>Instagram 계정 센터에서 직접 내려받은 파일을 현재 기기에서 선택합니다.</span></div><div><b>2</b><strong>웹 브라우저가 관계를 계산합니다</strong><span>팔로워·팔로잉 JSON을 메모리에서 읽어 현재 비맞팔과 A·B 관계 변화를 계산합니다.</span></div><div><b>3</b><strong>결과를 현재 브라우저에 표시합니다</strong><span>ZIP 원본과 관계 결과를 맞팔체커 서버로 업로드하지 않습니다.</span></div></div></section>
+
+    <section class="pageCard full"><h2>Instagram 웹 스캔 흐름</h2><div class="dataFlowV16"><div><b>1</b><strong>사용자가 Companion에서 스캔을 시작합니다</strong><span>로그인한 계정의 내 프로필인지 확인한 뒤 팔로워 목록 창을 엽니다.</span></div><div><b>2</b><strong>화면의 프로필 링크를 수집합니다</strong><span>팔로워와 팔로잉 목록을 차례로 스크롤하며 현재 화면에 로드되는 아이디를 읽습니다.</span></div><div><b>3</b><strong>맞팔 아닌 명단을 로컬에서 계산합니다</strong><span>팔로잉 명단에서 팔로워 명단을 빼고 결과를 확장 프로그램 저장소에 보관합니다.</span></div></div></section>
+
+    <section class="pageCard"><h2>Companion이 읽는 범위</h2><ul class="checkList"><li>로그인한 계정의 내 프로필 경로</li><li>팔로워·팔로잉 목록 창의 프로필 링크</li><li>목록 스크롤과 로딩 상태</li><li>팔로잉·팔로우 취소 버튼 텍스트</li><li>확장 프로그램 로컬 설정과 작업 상태</li></ul></section>
+    <section class="pageCard"><h2>Companion이 읽지 않는 범위</h2><ul class="checkList"><li>Instagram 비밀번호와 인증 코드</li><li>브라우저 쿠키와 세션 토큰</li><li>DM·게시물 내용·연락처</li><li>Instagram 비공개 API 응답</li><li>다른 사람 프로필의 전체 관계 명단</li></ul></section>
+
+    <section class="pageCard"><h2>확장 프로그램에 저장되는 정보</h2><ul class="checkList"><li>내 Instagram 아이디</li><li>팔로워·팔로잉·맞팔 아닌 아이디</li><li>스캔 완료 여부, 시각과 경고</li><li>선택한 팔로우 취소 작업 목록</li><li>성공·실패·건너뜀 상태와 실행 설정</li></ul></section>
+    <section class="pageCard"><h2>웹 브라우저에 저장되는 정보</h2><ul class="checkList"><li>ZIP 작업공간 이름</li><li>검토 완료 상태와 메모</li><li>화면 설정과 마지막 사용 상태</li><li>작업공간 연결용 비식별 해시 스케치</li></ul></section>
+
+    <section class="pageCard full"><h2>맞팔 아닌 명단과 작업 목록</h2><div class="dataFlowV16"><div><b>1</b><strong>명단을 먼저 확인합니다</strong><span>웹 또는 Companion에서 팔로워, 팔로잉과 맞팔 아닌 명단을 확인합니다.</span></div><div><b>2</b><strong>사용자가 필요한 아이디를 선택합니다</strong><span>명단 생성만으로는 팔로우 상태가 바뀌지 않습니다.</span></div><div><b>3</b><strong>별도 확인 후 작업을 시작합니다</strong><span>Companion 사이드패널에서 처리 수와 대기 시간을 정하고 시작합니다.</span></div></div></section>
+
+    <section class="pageCard"><h2>서버로 보내지 않는 정보</h2><ul class="checkList"><li>Instagram ZIP 원본과 JSON 원문</li><li>팔로워·팔로잉·맞팔 아닌 전체 명단</li><li>자동화 큐와 성공·실패 상태</li><li>작업공간 메모와 분석 결과</li><li>Instagram 로그인 정보</li></ul></section>
+    <section class="pageCard"><h2>서버에 저장되는 업무 정보</h2><ul class="checkList"><li>문의자가 제출한 이름·이메일·내용</li><li>뉴스레터 이메일과 동의 기록</li><li>프리미엄 수요조사 답변</li><li>뉴스레터 캠페인과 발송 상태</li><li>관리자 감사 기록</li></ul></section>
+
+    <section class="pageCard full"><h2>로컬 정보와 서버 정보의 분리</h2><p>문의, 뉴스레터, 수요조사와 캠페인 기록은 Supabase 기반 업무 데이터베이스에 분리해 저장합니다. ZIP 분석, 웹 작업공간, 관계 스캔 명단과 팔로우 취소 작업 목록은 이 데이터베이스에 저장하지 않고 서로 결합하지 않습니다.</p><div class="notice">분석과 관계 스캔은 문의, 뉴스레터 또는 수요조사에 참여하지 않아도 사용할 수 있습니다.</div></section>
+
+    <section class="pageCard full"><h2>삭제 방법</h2><div class="tableWrap"><table><thead><tr><th>정보</th><th>삭제 방법</th></tr></thead><tbody><tr><td>웹 작업공간</td><td>작업공간 관리 또는 브라우저 사이트 데이터 삭제</td></tr><tr><td>관계 스캔 명단과 작업 목록</td><td>Chrome 확장 프로그램 저장 데이터 삭제 또는 확장 프로그램 제거</td></tr><tr><td>뉴스레터</td><td><a href="/newsletter/#unsubscribe">수신 해지 페이지</a> 또는 개별 해지 링크</td></tr><tr><td>프리미엄 의견</td><td><a href="/premium/#interest-survey">수요조사 화면</a>의 삭제 기능</td></tr><tr><td>문의 기록</td><td><a href="/contact/">문의 페이지</a>에서 삭제 요청</td></tr></tbody></table></div></section>
   </div>
 </main>
-<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>최종 갱신: 2026년 7월 15일</div><nav><a href="/guide/">사용 가이드</a><a href="/#automationV22">자동화</a><a href="/privacy/">개인정보</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav></div></footer>
+<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>최종 갱신: 2026년 7월 16일</div><nav><a href="/guide/">사용 가이드</a><a href="/#relationshipScanV23">웹 스캔</a><a href="/#automationV22">자동화</a><a href="/privacy/">개인정보</a><a href="/contact/">문의</a></nav></div></footer>
 </body></html>

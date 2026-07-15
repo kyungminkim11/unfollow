@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "맞팔체커 Companion",
-  "version": "22.0.0",
-  "description": "맞팔체커에서 만든 검토 목록을 Instagram에서 사용자가 시작한 배치 작업으로 처리합니다.",
+  "version": "23.0.0",
+  "description": "Instagram 웹에서 팔로워·팔로잉을 수집해 비맞팔 명단을 만들고, 사용자가 선택한 팔로우 취소 작업을 처리합니다.",
   "minimum_chrome_version": "116",
   "permissions": ["storage", "tabs", "sidePanel"],
   "host_permissions": [
@@ -26,7 +26,7 @@
     },
     {
       "matches": ["https://www.instagram.com/*"],
-      "js": ["instagram-content.js"],
+      "js": ["instagram-content.js", "instagram-scan.js"],
       "run_at": "document_idle"
     }
   ]

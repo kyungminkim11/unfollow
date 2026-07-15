@@ -1,5 +1,6 @@
-const VERSION = '22.0.0';
+const VERSION = '23.0.0';
 const STORAGE_KEY = 'matchalAutomationStateV22';
+const RELATIONSHIP_KEY = 'matchalRelationshipStateV23';
 
 const defaultState = () => ({
   queue: [],
@@ -25,6 +26,22 @@ const defaultState = () => ({
   }
 });
 
+const defaultRelationshipState = () => ({
+  profileUsername: '',
+  status: 'idle',
+  currentKind: '',
+  progressCount: 0,
+  progressExpected: null,
+  followers: [],
+  following: [],
+  nonMutual: [],
+  mutual: [],
+  complete: false,
+  warnings: [],
+  lastScanAt: '',
+  snapshots: []
+});
+
 async function getState() {
   const stored = await chrome.storage.local.get(STORAGE_KEY);
   return { ...defaultState(), ...(stored[STORAGE_KEY] || {}) };
@@ -34,6 +51,11 @@ async function setState(next) {
   const state = { ...defaultState(), ...next };
   await chrome.storage.local.set({ [STORAGE_KEY]: state });
   return state;
+}
+
+async function getRelationshipState() {
+  const stored = await chrome.storage.local.get(RELATIONSHIP_KEY);
+  return { ...defaultRelationshipState(), ...(stored[RELATIONSHIP_KEY] || {}) };
 }
 
 function normalizeQueue(payload = {}) {
@@ -51,7 +73,7 @@ function normalizeQueue(payload = {}) {
       updatedAt: ''
     });
   }
-  return queue.slice(0, 5000);
+  return queue.slice(0, 50000);
 }
 
 function openPanel(sender) {
@@ -64,8 +86,11 @@ function openPanel(sender) {
 
 chrome.runtime.onInstalled.addListener(async () => {
   await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
-  const current = await chrome.storage.local.get(STORAGE_KEY);
-  if (!current[STORAGE_KEY]) await setState(defaultState());
+  const current = await chrome.storage.local.get([STORAGE_KEY, RELATIONSHIP_KEY]);
+  const updates = {};
+  if (!current[STORAGE_KEY]) updates[STORAGE_KEY] = defaultState();
+  if (!current[RELATIONSHIP_KEY]) updates[RELATIONSHIP_KEY] = defaultRelationshipState();
+  if (Object.keys(updates).length) await chrome.storage.local.set(updates);
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -77,6 +102,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (type === 'MATCHAL_GET_STATE') {
       sendResponse({ ok: true, state: await getState(), version: VERSION });
+      return;
+    }
+    if (type === 'MATCHAL_GET_RELATIONSHIP_SCAN') {
+      sendResponse({ ok: true, state: await getRelationshipState(), version: VERSION });
       return;
     }
     if (type === 'MATCHAL_SET_STATE') {
@@ -103,6 +132,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (type === 'MATCHAL_OPEN_PANEL') {
       await openPanel(sender);
       sendResponse({ ok: true, version: VERSION });
+      return;
+    }
+    if (type === 'MATCHAL_SCAN_PROGRESS') {
+      sendResponse({ ok: true });
       return;
     }
     sendResponse({ ok: false, message: '지원하지 않는 요청입니다.' });

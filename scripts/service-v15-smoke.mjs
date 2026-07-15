@@ -112,9 +112,9 @@ const browser=await chromium.launch({headless:true});
 try{
   await inspectApp(browser,{name:'desktop-1440',width:1440,height:900});
   await inspectApp(browser,{name:'mobile-390',width:390,height:844});
-  await inspectPage(browser,{pathName:'/guide/',label:'guide',heading:'Instagram 데이터 ZIP을 준비하는 방법'});
-  await inspectPage(browser,{pathName:'/help/',label:'help',heading:'분석이 되지 않을 때 확인하세요'});
-  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:['ZIP 내용은 외부 서버로 전송되지 않습니다','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다','ZIP 분석은 로컬에서, 선택한 신청 정보만 분리해 저장합니다']});
+  await inspectPage(browser,{pathName:'/guide/',label:'guide',heading:['Instagram 데이터 ZIP을 준비하는 방법','현재 팔로워·팔로잉은 다운로드 없이 확인하세요']});
+  await inspectPage(browser,{pathName:'/help/',label:'help',heading:['분석이 되지 않을 때 확인하세요','스캔이나 분석이 되지 않을 때 확인하세요']});
+  await inspectPage(browser,{pathName:'/privacy/',label:'privacy',heading:['ZIP 내용은 외부 서버로 전송되지 않습니다','ZIP 분석은 로컬에서, 뉴스레터 이메일만 선택적으로 저장합니다','ZIP 분석은 로컬에서, 선택한 신청 정보만 분리해 저장합니다','ZIP과 관계 스캔 명단은 이용자의 브라우저 안에서 처리합니다']});
 }finally{
   await browser.close();
 }
