@@ -29,6 +29,7 @@ check('사이드패널 3개 명단 UI',/scanFollowersCount/.test(sidepanel)&&/sc
 check('비맞팔 계산과 큐 연결',/following\.filter\(usernameValue => !followerSet\.has\(usernameValue\)\)/.test(sidepanelScript)&&/instagram_scan_non_mutual/.test(sidepanelScript),{});
 check('웹-확장 스캔 상태 브리지',/MATCHAL_GET_RELATIONSHIP_SCAN/.test(bridge)&&/MATCHAL_RELATIONSHIP_SCAN/.test(bridge),{});
 check('웹 스캔 결과 UI',/relationshipScanV23/.test(webScript)&&/팔로워 명단/.test(webScript)&&/맞팔 아닌 명단/.test(webScript),{});
+check('v22 제어 속성과 충돌 없음',!/data-confirm|data-list-title|data-list-description|data-list(?:[\s>])|data-select-all/.test(webScript),{});
 check('Companion v23 ZIP 생성',fs.existsSync(path.join(root,'dist','downloads','matchal-companion-v23.zip')),{});
 
 const browser=await chromium.launch({headless:true});
@@ -46,26 +47,28 @@ try{
       window.postMessage({source:'MATCHAL_EXTENSION',type:'MATCHAL_READY',payload:{version:'23.0.0'}},location.origin);
       window.postMessage({source:'MATCHAL_EXTENSION',type:'MATCHAL_RELATIONSHIP_SCAN',payload:{state:{profileUsername:'sample.owner',followers:['alpha','mutual.user','gamma'],following:['alpha','mutual.user','not.back','brand.only'],nonMutual:['not.back','brand.only'],complete:true,warnings:[],lastScanAt:new Date().toISOString(),status:'completed'}}},location.origin);
     });
-    await page.waitForFunction(()=>document.querySelector('[data-count="nonMutual"]')?.textContent.trim()==='2');
+    await page.waitForFunction(()=>document.querySelector('[data-v23-count="nonMutual"]')?.textContent.trim()==='2');
     const metrics=await page.evaluate(()=>({
       section:Boolean(document.querySelector('#relationshipScanV23')),
-      counts:[...document.querySelectorAll('.relationshipCountsV23 strong')].map(node=>node.textContent.trim()),
-      rows:document.querySelectorAll('.relationshipRowV23').length,
-      connected:document.querySelector('.relationshipConnectionV23')?.dataset.connected,
+      counts:[...document.querySelectorAll('#relationshipScanV23 .relationshipCountsV23 strong')].map(node=>node.textContent.trim()),
+      rows:document.querySelectorAll('#relationshipScanV23 .relationshipRowV23').length,
+      connected:document.querySelector('.relationshipConnectionV23')?.dataset.v23Connected,
+      automationRows:document.querySelectorAll('#automationV22 .automationRowV22').length,
       overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2
     }));
     check(`${viewport.label} 웹 스캔 요약`,response?.status()===200&&metrics.section&&metrics.counts.join(',')==='3,4,2'&&metrics.rows===2,metrics);
     check(`${viewport.label} 확장 연결 상태`,metrics.connected==='true',metrics);
+    check(`${viewport.label} v22 UI 독립`,metrics.automationRows===0,metrics);
     check(`${viewport.label} 가로 넘침 없음`,!metrics.overflow,metrics);
 
-    await page.locator('#relationshipScanV23 [data-confirm]').check();
-    await page.locator('#relationshipScanV23 [data-send]').click();
+    await page.locator('#relationshipScanV23 [data-v23-confirm]').check();
+    await page.locator('#relationshipScanV23 [data-v23-send]').click();
     await page.waitForFunction(()=>window.__scanQueue?.items?.length===2);
     const payload=await page.evaluate(()=>window.__scanQueue);
     check(`${viewport.label} 비맞팔 큐`,payload.sourceType==='instagram_scan_non_mutual'&&payload.items.map(item=>item.username).join(',')==='not.back,brand.only',payload);
 
-    await page.locator('#relationshipScanV23 [data-view="followers"]').click();
-    await page.waitForFunction(()=>document.querySelector('#relationshipScanV23 [data-list-title]')?.textContent.includes('팔로워'));
+    await page.locator('#relationshipScanV23 [data-v23-view="followers"]').click();
+    await page.waitForFunction(()=>document.querySelector('#relationshipScanV23 [data-v23-list-title]')?.textContent.includes('팔로워'));
     check(`${viewport.label} 팔로워 명단 전환`,await page.locator('#relationshipScanV23 .relationshipRowV23').count()===3,{});
 
     const axe=await new AxeBuilder({page}).include('#relationshipScanV23').analyze();
