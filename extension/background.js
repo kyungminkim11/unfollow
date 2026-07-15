@@ -54,15 +54,12 @@ function normalizeQueue(payload = {}) {
   return queue.slice(0, 5000);
 }
 
-async function openPanel(sender) {
+function openPanel(sender) {
   const tabId = sender?.tab?.id;
   const windowId = sender?.tab?.windowId;
-  if (Number.isInteger(tabId)) {
-    await chrome.sidePanel.setOptions({ tabId, path: 'sidepanel.html', enabled: true });
-    await chrome.sidePanel.open({ tabId });
-    return;
-  }
-  if (Number.isInteger(windowId)) await chrome.sidePanel.open({ windowId });
+  if (Number.isInteger(tabId)) return chrome.sidePanel.open({ tabId });
+  if (Number.isInteger(windowId)) return chrome.sidePanel.open({ windowId });
+  return Promise.reject(new Error('사이드패널을 열 브라우저 탭을 찾지 못했습니다.'));
 }
 
 chrome.runtime.onInstalled.addListener(async () => {
@@ -89,6 +86,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (type === 'MATCHAL_SAVE_QUEUE') {
       const queue = normalizeQueue(message.payload || {});
       if (!queue.length) throw new Error('저장할 계정 목록이 없습니다.');
+      const panelPromise = openPanel(sender).catch(() => null);
       const previous = await getState();
       const state = await setState({
         ...previous,
@@ -98,7 +96,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         createdAt: new Date().toISOString(),
         runner: { ...defaultState().runner, lastMessage: `${queue.length}개 계정을 불러왔습니다.`, updatedAt: new Date().toISOString() }
       });
-      await openPanel(sender).catch(() => {});
+      await panelPromise;
       sendResponse({ ok: true, count: queue.length, state, version: VERSION });
       return;
     }
