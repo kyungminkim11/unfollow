@@ -14,12 +14,25 @@
     download: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 18v2h14v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
 
+  function lockHeroHeading() {
+    const heading = document.querySelector('.v14HeroPrimary h1');
+    if (!heading || heading.dataset.v22HeadingLock === 'true') return;
+    const expected = 'Instagram 관계 분석';
+    const apply = () => { if (heading.textContent.trim() !== expected) heading.textContent = expected; };
+    heading.dataset.v22HeadingLock = 'true';
+    apply();
+    const observer = new MutationObserver(apply);
+    observer.observe(heading, { childList: true, characterData: true, subtree: true });
+    setTimeout(() => { apply(); observer.disconnect(); }, 5000);
+  }
+
   function mount() {
     if (state.mounted || !document.body) return;
     const main = document.querySelector('.main') || document.querySelector('main') || document.body;
     const hero = document.querySelector('.hero');
     const topbar = document.querySelector('.serviceTopbar');
     const topActions = document.querySelector('.serviceTopActions');
+    lockHeroHeading();
     createGuideDialog();
     const promo = document.getElementById('chrome-extension') || createPromo();
     if (!promo.isConnected) {
