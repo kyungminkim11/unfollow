@@ -5,7 +5,7 @@
   window.__MATCHAL_EXTENSION_SITE_ACTIVE__ = true;
 
   const ORIGIN = 'https://unfollow.lavalabs.co.kr';
-  const STORE_URL = '';
+  const STORE_URL = '/downloads/matchal-companion-v22.zip';
   const state = { ready: false, version: '', mounted: false, pingTimer: null };
   const svg = {
     extension: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><path d="M8.2 12a3.8 3.8 0 1 0 7.6 0 3.8 3.8 0 0 0-7.6 0Z" stroke="currentColor" stroke-width="2"/><path d="M8.2 12H3.5m17 0h-4.7M9.3 8.6 6.7 6a2 2 0 0 0-2.8 2.8l2.6 2.6m8.2-2.8L17.3 6a2 2 0 1 1 2.8 2.8l-2.6 2.6M9.3 15.4 6.7 18a2 2 0 1 1-2.8-2.8l2.6-2.6m8.2 2.8 2.6 2.6a2 2 0 1 0 2.8-2.8l-2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -29,9 +29,7 @@
       else if (topbar?.parentNode) topbar.insertAdjacentElement('afterend', promo);
       else main.insertAdjacentElement('afterbegin', promo);
     }
-    if (topActions && !topActions.querySelector('.extensionHeaderBtn')) {
-      topActions.insertAdjacentElement('afterbegin', createHeaderButton());
-    }
+    if (topActions && !topActions.querySelector('.extensionHeaderBtn')) topActions.insertAdjacentElement('afterbegin', createHeaderButton());
     bindGlobalEvents();
     state.mounted = true;
     updateUI();
@@ -43,7 +41,7 @@
     section.className = 'extensionPromoSite';
     section.id = 'chrome-extension';
     section.setAttribute('aria-labelledby', 'extensionPromoTitle');
-    section.innerHTML = `<div class="extensionPromoInner"><div class="extensionPromoCopy"><div class="extensionPromoIcon">${svg.extension}</div><div class="extensionPromoText"><p class="extensionPromoKicker">CHROME COMPANION</p><h2 class="extensionPromoTitle" id="extensionPromoTitle">Instagram 옆에서 더 편하게 검토하세요</h2><p class="extensionPromoDesc">사이트에서 ZIP을 분석한 뒤, Chrome 사이드패널에서 프로필을 확인하고 취소 완료·유지·보류를 기록할 수 있습니다.</p><span class="extensionPromoStatus" data-extension-status>확장 프로그램 확인 중</span></div></div><div class="extensionPromoActions"><button type="button" class="extensionPromoBtn" data-extension-guide>${svg.help}<span>사용법 보기</span></button><button type="button" class="extensionPromoBtn primary" data-extension-primary>${svg.extension}<span class="install-label">Chrome에 설치</span><span class="open-label">익스텐션 열기</span></button></div></div>`;
+    section.innerHTML = `<div class="extensionPromoInner"><div class="extensionPromoCopy"><div class="extensionPromoIcon">${svg.extension}</div><div class="extensionPromoText"><p class="extensionPromoKicker">CHROME COMPANION</p><h2 class="extensionPromoTitle" id="extensionPromoTitle">비맞팔 목록을 사이드패널에서 처리하세요</h2><p class="extensionPromoDesc">웹에서 현재 비맞팔 또는 팔로워 이탈 목록을 만들고, 처리 수·대기·휴식을 설정한 뒤 Instagram의 팔로우 취소 버튼을 순서대로 처리합니다.</p><span class="extensionPromoStatus" data-extension-status>확장 프로그램 확인 중</span></div></div><div class="extensionPromoActions"><button type="button" class="extensionPromoBtn" data-extension-guide>${svg.help}<span>사용법 보기</span></button><button type="button" class="extensionPromoBtn primary" data-extension-primary>${svg.extension}<span class="install-label">Companion 받기</span><span class="open-label">사이드패널 열기</span></button></div></div>`;
     return section;
   }
 
@@ -64,12 +62,12 @@
     backdrop.setAttribute('role', 'dialog');
     backdrop.setAttribute('aria-modal', 'true');
     backdrop.setAttribute('aria-labelledby', 'extensionGuideTitle');
-    backdrop.innerHTML = `<div class="extensionGuideDialog" tabindex="-1"><div class="extensionGuideHead"><div><h2 id="extensionGuideTitle">맞팔체커 Companion 사용법</h2><p>분석은 웹에서, 실제 프로필 검토는 Instagram 옆 사이드패널에서 진행합니다.</p></div><button type="button" class="extensionGuideClose" data-extension-close aria-label="닫기">${svg.close}</button></div><div class="extensionGuideBody"><div class="extensionGuideState" data-guide-state><span class="stateDot"></span><span>확장 프로그램 설치 여부를 확인하고 있습니다.</span></div><div class="extensionGuideSteps"><div class="extensionGuideStep"><span class="extensionGuideStepNum">1</span><div><strong>Instagram 공식 데이터 받기</strong><p>계정 센터에서 ‘팔로워 및 팔로잉’을 JSON·전체 기간으로 요청합니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">2</span><div><strong>맞팔체커에서 ZIP 분석</strong><p>다운로드한 ZIP을 압축 해제하지 않고 이 사이트에 그대로 올립니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">3</span><div><strong>익스텐션으로 검토 목록 보내기</strong><p>분석 결과에서 익스텐션 검토를 시작하면 로컬 저장소로 목록이 전달됩니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">4</span><div><strong>Instagram에서 직접 판단</strong><p>프로필을 확인하고 취소 완료·유지·보류만 기록합니다. 자동 언팔은 실행하지 않습니다.</p></div></div></div><div class="extensionGuideNotice" data-install-notice>Chrome 웹스토어 공개 심사 전에는 개발자용 압축 파일로 설치합니다. 스토어 등록이 완료되면 이 버튼이 바로 설치 페이지로 연결됩니다.</div><div class="extensionGuideActions"><a class="extensionPromoBtn" href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noopener noreferrer">${svg.download}<span>공식 데이터 받기</span></a><button type="button" class="extensionPromoBtn primary" data-extension-primary>${svg.extension}<span class="install-label">설치 안내 보기</span><span class="open-label">익스텐션 열기</span></button></div><p class="extensionGuideFoot">비밀번호·쿠키·세션 정보를 읽지 않으며, 분석 결과와 작업 기록은 브라우저 로컬에 저장됩니다.</p></div></div>`;
+    backdrop.innerHTML = `<div class="extensionGuideDialog" tabindex="-1"><div class="extensionGuideHead"><div><h2 id="extensionGuideTitle">맞팔체커 Companion 사용법</h2><p>대상 계산은 웹에서, 실제 버튼 처리는 사용자가 시작한 Chrome 사이드패널 작업에서 진행합니다.</p></div><button type="button" class="extensionGuideClose" data-extension-close aria-label="닫기">${svg.close}</button></div><div class="extensionGuideBody"><div class="extensionGuideState" data-guide-state><span class="stateDot"></span><span>확장 프로그램 설치 여부를 확인하고 있습니다.</span></div><div class="extensionGuideSteps"><div class="extensionGuideStep"><span class="extensionGuideStepNum">1</span><div><strong>Instagram 공식 데이터 받기</strong><p>계정 센터에서 ‘팔로워 및 팔로잉’을 JSON·전체 기간으로 요청합니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">2</span><div><strong>현재 또는 A·B 시점 분석</strong><p>현재 비맞팔 목록이나 나를 언팔한 뒤에도 내가 팔로우 중인 계정을 계산합니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">3</span><div><strong>선택 목록을 Companion으로 전송</strong><p>아이디 목록만 확장 프로그램 로컬 저장소로 보내고 ZIP 원본은 전달하지 않습니다.</p></div></div><div class="extensionGuideStep"><span class="extensionGuideStepNum">4</span><div><strong>처리 수·대기 시간 확인 후 시작</strong><p>한 번에 최대 30개, 임의 대기와 휴식을 적용하며 언제든 일시정지·중지할 수 있습니다.</p></div></div></div><div class="extensionGuideNotice" data-install-notice>ZIP을 내려받아 압축을 푼 뒤 chrome://extensions에서 개발자 모드를 켜고 ‘압축해제된 확장 프로그램을 로드합니다’를 선택하세요.</div><div class="extensionGuideActions"><a class="extensionPromoBtn" href="https://accountscenter.instagram.com/info_and_permissions/dyi/" target="_blank" rel="noopener noreferrer">${svg.download}<span>공식 데이터 받기</span></a><button type="button" class="extensionPromoBtn primary" data-extension-primary>${svg.extension}<span class="install-label">Companion ZIP 받기</span><span class="open-label">사이드패널 열기</span></button></div><p class="extensionGuideFoot">비밀번호·인증 코드·쿠키·세션 토큰을 읽지 않고 Instagram 화면의 팔로잉·팔로우 취소 버튼만 찾습니다. 보안 확인이나 연속 오류가 감지되면 중지합니다.</p></div></div>`;
     document.body.appendChild(backdrop);
   }
 
   function bindGlobalEvents() {
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', event => {
       const primary = event.target.closest('[data-extension-primary]');
       const guide = event.target.closest('[data-extension-guide]');
       const close = event.target.closest('[data-extension-close]');
@@ -79,7 +77,7 @@
       if (event.target.id === 'extensionGuideBackdrop') hideGuide();
     });
     window.addEventListener('message', onExtensionMessage);
-    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') hideGuide(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') hideGuide(); });
   }
 
   function onExtensionMessage(event) {
@@ -104,8 +102,8 @@
   }
 
   function openInstallFlow() {
-    if (STORE_URL) { window.open(STORE_URL, '_blank', 'noopener,noreferrer'); return; }
     showGuide();
+    window.open(STORE_URL, '_blank', 'noopener,noreferrer');
   }
 
   function showGuide() {
@@ -124,17 +122,17 @@
   }
 
   function updateUI() {
-    document.querySelectorAll('.extensionPromoSite').forEach((element) => element.classList.toggle('is-ready', state.ready));
-    document.querySelectorAll('.extensionHeaderBtn').forEach((element) => element.classList.toggle('is-ready', state.ready));
-    document.querySelectorAll('[data-extension-status]').forEach((element) => {
-      element.textContent = state.ready ? `설치됨${state.version ? ` · v${state.version}` : ''}` : '설치하면 사이드패널 검토를 사용할 수 있어요';
+    document.querySelectorAll('.extensionPromoSite').forEach(element => element.classList.toggle('is-ready', state.ready));
+    document.querySelectorAll('.extensionHeaderBtn').forEach(element => element.classList.toggle('is-ready', state.ready));
+    document.querySelectorAll('[data-extension-status]').forEach(element => {
+      element.textContent = state.ready ? `연결됨${state.version ? ` · v${state.version}` : ''}` : '설치 후 자동화 목록을 사이드패널로 보낼 수 있어요';
     });
-    document.querySelectorAll('[data-guide-state]').forEach((element) => {
+    document.querySelectorAll('[data-guide-state]').forEach(element => {
       element.classList.toggle('is-ready', state.ready);
       const label = element.querySelector('span:last-child');
       if (label) label.textContent = state.ready ? `확장 프로그램이 연결되었습니다${state.version ? ` · v${state.version}` : ''}.` : '아직 확장 프로그램이 연결되지 않았습니다.';
     });
-    document.querySelectorAll('[data-install-notice]').forEach((element) => { element.hidden = state.ready; });
+    document.querySelectorAll('[data-install-notice]').forEach(element => { element.hidden = state.ready; });
   }
 
   function boot() {
