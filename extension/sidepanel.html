@@ -9,10 +9,44 @@
 <body>
   <header class="appHeader">
     <div class="brandMark">M</div>
-    <div><strong>맞팔체커 Companion</strong><span>사용자가 시작하는 팔로우 취소 작업</span></div>
+    <div><strong>맞팔체커 Companion</strong><span>관계 스캔 · 선택 팔로우 취소</span></div>
   </header>
 
   <main>
+    <section class="scanCard" aria-labelledby="scanTitle">
+      <div class="sectionHead">
+        <div><h2 id="scanTitle">Instagram 관계 스캔</h2><p>데이터 ZIP 없이 현재 팔로워와 팔로잉을 화면에서 수집합니다.</p></div>
+        <strong id="scanBadge" class="scanBadge" data-state="idle">대기</strong>
+      </div>
+
+      <div class="profileField">
+        <label for="profileUsername">내 Instagram 아이디</label>
+        <div><span>@</span><input id="profileUsername" type="text" inputmode="text" autocomplete="off" maxlength="30" placeholder="username"><button id="detectProfile" type="button">감지</button></div>
+      </div>
+
+      <div class="scanActions">
+        <button id="startScan" class="primary" type="button">팔로워·팔로잉 스캔 시작</button>
+        <button id="stopScan" class="danger" type="button" disabled>스캔 중지</button>
+      </div>
+
+      <div class="scanProgress"><span id="scanProgressBar"></span></div>
+      <p id="scanMessage" class="scanMessage" role="status" aria-live="polite">Instagram에 로그인한 뒤 내 아이디를 입력해 주세요.</p>
+
+      <div class="relationshipStats" aria-label="관계 스캔 결과">
+        <button type="button" data-result-tab="followers"><span>팔로워</span><strong id="scanFollowersCount">0</strong><small>나를 팔로우</small></button>
+        <button type="button" data-result-tab="following"><span>팔로잉</span><strong id="scanFollowingCount">0</strong><small>내가 팔로우</small></button>
+        <button type="button" data-result-tab="nonMutual" class="active"><span>맞팔 아님</span><strong id="scanNonMutualCount">0</strong><small>나만 팔로우</small></button>
+      </div>
+
+      <div class="scanListTools">
+        <input id="scanSearch" type="search" autocomplete="off" placeholder="아이디 검색" aria-label="스캔 결과 아이디 검색">
+        <button id="exportScan" type="button" disabled>CSV</button>
+      </div>
+      <div id="scanList" class="scanList"><div class="queueEmpty">스캔을 완료하면 팔로워·팔로잉·맞팔 아닌 명단이 표시됩니다.</div></div>
+      <button id="queueNonMutual" class="primary wideButton" type="button" disabled>맞팔 아닌 명단을 팔로우 취소 목록으로 만들기</button>
+      <p id="scanMeta" class="scanMeta">스캔 결과와 아이디는 이 Chrome 확장 프로그램의 로컬 저장소에만 보관됩니다.</p>
+    </section>
+
     <section class="statusCard">
       <div class="statusTop"><span id="queueName">작업 목록 없음</span><strong id="runnerBadge" data-state="idle">대기</strong></div>
       <div class="stats">
@@ -22,11 +56,11 @@
         <div><span>실패</span><strong id="countFailed">0</strong></div>
       </div>
       <div class="progress"><span id="progressBar"></span></div>
-      <p id="runnerMessage" role="status" aria-live="polite">맞팔체커 웹에서 목록을 보내 주세요.</p>
+      <p id="runnerMessage" role="status" aria-live="polite">웹 또는 위 스캔 결과에서 작업 목록을 만들어 주세요.</p>
     </section>
 
     <section class="settingsCard">
-      <h2>이번 실행 설정</h2>
+      <h2>팔로우 취소 실행 설정</h2>
       <div class="fieldGrid">
         <label><span>이번에 처리할 수</span><input id="batchSize" type="number" min="1" max="30" value="10"></label>
         <label><span>작업 사이 최소 대기</span><input id="minDelay" type="number" min="5" max="120" value="8"><small>초</small></label>
@@ -34,7 +68,7 @@
         <label><span>휴식 주기</span><input id="restEvery" type="number" min="1" max="30" value="10"><small>건마다</small></label>
         <label><span>휴식 시간</span><input id="restSeconds" type="number" min="30" max="900" value="60"><small>초</small></label>
       </div>
-      <label class="confirmLine"><input id="confirmRun" type="checkbox"><span>선택된 계정의 Instagram 프로필에서 팔로우 취소 버튼을 자동으로 누르는 작업임을 확인했습니다.</span></label>
+      <label class="confirmLine"><input id="confirmRun" type="checkbox"><span>작업 목록에 포함된 계정의 Instagram 프로필에서 팔로우 취소 버튼을 자동으로 누르는 작업임을 확인했습니다.</span></label>
       <div class="buttonGrid">
         <button id="startButton" class="primary" type="button">작업 시작</button>
         <button id="pauseButton" type="button" disabled>일시정지</button>
@@ -43,13 +77,13 @@
     </section>
 
     <section class="queueCard">
-      <div class="sectionHead"><div><h2>작업 목록</h2><p id="queueSummary">0개 계정</p></div><button id="resetErrors" type="button">실패 다시 대기</button></div>
+      <div class="sectionHead"><div><h2>팔로우 취소 작업 목록</h2><p id="queueSummary">0개 계정</p></div><button id="resetErrors" type="button">실패 다시 대기</button></div>
       <div id="queueList" class="queueList"></div>
     </section>
 
     <section class="safetyCard">
-      <strong>안전 중지 조건</strong>
-      <p>로그인 화면, 보안 확인·챌린지, 팔로잉 버튼 미탐지 또는 연속 오류가 감지되면 작업을 멈춥니다. 비밀번호·쿠키·세션 값을 읽지 않고 Instagram 화면의 버튼만 처리합니다.</p>
+      <strong>수집·실행 안전 안내</strong>
+      <p>스캔은 내 프로필의 화면 목록만 스크롤해 아이디를 수집합니다. 로그인 화면, 보안 확인·챌린지, 목록 로딩 중단 또는 연속 실행 오류가 감지되면 중지합니다. 비밀번호·쿠키·세션·Instagram 비공개 API를 읽지 않습니다.</p>
     </section>
   </main>
 
