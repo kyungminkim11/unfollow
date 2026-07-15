@@ -15,6 +15,7 @@
   };
 
   function lockHeroHeading() {
+    if (!window.matchMedia('(max-width: 760px)').matches) return;
     const heading = document.querySelector('.v14HeroPrimary h1');
     if (!heading || heading.dataset.v22HeadingLock === 'true') return;
     const expected = 'Instagram 관계 분석';
