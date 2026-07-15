@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; upgrade-insecure-requests">
-  <meta name="description" content="맞팔체커에서 사용할 Instagram 팔로워 및 팔로잉 JSON ZIP을 받는 방법과 분석 준비사항을 안내합니다.">
+  <meta name="description" content="Instagram 팔로워·팔로잉 JSON ZIP 분석과 비맞팔·팔로워 이탈 자동화 사용법을 안내합니다.">
   <link rel="canonical" href="https://unfollow.lavalabs.co.kr/guide/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site-pages-v15.css?v=15.0">
@@ -16,24 +16,26 @@
 <a class="pageSkip" href="#main">본문으로 바로가기</a>
 <header class="pageHeader"><div class="pageHeaderInner">
   <a class="pageBrand" href="/"><span class="pageLogo">M</span><span class="pageBrandText"><strong>맞팔체커</strong><span>by Lava Labs</span></span></a>
-  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/" aria-current="page">가이드</a><a href="/help/">도움말</a><a href="/premium/">프리미엄</a><a href="/contact/">문의</a><a class="primary" href="/">분석 시작</a></nav>
+  <nav class="pageNav" aria-label="주요 메뉴"><a href="/guide/" aria-current="page">가이드</a><a href="/help/">도움말</a><a href="/#automationV22">자동화</a><a href="/contact/">문의</a><a class="primary" href="/">분석 시작</a></nav>
 </div></header>
 <main id="main" class="pageMain">
-  <div class="pageNoticeBannerV16"><div><strong>맞팔체커는 현재 무료 베타입니다</strong><span>기본 ZIP 분석은 무료로 사용할 수 있으며, 향후 프리미엄 출시 소식은 희망자만 받을 수 있습니다.</span></div><a href="/newsletter/">소식 받기</a></div>
-  <section class="pageHero"><span class="pageEyebrow">처음 사용하기</span><h1>Instagram 데이터 ZIP을 준비하는 방법</h1><p>맞팔체커는 Instagram이 제공하는 데이터 다운로드 ZIP을 사용합니다. 로그인 정보는 입력하지 않으며, ZIP은 압축을 풀지 않은 상태로 선택하면 됩니다.</p><div class="pageActions"><a class="pageButton primary" href="/">ZIP 분석 시작</a><a class="pageButton" href="https://accountscenter.instagram.com/" rel="noopener noreferrer">Instagram 계정 센터 열기</a></div></section>
+  <div class="pageNoticeBannerV16"><div><strong>분석은 웹, 자동화 실행은 Chrome Companion</strong><span>ZIP 원본은 웹 브라우저에서만 읽고 선택한 아이디 목록만 확장 프로그램으로 전달합니다.</span></div><a href="/#automationV22">자동화 열기</a></div>
+  <section class="pageHero"><span class="pageEyebrow">처음 사용하기</span><h1>분석부터 팔로우 취소 작업까지</h1><p>Instagram 공식 JSON ZIP을 준비하고, 현재 비맞팔 또는 A·B 시점의 팔로워 이탈 대상을 계산한 뒤 필요한 계정만 Companion으로 보냅니다.</p><div class="pageActions"><a class="pageButton primary" href="/">ZIP 분석 시작</a><a class="pageButton" href="https://accountscenter.instagram.com/" rel="noopener noreferrer">Instagram 계정 센터 열기</a></div></section>
   <div class="pageGrid">
-    <section class="pageCard full"><h2>데이터 요청 순서</h2><ol class="stepList">
-      <li><strong>Instagram의 계정 센터를 엽니다</strong><span>Instagram 앱의 설정 메뉴 또는 웹 계정 센터에서 ‘내 정보 및 권한’ 항목으로 이동합니다.</span></li>
-      <li><strong>내 정보 다운로드를 선택합니다</strong><span>다운로드할 Instagram 계정을 선택하고, 전체 정보 대신 필요한 정보 유형을 선택합니다.</span></li>
-      <li><strong>‘팔로워 및 팔로잉’을 포함합니다</strong><span>맞팔 분석에 필요한 팔로워·팔로잉 관계 데이터가 포함되도록 선택합니다.</span></li>
-      <li><strong>파일 형식을 JSON으로 설정합니다</strong><span>HTML이 아니라 JSON을 선택해야 분석할 수 있습니다. 날짜 범위는 확인하려는 기간에 맞춰 선택하세요.</span></li>
-      <li><strong>완료된 ZIP을 내려받습니다</strong><span>Instagram에서 준비 완료 알림을 받으면 ZIP을 기기에 저장합니다. 압축을 풀거나 파일명을 바꿀 필요는 없습니다.</span></li>
-      <li><strong>맞팔체커에서 ZIP을 선택합니다</strong><span>분석 화면에서 ZIP을 선택하면 브라우저가 파일 내부의 followers_*.json과 following.json을 확인합니다.</span></li>
-    </ol><div class="notice">Instagram의 메뉴 명칭과 위치는 앱 버전이나 계정 센터 구성에 따라 달라질 수 있습니다. 핵심은 <strong>팔로워 및 팔로잉 데이터</strong>와 <strong>JSON 형식</strong>입니다.</div></section>
-    <section class="pageCard"><h2>선택해야 하는 설정</h2><ul class="checkList"><li>정보 유형: 팔로워 및 팔로잉</li><li>파일 형식: JSON</li><li>파일: ZIP 상태 유지</li><li>권장 브라우저: 최신 Chrome, Edge, Safari</li></ul></section>
-    <section class="pageCard"><h2>분석 전에 확인할 점</h2><ul class="checkList"><li>ZIP 확장자가 맞는지 확인</li><li>파일 크기가 80MB 이하인지 확인</li><li>다운로드 완료 전 임시 파일이 아닌지 확인</li><li>결과는 ZIP 생성 시점의 상태임을 확인</li></ul></section>
-    <section class="pageCard full"><h2>분석 결과 용어</h2><div class="tableWrap"><table><thead><tr><th>표시</th><th>의미</th></tr></thead><tbody><tr><td>맞팔</td><td>내가 팔로우하고 상대도 나를 팔로우하는 계정</td></tr><tr><td>나만 팔로우 중</td><td>나는 팔로우하지만 상대는 나를 팔로우하지 않는 계정</td></tr><tr><td>나를 팔로우 중</td><td>상대는 나를 팔로우하지만 나는 팔로우하지 않는 계정</td></tr><tr><td>관계 변화 비교</td><td>이전 ZIP과 최신 ZIP 사이에서 새로 생기거나 사라진 관계</td></tr></tbody></table></div></section>
+    <section class="pageCard full"><h2>1. Instagram 데이터 요청</h2><ol class="stepList">
+      <li><strong>Instagram 계정 센터를 엽니다</strong><span>설정에서 ‘내 정보 및 권한’과 ‘내 정보 다운로드’로 이동합니다.</span></li>
+      <li><strong>‘팔로워 및 팔로잉’을 포함합니다</strong><span>전체 정보가 아니라 필요한 관계 데이터만 선택하면 파일 크기를 줄일 수 있습니다.</span></li>
+      <li><strong>파일 형식을 JSON으로 설정합니다</strong><span>HTML이 아닌 JSON이어야 맞팔체커가 분석할 수 있습니다.</span></li>
+      <li><strong>완료된 ZIP을 그대로 저장합니다</strong><span>압축을 풀거나 내부 파일을 수정하지 마세요.</span></li>
+    </ol></section>
+    <section class="pageCard"><h2>2-A. 현재 비맞팔 찾기</h2><p>최신 ZIP 한 개를 기본 분석 화면에 선택합니다. <strong>현재 비맞팔</strong>은 최신 시점에서 나는 팔로우하지만 상대는 나를 팔로우하지 않는 계정입니다.</p></section>
+    <section class="pageCard"><h2>2-B. 나를 언팔한 계정 찾기</h2><p>관계 변화 비교에 이전 ZIP과 최신 ZIP을 선택합니다. 자동화 대상은 단순 팔로워 이탈 전체가 아니라, 이탈한 사람 중 최신 시점에도 내가 팔로우 중인 계정만 계산합니다.</p></section>
+    <section class="pageCard full"><h2>3. Companion 설치</h2><ol class="stepList"><li><strong>웹의 ‘Companion 받기’를 누릅니다</strong><span>matchal-companion-v22.zip 파일이 내려받아집니다.</span></li><li><strong>ZIP을 폴더에 압축 해제합니다</strong><span>압축 파일 자체가 아니라 풀린 폴더를 Chrome에 등록합니다.</span></li><li><strong>chrome://extensions를 엽니다</strong><span>개발자 모드를 켜고 ‘압축해제된 확장 프로그램을 로드합니다’를 눌러 폴더를 선택합니다.</span></li><li><strong>맞팔체커 페이지를 새로고침합니다</strong><span>‘확장 프로그램 연결됨’이 표시되면 준비가 끝납니다.</span></li></ol></section>
+    <section class="pageCard full"><h2>4. 목록 선택과 전달</h2><ol class="stepList"><li><strong>현재 비맞팔 또는 팔로워 이탈 대상을 선택합니다</strong><span>목록에서 제외할 계정은 체크를 해제할 수 있습니다.</span></li><li><strong>자동 클릭 작업임을 확인합니다</strong><span>확인란을 선택하기 전에는 전송 버튼이 활성화되지 않습니다.</span></li><li><strong>사이드패널로 목록을 보냅니다</strong><span>ZIP 원본이 아니라 선택한 Instagram 아이디만 확장 프로그램 로컬 저장소로 전달됩니다.</span></li></ol></section>
+    <section class="pageCard full"><h2>5. 처리 수와 안전 간격 설정</h2><div class="tableWrap"><table><thead><tr><th>설정</th><th>기본값·범위</th><th>의미</th></tr></thead><tbody><tr><td>이번 처리 수</td><td>기본 10개 · 최대 30개</td><td>한 번의 시작 버튼으로 처리할 최대 계정 수</td></tr><tr><td>계정 사이 대기</td><td>기본 8~15초 · 최소 5초</td><td>각 프로필 사이에 임의로 기다리는 시간</td></tr><tr><td>정기 휴식</td><td>기본 10건마다 60초</td><td>연속 작업 사이에 긴 휴식을 넣는 설정</td></tr><tr><td>안전 중지</td><td>로그인·챌린지·연속 오류</td><td>확인 화면이나 2회 연속 버튼 탐지 실패 시 자동 중지</td></tr></tbody></table></div></section>
+    <section class="pageCard"><h2>실행 중 조작</h2><ul class="checkList"><li>일시정지 후 같은 위치에서 계속</li><li>즉시 중지 후 처리 중 항목을 대기로 복원</li><li>실패 항목만 다시 대기로 변경</li><li>이미 언팔된 계정은 건너뜀 처리</li></ul></section>
+    <section class="pageCard"><h2>중요한 확인</h2><ul class="checkList"><li>Instagram에 직접 로그인된 Chrome 탭 필요</li><li>ZIP은 생성 시점의 스냅샷</li><li>프로필 현재 상태는 실행 시 다시 확인</li><li>비밀번호·쿠키·인증 코드는 읽지 않음</li></ul></section>
   </div>
 </main>
-<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다.</div><nav><a href="/help/">도움말</a><a href="/newsletter/">뉴스레터</a><a href="/data/">데이터 처리</a><a href="/privacy/">개인정보</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav></div></footer>
+<footer class="pageFooter"><div class="pageFooterInner"><div><strong>© 2026 Lava Labs · 맞팔체커</strong>Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다.</div><nav><a href="/help/">도움말</a><a href="/#automationV22">자동화</a><a href="/data/">데이터 처리</a><a href="/privacy/">개인정보</a><a href="/terms/">이용약관</a><a href="/contact/">문의</a></nav></div></footer>
 </body></html>
