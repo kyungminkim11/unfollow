@@ -32,7 +32,8 @@ let browser;
 try{
   browser=await chromium.launch({headless:true});
   for(const viewport of [{width:1280,height:900,label:'desktop'},{width:390,height:844,label:'mobile'}]){
-    const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+    const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
+    const page=await context.newPage();
     const errors=[];
     page.on('pageerror',error=>errors.push(String(error)));
     page.on('console',message=>{if(message.type()==='error'&&!/ERR_FAILED|Failed to load resource/i.test(message.text())) errors.push(message.text());});
@@ -77,7 +78,7 @@ try{
       check(`${viewport.label} 브라우저 검사 실행`,false,{error:error?.message||String(error),stack:error?.stack||''});
       await page.screenshot({path:path.join(auditDir,`automation-v22-${viewport.label}-error.png`),fullPage:true}).catch(()=>{});
     }finally{
-      await page.close();
+      await context.close();
     }
   }
 }catch(error){
