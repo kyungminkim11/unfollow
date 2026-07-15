@@ -22,7 +22,7 @@ check('Companion v23 manifest',manifest.manifest_version===3&&manifest.version==
 check('스캐너 콘텐츠 스크립트 등록',manifest.content_scripts?.some(item=>item.matches?.includes('https://www.instagram.com/*')&&item.js?.includes('instagram-scan.js')),{contentScripts:manifest.content_scripts});
 check('권한 증가 없음',JSON.stringify(manifest.permissions)===JSON.stringify(['storage','tabs','sidePanel']),{permissions:manifest.permissions});
 check('호스트 권한 제한',manifest.host_permissions?.length===2&&manifest.host_permissions.includes('https://www.instagram.com/*')&&manifest.host_permissions.includes('https://unfollow.lavalabs.co.kr/*'),{hostPermissions:manifest.host_permissions});
-check('비공개 API·쿠키 미사용',!/(chrome\.cookies|document\.cookie|graphql|\/api\/v1\/|fetch\s*\()/i.test(scanner),{});
+check('비공개 API·쿠키 미사용',!/(chrome\.cookies|document\.cookie|\/api\/v1\/|fetch\s*\(|XMLHttpRequest|webRequest)/i.test(scanner),{});
 check('팔로워·팔로잉 DOM 스크롤 수집',/MATCHAL_SCAN_LIST/.test(scanner)&&/findScrollContainer/.test(scanner)&&/collectDialogUsernames/.test(scanner)&&/scrollTop/.test(scanner),{});
 check('내 프로필 확인과 안전 중지',/ownProfileConfirmed/.test(scanner)&&/login_required/.test(scanner)&&/challenge/.test(scanner)&&/MATCHAL_SCAN_STOP/.test(scanner),{});
 check('사이드패널 3개 명단 UI',/scanFollowersCount/.test(sidepanel)&&/scanFollowingCount/.test(sidepanel)&&/scanNonMutualCount/.test(sidepanel),{});
@@ -35,7 +35,8 @@ check('Companion v23 ZIP 생성',fs.existsSync(path.join(root,'dist','downloads'
 const browser=await chromium.launch({headless:true});
 try{
   for(const viewport of [{width:1280,height:900,label:'desktop'},{width:390,height:844,label:'mobile'}]){
-    const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+    const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
+    const page=await context.newPage();
     const errors=[];
     page.on('pageerror',error=>errors.push(String(error)));
     page.on('console',message=>{if(message.type()==='error'&&!/ERR_FAILED|Failed to load resource/i.test(message.text())) errors.push(message.text());});
@@ -79,11 +80,12 @@ try{
       check(`${viewport.label} 웹 스캔 검사 실행`,false,{error:error?.message||String(error),stack:error?.stack||''});
       await page.screenshot({path:path.join(auditDir,`relationship-scan-v23-${viewport.label}-error.png`),fullPage:true}).catch(()=>{});
     }finally{
-      await page.close();
+      await context.close();
     }
   }
 
-  const scannerPage=await browser.newPage({viewport:{width:1000,height:800},bypassCSP:true});
+  const scannerContext=await browser.newContext({viewport:{width:1000,height:800},bypassCSP:true});
+  const scannerPage=await scannerContext.newPage();
   try{
     await scannerPage.goto(`${baseURL}/`,{waitUntil:'networkidle',timeout:45000});
     await scannerPage.evaluate(()=>{
@@ -126,7 +128,7 @@ try{
   }catch(error){
     check('DOM 스캐너 fixture 실행',false,{error:error?.message||String(error),stack:error?.stack||''});
   }finally{
-    await scannerPage.close();
+    await scannerContext.close();
   }
 }finally{
   await browser.close();
