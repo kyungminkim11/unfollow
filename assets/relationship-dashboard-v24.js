@@ -23,6 +23,10 @@
     const rightSet = new Set(right);
     return left.filter(value => rightSet.has(value));
   };
+  const timestamp = value => {
+    const time = new Date(value).getTime();
+    return Number.isFinite(time) ? time : 0;
+  };
   const unionSnapshots = (history = [], current = null) => {
     const rows = [];
     const seen = new Set();
@@ -37,22 +41,26 @@
       const followers = normalizeUsers(raw.followers);
       const following = normalizeUsers(raw.following);
       const followerSet = new Set(followers);
-      const mutual = normalizeUsers(raw.mutual?.length ? raw.mutual : following.filter(username => followerSet.has(username)));
-      const nonMutual = normalizeUsers(raw.nonMutual?.length ? raw.nonMutual : following.filter(username => !followerSet.has(username)));
       rows.push({
-        id: String(raw.id || key), profileUsername, createdAt, followers, following, mutual, nonMutual,
-        complete: Boolean(raw.complete), warnings: Array.isArray(raw.warnings) ? raw.warnings.map(String) : []
+        id: String(raw.id || key),
+        profileUsername,
+        createdAt,
+        followers,
+        following,
+        mutual: normalizeUsers(raw.mutual?.length ? raw.mutual : following.filter(username => followerSet.has(username))),
+        nonMutual: normalizeUsers(raw.nonMutual?.length ? raw.nonMutual : following.filter(username => !followerSet.has(username))),
+        complete: Boolean(raw.complete),
+        warnings: Array.isArray(raw.warnings) ? raw.warnings.map(String) : []
       });
     };
     push(current);
     history.forEach(push);
-    return rows.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 24);
+    return rows.sort((a, b) => timestamp(b.createdAt) - timestamp(a.createdAt)).slice(0, 24);
   };
 
   const state = {
     mounted: false,
     connected: false,
-    current: null,
     history: [],
     beforeId: '',
     afterId: '',
@@ -81,9 +89,15 @@
     return `${value > 0 ? '+' : ''}${value.toLocaleString('ko-KR')}`;
   }
   function snapshotById(id) { return state.history.find(item => item.id === id) || null; }
+  function olderSnapshots(after) {
+    if (!after) return [];
+    return state.history.filter(item => item.profileUsername === after.profileUsername && timestamp(item.createdAt) < timestamp(after.createdAt));
+  }
   function currentPair() {
     const after = snapshotById(state.afterId) || state.history[0] || null;
-    const before = snapshotById(state.beforeId) || state.history.find(item => item.profileUsername === after?.profileUsername && item.id !== after?.id) || null;
+    const allowedBefore = olderSnapshots(after);
+    const selectedBefore = snapshotById(state.beforeId);
+    const before = selectedBefore && allowedBefore.some(item => item.id === selectedBefore.id) ? selectedBefore : allowedBefore[0] || null;
     return { before, after };
   }
   function metrics(snapshot) {
@@ -160,21 +174,21 @@
   }
 
   function updateDashboard(payload = {}) {
-    state.current = payload.current || null;
     state.history = unionSnapshots(payload.history || payload.current?.snapshots || [], payload.current);
     const profiles = new Set(state.history.map(item => item.profileUsername));
     if (state.history.length) {
       const latest = state.history[0];
       const currentAfter = snapshotById(state.afterId);
-      if (!currentAfter || currentAfter.profileUsername !== latest.profileUsername) state.afterId = latest.id;
+      if (!currentAfter) state.afterId = latest.id;
       const after = snapshotById(state.afterId) || latest;
-      const candidates = state.history.filter(item => item.profileUsername === after.profileUsername && item.id !== after.id);
-      if (!snapshotById(state.beforeId) || snapshotById(state.beforeId)?.profileUsername !== after.profileUsername) state.beforeId = candidates[0]?.id || '';
+      const candidates = olderSnapshots(after);
+      const currentBefore = snapshotById(state.beforeId);
+      if (!currentBefore || !candidates.some(item => item.id === currentBefore.id)) state.beforeId = candidates[0]?.id || '';
     } else {
       state.beforeId = '';
       state.afterId = '';
     }
-    if (profiles.size > 1) setStatus('여러 Instagram 계정의 기록이 있습니다. 비교 선택에는 같은 계정 기록만 표시됩니다.');
+    if (profiles.size > 1) setStatus('여러 Instagram 계정의 기록이 있습니다. 이전 시점은 선택한 현재 시점과 같은 계정의 과거 기록만 표시됩니다.');
     state.selected = new Set(currentChangeList());
     render();
   }
@@ -203,11 +217,15 @@
     renderSelectors();
     const changeMap = changes();
     Object.entries(changeMap).forEach(([key, values]) => { q(`[data-v24-change-count="${key}"]`, section).textContent = values.length.toLocaleString('ko-KR'); });
-    section.querySelectorAll('[data-v24-view]').forEach(button => { button.classList.toggle('active', button.dataset.v24View === state.view); button.setAttribute('aria-selected', String(button.dataset.v24View === state.view)); });
+    section.querySelectorAll('[data-v24-view]').forEach(button => {
+      const active = button.dataset.v24View === state.view;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', String(active));
+    });
     const view = VIEWS[state.view];
     q('[data-v24-list-title]', section).textContent = view.label;
     q('[data-v24-list-description]', section).textContent = view.description;
-    q('[data-v24-compare-summary]', section).textContent = before && after ? `${formatDate(before.createdAt, true)}에서 ${formatDate(after.createdAt, true)}까지의 변화 · ${before.complete && after.complete ? '두 기록 모두 전체 수집' : '일부 목록 가능성 있음'}` : '같은 계정의 스캔 기록이 두 번 이상 있어야 변화를 계산할 수 있습니다.';
+    q('[data-v24-compare-summary]', section).textContent = before && after ? `${formatDate(before.createdAt, true)}에서 ${formatDate(after.createdAt, true)}까지의 변화 · ${before.complete && after.complete ? '두 기록 모두 전체 수집' : '일부 목록 가능성 있음'}` : '같은 계정의 더 오래된 스캔 기록이 있어야 변화를 계산할 수 있습니다.';
     const list = currentChangeList();
     state.selected = new Set(list.filter(username => state.selected.has(username)));
     if (view.actionable && !state.selected.size && list.length) state.selected = new Set(list);
@@ -227,19 +245,27 @@
     const afterSelect = q('[data-v24-after]', section);
     const beforeSelect = q('[data-v24-before]', section);
     const after = snapshotById(state.afterId) || state.history[0] || null;
-    const sameProfile = state.history.filter(item => !after || item.profileUsername === after.profileUsername);
     const fill = (select, values, selectedId, emptyLabel) => {
       select.replaceChildren();
       if (!values.length) {
-        const option = document.createElement('option'); option.value = ''; option.textContent = emptyLabel; select.appendChild(option); select.disabled = true; return;
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = emptyLabel;
+        select.appendChild(option);
+        select.disabled = true;
+        return;
       }
       select.disabled = false;
       values.forEach(item => {
-        const option = document.createElement('option'); option.value = item.id; option.textContent = `${formatDate(item.createdAt, true)} · 팔로워 ${item.followers.length.toLocaleString('ko-KR')}${item.complete ? '' : ' · 일부'}`; option.selected = item.id === selectedId; select.appendChild(option);
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = `${formatDate(item.createdAt, true)} · @${item.profileUsername} · 팔로워 ${item.followers.length.toLocaleString('ko-KR')}${item.complete ? '' : ' · 일부'}`;
+        option.selected = item.id === selectedId;
+        select.appendChild(option);
       });
     };
     fill(afterSelect, state.history, state.afterId, '스캔 기록 없음');
-    fill(beforeSelect, sameProfile.filter(item => item.id !== after?.id), state.beforeId, '이전 기록 없음');
+    fill(beforeSelect, olderSnapshots(after), state.beforeId, '이전 기록 없음');
   }
 
   function renderList() {
@@ -250,23 +276,37 @@
     const filtered = state.search ? source.filter(username => username.includes(state.search)) : source;
     listRoot.replaceChildren();
     if (!source.length || !filtered.length) {
-      const empty = document.createElement('div'); empty.className = 'dashboardEmptyV24'; empty.textContent = !currentPair().before ? '비교할 이전 스캔 기록이 없습니다. 같은 계정을 한 번 더 스캔해 주세요.' : !source.length ? '이 조건에 해당하는 변화가 없습니다.' : '검색 결과가 없습니다.'; listRoot.appendChild(empty); return;
+      const empty = document.createElement('div');
+      empty.className = 'dashboardEmptyV24';
+      empty.textContent = !currentPair().before ? '비교할 더 오래된 스캔 기록이 없습니다. 같은 계정을 나중에 한 번 더 스캔해 주세요.' : !source.length ? '이 조건에 해당하는 변화가 없습니다.' : '검색 결과가 없습니다.';
+      listRoot.appendChild(empty);
+      return;
     }
     const fragment = document.createDocumentFragment();
     filtered.slice(0, 500).forEach((username, index) => {
       const row = document.createElement(view.actionable ? 'label' : 'a');
       row.className = 'dashboardRowV24';
       if (view.actionable) {
-        const input = document.createElement('input'); input.type = 'checkbox'; input.dataset.v24Username = username; input.checked = state.selected.has(username); row.appendChild(input);
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.dataset.v24Username = username;
+        input.checked = state.selected.has(username);
+        row.appendChild(input);
       } else {
-        row.href = `https://www.instagram.com/${encodeURIComponent(username)}/`; row.target = '_blank'; row.rel = 'noopener noreferrer';
+        row.href = `https://www.instagram.com/${encodeURIComponent(username)}/`;
+        row.target = '_blank';
+        row.rel = 'noopener noreferrer';
       }
       const name = document.createElement('strong'); name.textContent = `@${username}`;
       const number = document.createElement('span'); number.textContent = String(index + 1);
-      row.append(name, number); fragment.appendChild(row);
+      row.append(name, number);
+      fragment.appendChild(row);
     });
     if (filtered.length > 500) {
-      const more = document.createElement('div'); more.className = 'dashboardEmptyV24'; more.textContent = `앞의 500개만 표시합니다. 전체 ${filtered.length.toLocaleString('ko-KR')}개는 CSV와 작업 목록에 포함됩니다.`; fragment.appendChild(more);
+      const more = document.createElement('div');
+      more.className = 'dashboardEmptyV24';
+      more.textContent = `앞의 500개만 표시합니다. 전체 ${filtered.length.toLocaleString('ko-KR')}개는 CSV와 작업 목록에 포함됩니다.`;
+      fragment.appendChild(more);
     }
     listRoot.appendChild(fragment);
   }
@@ -284,14 +324,29 @@
     const rows = [['change_type', 'username', 'profile_url', 'before', 'after'], ...values.map(username => [state.view, username, `https://www.instagram.com/${username}/`, before?.createdAt || '', after?.createdAt || ''])];
     const csv = '\ufeff' + rows.map(row => row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\r\n');
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-    const anchor = document.createElement('a'); anchor.href = url; anchor.download = `matchal-${state.view}-${after?.profileUsername || 'instagram'}-${new Date().toISOString().slice(0, 10)}.csv`; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `matchal-${state.view}-${after?.profileUsername || 'instagram'}-${new Date().toISOString().slice(0, 10)}.csv`;
+    anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   function queueSelected() {
     const view = VIEWS[state.view];
-    if (!view.actionable || !state.selected.size || !q('[data-v24-confirm]', root()).checked) { setStatus('선택 목록과 확인란을 확인해 주세요.', 'error'); return; }
+    if (!view.actionable || !state.selected.size || !q('[data-v24-confirm]', root()).checked) {
+      setStatus('선택 목록과 확인란을 확인해 주세요.', 'error');
+      return;
+    }
     const { before, after } = currentPair();
     const items = currentChangeList().filter(username => state.selected.has(username)).map(username => ({ username, source: view.source }));
-    window.postMessage({ source: 'MATCHAL_WEB', type: 'MATCHAL_SAVE_QUEUE', payload: { queueName: `${view.label} · @${after?.profileUsername || 'instagram'} · ${before ? formatDate(before.createdAt, true) : ''} → ${after ? formatDate(after.createdAt, true) : ''}`, sourceType: view.source, items } }, location.origin);
+    window.postMessage({
+      source: 'MATCHAL_WEB',
+      type: 'MATCHAL_SAVE_QUEUE',
+      payload: {
+        queueName: `${view.label} · @${after?.profileUsername || 'instagram'} · ${before ? formatDate(before.createdAt, true) : ''} → ${after ? formatDate(after.createdAt, true) : ''}`,
+        sourceType: view.source,
+        items
+      }
+    }, location.origin);
     setStatus(`${items.length.toLocaleString('ko-KR')}개 계정을 Companion 작업 목록으로 보내는 중입니다.`);
   }
 
@@ -307,33 +362,50 @@
       render();
       return;
     }
-    if (event.target.closest('[data-v24-open-panel]')) { state.connected ? window.postMessage({ source: 'MATCHAL_WEB', type: 'MATCHAL_OPEN_PANEL' }, location.origin) : q('[data-extension-primary]')?.click(); return; }
+    if (event.target.closest('[data-v24-open-panel]')) {
+      state.connected ? window.postMessage({ source: 'MATCHAL_WEB', type: 'MATCHAL_OPEN_PANEL' }, location.origin) : q('[data-extension-primary]')?.click();
+      return;
+    }
     if (event.target.closest('[data-v24-refresh]')) { setStatus('Companion에서 스캔 기록을 불러오는 중입니다.'); requestDashboard(); return; }
     if (event.target.closest('[data-v24-select-all]')) { state.selected = new Set(currentChangeList()); render(); return; }
     if (event.target.closest('[data-v24-clear]')) { state.selected.clear(); render(); return; }
     if (event.target.closest('[data-v24-export]')) { exportCurrent(); return; }
     if (event.target.closest('[data-v24-queue]')) queueSelected();
   }
+
   function handleChange(event) {
     if (event.target.matches('[data-v24-after]')) {
       state.afterId = event.target.value;
       const after = snapshotById(state.afterId);
-      const before = state.history.find(item => item.profileUsername === after?.profileUsername && item.id !== after?.id);
-      state.beforeId = before?.id || '';
+      state.beforeId = olderSnapshots(after)[0]?.id || '';
       state.selected = new Set();
       q('[data-v24-confirm]', root()).checked = false;
       render();
       return;
     }
-    if (event.target.matches('[data-v24-before]')) { state.beforeId = event.target.value; state.selected = new Set(); q('[data-v24-confirm]', root()).checked = false; render(); return; }
+    if (event.target.matches('[data-v24-before]')) {
+      state.beforeId = event.target.value;
+      state.selected = new Set();
+      q('[data-v24-confirm]', root()).checked = false;
+      render();
+      return;
+    }
     const username = event.target.dataset.v24Username;
-    if (username) { event.target.checked ? state.selected.add(username) : state.selected.delete(username); render(); return; }
+    if (username) {
+      event.target.checked ? state.selected.add(username) : state.selected.delete(username);
+      render();
+      return;
+    }
     if (event.target.matches('[data-v24-confirm]')) render();
   }
+
   function handleMessage(event) {
     if (event.source !== window || event.origin !== location.origin || event.data?.source !== 'MATCHAL_EXTENSION') return;
     if (event.data.type === 'MATCHAL_READY') { state.connected = true; render(); requestDashboard(); }
-    if (event.data.type === 'MATCHAL_RELATIONSHIP_DASHBOARD') { updateDashboard(event.data.payload || {}); setStatus(state.history.length ? '저장된 관계 대시보드를 불러왔습니다.' : '아직 저장된 스캔 기록이 없습니다.', state.history.length ? 'success' : ''); }
+    if (event.data.type === 'MATCHAL_RELATIONSHIP_DASHBOARD') {
+      updateDashboard(event.data.payload || {});
+      setStatus(state.history.length ? '저장된 관계 대시보드를 불러왔습니다.' : '아직 저장된 스캔 기록이 없습니다.', state.history.length ? 'success' : '');
+    }
     if (event.data.type === 'MATCHAL_RELATIONSHIP_SCAN' && !state.history.length) updateDashboard({ current: event.data.payload?.state || {}, history: event.data.payload?.state?.snapshots || [] });
     if (event.data.type === 'MATCHAL_QUEUE_SAVED') setStatus(`${Number(event.data.payload?.count || 0).toLocaleString('ko-KR')}개 계정을 Companion 작업 목록으로 저장했습니다.`, 'success');
     if (event.data.type === 'MATCHAL_ERROR') setStatus(event.data.payload?.message || '확장 프로그램 요청을 처리하지 못했습니다.', 'error');
@@ -346,6 +418,7 @@
     };
     ready();
   }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
   else boot();
 })();
