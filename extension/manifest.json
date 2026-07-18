@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "맞팔체커 Companion",
-  "version": "23.0.0",
-  "description": "Instagram 웹에서 팔로워·팔로잉을 수집해 비맞팔 명단을 만들고, 사용자가 선택한 팔로우 취소 작업을 처리합니다.",
+  "version": "24.0.0",
+  "description": "Instagram 웹에서 팔로워·팔로잉을 수집하고 스캔 기록을 비교해 관계 변화와 비맞팔 명단을 관리합니다.",
   "minimum_chrome_version": "116",
   "permissions": ["storage", "tabs", "sidePanel"],
   "host_permissions": [
