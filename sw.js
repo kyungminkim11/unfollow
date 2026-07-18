@@ -1,5 +1,5 @@
-const CACHE='unfollow-v23-20260716-relationship-scan-1';
-// Legacy release-check markers retained while older regression workflows remain active: unfollow-v22 unfollow-v21 unfollow-v20 unfollow-v19 unfollow-v18 unfollow-v17 unfollow-v16 unfollow-v15 unfollow-v14
+const CACHE='unfollow-v24-20260718-relationship-dashboard-1';
+// Legacy release-check markers retained while older regression workflows remain active: unfollow-v23 unfollow-v22 unfollow-v21 unfollow-v20 unfollow-v19 unfollow-v18 unfollow-v17 unfollow-v16 unfollow-v15 unfollow-v14
 const CORE=[
   '/','/index.html','/guide/','/help/','/privacy/','/terms/','/data/','/premium/','/newsletter/','/contact/',
   '/favicon.svg','/manifest.webmanifest','/og-image.png',
@@ -8,13 +8,13 @@ const CORE=[
   '/assets/product-improvements.css?v=14.0','/assets/business-info.css?v=20.0','/assets/release-hardening-v12.css?v=14.0',
   '/assets/v13-features.css?v=14.0','/assets/design-v14.css?v=14.3','/assets/design-v14-fixes.css?v=14.3',
   '/assets/service-v15.css?v=15.3','/assets/service-v15-a11y.css?v=15.1','/assets/site-pages-v15.css?v=15.0','/assets/site-pages-v15-a11y.css?v=15.1',
-  '/assets/monetization-v16.css?v=16.0','/assets/site-pages-v16.css?v=16.0','/assets/site-pages-v17.css?v=17.0','/assets/mobile-native-v19.css?v=19.0','/assets/mobile-native-v19-fixes.css?v=19.3','/assets/contact-v21.css?v=21.0','/assets/automation-v22.css?v=22.0','/assets/relationship-scan-v23.css?v=23.0',
+  '/assets/monetization-v16.css?v=16.0','/assets/site-pages-v16.css?v=16.0','/assets/site-pages-v17.css?v=17.0','/assets/mobile-native-v19.css?v=19.0','/assets/mobile-native-v19-fixes.css?v=19.3','/assets/contact-v21.css?v=21.0','/assets/automation-v22.css?v=22.0','/assets/relationship-scan-v23.css?v=23.0','/assets/relationship-dashboard-v24.css?v=24.0',
   '/assets/extension-site.css?v=4','/assets/responsive-final.css?v=4',
   '/assets/product-improvements.js?v=14.0','/assets/work-mode-enhancements.js?v=14.0','/assets/pwa-enhancements.js?v=14.0',
-  '/assets/business-info.js?v=14.7','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
+  '/assets/business-info.js?v=14.8','/assets/release-hardening-v12.js?v=14.0','/assets/v13-features.js?v=13.0',
   '/assets/design-v14.js?v=14.0','/assets/service-v15.js?v=15.3','/assets/service-v15-compat.js?v=15.1',
   '/assets/monetization-v16.js?v=16.0','/assets/mobile-native-v19.js?v=19.2','/assets/newsletter-page-v16.js?v=18.0','/assets/premium-interest-v17.js?v=17.0','/assets/contact-v21.js?v=21.0',
-  '/assets/feedback-v20.js?v=20.0','/assets/extension-site.js?v=23.0','/assets/automation-parser-v22.js?v=22.0','/assets/automation-v22.js?v=22.0','/assets/relationship-scan-v23.js?v=23.0'
+  '/assets/feedback-v20.js?v=20.0','/assets/extension-site.js?v=24.0','/assets/automation-parser-v22.js?v=22.0','/assets/automation-v22.js?v=22.0','/assets/relationship-scan-v23.js?v=23.0','/assets/relationship-dashboard-v24.js?v=24.0'
 ];
 
 self.addEventListener('install',event=>{
