@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>맞팔체커</title>
-  <meta name="description" content="Instagram 공식 데이터 ZIP 또는 Chrome Companion 웹 스캔으로 팔로워·팔로잉·맞팔 아닌 명단을 확인하는 브라우저 로컬 도구">
+  <meta name="description" content="Instagram 공식 데이터 ZIP 또는 Chrome Companion 웹 스캔으로 팔로워·팔로잉·맞팔 관계와 최근 변화를 확인하는 브라우저 로컬 도구">
   <meta name="theme-color" content="#6557ff">
   <style>
     html,body{margin:0;min-height:100%;background:#f7f8fc;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -69,7 +69,7 @@
         if(/<\/head>/i.test(html)) html=html.replace(/<\/head>/i,baseStyles+'</head>');
         else html=baseStyles+html;
 
-        const bootstrap='<script src="/assets/business-info.js?v=14.7"><\/script>';
+        const bootstrap='<script src="/assets/business-info.js?v=14.8"><\/script>';
         if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,bootstrap+'</body>');
         else html+=bootstrap;
 

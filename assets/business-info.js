@@ -71,11 +71,14 @@
     loadStyle('/assets/responsive-final.css?v=4','responsive-final');
     loadStyle('/assets/automation-v22.css?v=22.0','automation-v22');
     loadStyle('/assets/relationship-scan-v23.css?v=23.0','relationship-scan-v23');
+    loadStyle('/assets/relationship-dashboard-v24.css?v=24.0','relationship-dashboard-v24');
     loadScript('/assets/feedback-v20.js?v=20.0','feedback-v20');
-    loadScript('/assets/extension-site.js?v=23.0','extension-site',()=>{
+    loadScript('/assets/extension-site.js?v=24.0','extension-site',()=>{
       loadScript('/assets/automation-parser-v22.js?v=22.0','automation-parser-v22',()=>{
         loadScript('/assets/automation-v22.js?v=22.0','automation-v22',()=>{
-          loadScript('/assets/relationship-scan-v23.js?v=23.0','relationship-scan-v23');
+          loadScript('/assets/relationship-scan-v23.js?v=23.0','relationship-scan-v23',()=>{
+            loadScript('/assets/relationship-dashboard-v24.js?v=24.0','relationship-dashboard-v24');
+          });
         });
       });
     });
@@ -160,10 +163,10 @@
     brandHome.append(logo,brandCopy);
 
     const desc=document.createElement('p');
-    desc.textContent='Instagram 공식 ZIP 분석과 Chrome Companion 웹 스캔으로 팔로우 관계를 확인하는 도구입니다.';
+    desc.textContent='Instagram 공식 ZIP 분석과 Chrome Companion 웹 스캔으로 팔로우 관계와 변화를 확인하는 도구입니다.';
     const beta=document.createElement('span');
     beta.className='businessBetaV20';
-    beta.textContent='무료 베타 · 분석과 스캔 결과 로컬 처리';
+    beta.textContent='무료 베타 · 분석과 스캔 기록 로컬 처리';
     const copyright=document.createElement('small');
     copyright.className='businessCopyrightV20';
     copyright.textContent='© 2026 Lava Labs';
@@ -174,6 +177,7 @@
     links.setAttribute('aria-label','사이트 하단 메뉴');
     links.append(
       navGroup('서비스',[
+        {href:'/#relationshipDashboardV24',label:'관계 대시보드'},
         {href:'/#relationshipScanV23',label:'팔로워·팔로잉 웹 스캔'},
         {href:'/#automationV22',label:'팔로우 취소 자동화'},
         {href:'/premium/',label:'프리미엄 예정'}
@@ -224,7 +228,7 @@
 
     const notice=document.createElement('p');
     notice.className='businessNoticeV10';
-    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. ZIP 원본, 웹 스캔 명단과 자동화 작업 상태는 라바랩스 서버로 전송하지 않고 각 브라우저와 확장 프로그램 로컬 저장소에서 처리합니다.';
+    notice.textContent='맞팔체커는 Instagram 또는 Meta와 제휴하거나 공식적으로 운영되는 서비스가 아닙니다. ZIP 원본, 웹 스캔 명단, 비교 기록과 자동화 작업 상태는 라바랩스 서버로 전송하지 않고 각 브라우저와 확장 프로그램 로컬 저장소에서 처리합니다.';
 
     details.append(summary,grid,website,notice);
     footer.append(top,details);

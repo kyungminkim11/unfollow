@@ -1,18 +1,18 @@
-name: V23 Relationship Scan Check
+name: V24 Relationship Dashboard Check
 
 on:
   pull_request:
     paths:
       - 'extension/**'
-      - 'assets/relationship-scan-v23.*'
       - 'assets/relationship-dashboard-v24.*'
+      - 'assets/relationship-scan-v23.*'
       - 'assets/extension-site.js'
       - 'assets/business-info.js'
-      - 'scripts/relationship-scan-v23-smoke.mjs'
       - 'scripts/relationship-dashboard-v24-smoke.mjs'
       - 'scripts/build-v13.mjs'
+      - 'index.html'
       - 'sw.js'
-      - '.github/workflows/v23-relationship-scan-check.yml'
+      - '.github/workflows/v24-relationship-dashboard-check.yml'
   workflow_dispatch:
 
 permissions:
@@ -33,26 +33,23 @@ jobs:
 
       - name: Syntax checks
         run: |
-          node --check assets/relationship-scan-v23.js
           node --check assets/relationship-dashboard-v24.js
+          node --check assets/relationship-scan-v23.js
           node --check assets/extension-site.js
           node --check extension/background.js
           node --check extension/content-bridge.js
-          node --check extension/instagram-content.js
-          node --check extension/instagram-scan.js
-          node --check extension/sidepanel.js
           node --check extension/sidepanel-v24.js
-          node --check scripts/relationship-scan-v23-smoke.mjs
           node --check scripts/relationship-dashboard-v24-smoke.mjs
-          node -e "const m=require('./extension/manifest.json'); if(m.manifest_version!==3||Number(m.version.split('.')[0])<23) process.exit(1)"
+          node -e "const m=require('./extension/manifest.json'); if(m.manifest_version!==3||m.version!=='24.0.0') process.exit(1)"
 
       - name: Build production site
         run: node scripts/build-v13.mjs
 
-      - name: Package Companion compatibility ZIP
+      - name: Package Companion v24
         run: |
           mkdir -p dist/downloads
-          (cd extension && zip -qr ../dist/downloads/matchal-companion-v23.zip .)
+          (cd extension && zip -qr ../dist/downloads/matchal-companion-v24.zip .)
+          cp dist/downloads/matchal-companion-v24.zip dist/downloads/matchal-companion-v23.zip
 
       - name: Install browser test tools
         run: |
@@ -61,26 +58,26 @@ jobs:
 
       - name: Start production preview
         run: |
-          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v23-server.log 2>&1 &
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v24-server.log 2>&1 &
           for i in {1..20}; do
             curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
             sleep 1
           done
-          cat /tmp/unfollow-v23-server.log
+          cat /tmp/unfollow-v24-server.log
           exit 1
 
-      - name: Relationship scan regression audit
+      - name: Relationship dashboard audit
         env:
           SMOKE_URL: http://127.0.0.1:4173/
-        run: node scripts/relationship-scan-v23-smoke.mjs
+        run: node scripts/relationship-dashboard-v24-smoke.mjs
 
       - name: Upload reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: v23-relationship-scan-reports
+          name: v24-relationship-dashboard-reports
           path: |
-            audit/relationship-scan-v23-report.json
-            audit/relationship-scan-v23-*.png
+            audit/relationship-dashboard-v24-report.json
+            audit/relationship-dashboard-v24-*.png
           if-no-files-found: warn
           retention-days: 7

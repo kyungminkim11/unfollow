@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="sidepanel.css">
+  <link rel="stylesheet" href="sidepanel-v24.css">
   <title>맞팔체커 Companion</title>
 </head>
 <body>
   <header class="appHeader">
     <div class="brandMark">M</div>
-    <div><strong>맞팔체커 Companion</strong><span>관계 스캔 · 선택 팔로우 취소</span></div>
+    <div><strong>맞팔체커 Companion</strong><span>관계 스캔 · 변화 추적 · 선택 팔로우 취소</span></div>
   </header>
 
   <main>
@@ -45,6 +46,27 @@
       <div id="scanList" class="scanList"><div class="queueEmpty">스캔을 완료하면 팔로워·팔로잉·맞팔 아닌 명단이 표시됩니다.</div></div>
       <button id="queueNonMutual" class="primary wideButton" type="button" disabled>맞팔 아닌 명단을 팔로우 취소 목록으로 만들기</button>
       <p id="scanMeta" class="scanMeta">스캔 결과와 아이디는 이 Chrome 확장 프로그램의 로컬 저장소에만 보관됩니다.</p>
+    </section>
+
+    <section class="dashboardCard" aria-labelledby="dashboardTitleV24">
+      <div class="dashboardHeader"><div><h2 id="dashboardTitleV24">관계 대시보드</h2><p>최근 스캔 기록을 비교해 팔로워 변화와 새 비맞팔을 확인합니다.</p></div></div>
+      <div class="dashboardProfile"><strong id="dashboardProfileV24">스캔 기록 없음</strong><span id="dashboardMetaV24">관계 스캔을 두 번 이상 실행하면 최근 변화를 비교합니다.</span></div>
+      <div class="dashboardMetrics" aria-label="관계 요약">
+        <div><span>팔로워</span><strong id="dashboardFollowersV24">0</strong></div>
+        <div><span>팔로잉</span><strong id="dashboardFollowingV24">0</strong></div>
+        <div><span>맞팔</span><strong id="dashboardMutualV24">0</strong></div>
+        <div><span>비맞팔</span><strong id="dashboardNonMutualV24">0</strong></div>
+        <div><span>나를 팔로우만</span><strong id="dashboardFollowersOnlyV24">0</strong></div>
+      </div>
+      <p id="dashboardCompareV24" class="dashboardCompare">이전 스캔 기록이 아직 없습니다.</p>
+      <div class="dashboardTabs" role="tablist" aria-label="최근 관계 변화">
+        <button type="button" class="active" data-dashboard-view="lostFollowersStillFollowing"><span>나를 언팔</span><strong>0</strong></button>
+        <button type="button" data-dashboard-view="newFollowers"><span>새 팔로워</span><strong>0</strong></button>
+        <button type="button" data-dashboard-view="newNonMutual"><span>새 비맞팔</span><strong>0</strong></button>
+        <button type="button" data-dashboard-view="newMutual"><span>새 맞팔</span><strong>0</strong></button>
+      </div>
+      <div id="dashboardListV24" class="dashboardList"><div class="dashboardEmpty">같은 계정을 한 번 더 스캔하면 변화 목록이 표시됩니다.</div></div>
+      <div class="dashboardButtons"><button id="dashboardQueueV24" class="primary" type="button" disabled>변화 목록을 작업으로 만들기</button><button id="dashboardExportV24" type="button" disabled>CSV</button></div>
     </section>
 
     <section class="statusCard">
@@ -88,5 +110,6 @@
   </main>
 
   <script src="sidepanel.js"></script>
+  <script src="sidepanel-v24.js"></script>
 </body>
 </html>

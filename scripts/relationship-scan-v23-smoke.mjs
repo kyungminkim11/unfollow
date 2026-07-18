@@ -18,7 +18,7 @@ const sidepanelScript=fs.readFileSync(path.join(root,'extension','sidepanel.js')
 const bridge=fs.readFileSync(path.join(root,'extension','content-bridge.js'),'utf8');
 const webScript=fs.readFileSync(path.join(root,'assets','relationship-scan-v23.js'),'utf8');
 
-check('Companion v23 manifest',manifest.manifest_version===3&&manifest.version==='23.0.0',{version:manifest.version});
+check('Companion v23+ manifest',manifest.manifest_version===3&&Number(manifest.version.split('.')[0])>=23,{version:manifest.version});
 check('스캐너 콘텐츠 스크립트 등록',manifest.content_scripts?.some(item=>item.matches?.includes('https://www.instagram.com/*')&&item.js?.includes('instagram-scan.js')),{contentScripts:manifest.content_scripts});
 check('권한 증가 없음',JSON.stringify(manifest.permissions)===JSON.stringify(['storage','tabs','sidePanel']),{permissions:manifest.permissions});
 check('호스트 권한 제한',manifest.host_permissions?.length===2&&manifest.host_permissions.includes('https://www.instagram.com/*')&&manifest.host_permissions.includes('https://unfollow.lavalabs.co.kr/*'),{hostPermissions:manifest.host_permissions});
@@ -30,7 +30,7 @@ check('비맞팔 계산과 큐 연결',/following\.filter\(usernameValue => !fol
 check('웹-확장 스캔 상태 브리지',/MATCHAL_GET_RELATIONSHIP_SCAN/.test(bridge)&&/MATCHAL_RELATIONSHIP_SCAN/.test(bridge),{});
 check('웹 스캔 결과 UI',/relationshipScanV23/.test(webScript)&&/팔로워 명단/.test(webScript)&&/맞팔 아닌 명단/.test(webScript),{});
 check('v22 제어 속성과 충돌 없음',!/data-confirm|data-list-title|data-list-description|data-list(?:[\s>])|data-select-all/.test(webScript),{});
-check('Companion v23 ZIP 생성',fs.existsSync(path.join(root,'dist','downloads','matchal-companion-v23.zip')),{});
+check('Companion v23 호환 ZIP 생성',fs.existsSync(path.join(root,'dist','downloads','matchal-companion-v23.zip')),{});
 
 const browser=await chromium.launch({headless:true});
 try{
@@ -46,7 +46,7 @@ try{
       await page.evaluate(()=>{
         window.__scanQueue=null;
         window.addEventListener('message',event=>{if(event.data?.source==='MATCHAL_WEB'&&event.data?.type==='MATCHAL_SAVE_QUEUE') window.__scanQueue=event.data.payload;});
-        window.postMessage({source:'MATCHAL_EXTENSION',type:'MATCHAL_READY',payload:{version:'23.0.0'}},location.origin);
+        window.postMessage({source:'MATCHAL_EXTENSION',type:'MATCHAL_READY',payload:{version:'24.0.0'}},location.origin);
         window.postMessage({source:'MATCHAL_EXTENSION',type:'MATCHAL_RELATIONSHIP_SCAN',payload:{state:{profileUsername:'sample.owner',followers:['alpha','mutual.user','gamma'],following:['alpha','mutual.user','not.back','brand.only'],nonMutual:['not.back','brand.only'],complete:true,warnings:[],lastScanAt:new Date().toISOString(),status:'completed'}}},location.origin);
       });
       await page.waitForFunction(()=>document.querySelector('[data-v23-count="nonMutual"]')?.textContent.trim()==='2');
@@ -134,7 +134,7 @@ try{
   await browser.close();
 }
 
-const report={version:'23.0',checks,failures};
+const report={version:'23+ regression',checks,failures};
 fs.writeFileSync(path.join(auditDir,'relationship-scan-v23-report.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify(report,null,2));
 if(failures.length) process.exit(1);
