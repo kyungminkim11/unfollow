@@ -143,13 +143,13 @@ if(!source.includes('WORKSPACE_SIGNATURE_KEY')) throw new Error('v13 workspace s
 if(!source.includes('await activateWorkspace(file,zip,allKeys)')) throw new Error('v13 content workspace activation missing.');
 if(!source.includes('version:13')) throw new Error('v13 progress export version missing.');
 for(const page of ['guide','help','privacy','terms','data','premium','newsletter','contact']){
-  if(!fs.existsSync(path.join(root,'dist',page,'index.html'))) throw new Error(`V23 static page missing: ${page}`);
+  if(!fs.existsSync(path.join(root,'dist',page,'index.html'))) throw new Error(`V24 static page missing: ${page}`);
 }
-for(const asset of ['service-v15.js','service-v15.css','monetization-v16.js','monetization-v16.css','newsletter-page-v16.js','site-pages-v16.css','mobile-native-v19.js','mobile-native-v19.css','contact-v21.js','contact-v21.css','admin-inquiries-v21.js','admin-inquiries-v21.css','automation-v22.js','automation-v22.css','automation-parser-v22.js','relationship-scan-v23.js','relationship-scan-v23.css']){
-  if(!fs.existsSync(path.join(assetsDir,asset))) throw new Error(`V23 asset missing: ${asset}`);
+for(const asset of ['service-v15.js','service-v15.css','monetization-v16.js','monetization-v16.css','newsletter-page-v16.js','site-pages-v16.css','mobile-native-v19.js','mobile-native-v19.css','contact-v21.js','contact-v21.css','admin-inquiries-v21.js','admin-inquiries-v21.css','automation-v22.js','automation-v22.css','automation-parser-v22.js','relationship-scan-v23.js','relationship-scan-v23.css','relationship-dashboard-v24.js','relationship-dashboard-v24.css']){
+  if(!fs.existsSync(path.join(assetsDir,asset))) throw new Error(`V24 asset missing: ${asset}`);
 }
-for(const extensionFile of ['manifest.json','background.js','content-bridge.js','instagram-content.js','instagram-scan.js','sidepanel.html','sidepanel.css','sidepanel.js']){
-  if(!fs.existsSync(path.join(root,'extension',extensionFile))) throw new Error(`V23 extension file missing: ${extensionFile}`);
+for(const extensionFile of ['manifest.json','background.js','content-bridge.js','instagram-content.js','instagram-scan.js','sidepanel.html','sidepanel.css','sidepanel.js','sidepanel-v24.css','sidepanel-v24.js']){
+  if(!fs.existsSync(path.join(root,'extension',extensionFile))) throw new Error(`V24 extension file missing: ${extensionFile}`);
 }
 const businessInfo=fs.readFileSync(path.join(assetsDir,'business-info.js'),'utf8');
 if(!businessInfo.includes('service-v15.js')) throw new Error('V15 loader missing from business-info.js.');
@@ -158,5 +158,6 @@ if(!businessInfo.includes('mobile-native-v19.js')) throw new Error('V19 mobile l
 if(!businessInfo.includes('automation-v22.js')) throw new Error('V22 automation UI loader missing from business-info.js.');
 if(!businessInfo.includes('automation-parser-v22.js')) throw new Error('V22 automation parser loader missing from business-info.js.');
 if(!businessInfo.includes('relationship-scan-v23.js')) throw new Error('V23 relationship scan UI loader missing from business-info.js.');
+if(!businessInfo.includes('relationship-dashboard-v24.js')) throw new Error('V24 relationship dashboard loader missing from business-info.js.');
 if(!businessInfo.includes("href:'/contact/'")) throw new Error('V21 contact navigation missing from business-info.js.');
-console.log(`V23 relationship scan build ready with content-aware workspaces in ${path.basename(corePath)}.`);
+console.log(`V24 relationship dashboard build ready with content-aware workspaces in ${path.basename(corePath)}.`);
