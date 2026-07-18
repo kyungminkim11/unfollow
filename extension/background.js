@@ -1,6 +1,7 @@
-const VERSION = '23.0.0';
+const VERSION = '24.0.0';
 const STORAGE_KEY = 'matchalAutomationStateV22';
 const RELATIONSHIP_KEY = 'matchalRelationshipStateV23';
+const HISTORY_KEY = 'matchalRelationshipHistoryV24';
 
 const defaultState = () => ({
   queue: [],
@@ -58,6 +59,16 @@ async function getRelationshipState() {
   return { ...defaultRelationshipState(), ...(stored[RELATIONSHIP_KEY] || {}) };
 }
 
+async function getRelationshipHistory() {
+  const stored = await chrome.storage.local.get(HISTORY_KEY);
+  return Array.isArray(stored[HISTORY_KEY]) ? stored[HISTORY_KEY] : [];
+}
+
+async function getRelationshipDashboard() {
+  const [current, history] = await Promise.all([getRelationshipState(), getRelationshipHistory()]);
+  return { current, history };
+}
+
 function normalizeQueue(payload = {}) {
   const seen = new Set();
   const queue = [];
@@ -86,10 +97,11 @@ function openPanel(sender) {
 
 chrome.runtime.onInstalled.addListener(async () => {
   await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => {});
-  const current = await chrome.storage.local.get([STORAGE_KEY, RELATIONSHIP_KEY]);
+  const current = await chrome.storage.local.get([STORAGE_KEY, RELATIONSHIP_KEY, HISTORY_KEY]);
   const updates = {};
   if (!current[STORAGE_KEY]) updates[STORAGE_KEY] = defaultState();
   if (!current[RELATIONSHIP_KEY]) updates[RELATIONSHIP_KEY] = defaultRelationshipState();
+  if (!Array.isArray(current[HISTORY_KEY])) updates[HISTORY_KEY] = [];
   if (Object.keys(updates).length) await chrome.storage.local.set(updates);
 });
 
@@ -106,6 +118,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (type === 'MATCHAL_GET_RELATIONSHIP_SCAN') {
       sendResponse({ ok: true, state: await getRelationshipState(), version: VERSION });
+      return;
+    }
+    if (type === 'MATCHAL_GET_RELATIONSHIP_DASHBOARD') {
+      sendResponse({ ok: true, ...(await getRelationshipDashboard()), version: VERSION });
       return;
     }
     if (type === 'MATCHAL_SET_STATE') {
