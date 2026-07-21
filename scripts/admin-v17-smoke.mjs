@@ -99,9 +99,9 @@ async function adminLoginPage(browser){
 }
 
 function mockAdminResponse(action){
-  if(action==='stats') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},stats:{active:12,last7Days:3,last30Days:8,interestCount:5,featureCounts:{history:5,reports:3,multi_account:2},priceCounts:{'3000_5900':4,under_3000:1},accountCounts:{'1':2,'2_3':3},consentCounts:{subscribe:8}},recent:[]};
-  if(action==='list_subscribers') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},count:2,page:0,pageSize:25,rows:[{id:'11111111-1111-4111-8111-111111111111',email:'alpha@example.com',status:'active',source:'unfollow',subscribed_at:'2026-07-10T10:00:00Z'},{id:'22222222-2222-4222-8222-222222222222',email:'beta@example.com',status:'active',source:'unfollow',subscribed_at:'2026-07-09T10:00:00Z'}]};
-  if(action==='list_interest') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},count:1,page:0,pageSize:25,rows:[{id:'33333333-3333-4333-8333-333333333333',email:'alpha@example.com',feature_codes:['history','reports'],price_preference:'3000_5900',account_count_range:'2_3',comment:'월간 리포트가 필요합니다.',updated_at:'2026-07-10T10:00:00Z'}]};
+  if(action==='stats') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},stats:{active:12,last7Days:3,last30Days:8,interestCount:5,featureCounts:{history:5,reports:3,multi_account:2},priceCounts:{'3000_5900':4,under_3000:1},accountCounts:{'1':2,'2_3':3},consentCounts:{subscribe:8}},recent:[]};
+  if(action==='list_subscribers') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},count:2,page:0,pageSize:25,rows:[{id:'11111111-1111-4111-8111-111111111111',email:'alpha@example.com',status:'active',source:'unfollow',subscribed_at:'2026-07-10T10:00:00Z'},{id:'22222222-2222-4222-8222-222222222222',email:'beta@example.com',status:'active',source:'unfollow',subscribed_at:'2026-07-09T10:00:00Z'}]};
+  if(action==='list_interest') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},count:1,page:0,pageSize:25,rows:[{id:'33333333-3333-4333-8333-333333333333',email:'alpha@example.com',feature_codes:['history','reports'],price_preference:'3000_5900',account_count_range:'2_3',comment:'월간 리포트가 필요합니다.',updated_at:'2026-07-10T10:00:00Z'}]};
   if(action==='export_subscribers') return {ok:true,rows:[{email:'alpha@example.com',status:'active',source:'unfollow',subscribed_at:'2026-07-10T10:00:00Z'}]};
   if(action.startsWith('delete_')) return {ok:true,message:'삭제했습니다.'};
   return {ok:false,message:'지원하지 않는 작업'};
@@ -131,7 +131,7 @@ async function adminDashboard(browser,width,label){
     featureBars:document.querySelectorAll('#featureBars .adminBarRow').length,
     overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)>innerWidth+2,
   }));
-  check(`${label} 관리자 인증 상태`,metrics.identity.includes('lavalabs.ceo@gmail.com')&&metrics.identity.includes('owner'),metrics);
+  check(`${label} 관리자 인증 상태`,metrics.identity.includes('unfollow@lavalabs.co.kr')&&metrics.identity.includes('owner'),metrics);
   check(`${label} 관리자 통계·구독자`,metrics.subscriberRows===2&&metrics.featureBars>=2,metrics);
   check(`${label} 가로 넘침 없음`,!metrics.overflow,metrics);
   await page.locator('#tabInterest').click();

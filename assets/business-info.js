@@ -210,14 +210,14 @@
       ['사업자등록번호','455-23-01867'],
       ['통신판매업 신고번호','2025-고양일산서-1352'],
       ['사업장 소재지','경기도 고양시 일산서구 일현로 47, 2층 204호 1308호실(탄현동, 예일 큰프라자)'],
-      ['이메일','info@lavalabs.co.kr']
+      ['이메일','unfollow@lavalabs.co.kr']
     ];
 
     rows.forEach(([label,value])=>{
       const dt=document.createElement('dt');
       const dd=document.createElement('dd');
       dt.textContent=label;
-      if(label==='이메일') dd.appendChild(link('mailto:info@lavalabs.co.kr',value));
+      if(label==='이메일') dd.appendChild(link('mailto:unfollow@lavalabs.co.kr',value));
       else dd.textContent=value;
       grid.append(dt,dd);
     });

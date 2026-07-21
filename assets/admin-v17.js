@@ -1,7 +1,7 @@
 (()=>{
   const SUPABASE_URL='https://jnciddblcndmthmmvqrz.supabase.co';
   const PUBLISHABLE_KEY='sb_publishable_UUzSE7O9wqI0WN9cKG9OAQ_VleRkL4I';
-  const ADMIN_EMAIL='lavalabs.ceo@gmail.com';
+  const ADMIN_EMAIL='unfollow@lavalabs.co.kr';
   const SESSION_KEY='unfollow_admin_session_v17';
   const REDIRECT_URL=`${location.origin}/admin/newsletter/`;
   const API_URL=`${SUPABASE_URL}/functions/v1/unfollow-newsletter-admin`;

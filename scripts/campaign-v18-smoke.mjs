@@ -24,15 +24,15 @@ async function axe(page,name){
   }))});
 }
 function adminResponse(action){
-  if(action==='stats') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},stats:{active:12,last7Days:3,last30Days:8,interestCount:5,featureCounts:{history:5,reports:3},priceCounts:{'3000_5900':4}},recent:[]};
-  if(action==='list_subscribers') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},count:0,rows:[]};
-  if(action==='list_interest') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},count:0,rows:[]};
+  if(action==='stats') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},stats:{active:12,last7Days:3,last30Days:8,interestCount:5,featureCounts:{history:5,reports:3},priceCounts:{'3000_5900':4}},recent:[]};
+  if(action==='list_subscribers') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},count:0,rows:[]};
+  if(action==='list_interest') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},count:0,rows:[]};
   if(action==='export_subscribers') return {ok:true,rows:[]};
   return {ok:true,message:'완료'};
 }
 const sample={id:'11111111-1111-4111-8111-111111111111',internal_name:'7월 기능 업데이트',subject:'맞팔체커 새 기능을 소개합니다',preview_text:'관계 비교와 관리 기능이 더 편해졌습니다.',body_text:'안녕하세요.\n\n맞팔체커의 새로운 기능을 안내드립니다.',cta_label:'서비스 열기',cta_url:'https://unfollow.lavalabs.co.kr/',segment:'all_active',status:'draft',scheduled_at:null,recipient_count:0,sent_count:0,failed_count:0,updated_at:'2026-07-10T12:00:00Z'};
 function campaignResponse(action,body){
-  if(action==='list_campaigns') return {ok:true,admin:{email:'lavalabs.ceo@gmail.com',role:'owner'},provider:{ready:false,from:null},count:1,page:0,pageSize:20,rows:[sample]};
+  if(action==='list_campaigns') return {ok:true,admin:{email:'unfollow@lavalabs.co.kr',role:'owner'},provider:{ready:false,from:null},count:1,page:0,pageSize:20,rows:[sample]};
   if(action==='estimate_recipients') return {ok:true,count:12};
   if(action==='save_campaign') return {ok:true,message:'캠페인 초안을 저장했습니다.',row:{...sample,internal_name:body.internalName||sample.internal_name,subject:body.subject||sample.subject,body_text:body.bodyText||sample.body_text}};
   if(action==='duplicate_campaign') return {ok:true,message:'캠페인을 새 초안으로 복제했습니다.',row:{...sample,id:'22222222-2222-4222-8222-222222222222',internal_name:'7월 기능 업데이트 복사본'}};

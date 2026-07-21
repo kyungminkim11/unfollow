@@ -131,7 +131,7 @@ function staticAudit() {
 
   const business = {
     registration: html.includes('455-23-01867'),
-    email: html.includes('lavalabs.ceo@gmail.com'),
+    email: html.includes('unfollow@lavalabs.co.kr'),
     unverifiedPhoneAbsent: !html.includes('031-900-9228') && !html.includes('+82-31-900-9228'),
   };
   addCheck('legal', '사업자 정보 정확성 기본 검사', Object.values(business).every(Boolean) ? 'pass' : 'fail', 'high', business);

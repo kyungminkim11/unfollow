@@ -262,7 +262,7 @@ const structuredData = {
     name: '라바랩스(LavaLabs)',
     legalName: '라바랩스(LavaLabs)',
     url: 'https://lavalabs.co.kr/',
-    email: 'lavalabs.ceo@gmail.com',
+    email: 'unfollow@lavalabs.co.kr',
     vatID: '455-23-01867',
     address: {
       '@type': 'PostalAddress',
