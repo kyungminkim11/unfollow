@@ -52,6 +52,8 @@ html=html.replace(
   "connect-src 'self';",
   "connect-src 'self' https://jnciddblcndmthmmvqrz.supabase.co;"
 );
+if(!html.includes('zip-change-v25.css')) html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="/assets/zip-change-v25.css?v=25.0"></head>');
+if(!html.includes('zip-change-v25.js')) html=html.replace(/<\/body>/i,'<script src="/assets/zip-change-v25.js?v=25.0"></script></body>');
 fs.writeFileSync(indexPath,html);
 
 const remaining=[];
