@@ -14,6 +14,13 @@ try{
 }
 
 if(!fs.existsSync(path.join(dist,'index.html'))) throw new Error('Base build did not create dist/index.html');
+for(const name of ['zip-change-v25.js','zip-change-v25.css']){
+  const source=path.join(root,'assets',name);
+  if(fs.existsSync(source)){
+    fs.mkdirSync(path.join(dist,'assets'),{recursive:true});
+    fs.copyFileSync(source,path.join(dist,'assets',name));
+  }
+}
 
 function walk(dir){
   const files=[];
