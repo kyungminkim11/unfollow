@@ -1,0 +1,72 @@
+name: V25 ZIP Change Insights Check
+
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'assets/zip-change-v25.*'
+      - 'scripts/zip-change-v25-smoke.mjs'
+      - '.github/workflows/v25-zip-change-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax checks
+        run: |
+          node --check assets/zip-change-v25.js
+          node --check scripts/zip-change-v25-smoke.mjs
+
+      - name: Build production site
+        run: node scripts/build-v13.mjs
+
+      - name: Verify v25 assets
+        run: |
+          test -f dist/assets/zip-change-v25.js
+          test -f dist/assets/zip-change-v25.css
+          grep -q "zip-change-v25.js" dist/index.html
+          grep -q "zip-change-v25.css" dist/index.html
+
+      - name: Install browser test tools
+        run: |
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start production preview
+        run: |
+          python3 -m http.server 4173 --directory dist > /tmp/unfollow-v25-server.log 2>&1 &
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/unfollow-v25-server.log
+          exit 1
+
+      - name: ZIP change insights audit
+        env:
+          SMOKE_URL: http://127.0.0.1:4173/
+        run: node scripts/zip-change-v25-smoke.mjs
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v25-zip-change-insights-reports
+          path: |
+            audit/zip-change-v25-report.json
+            audit/zip-change-v25-*.png
+          if-no-files-found: warn
+          retention-days: 7

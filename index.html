@@ -65,11 +65,11 @@
           '<head$1><base href="/"><script async src="https://code.iconify.design/3/3.1.1/iconify.min.js"><\/script>'
         );
 
-        const baseStyles=`<style id="unfollow-base-domain-styles">${styles.join('\n')}</style>`;
+        const baseStyles=`<style id="unfollow-base-domain-styles">${styles.join('\n')}</style><link rel="stylesheet" href="/assets/zip-change-v25.css?v=25.0">`;
         if(/<\/head>/i.test(html)) html=html.replace(/<\/head>/i,baseStyles+'</head>');
         else html=baseStyles+html;
 
-        const bootstrap='<script src="/assets/business-info.js?v=14.8"><\/script>';
+        const bootstrap='<script src="/assets/business-info.js?v=14.8"><\/script><script src="/assets/zip-change-v25.js?v=25.0"><\/script>';
         if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,bootstrap+'</body>');
         else html+=bootstrap;
 
