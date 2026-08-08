@@ -14,6 +14,13 @@ try{
 }
 
 if(!fs.existsSync(path.join(dist,'index.html'))) throw new Error('Base build did not create dist/index.html');
+for(const name of ['zip-change-v25.js','zip-change-v25.css']){
+  const source=path.join(root,'assets',name);
+  if(fs.existsSync(source)){
+    fs.mkdirSync(path.join(dist,'assets'),{recursive:true});
+    fs.copyFileSync(source,path.join(dist,'assets',name));
+  }
+}
 
 function walk(dir){
   const files=[];
@@ -45,6 +52,8 @@ html=html.replace(
   "connect-src 'self';",
   "connect-src 'self' https://jnciddblcndmthmmvqrz.supabase.co;"
 );
+if(!html.includes('zip-change-v25.css')) html=html.replace(/<\/head>/i,'<link rel="stylesheet" href="/assets/zip-change-v25.css?v=25.0"></head>');
+if(!html.includes('zip-change-v25.js')) html=html.replace(/<\/body>/i,'<script src="/assets/zip-change-v25.js?v=25.0"></script></body>');
 fs.writeFileSync(indexPath,html);
 
 const remaining=[];
